@@ -1,4 +1,4 @@
-# Título de tu proyecto
+# CestaGalega
 
 - [Introducción](#introducción)
 - [Estado de arte o análisis del contexto](#estado-de-arte-o-análisis-del-contexto)
