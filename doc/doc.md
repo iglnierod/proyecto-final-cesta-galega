@@ -43,20 +43,20 @@ Lo principal es conectar la oferta local con la demanda digital, creando una exp
 
 ## Objetivos
 
-- Registro e inicio de sesión básicos.
-- Navegación por el catálogo de productos publicados.
-- Visualización de información de cada producto.
-- Posibilidad de valorar artículos (ntoa de 1 a 5 y comentario).
+- Registrar e iniciar sesión de forma básica.
+- Navegar por el catálogo de productos publicados.
+- Visualizar la información de cada producto.
+- Valorar artículos (nota de 1 a 5 y comentario).
 - Añadir artículos al carrito.
-- Gestionar el carrito de compra (añadir e eliminar productos).
-- Simulación de pago mediante un formulario, no habrá pasarela de pago real.
-- Cosulta del historial de pedidos realizados.
-- Registro e inicio de sesión como empresa.
-- Creación y gestión de artículos a la venta, no se gestionará stock de artículos.
-- Visualización de estadísticas básicas.
-- Página pública con su perfil y todos sus productos.
-- Filtros y orden en las vistas de productos.
-- Como empresa establecer descuentos en productos.
+- Gestionar el carrito de compra.
+- Simular el pago mediante un formulario.
+- Consultar el historial de pedidos realizados.
+- Registrar e iniciar sesión como empresa.
+- Crear y gestionar artículos a la venta.
+- Visualizar estadísticas básicas de venta.
+- Mostrar una página pública con el perfil y todos los productos.
+- Aplicar filtros y orden en las vistas de productos.
+- Establecer descuentos en productos.
 
 ## Alcance
 
