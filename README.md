@@ -35,3 +35,25 @@ Este proyecto dispone de [una documentación más extensa](doc/doc.md) del proye
 ## Guía de contribución
 
 > _TODO_: Tratándose de un proyecto de software libre, es muy importante que expongas cómo se puede contribuir con tu proyecto. Algunos ejemplos de esto son realizar nuevas funcionalidades, corrección y/u optimización del código, realización de tests automatizados, nuevas interfaces de integración, desarrollo de plugins, etc. etc. Sé lo más conciso que puedas.
+
+Los commits de este proyecto seguirán el formato de [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/), usando los siguientes tipos de commit:
+
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+| Tipo         | Cuándo usarlo                                               | Ejemplo                                       |
+| ------------ | ----------------------------------------------------------- | --------------------------------------------- |
+| **feat**     | Nueva funcionalidad                                         | `feat(home): añade sección de noticias`       |
+| **fix**      | Corrección de error                                         | `fix(api): corrige URL incorrecta en fetch`   |
+| **chore**    | Cambios menores o tareas que no afectan el código funcional | `chore: actualiza .gitignore`                 |
+| **docs**     | Cambios en documentación                                    | `docs: actualiza README`                      |
+| **style**    | Cambios de formato o estilo (sin cambiar lógica)            | `style: formatea código con Prettier`         |
+| **refactor** | Reescritura de código sin cambiar comportamiento            | `refactor: simplifica componente Header`      |
+| **test**     | Añadir o modificar tests                                    | `test: añade tests para el componente Footer` |
+| **build**    | Cambios en dependencias o build                             | `build: actualiza versión de Next.js`         |
+| **ci**       | Cambios en configuración de CI/CD                           | `ci: actualiza workflow de GitHub Actions`    |
