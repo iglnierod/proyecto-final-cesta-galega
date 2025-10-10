@@ -54,3 +54,10 @@ coverage
 ##### FIN DE TEMPLATE #####
 
 # Incluye los ignores que consideres a partir de aquí
+cesta-galega/.idea/
+cesta-galega/.next/
+cesta-galega/node_modules/
+cesta-galega/.env
+cesta-galega/.vscode/
+cesta-galega/package-lock.json
+cesta-galega/.conventional-commits.md
