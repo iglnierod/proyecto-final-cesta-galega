@@ -5,6 +5,7 @@ import { JSX, useState } from 'react';
 export default function WelcomeComponent(props: { name: string; appName: string }): JSX.Element {
   const { name, appName } = props;
   const [count, setCount] = useState(0);
+
   return (
     <>
       <h1>
