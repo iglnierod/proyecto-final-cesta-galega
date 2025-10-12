@@ -60,3 +60,5 @@ cesta-galega/.vscode/
 cesta-galega/node_modules/
 cesta-galega/package-lock.json
 cesta-galega/.env.production
+cesta-galega/app/api/_requests/*
+cesta-galega/*.http
