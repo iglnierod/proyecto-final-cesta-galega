@@ -5,10 +5,6 @@ import { cookies } from 'next/headers';
 const JWT_SECRET = process.env.JWT_SECRET ?? '';
 const JWT_EXPIRES_IN = Number(process.env.JWT_EXPIRES_IN) ?? 60 * 60;
 
-if (!JWT_SECRET) {
-  throw new Error('JWT_SECRET no está definido en .env');
-}
-
 // Bcrypt
 export async function hashPassword(password: string) {
   return bcrypt.hash(password, 10);
@@ -42,7 +38,7 @@ export function verifyToken(token: string) {
 }
 
 // Cookies
-export async function saveSessionCookie(token: string) {
+export async function saveSessionCookie(token: string, type: 'user' | 'business' = 'user') {
   const cookieStore = await cookies();
 
   cookieStore.set({
@@ -54,10 +50,36 @@ export async function saveSessionCookie(token: string) {
     path: '/',
     maxAge: JWT_EXPIRES_IN,
   });
+
+  cookieStore.set({
+    name: 'auth_type',
+    value: type,
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    path: '/',
+    maxAge: JWT_EXPIRES_IN,
+  });
 }
 
-export async function isCookieValid(): Promise<boolean> {
+export async function isCookieValid(type: 'user' | 'business' = 'user'): Promise<boolean> {
   const cookieStore = await cookies();
   const token = cookieStore.get('auth_token')?.value;
-  return Boolean(token);
+  const authType = cookieStore.get('auth_type')?.value;
+  if (token && authType === type) {
+    try {
+      verifyToken(token);
+      return true;
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
+  }
+  return false;
+}
+
+export async function clearSessionCookies() {
+  const cookieStore = await cookies();
+  cookieStore.delete('auth_token');
+  cookieStore.delete('auth_type');
 }
