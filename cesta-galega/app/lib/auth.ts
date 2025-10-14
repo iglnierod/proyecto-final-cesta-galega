@@ -77,9 +77,3 @@ export async function isCookieValid(type: 'user' | 'business' = 'user'): Promise
   }
   return false;
 }
-
-export async function clearSessionCookies() {
-  const cookieStore = await cookies();
-  cookieStore.delete('auth_token');
-  cookieStore.delete('auth_type');
-}

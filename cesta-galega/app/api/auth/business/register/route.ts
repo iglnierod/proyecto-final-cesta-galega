@@ -4,17 +4,8 @@ import { hashPassword } from '@/app/lib/auth';
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const {
-    name,
-    email,
-    business_type,
-    phone_number,
-    address,
-    city,
-    province,
-    postal_code,
-    password,
-  } = body;
+  const { name, email, businessType, phoneNumber, address, city, province, postalCode, password } =
+    body;
 
   try {
     const exists = await prisma.business.findUnique({
@@ -30,12 +21,12 @@ export async function POST(request: Request) {
       data: {
         name,
         email,
-        business_type,
-        phone_number,
+        business_type: businessType,
+        phone_number: phoneNumber,
         address,
         city,
         province,
-        postal_code,
+        postal_code: postalCode,
         password: hashedPassword,
       },
     });
