@@ -5,7 +5,7 @@ import { hashPassword } from '@/app/lib/auth';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, password } = body;
+    const { name, email, sex, birthDate, province, password } = body;
 
     if (!name || !email || !password) {
       return NextResponse.json(
@@ -21,11 +21,15 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Email ya registrado' }, { status: 400 });
     }
 
+    const birthDateParsed = new Date(birthDate);
     const hashedPass = await hashPassword(password);
     const newUser = await prisma.user.create({
       data: {
         name,
         email,
+        sex,
+        province,
+        birt_date: birthDateParsed,
         password: hashedPass,
       },
     });
