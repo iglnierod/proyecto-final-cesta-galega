@@ -77,6 +77,74 @@ Futuras ampliaciones podrían incluir: la gestión avanzada de stock, sistema de
 > Hemos elaborado un [checklist](checklist.md) de puntos necesarios para tu PFC, para que revises estas recomendaciones/especificaciones.
 > Apóyate en tu tutor/a si tienes duda de cómo organizar tu proyecto y estos apartados/subapartado. Cada proyecto y su contexto determinará la mejor forma de estructurarlo. Piensa bien cómo lo vas a hacer.
 
+## Planificación temporal e de recurso das distintas fases
+
+### Identificación de fases
+
+> Identificación das fases de implantación de tódolos elementos do proxecto, así como a súa estimación de xornadas para levalas a cabo e duración secuenciación temporal segundo as dependencias entre elas.
+
+### Identificación de recursos
+
+> Identificación dos recursos necesarios para pñer en marcha o proxecto e a súa vibilidade. Estes poden ser:
+>
+> Recursos persoais: número de pesoas serían necesarias para realizar cada actividade a súa cualificación profesional
+>
+> Recursos materiais: HW necesario, SW seleccionado, interaccións ou dependencias doutras aplicacións ou sistemas xa existentes
+
+### Diagrama de Gantt
+
+> Incluir un diagrama de Gantt que permite ver un cunha representación gráfica a planificación proposta e as dependecias entre as fases e actividades planificadas.
+
+## Diseño de la solución
+
+### Base de datos
+
+La base de datos de este proyecto es una base relacional SQL. El gestor de base de datos elegido es PostgreSQL.
+
+### Esquema Entidad-Relación
+
+![Esquema Entidad-Relación de la base de datos](img/bd_entidad-relacion.png)
+[Enlace a diagrama web: erdlab.io](https://erdlab.page.link/czgA4UV4ymD1koir9)
+
+> _Tablas y campos pueden variar y modificarse con el tiempo_
+
+### Software e paquetes de software
+
+> Indicarase a configuración de software seleccionada para as estacións de traballo. No caso de haber distintas necesidades segundo departamento indicarase as peculiaridades de cada un.
+
+### Infraestructura de hardware
+
+#### Estaciones de trabajo
+
+> Descripción de la infraestructura de hardware empleada para las estaciones de trabajo de la mayor parte de los empleados
+> 
+> Podrá haber distintas configuraciones atendiendo a distintas necesidades de distintos departamentos
+
+#### Seguridad
+
+> Diseño del modelo de segurdidad en multiples aspectos:
+> 
+> Seguridad interna: lógica y de accesos.
+> Copias de seguridad: cómo, donde y cuando
+
+## Orzamento da solución
+
+> Debe realizarse una asignación económica a cada una de las fases, especificando el coste de cada uno de los recursos materiales y humanos. En caso de ser necesario se incluira necesidades de financiacion, ayudas, subvenciones...
+> 
+> Esto servirá para tener un orzamento final que permitirá saber el coste final de la solución propuesta.
+
+## Propuesta de mejoras
+
+> A partir de tu solución final indicarás futuras ampliaciones o mejoras. Ejemplos:
+> 
+> Ampliacion de infraestructura ante una posible expansión de la empresa o aprterua de nuevas sucursales
+>
+> Incorporación de neuvos servicios, aplicaciones, que pueden mejorar una carencia actual o cubrir una necesidad futura
+>
+> Implantacion a futuro de alguna tecnología emergente en lugar de las propuestas inicalmente, por esperar a que esta tecnología esté mas madura
+> 
+> Cualquier otra cosa que no estuviese comtempleada en el proyecto o que suprimiste en la solución final por falta de tiempo o por dificultad de implantación.
+
 ## Conclusiones
 
 > Deja esta apartado para el final. Realiza un resumen de todo lo que ha supuesto la realización de tu proyecto. Debe ser una redacción breve. Un resumen de los hitos conseguidos más importantes y de lo aprendido durante el proceso.
@@ -85,3 +153,5 @@ Futuras ampliaciones podrían incluir: la gestión avanzada de stock, sistema de
 ## Referencias, Fuentes consultadas y Recursos externos: Webgrafía
 
 > _TODO_: Enlaces externos y descipciones de estos enlaces que creas conveniente indicar aquí. Generalmente ya van a estar integrados con tu documentación, pero si requieres realizar un listado de ellos, este es el lugar.
+
+[Web para realizar esquemas relacionales SQL [https://erdlab.io]](https://erdlab.io)
