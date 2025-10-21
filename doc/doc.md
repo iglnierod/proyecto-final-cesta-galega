@@ -135,7 +135,7 @@ El siguiente diagrama de Gantt muestra la planificación temporal del proyecto, 
 Se puede ver la relación entre las fases, las dependencias y la duración estimada de cada una, reflejando de manera visual el progreso previsot desde el inicio del desarrollo
 hasta la presentación final de proyecto.
 
-![Diagrama de Gantt de Cesta Galega](img/gantt.png)
+![Diagrama de Gantt de Cesta Galega](./img/gantt.png)
 
 ### Identificación de recursos
 
@@ -184,7 +184,7 @@ La base de datos de este proyecto es una base relacional SQL. El gestor de base 
 
 ### Esquema Entidad-Relación
 
-![Esquema Entidad-Relación de la base de datos](img/bd_entidad-relacion.png)
+![Esquema Entidad-Relación de la base de datos](./img/bd_entidad-relacion.png)
 [Enlace a diagrama web: erdlab.io](https://erdlab.page.link/czgA4UV4ymD1koir9)
 
 > _Tablas y campos pueden variar y modificarse con el tiempo_
