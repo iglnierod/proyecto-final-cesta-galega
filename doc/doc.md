@@ -166,8 +166,10 @@ En un entorno profesional, el equipo ideal estaría compuesto por más personas 
 
 ##### Software utilizado
 
+- **Windows 11**: Sistema operativo elegido para el desarrollo.
 - **IntelliJ IDEA Ultimate**: IDE preferido por comodidad de plugins.
 - **Node.js y Next.js**: estructura y desarrollo de la aplicación.
+- **Docker**: Herramienta de virtualización utilizada para crear y ejecutar contenedores.
 - **PostgreSQL**: sistema de gestión de bases de datos relacional.
 - **Supabase**: servicio en la nube para alojar base de datos.
 - **Git y GitLab**: para el control de versiones.
@@ -192,6 +194,36 @@ La base de datos de este proyecto es una base relacional SQL. El gestor de base 
 > Indicarase a configuración de software seleccionada para as estacións de traballo. No caso de haber distintas
 > necesidades segundo departamento indicarase as peculiaridades de cada un.
 
+La configuración de software seleccionada está orientada a un entorno de desarrollo web moderno, con herramientas que
+permiten la creación, prueba y despliegue eficiente de la app.
+
+Todas las estaciones de trabajo dispondrán de Windows 11 como sistema operativo, junto con los entornos de desarrollo y
+herramientas necesarias para cada área del proyecto.
+
+**Herramientas en común para los empleados:**
+
+- Windows 11
+- Trello
+- Online Gantt
+
+**Herramientas para el desarrollador Full-Stack:**
+
+- IntelliJ IDEA Ultimate
+- ERD Lab
+- Docker
+- Supabase
+- Node.js y Next.js
+- Git y GitLab
+
+**Herramientas para el diseñador gráfico:**
+- Excalidraw
+- Figma
+- Photoshop
+
+**Herramientas para el tester:**
+- Navegadores web: Google Chrome, Firefox, Arc...
+- Postman
+
 ### Infraestructura de hardware
 
 #### Estaciones de trabajo
@@ -201,6 +233,19 @@ La base de datos de este proyecto es una base relacional SQL. El gestor de base 
 >
 > Podrá haber distintas configuraciones atendiendo a distintas necesidades de distintos departamentos
 
+Cada miembro dispondrá de una estación de trabajo configurada para cumplir con los requisitos de desarrollo, diseño o prueba
+según su función.
+
+**Configuración global:**
+- Procesador de 64 bits con soporte para SLAT.
+- Mínimo 8 GB de memoria RAM, recomendados 16 GB.
+- SSD de 256 GB para SO, proyecto y aplicaciones necesarias.
+- Conexión a internet estable.
+
+**Diseñador gráfico**
+
+- CPU con gráfica integrada para el trabajo con herramientas de diseño visual
+
 #### Seguridad
 
 > Diseño del modelo de segurdidad en multiples aspectos:
@@ -208,12 +253,102 @@ La base de datos de este proyecto es una base relacional SQL. El gestor de base 
 > Seguridad interna: lógica y de accesos.
 > Copias de seguridad: cómo, donde y cuando
 
-## Orzamento da solución
+##### Seguridad interna: lógica y accesos
+
+Se enfoca en asegurar tanto la protección de los datos como el control de acceso adecuado para los distintos perfiles de usuario
+(usuarios y empresas).
+
+- **Autenticación y autorización**: Se implementará un sistema básico de autenticación mediante contraseña para los usuarios
+y empresas, utilizando hashing (BCrypt) seguro para almacenar las contraseñas en la base de datos.
+  - Los usuarios únicamente tendrán acceso a la parte pública de la app (productos, navegación, carrito), mientras que las empresas
+  podrán acceder y gestionar solo su propia tienda y productos.
+  - La aplicación estará configurada para usar roles básicos (usuario, empresa) con restricciones de acceso. Las empresas
+  no podrán acceder a los datos de otros usuarios ni productos ajenos.
+- **Protección de datos sensibles**: Se garantizará la seguridad en la transmisión de datos utilizando HTTPS para cifrar
+las comunicaciones entre el cliente y el servidor. Los datos sensibles como contraseñas o información personal serán siempre
+cifrados antes de ser almacenados en la base de datos
+- **Autorización de la API**: la API REST que conecta el frontend con el backend estará protegida mediante tokens JWT
+  (JSON Web Tokens) para la autenticación de cada solicitud.
+
+##### Copias de seguridad
+
+Para garantizar la integridad de los datos y la recuperación ante posibles pérdidas, se implementará una estrategia de copias de
+seguridad periódicas.
+
+- **Frecuencia**: Las copias de seguridad de los datos más importantes se realizarán diariamente.
+- **Almacenamiento**: Se almacenarán de forma segura en un entorno externo en la nube, utilizando Supabase para la base de
+datos y GitLab para el código fuente de la app.
+- **Automatización**: Las copias de seguridad se automatizarán mediante scripts o herramientas proporcionados por Supabase.
+- **Recuperación ante desastres**: En caso de pérdida de datos, se podrá restaurar la base de datos y los archivos de productos
+de las copias de seguridad más recientes, garantizando que el servicio se pueda restablecer rápidamente.
+
+## Presupuesto de la solución
 
 > Debe realizarse una asignación económica a cada una de las fases, especificando el coste de cada uno de los recursos
 > materiales y humanos. En caso de ser necesario se incluira necesidades de financiacion, ayudas, subvenciones...
 >
 > Esto servirá para tener un orzamento final que permitirá saber el coste final de la solución propuesta.
+
+La empresa responsable del desarrollo de Cesta Galega es una Sociedad Limitada (S.L) dedicada al desarrollo de software y soluciones
+web personalizadas.
+Se ha optado por la S.L por ser la figura legal más adecuada para pequeñas empresas tecnológicas en España.
+
+### Recursos humanos
+
+La empresa está compuesta por 3 trabajadores con perfiles complementarios
+
+| Cargo / Rol                             | Funciones principales                                                                                         | Tipo de contrato | Cualificación                                         |
+|-----------------------------------------|---------------------------------------------------------------------------------------------------------------|------------------|-------------------------------------------------------|
+| **Analista / Desarrollador Full-Stack** | Diseño, desarrollo y mantenimiento del sistema, integración entre backend y frontend, despliegues en Docker.  | Jornada completa | Técnico Superior en Desarrollo de Aplicaciones Web    |
+| **Diseñador UX/UI**                     | Creación de la interfaz visual, experiencia de usuario, diseño gráfico y adaptación a distintos dispositivos. | Media jornada    | Técnico Superior en Diseño y Producción de Multimedia |
+| **Tester / Responsable de calidad**     | Pruebas funcionales, validación de requisitos y control de calidad del producto final.                        | Media jornada    | Técnico en Sistemas Microinformáticos o QA Tester     |
+
+### Gastos anuales estimados
+
+A continuación se detallan los principales gastos anuales estimados de la empresa, considerando su tamaño y estructura:
+
+| Concepto                                         | Descripción                                                                                    | Coste anual aproximado |
+|--------------------------------------------------|------------------------------------------------------------------------------------------------|------------------------|
+| **Salarios brutos**                              | Retribuciones de los 3 trabajadores (1 a tiempo completo y 2 a media jornada).                 | 72.000 €               |
+| **Cotizaciones a la Seguridad Social (empresa)** | Aportación empresarial (~30% de los salarios brutos).                                          | 21.600 €               |
+| **Licencias y software**                         | IntelliJ IDEA Ultimate, Docker Hub Pro, servicios en la nube (Supabase, dominio web, hosting). | 2.400 €                |
+| **Equipos informáticos y mantenimiento**         | Renovación de hardware, periféricos y mantenimiento técnico.                                   | 3.000 €                |
+| **Seguros, gestoría y contabilidad**             | Seguro de responsabilidad civil, gestoría, tasas, notaría, etc.                                | 2.000 €                |
+| **Otros gastos operativos**                      | Desplazamientos, marketing, material de oficina, imprevistos.                                  | 1.400 €                |
+
+**Total estimado anual: 102.400,00 €**
+
+### Normativa
+
+#### Protección de datos
+
+La empresa cumple con el Reglamento General de Protección de Datos (RGPD) y a la Ley Orgánica 3/2018 (LOPDGDD).
+
+Se garantiza que los datos de empresas y usuarios se almacenan en servidores cifrados y seguros, cumpliendo con las medidas
+técnicas necesarias.
+
+El encargado del traamiento garantiza la confidencialidad y permite a los usuarios ejercer sus derechos de acceso, rectificación
+y eliminación de datos.
+
+#### Obligaciones fiscales y laborales
+
+Como Sociedad Limitada, la empresa tributa bajo el Impuesto de Sociedades (25%), presenta el IVA trimestral y gestiona las
+retenciones de IRPF correspondientes.
+
+Los trabajadores están contratados según el Estatuto de los Trabajadores y dados de alta en la Seguridad Social, cumpliendo todas
+las obligaciones de cotzación y cobertura.
+
+#### Prevención de riesgos laborales
+
+Aun trabajando de forma remota, se cumple con la Ley 31/1995 de Prevención de Riesgos Laborales, promoviendo buenas prácticas
+ergónomicas (postura, iluminación, pausas regulares) y el uso seguro de equipos informáticos.
+
+#### Ayudas y subvenciones
+
+La empresa se acoge a programas de apoyo a la digitalización como el Kit Digital y a subvenciones autonómicas o estatales para
+proyectos tecnológicos y de innovación.
+
+Estas ayudas permiten reducir costes iniciales y fomentar el crecimiento sostenible del proyecto.
 
 ## Propuesta de mejoras
 
