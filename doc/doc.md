@@ -100,13 +100,6 @@ despliegue en entornos comerciales ni la integración con plataformas externas.
 Futuras ampliaciones podrían incluir: la gestión avanzada de stock, sistema de recomendaciones más sofisticado y un
 panel de administración global, pero estos aspectos quedan fuera del alcance del desarrollo.
 
-## TODO: A partir de este punto eres libre de organizar la documentación como estimes pero debes desarrollar el cuerpo de tu proyecto con apartados y subapartados que completen tu documentación
-
-> Hemos elaborado un [checklist](checklist.md) de puntos necesarios para tu PFC, para que revises estas
-> recomendaciones/especificaciones.
-> Apóyate en tu tutor/a si tienes duda de cómo organizar tu proyecto y estos apartados/subapartado. Cada proyecto y su
-> contexto determinará la mejor forma de estructurarlo. Piensa bien cómo lo vas a hacer.
-
 ## Planificación temporal y de recursos de las distintas fases
 
 ### Identificación de fases
@@ -191,9 +184,6 @@ La base de datos de este proyecto es una base relacional SQL. El gestor de base 
 
 ### Software e paquetes de software
 
-> Indicarase a configuración de software seleccionada para as estacións de traballo. No caso de haber distintas
-> necesidades segundo departamento indicarase as peculiaridades de cada un.
-
 La configuración de software seleccionada está orientada a un entorno de desarrollo web moderno, con herramientas que
 permiten la creación, prueba y despliegue eficiente de la app.
 
@@ -228,11 +218,6 @@ herramientas necesarias para cada área del proyecto.
 
 #### Estaciones de trabajo
 
-> Descripción de la infraestructura de hardware empleada para las estaciones de trabajo de la mayor parte de los
-> empleados
->
-> Podrá haber distintas configuraciones atendiendo a distintas necesidades de distintos departamentos
-
 Cada miembro dispondrá de una estación de trabajo configurada para cumplir con los requisitos de desarrollo, diseño o prueba
 según su función.
 
@@ -247,11 +232,6 @@ según su función.
 - CPU con gráfica integrada para el trabajo con herramientas de diseño visual
 
 #### Seguridad
-
-> Diseño del modelo de segurdidad en multiples aspectos:
->
-> Seguridad interna: lógica y de accesos.
-> Copias de seguridad: cómo, donde y cuando
 
 ##### Seguridad interna: lógica y accesos
 
@@ -283,11 +263,6 @@ datos y GitLab para el código fuente de la app.
 de las copias de seguridad más recientes, garantizando que el servicio se pueda restablecer rápidamente.
 
 ## Presupuesto de la solución
-
-> Debe realizarse una asignación económica a cada una de las fases, especificando el coste de cada uno de los recursos
-> materiales y humanos. En caso de ser necesario se incluira necesidades de financiacion, ayudas, subvenciones...
->
-> Esto servirá para tener un orzamento final que permitirá saber el coste final de la solución propuesta.
 
 La empresa responsable del desarrollo de Cesta Galega es una Sociedad Limitada (S.L) dedicada al desarrollo de software y soluciones
 web personalizadas.
@@ -372,8 +347,7 @@ Estas ayudas permiten reducir costes iniciales y fomentar el crecimiento sosteni
 
 ## Referencias, Fuentes consultadas y Recursos externos: Webgrafía
 
-> _TODO_: Enlaces externos y descipciones de estos enlaces que creas conveniente indicar aquí. Generalmente ya van a
-> estar integrados con tu documentación, pero si requieres realizar un listado de ellos, este es el lugar.
+## Webgrafía
 
 ## Webgrafía
 
@@ -384,3 +358,27 @@ Estas ayudas permiten reducir costes iniciales y fomentar el crecimiento sosteni
 > **[Trello](https://trello.com)** — Aplicación online para la gestión de tareas mediante tableros y tarjetas.
 >
 > **[PostgreSQL](https://www.postgresql.org/)** — Sistema de gestión de bases de datos relacional de código abierto utilizado en el proyecto.
+>
+> **[Docker](https://www.docker.com/)** — Plataforma que permite crear, implementar y ejecutar aplicaciones dentro de contenedores ligeros y portátiles.
+>
+> **[Docker Hub](https://hub.docker.com/)** — Repositorio oficial de Docker para almacenar, compartir y gestionar imágenes de contenedores.
+>
+> **[Supabase](https://supabase.com/)** — Plataforma de backend como servicio (BaaS) de código abierto que ofrece base de datos, autenticación y almacenamiento.
+>
+> **[Node.js](https://nodejs.org/)** — Entorno de ejecución para JavaScript del lado del servidor basado en el motor V8 de Google Chrome.
+>
+> **[Next.js](https://nextjs.org/)** — Framework de React que permite crear aplicaciones web modernas con renderizado híbrido y optimización de rendimiento.
+>
+> **[IntelliJ IDEA](https://www.jetbrains.com/idea/)** — Entorno de desarrollo integrado (IDE) desarrollado por JetBrains, ideal para proyectos en Java y otros lenguajes.
+>
+> **[Git](https://git-scm.com/)** — Sistema de control de versiones distribuido que permite gestionar el historial y la colaboración en proyectos de software.
+>
+> **[GitLab](https://gitlab.com/)** — Plataforma de gestión del ciclo de vida del desarrollo que integra control de versiones, CI/CD y colaboración en equipo.
+>
+> **[Excalidraw](https://excalidraw.com/)** — Aplicación web para crear diagramas y bocetos colaborativos de manera visual y sencilla.
+>
+> **[Figma](https://www.figma.com/)** — Herramienta de diseño colaborativo utilizada para crear interfaces y prototipos de aplicaciones.
+>
+> **[Adobe Photoshop](https://www.adobe.com/products/photoshop.html)** — Software profesional para la edición, manipulación y creación de imágenes digitales.
+>
+> **[Postman](https://www.postman.com/)** — Plataforma de desarrollo de APIs que permite probar, documentar y automatizar peticiones HTTP.  
