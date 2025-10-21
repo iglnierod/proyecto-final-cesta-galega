@@ -1,13 +1,41 @@
 # CestaGalega
 
+# CestaGalega
+
 - [Introducción](#introducción)
 - [Estado de arte o análisis del contexto](#estado-de-arte-o-análisis-del-contexto)
 - [Propósito](#propósito)
 - [Objetivos](#objetivos)
 - [Alcance](#alcance)
-- [TODO: A partir de este punto eres libre de organizar la documentación como estimes pero debes desarrollar el cuerpo de tu proyecto con apartados y subapartados que completen tu documentación](#todo-a-partir-de-este-punto-eres-libre-de-organizar-la-documentación-como-estimes-pero-debes-desarrollar-el-cuerpo-de-tu-proyecto-con-apartados-y-subapartados-que-completen-tu-documentación)
+- [Planificación temporal y de recursos de las distintas fases](#planificación-temporal-y-de-recursos-de-las-distintas-fases)
+  - [Identificación de fases](#identificación-de-fases)
+  - [Diagrama de Gantt](#diagrama-de-gantt)
+  - [Identificación de recursos](#identificación-de-recursos)
+    - [Recursos personales](#recursos-personales)
+    - [Recursos materiales](#recursos-materiales)
+      - [Hardware necesario](#hardware-necesario)
+      - [Software utilizado](#software-utilizado)
+- [Diseño de la solución](#diseño-de-la-solución)
+  - [Base de datos](#base-de-datos)
+  - [Esquema Entidad-Relación](#esquema-entidad-relación)
+  - [Software e paquetes de software](#software-e-paquetes-de-software)
+  - [Infraestructura de hardware](#infraestructura-de-hardware)
+    - [Estaciones de trabajo](#estaciones-de-trabajo)
+    - [Seguridad](#seguridad)
+      - [Seguridad interna: lógica y accesos](#seguridad-interna-lógica-y-accesos)
+      - [Copias de seguridad](#copias-de-seguridad)
+- [Presupuesto de la solución](#presupuesto-de-la-solución)
+  - [Recursos humanos](#recursos-humanos)
+  - [Gastos anuales estimados](#gastos-anuales-estimados)
+  - [Normativa](#normativa)
+    - [Protección de datos](#protección-de-datos)
+    - [Obligaciones fiscales y laborales](#obligaciones-fiscales-y-laborales)
+    - [Prevención de riesgos laborales](#prevención-de-riesgos-laborales)
+    - [Ayudas y subvenciones](#ayudas-y-subvenciones)
+- [Propuesta de mejoras](#propuesta-de-mejoras)
 - [Conclusiones](#conclusiones)
 - [Referencias, Fuentes consultadas y Recursos externos: Webgrafía](#referencias-fuentes-consultadas-y-recursos-externos-webgrafía)
+- [Webgrafía](#webgrafía)
 
 ## Introducción
 
@@ -110,7 +138,7 @@ Las distintas fases del proyecto a su vez se dividirán en tareas más pequeñas
 [Enlace a Trello de Cesta Galega](https://trello.com/b/eC77GoBN/proyecto-daw-cesta-galega)
 
 | **Fase**                                                   | **Descripción**                                                                                                                                    | **Duración estimada** | **Dependencias** | **Periodo aproximado** |
-|------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|------------------|------------------------|
+| ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | ---------------- | ---------------------- |
 | **1. Anteproyecto: análisis y planificación**              | Definición de los objetivos, funcionalidades, usuarios y estructura del sistema. Elaboración del anteproyecto y planificación general del trabajo. | 1 semana              | —                | 29 sep – 6 oct         |
 | **2. Diseño de la base de datos**                          | Creación del modelo entidad-relación, definición de tablas y relaciones, e implementación del esquema SQL inicial.                                 | 5 días                | Fase 1           | 7 – 11 oct             |
 | **3. Configuración del entorno y estructura del proyecto** | Creación del proyecto con Next.js, configuración del repositorio, instalación de dependencias y conexión con la base de datos.                     | 1 semana              | Fase 2           | 14 – 20 oct            |
@@ -173,7 +201,7 @@ En un entorno profesional, el equipo ideal estaría compuesto por más personas 
 
 ### Base de datos
 
-La base de datos de este proyecto es una base relacional SQL. El gestor de base de datos elegido es PostgreSQL[^2].
+La base de datos de este proyecto es una base relacional SQL. El gestor de base de datos elegido es PostgreSQL.
 
 ### Esquema Entidad-Relación
 
@@ -206,11 +234,13 @@ herramientas necesarias para cada área del proyecto.
 - Git y GitLab
 
 **Herramientas para el diseñador gráfico:**
+
 - Excalidraw
 - Figma
 - Photoshop
 
 **Herramientas para el tester:**
+
 - Navegadores web: Google Chrome, Firefox, Arc...
 - Postman
 
@@ -222,6 +252,7 @@ Cada miembro dispondrá de una estación de trabajo configurada para cumplir con
 según su función.
 
 **Configuración global:**
+
 - Procesador de 64 bits con soporte para SLAT.
 - Mínimo 8 GB de memoria RAM, recomendados 16 GB.
 - SSD de 256 GB para SO, proyecto y aplicaciones necesarias.
@@ -239,14 +270,14 @@ Se enfoca en asegurar tanto la protección de los datos como el control de acces
 (usuarios y empresas).
 
 - **Autenticación y autorización**: Se implementará un sistema básico de autenticación mediante contraseña para los usuarios
-y empresas, utilizando hashing (BCrypt) seguro para almacenar las contraseñas en la base de datos.
+  y empresas, utilizando hashing (BCrypt) seguro para almacenar las contraseñas en la base de datos.
   - Los usuarios únicamente tendrán acceso a la parte pública de la app (productos, navegación, carrito), mientras que las empresas
-  podrán acceder y gestionar solo su propia tienda y productos.
+    podrán acceder y gestionar solo su propia tienda y productos.
   - La aplicación estará configurada para usar roles básicos (usuario, empresa) con restricciones de acceso. Las empresas
-  no podrán acceder a los datos de otros usuarios ni productos ajenos.
+    no podrán acceder a los datos de otros usuarios ni productos ajenos.
 - **Protección de datos sensibles**: Se garantizará la seguridad en la transmisión de datos utilizando HTTPS para cifrar
-las comunicaciones entre el cliente y el servidor. Los datos sensibles como contraseñas o información personal serán siempre
-cifrados antes de ser almacenados en la base de datos
+  las comunicaciones entre el cliente y el servidor. Los datos sensibles como contraseñas o información personal serán siempre
+  cifrados antes de ser almacenados en la base de datos
 - **Autorización de la API**: la API REST que conecta el frontend con el backend estará protegida mediante tokens JWT
   (JSON Web Tokens) para la autenticación de cada solicitud.
 
@@ -257,10 +288,10 @@ seguridad periódicas.
 
 - **Frecuencia**: Las copias de seguridad de los datos más importantes se realizarán diariamente.
 - **Almacenamiento**: Se almacenarán de forma segura en un entorno externo en la nube, utilizando Supabase para la base de
-datos y GitLab para el código fuente de la app.
+  datos y GitLab para el código fuente de la app.
 - **Automatización**: Las copias de seguridad se automatizarán mediante scripts o herramientas proporcionados por Supabase.
 - **Recuperación ante desastres**: En caso de pérdida de datos, se podrá restaurar la base de datos y los archivos de productos
-de las copias de seguridad más recientes, garantizando que el servicio se pueda restablecer rápidamente.
+  de las copias de seguridad más recientes, garantizando que el servicio se pueda restablecer rápidamente.
 
 ## Presupuesto de la solución
 
@@ -273,7 +304,7 @@ Se ha optado por la S.L por ser la figura legal más adecuada para pequeñas emp
 La empresa está compuesta por 3 trabajadores con perfiles complementarios
 
 | Cargo / Rol                             | Funciones principales                                                                                         | Tipo de contrato | Cualificación                                         |
-|-----------------------------------------|---------------------------------------------------------------------------------------------------------------|------------------|-------------------------------------------------------|
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ---------------- | ----------------------------------------------------- |
 | **Analista / Desarrollador Full-Stack** | Diseño, desarrollo y mantenimiento del sistema, integración entre backend y frontend, despliegues en Docker.  | Jornada completa | Técnico Superior en Desarrollo de Aplicaciones Web    |
 | **Diseñador UX/UI**                     | Creación de la interfaz visual, experiencia de usuario, diseño gráfico y adaptación a distintos dispositivos. | Media jornada    | Técnico Superior en Diseño y Producción de Multimedia |
 | **Tester / Responsable de calidad**     | Pruebas funcionales, validación de requisitos y control de calidad del producto final.                        | Media jornada    | Técnico en Sistemas Microinformáticos o QA Tester     |
@@ -283,7 +314,7 @@ La empresa está compuesta por 3 trabajadores con perfiles complementarios
 A continuación se detallan los principales gastos anuales estimados de la empresa, considerando su tamaño y estructura:
 
 | Concepto                                         | Descripción                                                                                    | Coste anual aproximado |
-|--------------------------------------------------|------------------------------------------------------------------------------------------------|------------------------|
+| ------------------------------------------------ | ---------------------------------------------------------------------------------------------- | ---------------------- |
 | **Salarios brutos**                              | Retribuciones de los 3 trabajadores (1 a tiempo completo y 2 a media jornada).                 | 72.000 €               |
 | **Cotizaciones a la Seguridad Social (empresa)** | Aportación empresarial (~30% de los salarios brutos).                                          | 21.600 €               |
 | **Licencias y software**                         | IntelliJ IDEA Ultimate, Docker Hub Pro, servicios en la nube (Supabase, dominio web, hosting). | 2.400 €                |
@@ -349,8 +380,6 @@ Estas ayudas permiten reducir costes iniciales y fomentar el crecimiento sosteni
 
 ## Webgrafía
 
-## Webgrafía
-
 > **[ERD Lab](https://erdlab.io)** — Herramienta online para crear esquemas entidad-relación y generar modelos SQL visuales.
 >
 > **[Online Gantt](https://www.onlinegantt.com/)** — Plataforma web para elaborar diagramas de Gantt y planificar fases de proyectos.
@@ -381,4 +410,4 @@ Estas ayudas permiten reducir costes iniciales y fomentar el crecimiento sosteni
 >
 > **[Adobe Photoshop](https://www.adobe.com/products/photoshop.html)** — Software profesional para la edición, manipulación y creación de imágenes digitales.
 >
-> **[Postman](https://www.postman.com/)** — Plataforma de desarrollo de APIs que permite probar, documentar y automatizar peticiones HTTP.  
+> **[Postman](https://www.postman.com/)** — Plataforma de desarrollo de APIs que permite probar, documentar y automatizar peticiones HTTP.
