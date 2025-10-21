@@ -1,2 +1,16 @@
 # Fuerza LF en todos los archivos de texto
 * text eol=lf
+
+# No modificar ficheros binarios
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.bmp binary
+*.ico binary
+*.svg binary
+*.pdf binary
+*.zip binary
+*.jar binary
+*.exe binary
+*.dll binary
