@@ -1,10 +1,10 @@
 @import "tailwindcss";
-@plugin "flyonui" {
- themes: light --default, corporate;
-}
 @import "flyonui/variants.css";
 @source "./node_modules/flyonui/flyonui.js";
-
+@plugin "flyonui" {
+  themes: light --default, corporate;
+}
+@plugin "@iconify/tailwind4";
 body {
   font-family: Arial, Helvetica, sans-serif;
 }

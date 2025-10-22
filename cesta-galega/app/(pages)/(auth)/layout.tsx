@@ -7,6 +7,7 @@ export default async function AuthLayout({
   children: React.ReactNode;
 }>) {
   const loggedIn = await isCookieValid();
+  console.log(loggedIn);
   if (loggedIn) {
     redirect('/');
   }

@@ -24,6 +24,7 @@ export default function UserRegisterForm() {
     setLoading(true);
     if (pwd !== formData.password) {
       setErrorMsg('Las contraseñas no coinciden');
+      setLoading(false);
       return;
     }
 
@@ -135,7 +136,7 @@ export default function UserRegisterForm() {
       )}
 
       <button type={'submit'} className={'btn btn-primary rounded'}>
-        {loading ? 'Registrando...' : 'Registrarse'}
+        {loading ? <span className="loading loading-dots"></span> : 'Registrarse'}
       </button>
     </form>
   );

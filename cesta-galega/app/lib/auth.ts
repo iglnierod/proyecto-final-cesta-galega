@@ -23,6 +23,8 @@ export interface JwtPayloadUser {
 export interface JwtPayloadBusiness {
   businessId: number;
   email: string;
+  exp?: number;
+  iat?: number;
 }
 
 export function signUser(payload: JwtPayloadUser): string {
@@ -62,11 +64,10 @@ export async function saveSessionCookie(token: string, type: 'user' | 'business'
   });
 }
 
-export async function isCookieValid(type: 'user' | 'business' = 'user'): Promise<boolean> {
+export async function isCookieValid(): Promise<boolean> {
   const cookieStore = await cookies();
   const token = cookieStore.get('auth_token')?.value;
-  const authType = cookieStore.get('auth_type')?.value;
-  if (token && authType === type) {
+  if (token) {
     try {
       verifyToken(token);
       return true;
@@ -76,4 +77,14 @@ export async function isCookieValid(type: 'user' | 'business' = 'user'): Promise
     }
   }
   return false;
+}
+
+export async function getAuthTokenDecoded() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get('auth_token')?.value;
+  if (token) {
+    return verifyToken(token);
+  } else {
+    throw new Error('Token inválido o expirado');
+  }
 }

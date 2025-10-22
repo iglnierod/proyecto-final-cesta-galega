@@ -32,7 +32,7 @@ export default function UserLoginForm() {
 
       router.push('/');
     } catch (err: any) {
-      setErrorMsg(err.msg || 'Error inesperado');
+      setErrorMsg(err.message || 'Error inesperado');
       console.error(err);
     } finally {
       setLoading(false);

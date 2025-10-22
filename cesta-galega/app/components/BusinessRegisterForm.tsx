@@ -28,6 +28,7 @@ export default function BusinessRegisterForm() {
 
     if (formData.password !== pwd) {
       setErrorMsg('Las contraseñas no coinciden');
+      setLoading(false);
       return;
     }
     console.log(JSON.stringify(formData));

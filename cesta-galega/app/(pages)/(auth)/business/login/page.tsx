@@ -1,14 +1,12 @@
-import { isCookieValid } from '@/app/lib/auth';
-import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import BusinessLoginForm from '@/app/components/BusinessLoginForm';
 
 export default async function BusinessLoginPage() {
-  const loggedIn = await isCookieValid();
+  /*const loggedIn = await isCookieValid();
 
   if (loggedIn) {
     redirect('/');
-  }
+  }*/
 
   return (
     <div className="h-dvh flex items-center">
