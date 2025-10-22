@@ -1,7 +1,5 @@
 # CestaGalega
 
-# CestaGalega
-
 - [Introducción](#introducción)
 - [Estado de arte o análisis del contexto](#estado-de-arte-o-análisis-del-contexto)
 - [Propósito](#propósito)
