@@ -314,7 +314,7 @@ La empresa está compuesta por 3 trabajadores con perfiles complementarios
 A continuación se detallan los principales gastos anuales estimados de la empresa, considerando su tamaño y estructura:
 
 | Concepto                                         | Descripción                                                                                    | Coste anual aproximado |
-| ------------------------------------------------ | ---------------------------------------------------------------------------------------------- | ---------------------- |
+|--------------------------------------------------|------------------------------------------------------------------------------------------------|------------------------|
 | **Salarios brutos**                              | Retribuciones de los 3 trabajadores (1 a tiempo completo y 2 a media jornada).                 | 72.000 €               |
 | **Cotizaciones a la Seguridad Social (empresa)** | Aportación empresarial (~30% de los salarios brutos).                                          | 21.600 €               |
 | **Licencias y software**                         | IntelliJ IDEA Ultimate, Docker Hub Pro, servicios en la nube (Supabase, dominio web, hosting). | 2.400 €                |
