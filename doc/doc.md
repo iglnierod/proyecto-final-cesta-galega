@@ -126,6 +126,36 @@ despliegue en entornos comerciales ni la integración con plataformas externas.
 Futuras ampliaciones podrían incluir: la gestión avanzada de stock, sistema de recomendaciones más sofisticado y un
 panel de administración global, pero estos aspectos quedan fuera del alcance del desarrollo.
 
+### Funciones por roles
+
+#### Usuario anónimo:
+
+- Navegar por el catálogo de productos
+- Buscar y filtrar productos/empresas
+- Visualizar los detalles de productos
+- Registrar una cuenta de usuario
+- Acceder al perfil de empresas para ver su catálogo
+
+#### Usuario:
+- Iniciar sesión/Registrarse
+- Navegar por el catálogo de productos
+- Buscar y filtrar productos/empresas
+- Visualizar los detalles de productos
+- Gestionar carrito de compra (añadir, eliminar productos)
+- Hacer pedido y simular compra
+- Consultar historial de pedidos
+- Valorar productos comprados
+- Acceder al perfil de empresas para ver su catálogo
+
+#### Empresa:
+- Registrarse/Iniciar sesión
+- Completar y editar la información de su perfil
+- Gestionar productos (añadir, editar, eliminar)
+- Establecer descuentos o promociones en productos
+- Visualizar estadísticas de ventas
+- Acceder a su página pública que muestre su perfil y productos
+- Consultar valoraciones de usuarios sobre sus productos
+
 ## Planificación temporal y de recursos de las distintas fases
 
 ### Identificación de fases
@@ -196,6 +226,23 @@ En un entorno profesional, el equipo ideal estaría compuesto por más personas 
 - **ERD Lab**: diseño de model entidad relación.
 
 ## Diseño de la solución
+
+### Framework seleccionado: Next.js
+
+Este proyecto está desarrollado en Next.js junto con React y TypeScript, debido a las ventajas que ofrecen en términos
+de rendimiento, escalabilidad y facilidad de mantenimiento.
+
+Next.js es un framework basado en React que permite desarrollar aplicaciones web modernas con renderizado del lado del
+servidor y generación estática, lo que mejora la velocidad de carga y el posicionamiento en buscadores (SEO). Una de las
+cosas más importantes es que proporciona una estructura de rutas sencilla, soporte integrado de API Routes y optimización
+automática de recursos, facilitando la creación de proyectos completos con una configuración mínima.
+
+React ofrece un enfoque basado en componentes reutilizables, lo que permite desarrollar interfaces dinámicas y fáciles de
+mantener. Typescript añade una capa de robustez al incorporar tipado estático. Esto ayuda a prevenir errores durante el 
+desarrollo y antes de la ejecución del código.
+
+En conjunto, estas tecnologías permiten construir una aplicación rápida, segura y escalable, con una arquitectura moderna
+que combina la productividad del desarrollador con una experiencia de usuario fluida.
 
 ### Base de datos
 
@@ -307,20 +354,37 @@ La empresa está compuesta por 3 trabajadores con perfiles complementarios
 | **Diseñador UX/UI**                     | Creación de la interfaz visual, experiencia de usuario, diseño gráfico y adaptación a distintos dispositivos. | Media jornada    | Técnico Superior en Diseño y Producción de Multimedia |
 | **Tester / Responsable de calidad**     | Pruebas funcionales, validación de requisitos y control de calidad del producto final.                        | Media jornada    | Técnico en Sistemas Microinformáticos o QA Tester     |
 
-### Gastos anuales estimados
+### Gastos estimados
 
-A continuación se detallan los principales gastos anuales estimados de la empresa, considerando su tamaño y estructura:
+#### Trabajadores
+Desglose de costes laborales desde el 29 de septiembre hasta el 16 de diciembre de 2025.
 
-| Concepto                                         | Descripción                                                                                    | Coste anual aproximado |
-|--------------------------------------------------|------------------------------------------------------------------------------------------------|------------------------|
-| **Salarios brutos**                              | Retribuciones de los 3 trabajadores (1 a tiempo completo y 2 a media jornada).                 | 72.000 €               |
-| **Cotizaciones a la Seguridad Social (empresa)** | Aportación empresarial (~30% de los salarios brutos).                                          | 21.600 €               |
-| **Licencias y software**                         | IntelliJ IDEA Ultimate, Docker Hub Pro, servicios en la nube (Supabase, dominio web, hosting). | 2.400 €                |
-| **Equipos informáticos y mantenimiento**         | Renovación de hardware, periféricos y mantenimiento técnico.                                   | 3.000 €                |
-| **Seguros, gestoría y contabilidad**             | Seguro de responsabilidad civil, gestoría, tasas, notaría, etc.                                | 2.000 €                |
-| **Otros gastos operativos**                      | Desplazamientos, marketing, material de oficina, imprevistos.                                  | 1.400 €                |
+Este periodo tiene 79 días, equivalentes a 21.64% del año y se aplican los siguientes tipos:
 
-**Total estimado anual: 102.400,00 €**
+- **Cotización empresa**: 30% salario bruto
+- **Cotización trabajador**: 6,35%
+- **IRPF**: entre el 12% y 16% según nivel salarial
+
+| Empleado / Cargo                                    | Salario bruto (79 días) | Cotización empresa (30%) | Cotización trabajador (6,35%) | IRPF aplicado | Retención IRPF (€) | **Salario neto percibido** | **Coste total empresa** |
+|-----------------------------------------------------|-------------------------|--------------------------|-------------------------------|---------------|--------------------|----------------------------|-------------------------|
+| **Analista / Desarrollador Full-Stack**             | 7.790,40 €              | 2.337,12 €               | 494,76 €                      | 16 %          | 1.246,46 €         | **6.049,18 €**             | **10.127,52 €**         |
+| **Diseñador UX/UI (media jornada)**                 | 3.895,20 €              | 1.168,56 €               | 247,26 €                      | 12 %          | 467,42 €           | **3.180,52 €**             | **5.063,76 €**          |
+| **Tester / Responsable de calidad (media jornada)** | 3.895,20 €              | 1.168,56 €               | 247,26 €                      | 12 %          | 467,42 €           | **3.180,52 €**             | **5.063,76 €**          |
+| **Totales (29/09 – 16/12)**                         | **15.580,80 €**         | **4.674,24 €**           | **989,28 €**                  | —             | **2.181,30 €**     | **12.410,22 €**            | **20.255,04 €**         |
+
+#### Software y hardware
+
+| Concepto                                | Descripción                                                                | Coste unitario | Periodo / cantidad | **Coste total (€)** |
+|-----------------------------------------|----------------------------------------------------------------------------|----------------|--------------------|---------------------|
+| **IntelliJ IDEA Ultimate**              | Licencia mensual para desarrollo backend y frontend                        | 24,08 €/mes    | 3 meses            | **72,24 €**         |
+| **Adobe Photoshop**                     | Licencia mensual para edición y diseño gráfico                             | 25 €/mes       | 3 meses            | **75,00 €**         |
+| **Ordenador desarrollador Full-Stack**  | CPU i5, 16 GB RAM, SSD 512 GB, teclado, ratón y monitor                    | —              | —                  | **1.200 €**         |
+| **Ordenador diseñador UX/UI**           | CPU i5, 16 GB RAM, SSD 256 GB, gráfica integrada, teclado, ratón y monitor | —              | —                  | **1.000 €**         |
+| **Ordenador tester / QA**               | Portátil CPU i5, 8 GB RAM, SSD 256 GB                                      | —              | —                  | **800 €**           |
+| **Total hardware**                      | —                                                                          | —              | —                  | **3.000 €**         |
+| **Total software**                      | (IntelliJ + Photoshop)                                                     | —              | —                  | **147,24 €**        |
+| **Total general (software + hardware)** | —                                                                          | —              | —                  | **3.147,24 €**      |
+
 
 ### Normativa
 
