@@ -5,6 +5,10 @@
 - [Propósito](#propósito)
 - [Objetivos](#objetivos)
 - [Alcance](#alcance)
+  - [Funciones por roles](#funciones-por-roles)
+    - [Usuario anónimo:](#usuario-anónimo)
+    - [Usuario:](#usuario)
+    - [Empresa:](#empresa)
 - [Planificación temporal y de recursos de las distintas fases](#planificación-temporal-y-de-recursos-de-las-distintas-fases)
   - [Identificación de fases](#identificación-de-fases)
   - [Diagrama de Gantt](#diagrama-de-gantt)
@@ -14,8 +18,10 @@
       - [Hardware necesario](#hardware-necesario)
       - [Software utilizado](#software-utilizado)
 - [Diseño de la solución](#diseño-de-la-solución)
+  - [Framework seleccionado: Next.js](#framework-seleccionado-nextjs)
   - [Base de datos](#base-de-datos)
   - [Esquema Entidad-Relación](#esquema-entidad-relación)
+  - [Diagrama de navegación](#diagrama-de-navegación)
   - [Software e paquetes de software](#software-e-paquetes-de-software)
   - [Infraestructura de hardware](#infraestructura-de-hardware)
     - [Estaciones de trabajo](#estaciones-de-trabajo)
@@ -24,7 +30,9 @@
       - [Copias de seguridad](#copias-de-seguridad)
 - [Presupuesto de la solución](#presupuesto-de-la-solución)
   - [Recursos humanos](#recursos-humanos)
-  - [Gastos anuales estimados](#gastos-anuales-estimados)
+  - [Gastos estimados](#gastos-estimados)
+    - [Trabajadores](#trabajadores)
+    - [Software y hardware](#software-y-hardware)
   - [Normativa](#normativa)
     - [Protección de datos](#protección-de-datos)
     - [Obligaciones fiscales y laborales](#obligaciones-fiscales-y-laborales)
@@ -137,6 +145,7 @@ panel de administración global, pero estos aspectos quedan fuera del alcance de
 - Acceder al perfil de empresas para ver su catálogo
 
 #### Usuario:
+
 - Iniciar sesión/Registrarse
 - Navegar por el catálogo de productos
 - Buscar y filtrar productos/empresas
@@ -148,6 +157,7 @@ panel de administración global, pero estos aspectos quedan fuera del alcance de
 - Acceder al perfil de empresas para ver su catálogo
 
 #### Empresa:
+
 - Registrarse/Iniciar sesión
 - Completar y editar la información de su perfil
 - Gestionar productos (añadir, editar, eliminar)
@@ -238,7 +248,7 @@ cosas más importantes es que proporciona una estructura de rutas sencilla, sopo
 automática de recursos, facilitando la creación de proyectos completos con una configuración mínima.
 
 React ofrece un enfoque basado en componentes reutilizables, lo que permite desarrollar interfaces dinámicas y fáciles de
-mantener. Typescript añade una capa de robustez al incorporar tipado estático. Esto ayuda a prevenir errores durante el 
+mantener. Typescript añade una capa de robustez al incorporar tipado estático. Esto ayuda a prevenir errores durante el
 desarrollo y antes de la ejecución del código.
 
 En conjunto, estas tecnologías permiten construir una aplicación rápida, segura y escalable, con una arquitectura moderna
@@ -262,7 +272,7 @@ de la aplicación web. Sirve para entender el recorrido que puede hacer el usuar
 
 ![Diagrama de navegación](img/diagrama-de-navegacion.png)
 
-Este diagrama está hecho en la web _octopus.do_ y se puede ver de manera online en siguiente enlace: 
+Este diagrama está hecho en la web _octopus.do_ y se puede ver de manera online en siguiente enlace:
 
 [Enlace a octopus.do del proyecto](https://octopus.do/d08h7a8kudi)
 
@@ -368,6 +378,7 @@ La empresa está compuesta por 3 trabajadores con perfiles complementarios
 ### Gastos estimados
 
 #### Trabajadores
+
 Desglose de costes laborales desde el 29 de septiembre hasta el 16 de diciembre de 2025.
 
 Este periodo tiene 79 días, equivalentes a 21.64% del año y se aplican los siguientes tipos:
@@ -377,7 +388,7 @@ Este periodo tiene 79 días, equivalentes a 21.64% del año y se aplican los sig
 - **IRPF**: entre el 12% y 16% según nivel salarial
 
 | Empleado / Cargo                                    | Salario bruto (79 días) | Cotización empresa (30%) | Cotización trabajador (6,35%) | IRPF aplicado | Retención IRPF (€) | **Salario neto percibido** | **Coste total empresa** |
-|-----------------------------------------------------|-------------------------|--------------------------|-------------------------------|---------------|--------------------|----------------------------|-------------------------|
+| --------------------------------------------------- | ----------------------- | ------------------------ | ----------------------------- | ------------- | ------------------ | -------------------------- | ----------------------- |
 | **Analista / Desarrollador Full-Stack**             | 7.790,40 €              | 2.337,12 €               | 494,76 €                      | 16 %          | 1.246,46 €         | **6.049,18 €**             | **10.127,52 €**         |
 | **Diseñador UX/UI (media jornada)**                 | 3.895,20 €              | 1.168,56 €               | 247,26 €                      | 12 %          | 467,42 €           | **3.180,52 €**             | **5.063,76 €**          |
 | **Tester / Responsable de calidad (media jornada)** | 3.895,20 €              | 1.168,56 €               | 247,26 €                      | 12 %          | 467,42 €           | **3.180,52 €**             | **5.063,76 €**          |
@@ -386,7 +397,7 @@ Este periodo tiene 79 días, equivalentes a 21.64% del año y se aplican los sig
 #### Software y hardware
 
 | Concepto                                | Descripción                                                                | Coste unitario | Periodo / cantidad | **Coste total (€)** |
-|-----------------------------------------|----------------------------------------------------------------------------|----------------|--------------------|---------------------|
+| --------------------------------------- | -------------------------------------------------------------------------- | -------------- | ------------------ | ------------------- |
 | **IntelliJ IDEA Ultimate**              | Licencia mensual para desarrollo backend y frontend                        | 24,08 €/mes    | 3 meses            | **72,24 €**         |
 | **Adobe Photoshop**                     | Licencia mensual para edición y diseño gráfico                             | 25 €/mes       | 3 meses            | **75,00 €**         |
 | **Ordenador desarrollador Full-Stack**  | CPU i5, 16 GB RAM, SSD 512 GB, teclado, ratón y monitor                    | —              | —                  | **1.200 €**         |
@@ -395,7 +406,6 @@ Este periodo tiene 79 días, equivalentes a 21.64% del año y se aplican los sig
 | **Total hardware**                      | —                                                                          | —              | —                  | **3.000 €**         |
 | **Total software**                      | (IntelliJ + Photoshop)                                                     | —              | —                  | **147,24 €**        |
 | **Total general (software + hardware)** | —                                                                          | —              | —                  | **3.147,24 €**      |
-
 
 ### Normativa
 
