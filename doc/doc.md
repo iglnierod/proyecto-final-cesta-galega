@@ -255,6 +255,17 @@ La base de datos de este proyecto es una base relacional SQL. El gestor de base 
 
 > _Tablas y campos pueden variar y modificarse con el tiempo_
 
+### Diagrama de navegación
+
+Este diagrama de navegación es una representación visual que muestra cómo se organizan y conectan las diferentes secciones
+de la aplicación web. Sirve para entender el recorrido que puede hacer el usuario.
+
+![Diagrama de navegación](img/diagrama-de-navegacion.png)
+
+Este diagrama está hecho en la web _octopus.do_ y se puede ver de manera online en siguiente enlace: 
+
+[Enlace a octopus.do del proyecto](https://octopus.do/d08h7a8kudi)
+
 ### Software e paquetes de software
 
 La configuración de software seleccionada está orientada a un entorno de desarrollo web moderno, con herramientas que
@@ -395,7 +406,7 @@ La empresa cumple con el Reglamento General de Protección de Datos (RGPD) y a l
 Se garantiza que los datos de empresas y usuarios se almacenan en servidores cifrados y seguros, cumpliendo con las medidas
 técnicas necesarias.
 
-El encargado del traamiento garantiza la confidencialidad y permite a los usuarios ejercer sus derechos de acceso, rectificación
+El encargado del tratamiento garantiza la confidencialidad y permite a los usuarios ejercer sus derechos de acceso, rectificación
 y eliminación de datos.
 
 #### Obligaciones fiscales y laborales
@@ -415,6 +426,10 @@ ergónomicas (postura, iluminación, pausas regulares) y el uso seguro de equipo
 
 La empresa se acoge a programas de apoyo a la digitalización como el Kit Digital y a subvenciones autonómicas o estatales para
 proyectos tecnológicos y de innovación.
+
+**Kit digital:**
+
+Al solicitar la ayuda del kit digital, al ser una empresa de entre 3 y 9 empleados podríamos optar a 6000 €
 
 Estas ayudas permiten reducir costes iniciales y fomentar el crecimiento sostenible del proyecto.
 
