@@ -152,6 +152,7 @@ const config = {
       "fromEnvVar": null
     },
     "config": {
+      "url": "DATABASE_URL",
       "engineType": "library"
     },
     "binaryTargets": [
@@ -185,8 +186,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../app/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        Int       @id @default(autoincrement())\n  name      String\n  email     String    @unique\n  sex       String?\n  birt_date DateTime?\n  province  String?\n  password  String\n  createdAt DateTime  @default(now())\n}\n\nmodel Business {\n  id            Int      @id @default(autoincrement())\n  name          String\n  email         String   @unique\n  business_type String\n  phone_number  String\n  address       String\n  city          String\n  province      String\n  postal_code   String\n  password      String\n  createdAt     DateTime @default(now())\n}\n",
-  "inlineSchemaHash": "20d1b764604a6b89f571b2223a33a5b2196520ae1db87f8a74a495bb0eb8d7fe",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  url      = env(\"DATABASE_URL\")\n  output   = \"../app/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        Int       @id @default(autoincrement())\n  name      String\n  email     String    @unique\n  sex       String?\n  birt_date DateTime?\n  province  String?\n  password  String\n  createdAt DateTime  @default(now())\n}\n\nmodel Business {\n  id            Int      @id @default(autoincrement())\n  name          String\n  email         String   @unique\n  business_type String\n  phone_number  String\n  address       String\n  city          String\n  province      String\n  postal_code   String\n  password      String\n  createdAt     DateTime @default(now())\n}\n",
+  "inlineSchemaHash": "37f8e97b07938588960bcd966229d653dabb7c72def436b9c5e4deee6727425a",
   "copyEngine": true
 }
 config.dirname = '/'
