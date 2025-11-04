@@ -29,7 +29,7 @@ export async function POST(request: Request) {
         email,
         sex,
         province,
-        birt_date: birthDateParsed,
+        birthDate: birthDateParsed,
         password: hashedPass,
       },
     });

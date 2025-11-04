@@ -125,7 +125,7 @@ exports.Prisma.UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   sex: 'sex',
-  birt_date: 'birt_date',
+  birthDate: 'birthDate',
   province: 'province',
   password: 'password',
   createdAt: 'createdAt'
@@ -135,14 +135,58 @@ exports.Prisma.BusinessScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
-  business_type: 'business_type',
-  phone_number: 'phone_number',
+  businessType: 'businessType',
+  phoneNumber: 'phoneNumber',
   address: 'address',
   city: 'city',
   province: 'province',
-  postal_code: 'postal_code',
+  postalCode: 'postalCode',
   password: 'password',
   createdAt: 'createdAt'
+};
+
+exports.Prisma.ProductScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  businessId: 'businessId'
+};
+
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.UserProductScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  review: 'review',
+  rating: 'rating',
+  createdAt: 'createdAt',
+  userId: 'userId',
+  productId: 'productId'
+};
+
+exports.Prisma.OrderScalarFieldEnum = {
+  id: 'id',
+  status: 'status',
+  total: 'total',
+  shippingAddress: 'shippingAddress',
+  paymentMethod: 'paymentMethod',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+};
+
+exports.Prisma.OrderProductScalarFieldEnum = {
+  id: 'id',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  subtotal: 'subtotal',
+  orderId: 'orderId',
+  productId: 'productId'
 };
 
 exports.Prisma.SortOrder = {
@@ -163,7 +207,12 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Business: 'Business'
+  Business: 'Business',
+  Product: 'Product',
+  Category: 'Category',
+  UserProduct: 'UserProduct',
+  Order: 'Order',
+  OrderProduct: 'OrderProduct'
 };
 
 /**

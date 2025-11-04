@@ -21,12 +21,12 @@ export async function POST(request: Request) {
       data: {
         name,
         email,
-        business_type: businessType,
-        phone_number: phoneNumber,
+        businessType,
+        phoneNumber: phoneNumber,
         address,
         city,
         province,
-        postal_code: postalCode,
+        postalCode,
         password: hashedPassword,
       },
     });

@@ -16,26 +16,92 @@ datasource db {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  name      String
-  email     String    @unique
-  sex       String?
-  birt_date DateTime?
-  province  String?
-  password  String
-  createdAt DateTime  @default(now())
+  id          Int           @id @default(autoincrement())
+  name        String
+  email       String        @unique
+  sex         String?
+  birthDate   DateTime?
+  province    String?
+  password    String
+  createdAt   DateTime      @default(now())
+  UserProduct UserProduct[]
+  Order       Order[]
 }
 
 model Business {
-  id            Int      @id @default(autoincrement())
-  name          String
-  email         String   @unique
-  business_type String
-  phone_number  String
-  address       String
-  city          String
-  province      String
-  postal_code   String
-  password      String
-  createdAt     DateTime @default(now())
+  id           Int       @id @default(autoincrement())
+  name         String
+  email        String    @unique
+  businessType String
+  phoneNumber  String
+  address      String
+  city         String
+  province     String
+  postalCode   String
+  password     String
+  createdAt    DateTime  @default(now())
+  product      Product[]
+}
+
+model Product {
+  id           Int            @id @default(autoincrement())
+  name         String
+  description  String
+  createdAt    DateTime       @default(now())
+  // relacion con Business
+  businessId   Int
+  business     Business       @relation(fields: [businessId], references: [id])
+  // relacion con Category
+  categories   Category[]
+  UserProduct  UserProduct[]
+  OrderProduct OrderProduct[]
+}
+
+model Category {
+  id        Int       @id @default(autoincrement())
+  name      String
+  createdAt DateTime  @default(now())
+  // relacion con Product
+  products  Product[]
+}
+
+model UserProduct {
+  id        Int      @id @default(autoincrement())
+  title     String
+  review    String
+  rating    Float
+  createdAt DateTime @default(now())
+  // relacion con User
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  // relacion con Product
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id])
+}
+
+model Order {
+  id              Int            @id @default(autoincrement())
+  status          String
+  total           Float
+  shippingAddress String
+  paymentMethod   String
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @default(now())
+  //relacion con User
+  userId          Int
+  user            User           @relation(fields: [userId], references: [id])
+  OrderProduct    OrderProduct[]
+}
+
+model OrderProduct {
+  id        Int     @id @default(autoincrement())
+  quantity  Int
+  unitPrice Float
+  subtotal  Float
+  // relacion con Order
+  orderId   Int
+  order     Order   @relation(fields: [orderId], references: [id])
+  // relacion con Product
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
 }

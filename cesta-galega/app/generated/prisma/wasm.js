@@ -97,7 +97,7 @@ exports.Prisma.UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   sex: 'sex',
-  birt_date: 'birt_date',
+  birthDate: 'birthDate',
   province: 'province',
   password: 'password',
   createdAt: 'createdAt'
@@ -107,14 +107,58 @@ exports.Prisma.BusinessScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
-  business_type: 'business_type',
-  phone_number: 'phone_number',
+  businessType: 'businessType',
+  phoneNumber: 'phoneNumber',
   address: 'address',
   city: 'city',
   province: 'province',
-  postal_code: 'postal_code',
+  postalCode: 'postalCode',
   password: 'password',
   createdAt: 'createdAt'
+};
+
+exports.Prisma.ProductScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  businessId: 'businessId'
+};
+
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.UserProductScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  review: 'review',
+  rating: 'rating',
+  createdAt: 'createdAt',
+  userId: 'userId',
+  productId: 'productId'
+};
+
+exports.Prisma.OrderScalarFieldEnum = {
+  id: 'id',
+  status: 'status',
+  total: 'total',
+  shippingAddress: 'shippingAddress',
+  paymentMethod: 'paymentMethod',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+};
+
+exports.Prisma.OrderProductScalarFieldEnum = {
+  id: 'id',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  subtotal: 'subtotal',
+  orderId: 'orderId',
+  productId: 'productId'
 };
 
 exports.Prisma.SortOrder = {
@@ -135,7 +179,12 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Business: 'Business'
+  Business: 'Business',
+  Product: 'Product',
+  Category: 'Category',
+  UserProduct: 'UserProduct',
+  Order: 'Order',
+  OrderProduct: 'OrderProduct'
 };
 /**
  * Create the Client
@@ -186,13 +235,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  url      = env(\"DATABASE_URL\")\n  output   = \"../app/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        Int       @id @default(autoincrement())\n  name      String\n  email     String    @unique\n  sex       String?\n  birt_date DateTime?\n  province  String?\n  password  String\n  createdAt DateTime  @default(now())\n}\n\nmodel Business {\n  id            Int      @id @default(autoincrement())\n  name          String\n  email         String   @unique\n  business_type String\n  phone_number  String\n  address       String\n  city          String\n  province      String\n  postal_code   String\n  password      String\n  createdAt     DateTime @default(now())\n}\n",
-  "inlineSchemaHash": "37f8e97b07938588960bcd966229d653dabb7c72def436b9c5e4deee6727425a",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  url      = env(\"DATABASE_URL\")\n  output   = \"../app/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id          Int           @id @default(autoincrement())\n  name        String\n  email       String        @unique\n  sex         String?\n  birthDate   DateTime?\n  province    String?\n  password    String\n  createdAt   DateTime      @default(now())\n  UserProduct UserProduct[]\n  Order       Order[]\n}\n\nmodel Business {\n  id           Int       @id @default(autoincrement())\n  name         String\n  email        String    @unique\n  businessType String\n  phoneNumber  String\n  address      String\n  city         String\n  province     String\n  postalCode   String\n  password     String\n  createdAt    DateTime  @default(now())\n  product      Product[]\n}\n\nmodel Product {\n  id           Int            @id @default(autoincrement())\n  name         String\n  description  String\n  createdAt    DateTime       @default(now())\n  // relacion con Business\n  businessId   Int\n  business     Business       @relation(fields: [businessId], references: [id])\n  // relacion con Category\n  categories   Category[]\n  UserProduct  UserProduct[]\n  OrderProduct OrderProduct[]\n}\n\nmodel Category {\n  id        Int       @id @default(autoincrement())\n  name      String\n  createdAt DateTime  @default(now())\n  // relacion con Product\n  products  Product[]\n}\n\nmodel UserProduct {\n  id        Int      @id @default(autoincrement())\n  title     String\n  review    String\n  rating    Float\n  createdAt DateTime @default(now())\n  // relacion con User\n  userId    Int\n  user      User     @relation(fields: [userId], references: [id])\n  // relacion con Product\n  productId Int\n  product   Product  @relation(fields: [productId], references: [id])\n}\n\nmodel Order {\n  id              Int            @id @default(autoincrement())\n  status          String\n  total           Float\n  shippingAddress String\n  paymentMethod   String\n  createdAt       DateTime       @default(now())\n  updatedAt       DateTime       @default(now())\n  //relacion con User\n  userId          Int\n  user            User           @relation(fields: [userId], references: [id])\n  OrderProduct    OrderProduct[]\n}\n\nmodel OrderProduct {\n  id        Int     @id @default(autoincrement())\n  quantity  Int\n  unitPrice Float\n  subtotal  Float\n  // relacion con Order\n  orderId   Int\n  order     Order   @relation(fields: [orderId], references: [id])\n  // relacion con Product\n  productId Int\n  product   Product @relation(fields: [productId], references: [id])\n}\n",
+  "inlineSchemaHash": "f36f225a124aee564a3cb201acfcf1792d8422619ee8156f36054cad37b2294b",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sex\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"birt_date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"province\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Business\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"business_type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone_number\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"address\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"city\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"province\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"postal_code\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sex\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"birthDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"province\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"UserProduct\",\"kind\":\"object\",\"type\":\"UserProduct\",\"relationName\":\"UserToUserProduct\"},{\"name\":\"Order\",\"kind\":\"object\",\"type\":\"Order\",\"relationName\":\"OrderToUser\"}],\"dbName\":null},\"Business\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"businessType\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phoneNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"address\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"city\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"province\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"postalCode\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"product\",\"kind\":\"object\",\"type\":\"Product\",\"relationName\":\"BusinessToProduct\"}],\"dbName\":null},\"Product\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"businessId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"business\",\"kind\":\"object\",\"type\":\"Business\",\"relationName\":\"BusinessToProduct\"},{\"name\":\"categories\",\"kind\":\"object\",\"type\":\"Category\",\"relationName\":\"CategoryToProduct\"},{\"name\":\"UserProduct\",\"kind\":\"object\",\"type\":\"UserProduct\",\"relationName\":\"ProductToUserProduct\"},{\"name\":\"OrderProduct\",\"kind\":\"object\",\"type\":\"OrderProduct\",\"relationName\":\"OrderProductToProduct\"}],\"dbName\":null},\"Category\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"products\",\"kind\":\"object\",\"type\":\"Product\",\"relationName\":\"CategoryToProduct\"}],\"dbName\":null},\"UserProduct\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"review\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"rating\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserToUserProduct\"},{\"name\":\"productId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"product\",\"kind\":\"object\",\"type\":\"Product\",\"relationName\":\"ProductToUserProduct\"}],\"dbName\":null},\"Order\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"total\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"shippingAddress\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"paymentMethod\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"OrderToUser\"},{\"name\":\"OrderProduct\",\"kind\":\"object\",\"type\":\"OrderProduct\",\"relationName\":\"OrderToOrderProduct\"}],\"dbName\":null},\"OrderProduct\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"quantity\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"unitPrice\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"subtotal\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"orderId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"order\",\"kind\":\"object\",\"type\":\"Order\",\"relationName\":\"OrderToOrderProduct\"},{\"name\":\"productId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"product\",\"kind\":\"object\",\"type\":\"Product\",\"relationName\":\"OrderProductToProduct\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),
