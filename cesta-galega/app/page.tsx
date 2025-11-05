@@ -31,7 +31,7 @@ export default function Home() {
             </p>
             <Link
               href="/business/register"
-              className="inline-block mt-6 px-6 py-3 bg-blue-900 text-white font-semibold rounded-lg hover:bg-gray-100 transition"
+              className="inline-block mt-6 px-6 py-3 bg-blue-900 text-white font-semibold rounded-lg hover:bg-blue-950 transition"
             >
               Crear cuenta de vendedor
             </Link>
