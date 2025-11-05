@@ -8,7 +8,20 @@ El proyecto pretende fomentar el comercio local y crear una alternativa accesibl
 
 ## Instalación / Puesta en marcha
 
-> _TODO_: En este apartado describe con toda precisión y a poder ser con la mayor simplicidad/facilidad posible, cómo poner en marcha tu aplicación para probarla (en un ambiente local). Se valorará muy positivamente que este proceso sea lo más fácil posible, con una simple instrucción (p. e. un script de instalación). Docker es ideal para esto.
+**Requisitos**:
+- Node.js 20.9 o superior
+- npm 9 o superior
+- Docker
+
+**Pasos:**
+1. Clonar el repositorio y acceder al directorio `cesta-galega/`
+2. Instalar las dependencias con `npm install`
+3. Renombrar el fichero `.env.example` a `.env` y si es necesario cambiar las propiedades establecidas por defecto
+4. Levantar el contenedor Docker con el comando `docker compose up -d`
+5. Crear la base de datos con el comando `npx prisma migrate deploy` 
+6. Regenerar el cliente prisma `npx prisma generate`
+7. Levantar la página web con el comando `npm run dev`
+8. Abrir en el navegador la dirección `localhost:3000`
 
 ## Uso
 
