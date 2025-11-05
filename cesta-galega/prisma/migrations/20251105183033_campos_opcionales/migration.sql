@@ -1,0 +1,21 @@
+-- AlterTable
+ALTER TABLE "Business" ALTER COLUMN "address" DROP NOT NULL,
+ALTER COLUMN "city" DROP NOT NULL,
+ALTER COLUMN "province" DROP NOT NULL,
+ALTER COLUMN "password" DROP NOT NULL,
+ALTER COLUMN "businessType" DROP NOT NULL,
+ALTER COLUMN "phoneNumber" DROP NOT NULL,
+ALTER COLUMN "postalCode" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "Order" ALTER COLUMN "status" DROP NOT NULL,
+ALTER COLUMN "total" DROP NOT NULL,
+ALTER COLUMN "shippingAddress" DROP NOT NULL,
+ALTER COLUMN "paymentMethod" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "Product" ADD COLUMN     "image" TEXT,
+ALTER COLUMN "description" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "UserProduct" ALTER COLUMN "review" DROP NOT NULL;
