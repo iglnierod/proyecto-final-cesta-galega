@@ -23,11 +23,11 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        working-directory: cesta_galega
+        working-directory: cesta-galega
         run: npm ci
 
       - name: Run Prisma migrations on Supabase
-        working-directory: cesta_galega
+        working-directory: cesta-galega
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
