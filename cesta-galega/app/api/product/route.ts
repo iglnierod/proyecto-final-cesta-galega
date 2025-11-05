@@ -26,9 +26,9 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, description, businessId, categoryIds } = body;
+    const { name, description, businessId, image, categoryIds } = body;
 
-    if (!name || !description || !businessId || !categoryIds) {
+    if (!name || !description || !businessId || !image || !categoryIds) {
       return NextResponse.json(
         { error: 'Name, description, businessId y categoryIds son necesarios ' },
         { status: 400 }
@@ -39,6 +39,7 @@ export async function POST(request: Request) {
       data: {
         name,
         description,
+        image,
         business: { connect: { id: businessId } },
         categories: categoryIds
           ? {
