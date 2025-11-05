@@ -24,7 +24,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: cesta-galega
-        run: npm ci
+        run: npm install
 
       - name: Run Prisma migrations on Supabase
         working-directory: cesta-galega
