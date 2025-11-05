@@ -3,7 +3,8 @@ name: Prisma Migrations
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
       - 'cesta-galega/app/lib/prisma/**'
       - 'cesta-galega/package-lock.json'
