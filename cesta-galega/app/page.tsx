@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import imgPaquete from '@/app/assets/paquete.png';
+import imgPaquete from '@/public/assets/paquete.png';
 
 export default function Home() {
   return (
