@@ -63,6 +63,3 @@ cesta-galega/.env.production
 cesta-galega/app/api/_requests/*
 cesta-galega/*.http
 cesta-galega/.flowbite-react/
-*.dll
-*.node
-*.wasm
