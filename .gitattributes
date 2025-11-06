@@ -14,3 +14,5 @@
 *.jar binary
 *.exe binary
 *.dll binary
+*.node binary
+*.wasm binary
