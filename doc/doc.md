@@ -5,39 +5,41 @@
 - [Propósito](#propósito)
 - [Objetivos](#objetivos)
 - [Alcance](#alcance)
-  - [Funciones por roles](#funciones-por-roles)
-    - [Usuario anónimo:](#usuario-anónimo)
-    - [Usuario:](#usuario)
-    - [Empresa:](#empresa)
+    - [Funciones por roles](#funciones-por-roles)
+        - [Usuario anónimo:](#usuario-anónimo)
+        - [Usuario:](#usuario)
+        - [Empresa:](#empresa)
 - [Planificación temporal y de recursos de las distintas fases](#planificación-temporal-y-de-recursos-de-las-distintas-fases)
-  - [Identificación de fases](#identificación-de-fases)
-  - [Diagrama de Gantt](#diagrama-de-gantt)
-  - [Identificación de recursos](#identificación-de-recursos)
-    - [Recursos personales](#recursos-personales)
-    - [Recursos materiales](#recursos-materiales)
-      - [Hardware necesario](#hardware-necesario)
-      - [Software utilizado](#software-utilizado)
+    - [Identificación de fases](#identificación-de-fases)
+    - [Diagrama de Gantt](#diagrama-de-gantt)
+    - [Identificación de recursos](#identificación-de-recursos)
+        - [Recursos personales](#recursos-personales)
+        - [Recursos materiales](#recursos-materiales)
+            - [Hardware necesario](#hardware-necesario)
+            - [Software utilizado](#software-utilizado)
 - [Diseño de la solución](#diseño-de-la-solución)
-  - [Framework seleccionado: Next.js](#framework-seleccionado-nextjs)
-  - [Base de datos](#base-de-datos)
-  - [Esquema Entidad-Relación](#esquema-entidad-relación)
-  - [Diagrama de navegación](#diagrama-de-navegación)
-  - [Software e paquetes de software](#software-e-paquetes-de-software)
-  - [Infraestructura de hardware](#infraestructura-de-hardware)
-    - [Estaciones de trabajo](#estaciones-de-trabajo)
-    - [Seguridad](#seguridad)
-      - [Seguridad interna: lógica y accesos](#seguridad-interna-lógica-y-accesos)
-      - [Copias de seguridad](#copias-de-seguridad)
+    - [Framework seleccionado: Next.js](#framework-seleccionado-nextjs)
+    - [Base de datos](#base-de-datos)
+    - [Esquema Entidad-Relación](#esquema-entidad-relación)
+    - [Diagrama de navegación](#diagrama-de-navegación)
+    - [Software e paquetes de software](#software-e-paquetes-de-software)
+    - [Infraestructura de hardware](#infraestructura-de-hardware)
+        - [Estaciones de trabajo](#estaciones-de-trabajo)
+        - [Seguridad](#seguridad)
+            - [Seguridad interna: lógica y accesos](#seguridad-interna-lógica-y-accesos)
+            - [Copias de seguridad](#copias-de-seguridad)
 - [Presupuesto de la solución](#presupuesto-de-la-solución)
-  - [Recursos humanos](#recursos-humanos)
-  - [Gastos estimados](#gastos-estimados)
-    - [Trabajadores](#trabajadores)
-    - [Software y hardware](#software-y-hardware)
-  - [Normativa](#normativa)
-    - [Protección de datos](#protección-de-datos)
-    - [Obligaciones fiscales y laborales](#obligaciones-fiscales-y-laborales)
-    - [Prevención de riesgos laborales](#prevención-de-riesgos-laborales)
-    - [Ayudas y subvenciones](#ayudas-y-subvenciones)
+    - [Recursos humanos](#recursos-humanos)
+    - [Gastos estimados](#gastos-estimados)
+        - [Trabajadores](#trabajadores)
+        - [Software y hardware](#software-y-hardware)
+    - [Normativa](#normativa)
+        - [Protección de datos](#protección-de-datos)
+        - [Obligaciones fiscales y laborales](#obligaciones-fiscales-y-laborales)
+        - [Prevención de riesgos laborales](#prevención-de-riesgos-laborales)
+        - [Ayudas y subvenciones](#ayudas-y-subvenciones)
+- [Entregas](#entregas)
+    - [Prototipo 1:](#prototipo-1)
 - [Propuesta de mejoras](#propuesta-de-mejoras)
 - [Conclusiones](#conclusiones)
 - [Referencias, Fuentes consultadas y Recursos externos: Webgrafía](#referencias-fuentes-consultadas-y-recursos-externos-webgrafía)
@@ -85,6 +87,15 @@ Hay diferentes maneras de monetizar un negocio así:
 - Suscripciones a empresas: permitir a los vendedores tener un plan básico gratuito y planes de pago con más
   visibilidad, estadísticas avanzadas o mejor posicionamiento.
 - Publicidad: promoción de productos destacados o campañas especiales dentro de la web.
+
+El proyecto adopta la forma de monetización de **comisión por venta** porque permite al negocio obtener ingresos de manera
+proporcional al éxito de las ventas realizadas a través de la plataforma. Esta opción es flexible y no require que los
+vendedores se comprometan a pagar una tarifa fija o mensual, lo cual puede ser un obstáculo para las pequeñas empresas.
+Además, al basarse en rendimiento, incentiva a la plataforma a mantener su calidad y promover las ventas, beneficiando
+tanto a los vendedores como a la propia plataforma.
+
+En este modelo la **comisión será del 10% de cada venta**, lo que proporciona un equilibrio justo entre las ganancias
+de la plataforma y las de los vendedores.
 
 ## Propósito
 
@@ -176,7 +187,7 @@ Las distintas fases del proyecto a su vez se dividirán en tareas más pequeñas
 [Enlace a Trello de Cesta Galega](https://trello.com/b/eC77GoBN/proyecto-daw-cesta-galega)
 
 | **Fase**                                                   | **Descripción**                                                                                                                                    | **Duración estimada** | **Dependencias** | **Periodo aproximado** |
-|------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|------------------|------------------------|
+| ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | ---------------- | ---------------------- |
 | **1. Anteproyecto: análisis y planificación**              | Definición de los objetivos, funcionalidades, usuarios y estructura del sistema. Elaboración del anteproyecto y planificación general del trabajo. | 1 semana              | —                | 29 sep – 6 oct         |
 | **2. Diseño de la base de datos**                          | Creación del modelo entidad-relación, definición de tablas y relaciones, e implementación del esquema SQL inicial.                                 | 5 días                | Fase 1           | 7 – 11 oct             |
 | **3. Configuración del entorno y estructura del proyecto** | Creación del proyecto con Next.js, configuración del repositorio, instalación de dependencias y conexión con la base de datos.                     | 1 semana              | Fase 2           | 14 – 20 oct            |
@@ -337,10 +348,10 @@ Se enfoca en asegurar tanto la protección de los datos como el control de acces
 
 - **Autenticación y autorización**: Se implementará un sistema básico de autenticación mediante contraseña para los usuarios
   y empresas, utilizando hashing (BCrypt) seguro para almacenar las contraseñas en la base de datos.
-  - Los usuarios únicamente tendrán acceso a la parte pública de la app (productos, navegación, carrito), mientras que las empresas
-    podrán acceder y gestionar solo su propia tienda y productos.
-  - La aplicación estará configurada para usar roles básicos (usuario, empresa) con restricciones de acceso. Las empresas
-    no podrán acceder a los datos de otros usuarios ni productos ajenos.
+    - Los usuarios únicamente tendrán acceso a la parte pública de la app (productos, navegación, carrito), mientras que las empresas
+      podrán acceder y gestionar solo su propia tienda y productos.
+    - La aplicación estará configurada para usar roles básicos (usuario, empresa) con restricciones de acceso. Las empresas
+      no podrán acceder a los datos de otros usuarios ni productos ajenos.
 - **Protección de datos sensibles**: Se garantizará la seguridad en la transmisión de datos utilizando HTTPS para cifrar
   las comunicaciones entre el cliente y el servidor. Los datos sensibles como contraseñas o información personal serán siempre
   cifrados antes de ser almacenados en la base de datos
@@ -370,7 +381,7 @@ Se ha optado por la S.L por ser la figura legal más adecuada para pequeñas emp
 La empresa está compuesta por 3 trabajadores con perfiles complementarios
 
 | Cargo / Rol                             | Funciones principales                                                                                         | Tipo de contrato | Cualificación                                         |
-|-----------------------------------------|---------------------------------------------------------------------------------------------------------------|------------------|-------------------------------------------------------|
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ---------------- | ----------------------------------------------------- |
 | **Analista / Desarrollador Full-Stack** | Diseño, desarrollo y mantenimiento del sistema, integración entre backend y frontend, despliegues en Docker.  | Jornada completa | Técnico Superior en Desarrollo de Aplicaciones Web    |
 | **Diseñador UX/UI**                     | Creación de la interfaz visual, experiencia de usuario, diseño gráfico y adaptación a distintos dispositivos. | Media jornada    | Técnico Superior en Diseño y Producción de Multimedia |
 | **Tester / Responsable de calidad**     | Pruebas funcionales, validación de requisitos y control de calidad del producto final.                        | Media jornada    | Técnico en Sistemas Microinformáticos o QA Tester     |
@@ -388,7 +399,7 @@ Este periodo tiene 79 días, equivalentes a 21.64% del año y se aplican los sig
 - **IRPF**: entre el 12% y 16% según nivel salarial
 
 | Empleado / Cargo                                    | Salario bruto (79 días) | Cotización empresa (30%) | Cotización trabajador (6,35%) | IRPF aplicado | Retención IRPF (€) | **Salario neto percibido** | **Coste total empresa** |
-|-----------------------------------------------------|-------------------------|--------------------------|-------------------------------|---------------|--------------------|----------------------------|-------------------------|
+| --------------------------------------------------- | ----------------------- | ------------------------ | ----------------------------- | ------------- | ------------------ | -------------------------- | ----------------------- |
 | **Analista / Desarrollador Full-Stack**             | 7.790,40 €              | 2.337,12 €               | 494,76 €                      | 16 %          | 1.246,46 €         | **6.049,18 €**             | **10.127,52 €**         |
 | **Diseñador UX/UI (media jornada)**                 | 3.895,20 €              | 1.168,56 €               | 247,26 €                      | 12 %          | 467,42 €           | **3.180,52 €**             | **5.063,76 €**          |
 | **Tester / Responsable de calidad (media jornada)** | 3.895,20 €              | 1.168,56 €               | 247,26 €                      | 12 %          | 467,42 €           | **3.180,52 €**             | **5.063,76 €**          |
@@ -397,7 +408,7 @@ Este periodo tiene 79 días, equivalentes a 21.64% del año y se aplican los sig
 #### Software y hardware
 
 | Concepto                                | Descripción                                                                | Coste unitario | Periodo / cantidad | **Coste total (€)** |
-|-----------------------------------------|----------------------------------------------------------------------------|----------------|--------------------|---------------------|
+| --------------------------------------- | -------------------------------------------------------------------------- | -------------- | ------------------ | ------------------- |
 | **IntelliJ IDEA Ultimate**              | Licencia mensual para desarrollo backend y frontend                        | 24,08 €/mes    | 3 meses            | **72,24 €**         |
 | **Adobe Photoshop**                     | Licencia mensual para edición y diseño gráfico                             | 25 €/mes       | 3 meses            | **75,00 €**         |
 | **Ordenador desarrollador Full-Stack**  | CPU i5, 16 GB RAM, SSD 512 GB, teclado, ratón y monitor                    | —              | —                  | **1.200 €**         |
@@ -442,6 +453,30 @@ proyectos tecnológicos y de innovación.
 Al solicitar la ayuda del kit digital, al ser una empresa de entre 3 y 9 empleados podríamos optar a 6000 €
 
 Estas ayudas permiten reducir costes iniciales y fomentar el crecimiento sostenible del proyecto.
+
+## Entregas
+
+### Prototipo 1:
+
+En esta versión están implementadas las funcionalidades de autenticación de usuarios y empresas. Usando la tecnología _JWT_ o _Json Web Token_ que almacena como cookie la información de la sesión del usuario.
+
+Están hechas las siguientes páginas:
+
+- [Página principal](https://proyecto-final-cesta-galega.vercel.app/)
+- [Registro de usuario](https://proyecto-final-cesta-galega.vercel.app/user/register)
+- [Inicio de sesión de usuario](https://proyecto-final-cesta-galega.vercel.app/user/login)
+- [Registro de empresa](https://proyecto-final-cesta-galega.vercel.app/business/register)
+- [Inicio de sesión de empresa](https://proyecto-final-cesta-galega.vercel.app/business/login)
+- [Dasboard de empresa (con logout)](https://proyecto-final-cesta-galega.vercel.app/business/dashboard)
+
+En el backend están hechos los siguientes endpoints:
+
+- Inicio de sesion de usuario [POST]: `/api/auth/user/login`
+- Registro de usuario [POST]: `/api/auth/user/register`
+- Inicio de sesion de empresa [POST]: `/api/auth/business/login`
+- Registro de empresa [POST]: `/api/auth/user/register`
+- Cerrar sesión [POST]: `/api/auth/logout`
+- Obtener información de usuario [GET]: `/api/user/[userId]`
 
 ## Propuesta de mejoras
 
