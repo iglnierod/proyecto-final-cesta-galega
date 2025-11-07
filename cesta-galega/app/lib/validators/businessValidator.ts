@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+// Validación de datos del formulario de registro de empresa
 export const businessRegisterSchema = z.object({
   name: z.string().min(4, { message: 'O nome da empresa debe ter mínimo 4 caracteres' }),
   email: z.email({ message: 'O email é obrigatorio' }),

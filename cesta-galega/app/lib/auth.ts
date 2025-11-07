@@ -15,11 +15,13 @@ export async function verifyPassword(password: string, hash: string) {
 }
 
 // Jason Web Token
+// Crea payload de usuario que se almacena en las cookies
 export interface JwtPayloadUser {
   userId: number;
   email: string;
 }
 
+// Crea payload de empresa que se almacena en las cookies
 export interface JwtPayloadBusiness {
   businessId: number;
   email: string;
@@ -27,14 +29,17 @@ export interface JwtPayloadBusiness {
   iat?: number;
 }
 
+// Inicia sesión de un usuario
 export function signUser(payload: JwtPayloadUser): string {
   return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
 }
 
+// Incia sesión de una empresa
 export function signBusiness(payload: JwtPayloadBusiness): string {
   return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
 }
 
+// Verificar token
 export function verifyToken(token: string) {
   return jwt.verify(token, JWT_SECRET);
 }
@@ -43,6 +48,7 @@ export function verifyToken(token: string) {
 export async function saveSessionCookie(token: string, type: 'user' | 'business' = 'user') {
   const cookieStore = await cookies();
 
+  // Cookie con el token de JWT
   cookieStore.set({
     name: 'auth_token',
     value: token,
@@ -53,6 +59,7 @@ export async function saveSessionCookie(token: string, type: 'user' | 'business'
     maxAge: JWT_EXPIRES_IN,
   });
 
+  // Cookie que diferencia usuario de empresa
   cookieStore.set({
     name: 'auth_type',
     value: type,
@@ -64,6 +71,7 @@ export async function saveSessionCookie(token: string, type: 'user' | 'business'
   });
 }
 
+// Verificar si un usuario está logeado correctamente
 export async function isCookieValid(): Promise<boolean> {
   const cookieStore = await cookies();
   const token = cookieStore.get('auth_token')?.value;
@@ -79,6 +87,7 @@ export async function isCookieValid(): Promise<boolean> {
   return false;
 }
 
+// Obtener datos del payload guardado en el token
 export async function getAuthTokenDecoded() {
   const cookieStore = await cookies();
   const token = cookieStore.get('auth_token')?.value;

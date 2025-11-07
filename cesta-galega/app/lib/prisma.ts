@@ -1,3 +1,4 @@
+// CREA CLIENTE DE PRISMA USADO EN TODA LA APP
 import { PrismaClient } from '@/app/generated/prisma';
 
 const globalForPrisma = globalThis as unknown as {

@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+// Validación de datos del formulario de registro de usuario
 export const userRegisterSchema = z.object({
   name: z.string().min(2, { message: 'O nome é obligatorio' }),
   email: z.email({ message: 'O email é obligatorio' }),

@@ -6,6 +6,7 @@ import imgPaquete from '@/public/assets/paquete.png';
 export default function Home() {
   return (
     <>
+      {/*1er APARTADO*/}
       <section className="bg-blue-900 text-white text-center py-20">
         <div className="container mx-auto px-6">
           <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight">Cesta Galega</h1>
@@ -21,7 +22,7 @@ export default function Home() {
           </Link>
         </div>
       </section>
-
+      {/*2do APARTADO*/}
       <section className="py-20 text-center">
         <div className="container mx-auto px-6 md:flex md:items-center md:justify-between md:text-left">
           <div className="md:w-1/2 mb-10 md:mb-0">
@@ -42,7 +43,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
+      {/*3er APARTADO*/}
       <section className="bg-blue-900 text-white py-20 text-center">
         <div className="container mx-auto px-6">
           <h3 className="text-4xl font-bold mb-8">¿Por qué elegir Cesta Galega?</h3>
