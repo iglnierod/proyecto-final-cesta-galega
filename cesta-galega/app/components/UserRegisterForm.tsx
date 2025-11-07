@@ -17,7 +17,7 @@ export default function UserRegisterForm() {
     password: '',
   });
 
-  // Definir propiedades del formulario
+  // Definir estados y propiedades del componente
   const [pwd, setPwd] = useState('');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -53,6 +53,7 @@ export default function UserRegisterForm() {
         body: JSON.stringify(formData),
       });
 
+      // Si falla el backend lanza error
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
         throw new Error(data?.error ?? 'Error al registrarse');
