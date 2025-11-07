@@ -4,6 +4,7 @@ import { Sex, UserRegisterInput } from '@/app/lib/types/user';
 import { Province, provinces } from '@/app/lib/types/shared';
 import { useRouter } from 'next/navigation';
 import { userRegisterSchema } from '@/app/lib/validators/userValidator';
+import { useAlert } from '@/app/context/AlertContext';
 
 // Componente con lógica y vista de formulario de registro de usuarios
 export default function UserRegisterForm() {
@@ -22,6 +23,7 @@ export default function UserRegisterForm() {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { showAlert } = useAlert();
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     // Evitar evento por defecto, eliminar mensaje y establecer cargando
@@ -60,6 +62,7 @@ export default function UserRegisterForm() {
       }
 
       // Si se ha registrado correctamente enviar a login
+      showAlert('Se ha creado la cuenta correctamente', 'success');
       router.push('/user/login');
     } catch (err: any) {
       // Si falla establecer mensaje

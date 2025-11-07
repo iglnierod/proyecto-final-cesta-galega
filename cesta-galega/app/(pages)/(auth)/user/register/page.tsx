@@ -16,11 +16,14 @@ export default async function UserRegisterPage() {
     <div className="h-dvh flex items-center bg-gradient-to-b from-blue-900 to-blue-400">
       <section className="w-full flex flex-col items-center py-4">
         <div className="w-full sm:w-auto flex flex-col gap-3 items-center p-8 bg-white rounded-md">
+          {/*LOGO*/}
           <Link href="/" title="Página principal">
             <Image src={logo} alt="Logo Cesta Galega" width={150} />
           </Link>
           <h1 className={'text-xl font-bold'}>Registrarse</h1>
+          {/*COMPONENTE DE REGISTRO DE USUARIO*/}
           <UserRegisterForm />
+          {/*ENLACE*/}
           <Link className={'link link-animated'} href={'/user/login'}>
             Ya tengo una cuenta
           </Link>

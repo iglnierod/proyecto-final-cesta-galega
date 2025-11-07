@@ -4,6 +4,7 @@ import { BusinessRegisterInput, businessType, BusinessType } from '@/app/lib/typ
 import { Province, provinces } from '@/app/lib/types/shared';
 import { useRouter } from 'next/navigation';
 import { businessRegisterSchema } from '@/app/lib/validators/businessValidator';
+import { useAlert } from '@/app/context/AlertContext';
 
 // Componente con lógica y vista de formulario de registro de empresas
 export default function BusinessRegisterForm() {
@@ -25,6 +26,7 @@ export default function BusinessRegisterForm() {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const router = useRouter();
+  const { showAlert } = useAlert();
 
   // Función que se ejecuta al enviar el formulario
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -64,6 +66,7 @@ export default function BusinessRegisterForm() {
       }
 
       // Si se ha registrado correctamente enviar a login
+      showAlert('Se ha creado la cuenta correctamente', 'success');
       router.push('/business/login');
     } catch (err: any) {
       // Si falla establecer mensaje
