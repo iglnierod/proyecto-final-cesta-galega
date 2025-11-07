@@ -3,8 +3,12 @@ import { FormEvent, useState } from 'react';
 import { Sex, UserRegisterInput } from '@/app/lib/types/user';
 import { Province, provinces } from '@/app/lib/types/shared';
 import { useRouter } from 'next/navigation';
+import { userRegisterSchema } from '@/app/lib/validators/userValidator';
+import { useAlert } from '@/app/context/AlertContext';
 
+// Componente con lógica y vista de formulario de registro de usuarios
 export default function UserRegisterForm() {
+  // Definir formulario de registro de usuario
   const [formData, setFormData] = useState<UserRegisterInput>({
     name: '',
     email: '',
@@ -13,15 +17,30 @@ export default function UserRegisterForm() {
     province: 'CORUÑA, A',
     password: '',
   });
+
+  // Definir estados y propiedades del componente
   const [pwd, setPwd] = useState('');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { showAlert } = useAlert();
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    // Evitar evento por defecto, eliminar mensaje y establecer cargando
     e.preventDefault();
     setErrorMsg(null);
     setLoading(true);
+
+    // Verificar datos de formulario usando la librería zod
+    const result = userRegisterSchema.safeParse(formData);
+    if (!result.success) {
+      const error = result.error.issues[0];
+      setErrorMsg(error.message);
+      setLoading(false);
+      return;
+    }
+
+    // Verificar que las dos contraseñas introducidas son iguales
     if (pwd !== formData.password) {
       setErrorMsg('Las contraseñas no coinciden');
       setLoading(false);
@@ -29,19 +48,24 @@ export default function UserRegisterForm() {
     }
 
     try {
+      // Enviar petición a la api para registrar usuario
       const res = await fetch('/api/auth/user/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
+      // Si falla el backend lanza error
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
         throw new Error(data?.error ?? 'Error al registrarse');
       }
 
+      // Si se ha registrado correctamente enviar a login
+      showAlert('Se ha creado la cuenta correctamente', 'success');
       router.push('/user/login');
     } catch (err: any) {
+      // Si falla establecer mensaje
       setErrorMsg(err.message || 'Error inesperado');
       console.error('Error inesperado');
     } finally {
@@ -49,8 +73,10 @@ export default function UserRegisterForm() {
     }
   }
 
+  // Devolver vista
   return (
     <form className={'flex flex-col gap-3'} onSubmit={handleSubmit}>
+      {/*INPUT NOMBRE*/}
       <div className={'input max-w-sm rounded'}>
         <label className={'label-text my-auto me-3 p-0'}>Nombre*</label>
         <input
@@ -60,7 +86,7 @@ export default function UserRegisterForm() {
           required
         />
       </div>
-
+      {/*INPUT EMAIL*/}
       <div className={'input max-w-sm rounded'}>
         <label className={'label-text my-auto me-3 p-0'}>Email*</label>
         <input
@@ -70,7 +96,7 @@ export default function UserRegisterForm() {
           required
         />
       </div>
-
+      {/*INPUT GÉNERO*/}
       <div className={'select-floating max-w-sm'}>
         <select
           className="select max-w-sm"
@@ -84,7 +110,7 @@ export default function UserRegisterForm() {
         </select>
         <label className="select-floating-label">Género*</label>
       </div>
-
+      {/*INPUT FECHA DE NACIMIENTO*/}
       <div className={'input max-w-sm rounded'} title={'Fecha de nacimiento'}>
         <label className={'label-text my-auto me-3 p-0'}>F.Nacimiento*</label>
         <input
@@ -94,7 +120,7 @@ export default function UserRegisterForm() {
           required
         />
       </div>
-
+      {/*INPUT PROVINCIA*/}
       <div className={'select-floating max-w-sm'}>
         <select
           className="select max-w-sm"
@@ -113,7 +139,7 @@ export default function UserRegisterForm() {
         </select>
         <label className="select-floating-label">Provincia*</label>
       </div>
-
+      {/*INPUT CONTRASEÑA*/}
       <div className={'input max-w-sm rounded'}>
         <label className={'label-text my-auto me-3 p-0'}>Contraseña*</label>
         <input
@@ -123,18 +149,20 @@ export default function UserRegisterForm() {
           required
         />
       </div>
-
+      {/*INPUT CONFIRMAR CONTRASEÑA*/}
       <div className={'input max-w-sm rounded'} title={'Confirmar contraseña'}>
         <label className={'label-text my-auto me-3 p-0'}>Conf.Contraseña*</label>
         <input type={'password'} className={'grow'} onChange={(e) => setPwd(e.target.value)} />
       </div>
 
+      {/*MENSAJE DE ERROR*/}
       {errorMsg && (
         <p className={'text-sm text-red-600'} role={'alert'}>
           {errorMsg}
         </p>
       )}
 
+      {/*BOTÓN PARA ENVIAR FORM*/}
       <button type={'submit'} className={'btn btn-primary rounded'}>
         {loading ? <span className="loading loading-dots"></span> : 'Registrarse'}
       </button>

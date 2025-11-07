@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import FlyonuiScript from '@/app/components/FlyonuiScript';
+import { AlertProvider } from '@/app/context/AlertContext';
+import Alert from '@/app/components/Alert';
 
 export const metadata: Metadata = {
   title: 'Cesta Galega',
@@ -17,7 +19,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" data-theme={'corporate'}>
-      <body>{children}</body>
+      <body>
+        <AlertProvider>
+          <Alert />
+          {children}
+        </AlertProvider>
+      </body>
       <FlyonuiScript />
     </html>
   );

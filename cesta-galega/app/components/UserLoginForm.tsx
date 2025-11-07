@@ -2,6 +2,7 @@
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { UserLoginInput } from '@/app/lib/types/user';
+import { useAlert } from '@/app/context/AlertContext';
 
 export default function UserLoginForm() {
   const [formData, setFormData] = useState<UserLoginInput>({
@@ -12,6 +13,7 @@ export default function UserLoginForm() {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const router = useRouter();
+  const { showAlert } = useAlert();
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -30,6 +32,7 @@ export default function UserLoginForm() {
         throw new Error(data?.error ?? 'Error al inciar sesión');
       }
 
+      showAlert('Inicio de sesión exitoso', 'success');
       router.push('/');
     } catch (err: any) {
       setErrorMsg(err.message || 'Error inesperado');
