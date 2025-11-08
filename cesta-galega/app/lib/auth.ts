@@ -97,3 +97,9 @@ export async function getAuthTokenDecoded() {
     throw new Error('Token inválido o expirado');
   }
 }
+
+export async function isBusinessLoggedIn(): Promise<boolean> {
+  const cookieStore = await cookies();
+  const authType = cookieStore.get('auth_type')?.value;
+  return !!(authType && authType === 'business');
+}

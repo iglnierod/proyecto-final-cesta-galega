@@ -1,5 +1,7 @@
 import prisma from '@/app/lib/prisma';
 import { NextResponse } from 'next/server';
+import { BusinessSelectPublic } from '@/app/lib/selects/businessSelect';
+import { CategorySelectPublic } from '@/app/lib/selects/CategorySelectPublic';
 
 export async function GET(request: Request) {
   try {
@@ -11,9 +13,10 @@ export async function GET(request: Request) {
     const products = await prisma.product.findMany({
       where,
       include: {
-        business: true,
-        categories: true,
+        business: BusinessSelectPublic,
+        categories: CategorySelectPublic,
       },
+      orderBy: [{ createdAt: 'desc' }],
     });
 
     return NextResponse.json(products);
@@ -48,8 +51,8 @@ export async function POST(request: Request) {
           : undefined,
       },
       include: {
-        business: true,
-        categories: true,
+        business: BusinessSelectPublic,
+        categories: CategorySelectPublic,
       },
     });
 
