@@ -12,7 +12,6 @@ export default async function BusinessLayout({
   }
 
   const decoded = (await getAuthTokenDecoded()) as JwtPayloadBusiness;
-  console.log(decoded);
 
   const business = await prisma.business.findUnique({
     where: {

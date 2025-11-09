@@ -1,5 +1,7 @@
 'use client';
 import LogOutButton from '@/app/components/LogOutButon';
+import Image from 'next/image';
+import logo from '@/public/assets/logo.png';
 
 export default function BusinessHeader({ businessName }: { businessName: string | undefined }) {
   return (
@@ -8,9 +10,10 @@ export default function BusinessHeader({ businessName }: { businessName: string 
         <div className="flex items-center justify-between">
           <div className="navbar-start items-center justify-between max-md:w-full">
             <a
-              className="link text-base-content link-neutral text-xl font-bold no-underline"
-              href="#"
+              className="link link-neutral text-xl font-bold no-underline flex gap-1 items-center"
+              href="/business/dashboard"
             >
+              <Image src={logo} alt="Logo Cesta Galega" width={32} />
               CestaGalega
             </a>
             <div className="md:hidden">
@@ -33,7 +36,7 @@ export default function BusinessHeader({ businessName }: { businessName: string 
         >
           <ul className="menu md:menu-horizontal gap-2 p-0 text-base max-md:mt-2">
             <li>
-              <a href="#">Gestión</a>
+              <a href="/business/manage/products">Xestión</a>
             </li>
             <li>
               <a href="#">Estadísticas</a>

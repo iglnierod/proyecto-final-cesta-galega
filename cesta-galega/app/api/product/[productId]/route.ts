@@ -60,7 +60,16 @@ export async function PUT(
     }
 
     // Obtener datos de body
-    const { name, description, image, businessId, categoryIds = [] } = parsed.data;
+    const {
+      name,
+      description,
+      image,
+      businessId,
+      price,
+      discounted,
+      discount,
+      categoryIds = [],
+    } = parsed.data;
 
     // Actualizar producto y obtener los nuevos datos
     const updated = await prisma.product.update({
@@ -69,6 +78,9 @@ export async function PUT(
         name,
         description,
         image,
+        price,
+        discounted,
+        discount,
         business: { connect: { id: businessId } },
         categories: {
           set: categoryIds.map((cid: number) => ({ id: cid })),

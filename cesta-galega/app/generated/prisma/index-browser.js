@@ -135,6 +135,7 @@ exports.Prisma.BusinessScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
+  description: 'description',
   businessType: 'businessType',
   phoneNumber: 'phoneNumber',
   address: 'address',
@@ -150,6 +151,10 @@ exports.Prisma.ProductScalarFieldEnum = {
   name: 'name',
   description: 'description',
   image: 'image',
+  enabled: 'enabled',
+  price: 'price',
+  discounted: 'discounted',
+  discount: 'discount',
   createdAt: 'createdAt',
   businessId: 'businessId'
 };
@@ -198,6 +203,11 @@ exports.Prisma.SortOrder = {
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
 };
 
 

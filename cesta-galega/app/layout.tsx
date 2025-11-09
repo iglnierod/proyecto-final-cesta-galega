@@ -20,10 +20,12 @@ export default function RootLayout({
   return (
     <html lang="es" data-theme={'corporate'}>
       <body>
-        <AlertProvider>
-          <Alert />
-          {children}
-        </AlertProvider>
+        <div className="mx-auto w-full max-w-[2560px]">
+          <AlertProvider>
+            <Alert />
+            {children}
+          </AlertProvider>
+        </div>
       </body>
       <FlyonuiScript />
     </html>

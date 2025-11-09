@@ -9,6 +9,9 @@ const productFields = {
     .number()
     .int()
     .positive({ message: 'businessId debe ser un entero positivo' }),
+  price: z.float64().min(1, { message: 'O precio mínimo é de 1 €' }),
+  discounted: z.boolean().optional(),
+  discount: z.float64().min(0.05, { message: 'O desconto mínmo e de 5%' }).optional(),
   categoryIds: z.array(z.coerce.number().int().positive()).optional().default([]),
 };
 
@@ -17,13 +20,8 @@ export const productCreateSchema = z.object({
   description: productFields.description,
   image: productFields.image,
   businessId: productFields.businessId,
+  price: productFields.price,
+  discounted: productFields.discounted,
+  discount: productFields.discount,
   categoryIds: productFields.categoryIds, // opcional; si viene vacío, no conecta nada
-});
-
-export const productEditSchema = z.object({
-  name: productFields.name.optional(),
-  description: productFields.description.optional(),
-  image: productFields.image.optional(),
-  businessId: z.never().optional(),
-  categoryIds: productFields.categoryIds.optional(),
 });

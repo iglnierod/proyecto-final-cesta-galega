@@ -1,9 +1,16 @@
-'use client';
 import Link from 'next/link';
 import Image from 'next/image';
 import imgPaquete from '@/public/assets/paquete.png';
+import { isBusinessLoggedIn } from '@/app/lib/auth';
+import { redirect } from 'next/navigation';
 
-export default function Home() {
+export default async function Home() {
+  // Si hay cookies de login de empresa, redirigir a dashboard
+  const businessLoggedIn = await isBusinessLoggedIn();
+  if (businessLoggedIn) {
+    redirect('/business/dashboard');
+  }
+
   return (
     <>
       {/*1er APARTADO*/}

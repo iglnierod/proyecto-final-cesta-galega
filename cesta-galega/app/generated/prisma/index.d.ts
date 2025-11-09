@@ -2782,6 +2782,7 @@ export namespace Prisma {
     id: number | null
     name: string | null
     email: string | null
+    description: string | null
     businessType: string | null
     phoneNumber: string | null
     address: string | null
@@ -2796,6 +2797,7 @@ export namespace Prisma {
     id: number | null
     name: string | null
     email: string | null
+    description: string | null
     businessType: string | null
     phoneNumber: string | null
     address: string | null
@@ -2810,6 +2812,7 @@ export namespace Prisma {
     id: number
     name: number
     email: number
+    description: number
     businessType: number
     phoneNumber: number
     address: number
@@ -2834,6 +2837,7 @@ export namespace Prisma {
     id?: true
     name?: true
     email?: true
+    description?: true
     businessType?: true
     phoneNumber?: true
     address?: true
@@ -2848,6 +2852,7 @@ export namespace Prisma {
     id?: true
     name?: true
     email?: true
+    description?: true
     businessType?: true
     phoneNumber?: true
     address?: true
@@ -2862,6 +2867,7 @@ export namespace Prisma {
     id?: true
     name?: true
     email?: true
+    description?: true
     businessType?: true
     phoneNumber?: true
     address?: true
@@ -2963,6 +2969,7 @@ export namespace Prisma {
     id: number
     name: string
     email: string
+    description: string | null
     businessType: string
     phoneNumber: string
     address: string
@@ -2996,6 +3003,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     email?: boolean
+    description?: boolean
     businessType?: boolean
     phoneNumber?: boolean
     address?: boolean
@@ -3012,6 +3020,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     email?: boolean
+    description?: boolean
     businessType?: boolean
     phoneNumber?: boolean
     address?: boolean
@@ -3026,6 +3035,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     email?: boolean
+    description?: boolean
     businessType?: boolean
     phoneNumber?: boolean
     address?: boolean
@@ -3040,6 +3050,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     email?: boolean
+    description?: boolean
     businessType?: boolean
     phoneNumber?: boolean
     address?: boolean
@@ -3050,7 +3061,7 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type BusinessOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "businessType" | "phoneNumber" | "address" | "city" | "province" | "postalCode" | "password" | "createdAt", ExtArgs["result"]["business"]>
+  export type BusinessOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "description" | "businessType" | "phoneNumber" | "address" | "city" | "province" | "postalCode" | "password" | "createdAt", ExtArgs["result"]["business"]>
   export type BusinessInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     product?: boolean | Business$productArgs<ExtArgs>
     _count?: boolean | BusinessCountOutputTypeDefaultArgs<ExtArgs>
@@ -3067,6 +3078,7 @@ export namespace Prisma {
       id: number
       name: string
       email: string
+      description: string | null
       businessType: string
       phoneNumber: string
       address: string
@@ -3502,6 +3514,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Business", 'Int'>
     readonly name: FieldRef<"Business", 'String'>
     readonly email: FieldRef<"Business", 'String'>
+    readonly description: FieldRef<"Business", 'String'>
     readonly businessType: FieldRef<"Business", 'String'>
     readonly phoneNumber: FieldRef<"Business", 'String'>
     readonly address: FieldRef<"Business", 'String'>
@@ -3954,11 +3967,15 @@ export namespace Prisma {
 
   export type ProductAvgAggregateOutputType = {
     id: number | null
+    price: number | null
+    discount: number | null
     businessId: number | null
   }
 
   export type ProductSumAggregateOutputType = {
     id: number | null
+    price: number | null
+    discount: number | null
     businessId: number | null
   }
 
@@ -3967,6 +3984,10 @@ export namespace Prisma {
     name: string | null
     description: string | null
     image: string | null
+    enabled: boolean | null
+    price: number | null
+    discounted: boolean | null
+    discount: number | null
     createdAt: Date | null
     businessId: number | null
   }
@@ -3976,6 +3997,10 @@ export namespace Prisma {
     name: string | null
     description: string | null
     image: string | null
+    enabled: boolean | null
+    price: number | null
+    discounted: boolean | null
+    discount: number | null
     createdAt: Date | null
     businessId: number | null
   }
@@ -3985,6 +4010,10 @@ export namespace Prisma {
     name: number
     description: number
     image: number
+    enabled: number
+    price: number
+    discounted: number
+    discount: number
     createdAt: number
     businessId: number
     _all: number
@@ -3993,11 +4022,15 @@ export namespace Prisma {
 
   export type ProductAvgAggregateInputType = {
     id?: true
+    price?: true
+    discount?: true
     businessId?: true
   }
 
   export type ProductSumAggregateInputType = {
     id?: true
+    price?: true
+    discount?: true
     businessId?: true
   }
 
@@ -4006,6 +4039,10 @@ export namespace Prisma {
     name?: true
     description?: true
     image?: true
+    enabled?: true
+    price?: true
+    discounted?: true
+    discount?: true
     createdAt?: true
     businessId?: true
   }
@@ -4015,6 +4052,10 @@ export namespace Prisma {
     name?: true
     description?: true
     image?: true
+    enabled?: true
+    price?: true
+    discounted?: true
+    discount?: true
     createdAt?: true
     businessId?: true
   }
@@ -4024,6 +4065,10 @@ export namespace Prisma {
     name?: true
     description?: true
     image?: true
+    enabled?: true
+    price?: true
+    discounted?: true
+    discount?: true
     createdAt?: true
     businessId?: true
     _all?: true
@@ -4120,6 +4165,10 @@ export namespace Prisma {
     name: string
     description: string
     image: string
+    enabled: boolean | null
+    price: number | null
+    discounted: boolean | null
+    discount: number | null
     createdAt: Date
     businessId: number
     _count: ProductCountAggregateOutputType | null
@@ -4148,6 +4197,10 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     image?: boolean
+    enabled?: boolean
+    price?: boolean
+    discounted?: boolean
+    discount?: boolean
     createdAt?: boolean
     businessId?: boolean
     business?: boolean | BusinessDefaultArgs<ExtArgs>
@@ -4162,6 +4215,10 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     image?: boolean
+    enabled?: boolean
+    price?: boolean
+    discounted?: boolean
+    discount?: boolean
     createdAt?: boolean
     businessId?: boolean
     business?: boolean | BusinessDefaultArgs<ExtArgs>
@@ -4172,6 +4229,10 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     image?: boolean
+    enabled?: boolean
+    price?: boolean
+    discounted?: boolean
+    discount?: boolean
     createdAt?: boolean
     businessId?: boolean
     business?: boolean | BusinessDefaultArgs<ExtArgs>
@@ -4182,11 +4243,15 @@ export namespace Prisma {
     name?: boolean
     description?: boolean
     image?: boolean
+    enabled?: boolean
+    price?: boolean
+    discounted?: boolean
+    discount?: boolean
     createdAt?: boolean
     businessId?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "image" | "createdAt" | "businessId", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "image" | "enabled" | "price" | "discounted" | "discount" | "createdAt" | "businessId", ExtArgs["result"]["product"]>
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     business?: boolean | BusinessDefaultArgs<ExtArgs>
     categories?: boolean | Product$categoriesArgs<ExtArgs>
@@ -4214,6 +4279,10 @@ export namespace Prisma {
       name: string
       description: string
       image: string
+      enabled: boolean | null
+      price: number | null
+      discounted: boolean | null
+      discount: number | null
       createdAt: Date
       businessId: number
     }, ExtArgs["result"]["product"]>
@@ -4647,6 +4716,10 @@ export namespace Prisma {
     readonly name: FieldRef<"Product", 'String'>
     readonly description: FieldRef<"Product", 'String'>
     readonly image: FieldRef<"Product", 'String'>
+    readonly enabled: FieldRef<"Product", 'Boolean'>
+    readonly price: FieldRef<"Product", 'Float'>
+    readonly discounted: FieldRef<"Product", 'Boolean'>
+    readonly discount: FieldRef<"Product", 'Float'>
     readonly createdAt: FieldRef<"Product", 'DateTime'>
     readonly businessId: FieldRef<"Product", 'Int'>
   }
@@ -9685,6 +9758,7 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     email: 'email',
+    description: 'description',
     businessType: 'businessType',
     phoneNumber: 'phoneNumber',
     address: 'address',
@@ -9703,6 +9777,10 @@ export namespace Prisma {
     name: 'name',
     description: 'description',
     image: 'image',
+    enabled: 'enabled',
+    price: 'price',
+    discounted: 'discounted',
+    discount: 'discount',
     createdAt: 'createdAt',
     businessId: 'businessId'
   };
@@ -9774,6 +9852,14 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   /**
    * Field references
    */
@@ -9818,6 +9904,13 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -9920,6 +10013,7 @@ export namespace Prisma {
     id?: IntFilter<"Business"> | number
     name?: StringFilter<"Business"> | string
     email?: StringFilter<"Business"> | string
+    description?: StringNullableFilter<"Business"> | string | null
     businessType?: StringFilter<"Business"> | string
     phoneNumber?: StringFilter<"Business"> | string
     address?: StringFilter<"Business"> | string
@@ -9935,6 +10029,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    description?: SortOrderInput | SortOrder
     businessType?: SortOrder
     phoneNumber?: SortOrder
     address?: SortOrder
@@ -9953,6 +10048,7 @@ export namespace Prisma {
     OR?: BusinessWhereInput[]
     NOT?: BusinessWhereInput | BusinessWhereInput[]
     name?: StringFilter<"Business"> | string
+    description?: StringNullableFilter<"Business"> | string | null
     businessType?: StringFilter<"Business"> | string
     phoneNumber?: StringFilter<"Business"> | string
     address?: StringFilter<"Business"> | string
@@ -9968,6 +10064,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    description?: SortOrderInput | SortOrder
     businessType?: SortOrder
     phoneNumber?: SortOrder
     address?: SortOrder
@@ -9990,6 +10087,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Business"> | number
     name?: StringWithAggregatesFilter<"Business"> | string
     email?: StringWithAggregatesFilter<"Business"> | string
+    description?: StringNullableWithAggregatesFilter<"Business"> | string | null
     businessType?: StringWithAggregatesFilter<"Business"> | string
     phoneNumber?: StringWithAggregatesFilter<"Business"> | string
     address?: StringWithAggregatesFilter<"Business"> | string
@@ -10008,6 +10106,10 @@ export namespace Prisma {
     name?: StringFilter<"Product"> | string
     description?: StringFilter<"Product"> | string
     image?: StringFilter<"Product"> | string
+    enabled?: BoolNullableFilter<"Product"> | boolean | null
+    price?: FloatNullableFilter<"Product"> | number | null
+    discounted?: BoolNullableFilter<"Product"> | boolean | null
+    discount?: FloatNullableFilter<"Product"> | number | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
     businessId?: IntFilter<"Product"> | number
     business?: XOR<BusinessScalarRelationFilter, BusinessWhereInput>
@@ -10021,6 +10123,10 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     image?: SortOrder
+    enabled?: SortOrderInput | SortOrder
+    price?: SortOrderInput | SortOrder
+    discounted?: SortOrderInput | SortOrder
+    discount?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     businessId?: SortOrder
     business?: BusinessOrderByWithRelationInput
@@ -10037,6 +10143,10 @@ export namespace Prisma {
     name?: StringFilter<"Product"> | string
     description?: StringFilter<"Product"> | string
     image?: StringFilter<"Product"> | string
+    enabled?: BoolNullableFilter<"Product"> | boolean | null
+    price?: FloatNullableFilter<"Product"> | number | null
+    discounted?: BoolNullableFilter<"Product"> | boolean | null
+    discount?: FloatNullableFilter<"Product"> | number | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
     businessId?: IntFilter<"Product"> | number
     business?: XOR<BusinessScalarRelationFilter, BusinessWhereInput>
@@ -10050,6 +10160,10 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     image?: SortOrder
+    enabled?: SortOrderInput | SortOrder
+    price?: SortOrderInput | SortOrder
+    discounted?: SortOrderInput | SortOrder
+    discount?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     businessId?: SortOrder
     _count?: ProductCountOrderByAggregateInput
@@ -10067,6 +10181,10 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Product"> | string
     description?: StringWithAggregatesFilter<"Product"> | string
     image?: StringWithAggregatesFilter<"Product"> | string
+    enabled?: BoolNullableWithAggregatesFilter<"Product"> | boolean | null
+    price?: FloatNullableWithAggregatesFilter<"Product"> | number | null
+    discounted?: BoolNullableWithAggregatesFilter<"Product"> | boolean | null
+    discount?: FloatNullableWithAggregatesFilter<"Product"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
     businessId?: IntWithAggregatesFilter<"Product"> | number
   }
@@ -10413,6 +10531,7 @@ export namespace Prisma {
   export type BusinessCreateInput = {
     name: string
     email: string
+    description?: string | null
     businessType: string
     phoneNumber: string
     address: string
@@ -10428,6 +10547,7 @@ export namespace Prisma {
     id?: number
     name: string
     email: string
+    description?: string | null
     businessType: string
     phoneNumber: string
     address: string
@@ -10442,6 +10562,7 @@ export namespace Prisma {
   export type BusinessUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     businessType?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
@@ -10457,6 +10578,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     businessType?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
@@ -10472,6 +10594,7 @@ export namespace Prisma {
     id?: number
     name: string
     email: string
+    description?: string | null
     businessType: string
     phoneNumber: string
     address: string
@@ -10485,6 +10608,7 @@ export namespace Prisma {
   export type BusinessUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     businessType?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
@@ -10499,6 +10623,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     businessType?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
@@ -10513,6 +10638,10 @@ export namespace Prisma {
     name: string
     description: string
     image: string
+    enabled?: boolean | null
+    price?: number | null
+    discounted?: boolean | null
+    discount?: number | null
     createdAt?: Date | string
     business: BusinessCreateNestedOneWithoutProductInput
     categories?: CategoryCreateNestedManyWithoutProductsInput
@@ -10525,6 +10654,10 @@ export namespace Prisma {
     name: string
     description: string
     image: string
+    enabled?: boolean | null
+    price?: number | null
+    discounted?: boolean | null
+    discount?: number | null
     createdAt?: Date | string
     businessId: number
     categories?: CategoryUncheckedCreateNestedManyWithoutProductsInput
@@ -10536,6 +10669,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
+    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    discount?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     business?: BusinessUpdateOneRequiredWithoutProductNestedInput
     categories?: CategoryUpdateManyWithoutProductsNestedInput
@@ -10548,6 +10685,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
+    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    discount?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     businessId?: IntFieldUpdateOperationsInput | number
     categories?: CategoryUncheckedUpdateManyWithoutProductsNestedInput
@@ -10560,6 +10701,10 @@ export namespace Prisma {
     name: string
     description: string
     image: string
+    enabled?: boolean | null
+    price?: number | null
+    discounted?: boolean | null
+    discount?: number | null
     createdAt?: Date | string
     businessId: number
   }
@@ -10568,6 +10713,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
+    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    discount?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -10576,6 +10725,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
+    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    discount?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     businessId?: IntFieldUpdateOperationsInput | number
   }
@@ -10969,10 +11122,30 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type ProductListRelationFilter = {
     every?: ProductWhereInput
     some?: ProductWhereInput
     none?: ProductWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type ProductOrderByRelationAggregateInput = {
@@ -10983,6 +11156,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    description?: SortOrder
     businessType?: SortOrder
     phoneNumber?: SortOrder
     address?: SortOrder
@@ -11001,6 +11175,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    description?: SortOrder
     businessType?: SortOrder
     phoneNumber?: SortOrder
     address?: SortOrder
@@ -11015,6 +11190,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    description?: SortOrder
     businessType?: SortOrder
     phoneNumber?: SortOrder
     address?: SortOrder
@@ -11027,6 +11203,40 @@ export namespace Prisma {
 
   export type BusinessSumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type BusinessScalarRelationFilter = {
@@ -11059,12 +11269,18 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     image?: SortOrder
+    enabled?: SortOrder
+    price?: SortOrder
+    discounted?: SortOrder
+    discount?: SortOrder
     createdAt?: SortOrder
     businessId?: SortOrder
   }
 
   export type ProductAvgOrderByAggregateInput = {
     id?: SortOrder
+    price?: SortOrder
+    discount?: SortOrder
     businessId?: SortOrder
   }
 
@@ -11073,6 +11289,10 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     image?: SortOrder
+    enabled?: SortOrder
+    price?: SortOrder
+    discounted?: SortOrder
+    discount?: SortOrder
     createdAt?: SortOrder
     businessId?: SortOrder
   }
@@ -11082,13 +11302,43 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     image?: SortOrder
+    enabled?: SortOrder
+    price?: SortOrder
+    discounted?: SortOrder
+    discount?: SortOrder
     createdAt?: SortOrder
     businessId?: SortOrder
   }
 
   export type ProductSumOrderByAggregateInput = {
     id?: SortOrder
+    price?: SortOrder
+    discount?: SortOrder
     businessId?: SortOrder
+  }
+
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type CategoryCountOrderByAggregateInput = {
@@ -11407,6 +11657,10 @@ export namespace Prisma {
     connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
   }
 
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type ProductUpdateManyWithoutBusinessNestedInput = {
     create?: XOR<ProductCreateWithoutBusinessInput, ProductUncheckedCreateWithoutBusinessInput> | ProductCreateWithoutBusinessInput[] | ProductUncheckedCreateWithoutBusinessInput[]
     connectOrCreate?: ProductCreateOrConnectWithoutBusinessInput | ProductCreateOrConnectWithoutBusinessInput[]
@@ -11479,6 +11733,18 @@ export namespace Prisma {
     connectOrCreate?: OrderProductCreateOrConnectWithoutProductInput | OrderProductCreateOrConnectWithoutProductInput[]
     createMany?: OrderProductCreateManyProductInputEnvelope
     connect?: OrderProductWhereUniqueInput | OrderProductWhereUniqueInput[]
+  }
+
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type BusinessUpdateOneRequiredWithoutProductNestedInput = {
@@ -11823,6 +12089,88 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -11960,6 +12308,10 @@ export namespace Prisma {
     name: string
     description: string
     image: string
+    enabled?: boolean | null
+    price?: number | null
+    discounted?: boolean | null
+    discount?: number | null
     createdAt?: Date | string
     categories?: CategoryCreateNestedManyWithoutProductsInput
     UserProduct?: UserProductCreateNestedManyWithoutProductInput
@@ -11971,6 +12323,10 @@ export namespace Prisma {
     name: string
     description: string
     image: string
+    enabled?: boolean | null
+    price?: number | null
+    discounted?: boolean | null
+    discount?: number | null
     createdAt?: Date | string
     categories?: CategoryUncheckedCreateNestedManyWithoutProductsInput
     UserProduct?: UserProductUncheckedCreateNestedManyWithoutProductInput
@@ -12011,6 +12367,10 @@ export namespace Prisma {
     name?: StringFilter<"Product"> | string
     description?: StringFilter<"Product"> | string
     image?: StringFilter<"Product"> | string
+    enabled?: BoolNullableFilter<"Product"> | boolean | null
+    price?: FloatNullableFilter<"Product"> | number | null
+    discounted?: BoolNullableFilter<"Product"> | boolean | null
+    discount?: FloatNullableFilter<"Product"> | number | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
     businessId?: IntFilter<"Product"> | number
   }
@@ -12018,6 +12378,7 @@ export namespace Prisma {
   export type BusinessCreateWithoutProductInput = {
     name: string
     email: string
+    description?: string | null
     businessType: string
     phoneNumber: string
     address: string
@@ -12032,6 +12393,7 @@ export namespace Prisma {
     id?: number
     name: string
     email: string
+    description?: string | null
     businessType: string
     phoneNumber: string
     address: string
@@ -12129,6 +12491,7 @@ export namespace Prisma {
   export type BusinessUpdateWithoutProductInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     businessType?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
@@ -12143,6 +12506,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     businessType?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
@@ -12226,6 +12590,10 @@ export namespace Prisma {
     name: string
     description: string
     image: string
+    enabled?: boolean | null
+    price?: number | null
+    discounted?: boolean | null
+    discount?: number | null
     createdAt?: Date | string
     business: BusinessCreateNestedOneWithoutProductInput
     UserProduct?: UserProductCreateNestedManyWithoutProductInput
@@ -12237,6 +12605,10 @@ export namespace Prisma {
     name: string
     description: string
     image: string
+    enabled?: boolean | null
+    price?: number | null
+    discounted?: boolean | null
+    discount?: number | null
     createdAt?: Date | string
     businessId: number
     UserProduct?: UserProductUncheckedCreateNestedManyWithoutProductInput
@@ -12296,6 +12668,10 @@ export namespace Prisma {
     name: string
     description: string
     image: string
+    enabled?: boolean | null
+    price?: number | null
+    discounted?: boolean | null
+    discount?: number | null
     createdAt?: Date | string
     business: BusinessCreateNestedOneWithoutProductInput
     categories?: CategoryCreateNestedManyWithoutProductsInput
@@ -12307,6 +12683,10 @@ export namespace Prisma {
     name: string
     description: string
     image: string
+    enabled?: boolean | null
+    price?: number | null
+    discounted?: boolean | null
+    discount?: number | null
     createdAt?: Date | string
     businessId: number
     categories?: CategoryUncheckedCreateNestedManyWithoutProductsInput
@@ -12367,6 +12747,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
+    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    discount?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     business?: BusinessUpdateOneRequiredWithoutProductNestedInput
     categories?: CategoryUpdateManyWithoutProductsNestedInput
@@ -12378,6 +12762,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
+    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    discount?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     businessId?: IntFieldUpdateOperationsInput | number
     categories?: CategoryUncheckedUpdateManyWithoutProductsNestedInput
@@ -12517,6 +12905,10 @@ export namespace Prisma {
     name: string
     description: string
     image: string
+    enabled?: boolean | null
+    price?: number | null
+    discounted?: boolean | null
+    discount?: number | null
     createdAt?: Date | string
     business: BusinessCreateNestedOneWithoutProductInput
     categories?: CategoryCreateNestedManyWithoutProductsInput
@@ -12528,6 +12920,10 @@ export namespace Prisma {
     name: string
     description: string
     image: string
+    enabled?: boolean | null
+    price?: number | null
+    discounted?: boolean | null
+    discount?: number | null
     createdAt?: Date | string
     businessId: number
     categories?: CategoryUncheckedCreateNestedManyWithoutProductsInput
@@ -12586,6 +12982,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
+    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    discount?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     business?: BusinessUpdateOneRequiredWithoutProductNestedInput
     categories?: CategoryUpdateManyWithoutProductsNestedInput
@@ -12597,6 +12997,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
+    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    discount?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     businessId?: IntFieldUpdateOperationsInput | number
     categories?: CategoryUncheckedUpdateManyWithoutProductsNestedInput
@@ -12684,6 +13088,10 @@ export namespace Prisma {
     name: string
     description: string
     image: string
+    enabled?: boolean | null
+    price?: number | null
+    discounted?: boolean | null
+    discount?: number | null
     createdAt?: Date | string
   }
 
@@ -12691,6 +13099,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
+    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    discount?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: CategoryUpdateManyWithoutProductsNestedInput
     UserProduct?: UserProductUpdateManyWithoutProductNestedInput
@@ -12702,6 +13114,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
+    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    discount?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: CategoryUncheckedUpdateManyWithoutProductsNestedInput
     UserProduct?: UserProductUncheckedUpdateManyWithoutProductNestedInput
@@ -12713,6 +13129,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
+    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    discount?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -12803,6 +13223,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
+    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    discount?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     business?: BusinessUpdateOneRequiredWithoutProductNestedInput
     UserProduct?: UserProductUpdateManyWithoutProductNestedInput
@@ -12814,6 +13238,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
+    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    discount?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     businessId?: IntFieldUpdateOperationsInput | number
     UserProduct?: UserProductUncheckedUpdateManyWithoutProductNestedInput
@@ -12825,6 +13253,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
+    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    discount?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     businessId?: IntFieldUpdateOperationsInput | number
   }
