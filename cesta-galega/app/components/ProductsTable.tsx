@@ -17,7 +17,7 @@ export default function ProductsTable() {
       });
 
       const data = await res.json();
-      console.log(data);
+      console.log('data:', data);
       if (!res.ok) {
         throw new Error(data?.error ?? 'Error ao cargar os produtos');
       }
@@ -36,6 +36,23 @@ export default function ProductsTable() {
   useEffect(() => {
     getProducts();
   }, []);
+
+  async function deleteProduct(productId: number) {
+    try {
+      const res = await fetch(`/api/product/${productId}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data?.error ?? 'Error ao cargar os produtos');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div className="border-base-content/25 w-full rounded-lg border">
@@ -104,6 +121,7 @@ export default function ProductsTable() {
                     </button>
                     <button
                       type="button"
+                      onClick={() => deleteProduct(p.id)}
                       title="Eleiminar produto"
                       className="btn btn-circle btn-text btn-sm"
                       aria-label="Action button"

@@ -8,7 +8,16 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const businessId = searchParams.get('businessId');
 
-    const where = businessId ? { businessId: Number(businessId) } : {};
+    let where: any = {
+      deleted: false,
+    };
+    if (businessId) {
+      where = {
+        ...where,
+        businessId: Number(businessId),
+      };
+    }
+    // const where = businessId ? { businessId: Number(businessId) } : {};
 
     const products = await prisma.product.findMany({
       where,

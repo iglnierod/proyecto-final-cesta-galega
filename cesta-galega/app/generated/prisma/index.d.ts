@@ -3988,6 +3988,7 @@ export namespace Prisma {
     price: number | null
     discounted: boolean | null
     discount: number | null
+    deleted: boolean | null
     createdAt: Date | null
     businessId: number | null
   }
@@ -4001,6 +4002,7 @@ export namespace Prisma {
     price: number | null
     discounted: boolean | null
     discount: number | null
+    deleted: boolean | null
     createdAt: Date | null
     businessId: number | null
   }
@@ -4014,6 +4016,7 @@ export namespace Prisma {
     price: number
     discounted: number
     discount: number
+    deleted: number
     createdAt: number
     businessId: number
     _all: number
@@ -4043,6 +4046,7 @@ export namespace Prisma {
     price?: true
     discounted?: true
     discount?: true
+    deleted?: true
     createdAt?: true
     businessId?: true
   }
@@ -4056,6 +4060,7 @@ export namespace Prisma {
     price?: true
     discounted?: true
     discount?: true
+    deleted?: true
     createdAt?: true
     businessId?: true
   }
@@ -4069,6 +4074,7 @@ export namespace Prisma {
     price?: true
     discounted?: true
     discount?: true
+    deleted?: true
     createdAt?: true
     businessId?: true
     _all?: true
@@ -4169,6 +4175,7 @@ export namespace Prisma {
     price: number | null
     discounted: boolean | null
     discount: number | null
+    deleted: boolean | null
     createdAt: Date
     businessId: number
     _count: ProductCountAggregateOutputType | null
@@ -4201,6 +4208,7 @@ export namespace Prisma {
     price?: boolean
     discounted?: boolean
     discount?: boolean
+    deleted?: boolean
     createdAt?: boolean
     businessId?: boolean
     business?: boolean | BusinessDefaultArgs<ExtArgs>
@@ -4219,6 +4227,7 @@ export namespace Prisma {
     price?: boolean
     discounted?: boolean
     discount?: boolean
+    deleted?: boolean
     createdAt?: boolean
     businessId?: boolean
     business?: boolean | BusinessDefaultArgs<ExtArgs>
@@ -4233,6 +4242,7 @@ export namespace Prisma {
     price?: boolean
     discounted?: boolean
     discount?: boolean
+    deleted?: boolean
     createdAt?: boolean
     businessId?: boolean
     business?: boolean | BusinessDefaultArgs<ExtArgs>
@@ -4247,11 +4257,12 @@ export namespace Prisma {
     price?: boolean
     discounted?: boolean
     discount?: boolean
+    deleted?: boolean
     createdAt?: boolean
     businessId?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "image" | "enabled" | "price" | "discounted" | "discount" | "createdAt" | "businessId", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "image" | "enabled" | "price" | "discounted" | "discount" | "deleted" | "createdAt" | "businessId", ExtArgs["result"]["product"]>
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     business?: boolean | BusinessDefaultArgs<ExtArgs>
     categories?: boolean | Product$categoriesArgs<ExtArgs>
@@ -4283,6 +4294,7 @@ export namespace Prisma {
       price: number | null
       discounted: boolean | null
       discount: number | null
+      deleted: boolean | null
       createdAt: Date
       businessId: number
     }, ExtArgs["result"]["product"]>
@@ -4720,6 +4732,7 @@ export namespace Prisma {
     readonly price: FieldRef<"Product", 'Float'>
     readonly discounted: FieldRef<"Product", 'Boolean'>
     readonly discount: FieldRef<"Product", 'Float'>
+    readonly deleted: FieldRef<"Product", 'Boolean'>
     readonly createdAt: FieldRef<"Product", 'DateTime'>
     readonly businessId: FieldRef<"Product", 'Int'>
   }
@@ -9781,6 +9794,7 @@ export namespace Prisma {
     price: 'price',
     discounted: 'discounted',
     discount: 'discount',
+    deleted: 'deleted',
     createdAt: 'createdAt',
     businessId: 'businessId'
   };
@@ -10110,6 +10124,7 @@ export namespace Prisma {
     price?: FloatNullableFilter<"Product"> | number | null
     discounted?: BoolNullableFilter<"Product"> | boolean | null
     discount?: FloatNullableFilter<"Product"> | number | null
+    deleted?: BoolNullableFilter<"Product"> | boolean | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
     businessId?: IntFilter<"Product"> | number
     business?: XOR<BusinessScalarRelationFilter, BusinessWhereInput>
@@ -10127,6 +10142,7 @@ export namespace Prisma {
     price?: SortOrderInput | SortOrder
     discounted?: SortOrderInput | SortOrder
     discount?: SortOrderInput | SortOrder
+    deleted?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     businessId?: SortOrder
     business?: BusinessOrderByWithRelationInput
@@ -10147,6 +10163,7 @@ export namespace Prisma {
     price?: FloatNullableFilter<"Product"> | number | null
     discounted?: BoolNullableFilter<"Product"> | boolean | null
     discount?: FloatNullableFilter<"Product"> | number | null
+    deleted?: BoolNullableFilter<"Product"> | boolean | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
     businessId?: IntFilter<"Product"> | number
     business?: XOR<BusinessScalarRelationFilter, BusinessWhereInput>
@@ -10164,6 +10181,7 @@ export namespace Prisma {
     price?: SortOrderInput | SortOrder
     discounted?: SortOrderInput | SortOrder
     discount?: SortOrderInput | SortOrder
+    deleted?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     businessId?: SortOrder
     _count?: ProductCountOrderByAggregateInput
@@ -10185,6 +10203,7 @@ export namespace Prisma {
     price?: FloatNullableWithAggregatesFilter<"Product"> | number | null
     discounted?: BoolNullableWithAggregatesFilter<"Product"> | boolean | null
     discount?: FloatNullableWithAggregatesFilter<"Product"> | number | null
+    deleted?: BoolNullableWithAggregatesFilter<"Product"> | boolean | null
     createdAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
     businessId?: IntWithAggregatesFilter<"Product"> | number
   }
@@ -10642,6 +10661,7 @@ export namespace Prisma {
     price?: number | null
     discounted?: boolean | null
     discount?: number | null
+    deleted?: boolean | null
     createdAt?: Date | string
     business: BusinessCreateNestedOneWithoutProductInput
     categories?: CategoryCreateNestedManyWithoutProductsInput
@@ -10658,6 +10678,7 @@ export namespace Prisma {
     price?: number | null
     discounted?: boolean | null
     discount?: number | null
+    deleted?: boolean | null
     createdAt?: Date | string
     businessId: number
     categories?: CategoryUncheckedCreateNestedManyWithoutProductsInput
@@ -10673,6 +10694,7 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     discount?: NullableFloatFieldUpdateOperationsInput | number | null
+    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     business?: BusinessUpdateOneRequiredWithoutProductNestedInput
     categories?: CategoryUpdateManyWithoutProductsNestedInput
@@ -10689,6 +10711,7 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     discount?: NullableFloatFieldUpdateOperationsInput | number | null
+    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     businessId?: IntFieldUpdateOperationsInput | number
     categories?: CategoryUncheckedUpdateManyWithoutProductsNestedInput
@@ -10705,6 +10728,7 @@ export namespace Prisma {
     price?: number | null
     discounted?: boolean | null
     discount?: number | null
+    deleted?: boolean | null
     createdAt?: Date | string
     businessId: number
   }
@@ -10717,6 +10741,7 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     discount?: NullableFloatFieldUpdateOperationsInput | number | null
+    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -10729,6 +10754,7 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     discount?: NullableFloatFieldUpdateOperationsInput | number | null
+    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     businessId?: IntFieldUpdateOperationsInput | number
   }
@@ -11273,6 +11299,7 @@ export namespace Prisma {
     price?: SortOrder
     discounted?: SortOrder
     discount?: SortOrder
+    deleted?: SortOrder
     createdAt?: SortOrder
     businessId?: SortOrder
   }
@@ -11293,6 +11320,7 @@ export namespace Prisma {
     price?: SortOrder
     discounted?: SortOrder
     discount?: SortOrder
+    deleted?: SortOrder
     createdAt?: SortOrder
     businessId?: SortOrder
   }
@@ -11306,6 +11334,7 @@ export namespace Prisma {
     price?: SortOrder
     discounted?: SortOrder
     discount?: SortOrder
+    deleted?: SortOrder
     createdAt?: SortOrder
     businessId?: SortOrder
   }
@@ -12312,6 +12341,7 @@ export namespace Prisma {
     price?: number | null
     discounted?: boolean | null
     discount?: number | null
+    deleted?: boolean | null
     createdAt?: Date | string
     categories?: CategoryCreateNestedManyWithoutProductsInput
     UserProduct?: UserProductCreateNestedManyWithoutProductInput
@@ -12327,6 +12357,7 @@ export namespace Prisma {
     price?: number | null
     discounted?: boolean | null
     discount?: number | null
+    deleted?: boolean | null
     createdAt?: Date | string
     categories?: CategoryUncheckedCreateNestedManyWithoutProductsInput
     UserProduct?: UserProductUncheckedCreateNestedManyWithoutProductInput
@@ -12371,6 +12402,7 @@ export namespace Prisma {
     price?: FloatNullableFilter<"Product"> | number | null
     discounted?: BoolNullableFilter<"Product"> | boolean | null
     discount?: FloatNullableFilter<"Product"> | number | null
+    deleted?: BoolNullableFilter<"Product"> | boolean | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
     businessId?: IntFilter<"Product"> | number
   }
@@ -12594,6 +12626,7 @@ export namespace Prisma {
     price?: number | null
     discounted?: boolean | null
     discount?: number | null
+    deleted?: boolean | null
     createdAt?: Date | string
     business: BusinessCreateNestedOneWithoutProductInput
     UserProduct?: UserProductCreateNestedManyWithoutProductInput
@@ -12609,6 +12642,7 @@ export namespace Prisma {
     price?: number | null
     discounted?: boolean | null
     discount?: number | null
+    deleted?: boolean | null
     createdAt?: Date | string
     businessId: number
     UserProduct?: UserProductUncheckedCreateNestedManyWithoutProductInput
@@ -12672,6 +12706,7 @@ export namespace Prisma {
     price?: number | null
     discounted?: boolean | null
     discount?: number | null
+    deleted?: boolean | null
     createdAt?: Date | string
     business: BusinessCreateNestedOneWithoutProductInput
     categories?: CategoryCreateNestedManyWithoutProductsInput
@@ -12687,6 +12722,7 @@ export namespace Prisma {
     price?: number | null
     discounted?: boolean | null
     discount?: number | null
+    deleted?: boolean | null
     createdAt?: Date | string
     businessId: number
     categories?: CategoryUncheckedCreateNestedManyWithoutProductsInput
@@ -12751,6 +12787,7 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     discount?: NullableFloatFieldUpdateOperationsInput | number | null
+    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     business?: BusinessUpdateOneRequiredWithoutProductNestedInput
     categories?: CategoryUpdateManyWithoutProductsNestedInput
@@ -12766,6 +12803,7 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     discount?: NullableFloatFieldUpdateOperationsInput | number | null
+    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     businessId?: IntFieldUpdateOperationsInput | number
     categories?: CategoryUncheckedUpdateManyWithoutProductsNestedInput
@@ -12909,6 +12947,7 @@ export namespace Prisma {
     price?: number | null
     discounted?: boolean | null
     discount?: number | null
+    deleted?: boolean | null
     createdAt?: Date | string
     business: BusinessCreateNestedOneWithoutProductInput
     categories?: CategoryCreateNestedManyWithoutProductsInput
@@ -12924,6 +12963,7 @@ export namespace Prisma {
     price?: number | null
     discounted?: boolean | null
     discount?: number | null
+    deleted?: boolean | null
     createdAt?: Date | string
     businessId: number
     categories?: CategoryUncheckedCreateNestedManyWithoutProductsInput
@@ -12986,6 +13026,7 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     discount?: NullableFloatFieldUpdateOperationsInput | number | null
+    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     business?: BusinessUpdateOneRequiredWithoutProductNestedInput
     categories?: CategoryUpdateManyWithoutProductsNestedInput
@@ -13001,6 +13042,7 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     discount?: NullableFloatFieldUpdateOperationsInput | number | null
+    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     businessId?: IntFieldUpdateOperationsInput | number
     categories?: CategoryUncheckedUpdateManyWithoutProductsNestedInput
@@ -13092,6 +13134,7 @@ export namespace Prisma {
     price?: number | null
     discounted?: boolean | null
     discount?: number | null
+    deleted?: boolean | null
     createdAt?: Date | string
   }
 
@@ -13103,6 +13146,7 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     discount?: NullableFloatFieldUpdateOperationsInput | number | null
+    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: CategoryUpdateManyWithoutProductsNestedInput
     UserProduct?: UserProductUpdateManyWithoutProductNestedInput
@@ -13118,6 +13162,7 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     discount?: NullableFloatFieldUpdateOperationsInput | number | null
+    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: CategoryUncheckedUpdateManyWithoutProductsNestedInput
     UserProduct?: UserProductUncheckedUpdateManyWithoutProductNestedInput
@@ -13133,6 +13178,7 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     discount?: NullableFloatFieldUpdateOperationsInput | number | null
+    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -13227,6 +13273,7 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     discount?: NullableFloatFieldUpdateOperationsInput | number | null
+    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     business?: BusinessUpdateOneRequiredWithoutProductNestedInput
     UserProduct?: UserProductUpdateManyWithoutProductNestedInput
@@ -13242,6 +13289,7 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     discount?: NullableFloatFieldUpdateOperationsInput | number | null
+    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     businessId?: IntFieldUpdateOperationsInput | number
     UserProduct?: UserProductUncheckedUpdateManyWithoutProductNestedInput
@@ -13257,6 +13305,7 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     discount?: NullableFloatFieldUpdateOperationsInput | number | null
+    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     businessId?: IntFieldUpdateOperationsInput | number
   }

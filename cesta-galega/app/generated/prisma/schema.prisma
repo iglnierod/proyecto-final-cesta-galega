@@ -54,6 +54,7 @@ model Product {
   price        Float?
   discounted   Boolean?
   discount     Float?
+  deleted      Boolean?       @default(false)
   createdAt    DateTime       @default(now())
   // relacion con Business
   businessId   Int

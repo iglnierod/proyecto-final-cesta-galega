@@ -105,3 +105,35 @@ export async function PUT(
     return NextResponse.json({ error: 'Error ao actualizar o producto' }, { status: 500 });
   }
 }
+
+export async function DELETE(
+  request: Request,
+  { params }: { params: Promise<{ productId: string }> }
+) {
+  try {
+    const { productId } = await params;
+    const id = Number(productId);
+
+    const deleteProduct = await prisma.product.update({
+      where: { id },
+      data: {
+        deleted: true,
+      },
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        image: true,
+        deleted: true,
+        createdAt: true,
+        business: BusinessSelectPublic,
+        categories: CategorySelectPublic,
+      },
+    });
+
+    return NextResponse.json({ deleteProduct }, { status: 200 });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: 'Erro ao eliminar o produto' });
+  }
+}
