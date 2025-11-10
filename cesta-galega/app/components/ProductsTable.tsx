@@ -1,12 +1,17 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { Product } from '@/app/generated/prisma';
+import Swal from 'sweetalert2';
+import { useAlert } from '@/app/context/AlertContext';
 
+// Componente que muestra la tabla de productos
 export default function ProductsTable() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | undefined>(undefined);
   const [products, setProducts] = useState<Product[]>([]);
+  const { showAlert } = useAlert();
 
+  // Obtener productos de la API y cargarlos en la lista
   async function getProducts() {
     setLoading(true);
 
@@ -16,14 +21,17 @@ export default function ProductsTable() {
         headers: { 'Content-Type': 'application/json' },
       });
 
+      // Obtener datos de la llamada
       const data = await res.json();
-      console.log('data:', data);
+
       if (!res.ok) {
+        // Si hay un fallo en la petición enviar error
         throw new Error(data?.error ?? 'Error ao cargar os produtos');
       }
 
       setProducts(data);
     } catch (error: any) {
+      // Mostrar error y reestablecer estados
       setError(error.message ?? 'Error');
       setLoading(false);
       setProducts([]);
@@ -33,10 +41,12 @@ export default function ProductsTable() {
     }
   }
 
+  // Cargar productos al cargar el componente
   useEffect(() => {
     getProducts();
   }, []);
 
+  // Enviar petición de eliminar producto
   async function deleteProduct(productId: number) {
     try {
       const res = await fetch(`/api/product/${productId}`, {
@@ -47,9 +57,38 @@ export default function ProductsTable() {
       const data = await res.json();
 
       if (!res.ok) {
+        // Si hubo un error en la api enviar un error
         throw new Error(data?.error ?? 'Error ao cargar os produtos');
       }
     } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // Desplegar modal y obtener feedback de usuario
+  async function handleDelete(productId: number, name?: string) {
+    // Enviar modal y obtener si el usuario confirmó el delete
+    const { isConfirmed } = await Swal.fire({
+      title: '¿Eliminar produto?',
+      text: `Eliminarase ${name}`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Eliminar',
+      cancelButtonAriaLabel: 'Cancelar',
+      reverseButtons: true,
+    });
+
+    // Si no confirmó devolver y no hacer nada
+    if (!isConfirmed) return;
+
+    try {
+      // Llamar a función de eliminar producto
+      await deleteProduct(productId);
+      // Actualizar la lista de productos para eliminar el producto eliminado
+      setProducts((prev) => prev.filter((p) => p.id !== productId));
+      showAlert('O produto foi eliminado correctamente', 'success');
+    } catch (error) {
+      showAlert('Ocorreu un erro ao eliminar o produto', 'error');
       console.error(error);
     }
   }
@@ -58,29 +97,33 @@ export default function ProductsTable() {
     <div className="border-base-content/25 w-full rounded-lg border">
       <div className="overflow-x-auto">
         <table className="table">
+          {/* CABECERA DE LA TABLA */}
           <thead>
             <tr className="bg-blue-50">
               <th className="font-bold">Nome</th>
               <th className="font-bold">Descrición</th>
-              <th className="font-bold">Disponible</th>
-              <th className="font-bold">Precio</th>
+              <th className="font-bold">Dispoñible</th>
+              <th className="font-bold">Prezo</th>
               <th className="font-bold">Desconto</th>
-              <th className="font-bold">Actions</th>
+              <th className="font-bold">Accións</th>
             </tr>
           </thead>
           <tbody>
+            {/* FILA CON ERROR SI HAY ALGUN FALLO */}
             {error && (
               <tr>
                 <td colSpan={5}>error</td>
               </tr>
             )}
+            {/* MOSTRAR CARGA DE DATOS */}
             {loading && !error ? (
               <tr>
-                <td colSpan={5} className="text-center">
+                <td colSpan={15} className="text-center">
                   <span className="loading loading-spinner text-primary"></span>
                 </td>
               </tr>
-            ) : (
+            ) : // RECORRER DATOS PARA MOSTRARLOS
+            products.length !== 0 ? (
               products.map((p) => (
                 <tr key={p.id}>
                   <td>{p.name}</td>
@@ -99,10 +142,12 @@ export default function ProductsTable() {
                         {p.discount ? p.discount * 100 : undefined} %
                       </span>
                     ) : (
-                      <span className="badge badge-soft badge-error">Non</span>
+                      <span className="badge badge-soft badge-secondary">Non</span>
                     )}
                   </td>
+                  {/* BOTONES DE ACCIONES */}
                   <td>
+                    {/* BOTÓN DE VER */}
                     <button
                       type="button"
                       title="Ver produto"
@@ -111,6 +156,7 @@ export default function ProductsTable() {
                     >
                       <span className="icon-[tabler--eye] size-5"></span>
                     </button>
+                    {/* BOTÓN DE EDITAR */}
                     <button
                       type="button"
                       title="Editar produto"
@@ -119,9 +165,10 @@ export default function ProductsTable() {
                     >
                       <span className="icon-[tabler--pencil] size-5 "></span>
                     </button>
+                    {/* BOTÓN DE ELIMINAR */}
                     <button
                       type="button"
-                      onClick={() => deleteProduct(p.id)}
+                      onClick={() => handleDelete(p.id, p.name)}
                       title="Eleiminar produto"
                       className="btn btn-circle btn-text btn-sm"
                       aria-label="Action button"
@@ -131,6 +178,12 @@ export default function ProductsTable() {
                   </td>
                 </tr>
               ))
+            ) : (
+              <tr>
+                <td className="text-center" colSpan={10}>
+                  Non hay produtos
+                </td>
+              </tr>
             )}
           </tbody>
         </table>
