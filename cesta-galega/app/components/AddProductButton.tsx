@@ -3,49 +3,41 @@ import { useAlert } from '@/app/context/AlertContext';
 import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
 import ProductForm from '@/app/components/ProductForm';
-import { Product } from '@/app/generated/prisma';
+import { mutate } from 'swr';
 
-export default function AddProductButton({
-  businessId,
-  onCreated,
-}: {
-  businessId: number | undefined;
-  onCreated?: (p: Product) => void;
-}) {
+export default function AddProductButton({ businessId }: { businessId: number | undefined }) {
   const { showAlert } = useAlert();
   const MySwal = withReactContent(Swal);
 
-  // Manejar click en botón
   async function handleClick() {
     if (!businessId) {
       showAlert('Ocorreu un erro coa identificación. Volva iniciar sesión.', 'error');
+      return;
     }
 
-    // Lanzar modal de creación de producto
     await MySwal.fire({
       title: 'Novo produto',
       html: (
         <ProductForm
           create={true}
           businessId={businessId}
-          onSuccess={(p) => {
+          onSuccess={() => {
             showAlert('Produto creado con éxito', 'success');
-            onCreated?.(p);
+            // 🔁 Revalidar la lista
+            mutate(`/api/product?businessId=${businessId}`);
           }}
         />
       ),
       showConfirmButton: false,
-      showCancelButton: false,
       width: 800,
     });
   }
 
-  // Devolver botón de nuevo producto
   return (
     <div className="">
       <button
         type="button"
-        onClick={() => handleClick()}
+        onClick={handleClick}
         title="Novo produto"
         className="btn btn-primary rounded btn-wide"
       >

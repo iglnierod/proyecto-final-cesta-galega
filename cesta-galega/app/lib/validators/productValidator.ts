@@ -9,9 +9,16 @@ const productFields = {
     .number()
     .int()
     .positive({ message: 'businessId debe ser un entero positivo' }),
-  price: z.float64().min(1, { message: 'O precio mínimo é de 1 €' }),
+  price: z
+    .float64()
+    .min(1, { message: 'O precio mínimo é de 1 €' })
+    .max(9999, { message: 'O precio máximo é de 9999 €' }),
   discounted: z.boolean().optional(),
-  discount: z.float64().min(0.05, { message: 'O desconto mínmo e de 5%' }).optional(),
+  discount: z
+    .float64()
+    .min(0, { message: 'O desconto mínmo e de 5%' })
+    .max(99, { message: 'O desconto máximo é de 99%' })
+    .optional(),
   categoryIds: z.array(z.coerce.number().int().positive()).optional().default([]),
 };
 

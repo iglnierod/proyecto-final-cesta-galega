@@ -2,55 +2,68 @@
 import Swal from 'sweetalert2';
 import { Product } from '@/app/generated/prisma';
 import { useAlert } from '@/app/context/AlertContext';
+import withReactContent from 'sweetalert2-react-content';
+import ProductForm from '@/app/components/ProductForm';
+import { mutate } from 'swr';
 
 export default function ProductsTable({
   products,
   loading,
   error,
-  onDelete,
+  businessId,
 }: {
   products: Product[];
   loading: boolean;
   error?: string;
-  onDelete?: (productId: number) => void;
+  businessId: number;
 }) {
-  // Lanzador de alertas de la app
   const { showAlert } = useAlert();
+  const MySwal = withReactContent(Swal);
+  const key = `/api/product?businessId=${businessId}`;
 
-  // Manejar click en delete
   async function handleDelete(productId: number, name?: string) {
-    // Lanzar modal de confirmación para eliminar
     const { isConfirmed } = await Swal.fire({
       title: '¿Eliminar produto?',
       text: `Eliminarase o produto: ${name}`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Eliminar',
-      cancelButtonAriaLabel: 'Cancelar',
       reverseButtons: true,
     });
-
-    // Si el usuario no confirma devolver sin ejecutar nada
     if (!isConfirmed) return;
 
     try {
-      // Hacer petición a la API para eliminar producto
-      const res = await fetch(`/api/product/${productId}`, {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-      });
-
-      // Obtener datos de la petición
+      const res = await fetch(`/api/product/${productId}`, { method: 'DELETE' });
       const data = await res.json();
       if (!res.ok) throw new Error(data?.error ?? 'Error ao eliminar produto');
-
-      // Si se eliminó correctamente ejecutar función heredada para eliminar de la lista
-      onDelete?.(productId);
       showAlert('O produto foi eliminado correctamente', 'success');
+
+      // 🔁 Revalidar la lista
+      mutate(key);
     } catch (error) {
       console.error(error);
       showAlert('Ocorreu un erro ao eliminar o produto', 'error');
     }
+  }
+
+  function handleEditClick(p: Product) {
+    MySwal.fire({
+      title: 'Editar produto',
+      html: (
+        <ProductForm
+          create={false}
+          businessId={businessId}
+          product={p}
+          onSuccess={(updated) => {
+            showAlert('Produto actualiza con éxito', 'success');
+            // Si tu API devuelve { product: {...} }, da igual: el refetch manda
+            mutate(key);
+          }}
+        />
+      ),
+      showConfirmButton: false,
+      width: 800,
+    });
   }
 
   return (
@@ -69,7 +82,6 @@ export default function ProductsTable({
             </tr>
           </thead>
           <tbody>
-            {/* FILA DE ERROR */}
             {error && (
               <tr>
                 <td colSpan={10} className="text-center text-error">
@@ -78,15 +90,13 @@ export default function ProductsTable({
               </tr>
             )}
 
-            {/* SPINNER DE CARGA */}
             {loading && !error ? (
               <tr>
                 <td colSpan={15} className="text-center">
                   <span className="loading loading-spinner text-primary"></span>
                 </td>
               </tr>
-            ) : // MOSTRAR PRODUCTOS
-            products.length !== 0 ? (
+            ) : products.length !== 0 ? (
               products.map((p) => (
                 <tr key={p.id}>
                   <td>{p.name}</td>
@@ -109,7 +119,6 @@ export default function ProductsTable({
                     )}
                   </td>
                   <td>
-                    {/* BOTÓN DE VER */}
                     <button
                       type="button"
                       title="Ver produto"
@@ -118,16 +127,17 @@ export default function ProductsTable({
                     >
                       <span className="icon-[tabler--eye] size-5"></span>
                     </button>
-                    {/* BOTÓN DE EDITAR */}
+
                     <button
                       type="button"
+                      onClick={() => handleEditClick(p)}
                       title="Editar produto"
                       className="btn btn-circle btn-text btn-sm"
                       aria-label="Action button"
                     >
                       <span className="icon-[tabler--pencil] size-5 "></span>
                     </button>
-                    {/* BOTÓN DE ELIMINAR */}
+
                     <button
                       type="button"
                       onClick={() => handleDelete(p.id, p.name)}
