@@ -38,9 +38,19 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, description, businessId, image, price, discounted, discount, categoryIds } = body;
+    const {
+      name,
+      description,
+      businessId,
+      image,
+      price,
+      discounted,
+      discount,
+      enabled,
+      categoryIds,
+    } = body;
 
-    if (!name || !description || !businessId || !image || !categoryIds) {
+    if (!name || !description || !businessId || !image || !categoryIds || !enabled) {
       return NextResponse.json(
         { error: 'Name, description, businessId y categoryIds son necesarios ' },
         { status: 400 }
@@ -55,6 +65,7 @@ export async function POST(request: Request) {
         price,
         discounted,
         discount,
+        enabled,
         business: { connect: { id: businessId } },
         categories: categoryIds
           ? {

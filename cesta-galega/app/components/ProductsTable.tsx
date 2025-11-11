@@ -1,76 +1,28 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { Product } from '@/app/generated/prisma';
 import Swal from 'sweetalert2';
+import { Product } from '@/app/generated/prisma';
 import { useAlert } from '@/app/context/AlertContext';
 
-// Componente que muestra la tabla de productos
-export default function ProductsTable() {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | undefined>(undefined);
-  const [products, setProducts] = useState<Product[]>([]);
+export default function ProductsTable({
+  products,
+  loading,
+  error,
+  onDelete,
+}: {
+  products: Product[];
+  loading: boolean;
+  error?: string;
+  onDelete?: (productId: number) => void;
+}) {
+  // Lanzador de alertas de la app
   const { showAlert } = useAlert();
 
-  // Obtener productos de la API y cargarlos en la lista
-  async function getProducts() {
-    setLoading(true);
-
-    try {
-      const res = await fetch('/api/product?businessId=2', {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      });
-
-      // Obtener datos de la llamada
-      const data = await res.json();
-
-      if (!res.ok) {
-        // Si hay un fallo en la petición enviar error
-        throw new Error(data?.error ?? 'Error ao cargar os produtos');
-      }
-
-      setProducts(data);
-    } catch (error: any) {
-      // Mostrar error y reestablecer estados
-      setError(error.message ?? 'Error');
-      setLoading(false);
-      setProducts([]);
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  // Cargar productos al cargar el componente
-  useEffect(() => {
-    getProducts();
-  }, []);
-
-  // Enviar petición de eliminar producto
-  async function deleteProduct(productId: number) {
-    try {
-      const res = await fetch(`/api/product/${productId}`, {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        // Si hubo un error en la api enviar un error
-        throw new Error(data?.error ?? 'Error ao cargar os produtos');
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  // Desplegar modal y obtener feedback de usuario
+  // Manejar click en delete
   async function handleDelete(productId: number, name?: string) {
-    // Enviar modal y obtener si el usuario confirmó el delete
+    // Lanzar modal de confirmación para eliminar
     const { isConfirmed } = await Swal.fire({
       title: '¿Eliminar produto?',
-      text: `Eliminarase ${name}`,
+      text: `Eliminarase o produto: ${name}`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Eliminar',
@@ -78,18 +30,26 @@ export default function ProductsTable() {
       reverseButtons: true,
     });
 
-    // Si no confirmó devolver y no hacer nada
+    // Si el usuario no confirma devolver sin ejecutar nada
     if (!isConfirmed) return;
 
     try {
-      // Llamar a función de eliminar producto
-      await deleteProduct(productId);
-      // Actualizar la lista de productos para eliminar el producto eliminado
-      setProducts((prev) => prev.filter((p) => p.id !== productId));
+      // Hacer petición a la API para eliminar producto
+      const res = await fetch(`/api/product/${productId}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      // Obtener datos de la petición
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.error ?? 'Error ao eliminar produto');
+
+      // Si se eliminó correctamente ejecutar función heredada para eliminar de la lista
+      onDelete?.(productId);
       showAlert('O produto foi eliminado correctamente', 'success');
     } catch (error) {
-      showAlert('Ocorreu un erro ao eliminar o produto', 'error');
       console.error(error);
+      showAlert('Ocorreu un erro ao eliminar o produto', 'error');
     }
   }
 
@@ -109,20 +69,23 @@ export default function ProductsTable() {
             </tr>
           </thead>
           <tbody>
-            {/* FILA CON ERROR SI HAY ALGUN FALLO */}
+            {/* FILA DE ERROR */}
             {error && (
               <tr>
-                <td colSpan={5}>error</td>
+                <td colSpan={10} className="text-center text-error">
+                  {error}
+                </td>
               </tr>
             )}
-            {/* MOSTRAR CARGA DE DATOS */}
+
+            {/* SPINNER DE CARGA */}
             {loading && !error ? (
               <tr>
                 <td colSpan={15} className="text-center">
                   <span className="loading loading-spinner text-primary"></span>
                 </td>
               </tr>
-            ) : // RECORRER DATOS PARA MOSTRARLOS
+            ) : // MOSTRAR PRODUCTOS
             products.length !== 0 ? (
               products.map((p) => (
                 <tr key={p.id}>
@@ -139,13 +102,12 @@ export default function ProductsTable() {
                   <td>
                     {p.discounted ? (
                       <span className="badge badge-soft badge-info">
-                        {p.discount ? p.discount * 100 : undefined} %
+                        {p.discount ? p.discount : undefined} %
                       </span>
                     ) : (
                       <span className="badge badge-soft badge-secondary">Non</span>
                     )}
                   </td>
-                  {/* BOTONES DE ACCIONES */}
                   <td>
                     {/* BOTÓN DE VER */}
                     <button
@@ -169,7 +131,7 @@ export default function ProductsTable() {
                     <button
                       type="button"
                       onClick={() => handleDelete(p.id, p.name)}
-                      title="Eleiminar produto"
+                      title="Eliminar produto"
                       className="btn btn-circle btn-text btn-sm"
                       aria-label="Action button"
                     >

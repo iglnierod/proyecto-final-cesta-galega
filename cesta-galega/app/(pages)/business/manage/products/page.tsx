@@ -1,12 +1,19 @@
-import ProductsTable from '@/app/components/ProductsTable';
+import { getAuthTokenDecoded, JwtPayloadBusiness } from '@/app/lib/auth';
+import prisma from '@/app/lib/prisma';
+import ManageProductsClient from '@/app/components/ManageProducts';
 
-export default function ManageProductsPage() {
-  return (
-    <section className="grid grid-cols-1 justify-items-center p-4">
-      <div className="flex flex-col gap-3 w-full max-w-[1100px]">
-        <h1 className="text-3xl font-bold">Xestionar produtos</h1>
-        <ProductsTable />
-      </div>
-    </section>
-  );
+export default async function ManageProductsPage() {
+  // Obtener datos de la empresa loggeada
+  const decoded = (await getAuthTokenDecoded()) as JwtPayloadBusiness;
+
+  const business = await prisma.business.findUnique({
+    where: { id: decoded.businessId },
+  });
+
+  if (!business) {
+    throw new Error('No se encontró la empresa. Vuelva a intentarlo más tarde.');
+  }
+
+  // Devolver componente con botón + tabla
+  return <ManageProductsClient businessId={business.id} />;
 }
