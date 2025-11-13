@@ -14,6 +14,13 @@ export const UserRegisterSchema = z.object({
 
 export type UserRegisterInput = z.infer<typeof UserRegisterSchema>;
 
+export const UserLoginSchema = z.object({
+  email: z.email('O formato do correo non é válido'),
+  password: z.string('O contrasinal é obrigatorio').min(8, 'O contrasinal debe ter 8 caracteres'),
+});
+
+export type UserLoginInput = z.infer<typeof UserLoginSchema>;
+
 export const UserDTO = z.object({
   id: z.number().int(),
   name: z.string(),

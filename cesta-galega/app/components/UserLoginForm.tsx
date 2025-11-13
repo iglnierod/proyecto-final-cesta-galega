@@ -1,8 +1,8 @@
 'use client';
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { UserLoginInput } from '@/app/lib/types/user';
 import { useAlert } from '@/app/context/AlertContext';
+import { UserLoginInput, UserLoginSchema } from '@/app/lib/user/user.schema';
 
 export default function UserLoginForm() {
   const [formData, setFormData] = useState<UserLoginInput>({
@@ -16,22 +16,36 @@ export default function UserLoginForm() {
   const { showAlert } = useAlert();
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    // Prevenir acciones por defecto
     e.preventDefault();
     setErrorMsg(null);
     setLoading(true);
 
+    // Verificación de formulario y devolver error si falla algún formato
+    const parsed = UserLoginSchema.safeParse(formData);
+    if (!parsed.success) {
+      const first = parsed.error.issues[0];
+      setErrorMsg(first?.message ?? 'Datos non válidos');
+      setLoading(false);
+      return;
+    }
+
     try {
+      // Hacer petición de loggear usuario
       const res = await fetch('/api/auth/user/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(parsed.data),
       });
 
+      // Si el registro falló
       if (!res.ok) {
+        // Obtener datos de vuelta
         const data = await res.json().catch(() => ({}));
         throw new Error(data?.error ?? 'Error al inciar sesión');
       }
 
+      // Mostrar alerta de confirmación y redirigir
       showAlert('Inicio de sesión exitoso', 'success');
       router.push('/');
     } catch (err: any) {
@@ -45,7 +59,7 @@ export default function UserLoginForm() {
   return (
     <form className={'flex flex-col gap-3'} onSubmit={handleSubmit}>
       <div className={'input max-w-sm rounded'}>
-        <label className={'label-text my-auto me-3 p-0'}>Email</label>
+        <label className={'label-text my-auto me-3 p-0'}>Correo</label>
         <input
           type={'email'}
           className={'grow'}
@@ -56,7 +70,7 @@ export default function UserLoginForm() {
       </div>
 
       <div className={'input max-w-sm rounded'}>
-        <label className={'label-text my-auto me-3 p-0'}>Password</label>
+        <label className={'label-text my-auto me-3 p-0'}>Contrasinal</label>
         <input
           type={'password'}
           className={'grow'}
