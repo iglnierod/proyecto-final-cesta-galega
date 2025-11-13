@@ -5,6 +5,7 @@ import { useAlert } from '@/app/context/AlertContext';
 import withReactContent from 'sweetalert2-react-content';
 import ProductForm from '@/app/components/ProductForm';
 import { mutate } from 'swr';
+import { useRouter } from 'next/navigation';
 
 export default function ProductsTable({
   products,
@@ -18,6 +19,7 @@ export default function ProductsTable({
   businessId: number;
 }) {
   const { showAlert } = useAlert();
+  const router = useRouter();
   const MySwal = withReactContent(Swal);
   const key = `/api/product?businessId=${businessId}`;
 
@@ -38,7 +40,7 @@ export default function ProductsTable({
       if (!res.ok) throw new Error(data?.error ?? 'Error ao eliminar produto');
       showAlert('O produto foi eliminado correctamente', 'success');
 
-      // 🔁 Revalidar la lista
+      // Revalidar la lista
       mutate(key);
     } catch (error) {
       console.error(error);
@@ -54,9 +56,8 @@ export default function ProductsTable({
           create={false}
           businessId={businessId}
           product={p}
-          onSuccess={(updated) => {
+          onSuccess={() => {
             showAlert('Produto actualiza con éxito', 'success');
-            // Si tu API devuelve { product: {...} }, da igual: el refetch manda
             mutate(key);
           }}
         />
@@ -121,6 +122,9 @@ export default function ProductsTable({
                   <td>
                     <button
                       type="button"
+                      onClick={() => {
+                        router.push(`/business/manage/products/preview/${p.id}`);
+                      }}
                       title="Ver produto"
                       className="tooltip-toggle btn btn-circle btn-text btn-sm"
                       aria-label="Ver produto"
