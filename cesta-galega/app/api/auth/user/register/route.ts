@@ -6,14 +6,18 @@ import { toUserDTO } from '@/app/lib/user/user.mapper';
 
 export async function POST(request: Request) {
   try {
-    const json = await request.json();
-    const input = UserRegisterSchema.parse(json);
+    // Obtener datos de la petición
+    const body = await request.json();
+    const input = UserRegisterSchema.parse(body);
 
+    // Obtener si el email ya está en uso
     const existing = await findUserByEmail(input.email);
     if (existing) {
+      // Si está en uso devolver error
       return NextResponse.json({ error: 'Email xa rexistrado' }, { status: 400 });
     }
 
+    // Hashear contraseña para almacenarla en la base de datos
     const passwordHash = await hashPassword(input.password);
 
     const created = await createUser({

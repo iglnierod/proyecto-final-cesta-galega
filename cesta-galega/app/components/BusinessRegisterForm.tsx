@@ -46,7 +46,7 @@ export default function BusinessRegisterForm() {
 
     // Verificar que las dos contraseñas introducidas son iguales
     if (formData.password !== pwd) {
-      setErrorMsg('Las contraseñas no coinciden');
+      setErrorMsg('Os contrasinais non coinciden');
       setLoading(false);
       return;
     }
@@ -62,15 +62,15 @@ export default function BusinessRegisterForm() {
       // Si falla el backend lanza error
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data?.error ?? 'Error al registrar la empresa');
+        throw new Error(data?.error ?? 'Erro ao rexistrar a empresa');
       }
 
       // Si se ha registrado correctamente enviar a login
-      showAlert('Se ha creado la cuenta correctamente', 'success');
+      showAlert('A conta creouse correctamente', 'success');
       router.push('/business/login');
     } catch (err: any) {
       // Si falla establecer mensaje
-      setErrorMsg(err.message || 'Error inesperado');
+      setErrorMsg(err.message || 'Erro inesperado');
     } finally {
       setLoading(false);
     }
@@ -81,27 +81,31 @@ export default function BusinessRegisterForm() {
     <form className={'flex flex-col gap-3'} onSubmit={handleSubmit}>
       {/*INPUT NOMBRE*/}
       <div className={'input max-w-sm rounded'}>
-        <label className={'label-text my-auto me-3 p-0'}>Nombre*</label>
+        <label className={'label-text my-auto me-3 p-0'}>Nome*</label>
         <input
           type={'text'}
           className={'grow'}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          required
         />
       </div>
+
       {/*INPUT EMAIL*/}
       <div className={'input max-w-sm rounded'}>
-        <label className={'label-text my-auto me-3 p-0'}>Email*</label>
+        <label className={'label-text my-auto me-3 p-0'}>Correo*</label>
         <input
           type={'text'}
           className={'grow'}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          required
         />
       </div>
+
       {/*INPUT TIPO DE EMPRESA*/}
       <div className={'select-floating max-w-sm'}>
         <select
           className={'select max-w-sm'}
-          aria-label={'select'}
+          aria-label={'Selecciona o tipo de empresa'}
           onChange={(e) =>
             setFormData({ ...formData, businessType: e.target.value as BusinessType })
           }
@@ -115,6 +119,7 @@ export default function BusinessRegisterForm() {
         </select>
         <label className={'select-floating-label'}>Tipo*</label>
       </div>
+
       {/*INPUT TELEFONO*/}
       <div className={'input max-w-sm rounded'}>
         <label className={'label-text my-auto me-3 p-0'}>Teléfono*</label>
@@ -122,36 +127,42 @@ export default function BusinessRegisterForm() {
           type={'text'}
           className={'grow'}
           onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
+          required
         />
       </div>
+
       {/*INPUT DIRECCION*/}
       <div className={'input max-w-sm rounded'}>
-        <label className={'label-text my-auto me-3 p-0'}>Dirección*</label>
+        <label className={'label-text my-auto me-3 p-0'}>Enderezo*</label>
         <input
           type={'text'}
           className={'grow'}
           onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+          required
         />
       </div>
+
       {/*INPUT CIUDAD*/}
       <div className={'input max-w-sm rounded'}>
-        <label className={'label-text my-auto me-3 p-0'}>Ciudad*</label>
+        <label className={'label-text my-auto me-3 p-0'}>Cidade*</label>
         <input
           type={'text'}
           className={'grow'}
           onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+          required
         />
       </div>
+
       {/*INPUT PROVINCIA*/}
       <div className={'select-floating max-w-sm'}>
         <select
           className="select max-w-sm"
-          aria-label="select"
+          aria-label="Selecciona a provincia"
           onChange={(e) => setFormData({ ...formData, province: e.target.value as Province })}
           required
         >
           <option disabled defaultValue={'OTHER'}>
-            Selecciona tu provincia
+            Selecciona a túa provincia
           </option>
           {provinces.map((p) => (
             <option key={p} value={p}>
@@ -161,18 +172,21 @@ export default function BusinessRegisterForm() {
         </select>
         <label className="select-floating-label">Provincia*</label>
       </div>
+
       {/*INPUT CODIGO POSTAL*/}
-      <div className={'input max-w-sm rounded'} title={'Código Postal'}>
-        <label className={'label-text my-auto me-3 p-0'}>C.Postal*</label>
+      <div className={'input max-w-sm rounded'} title={'Código postal'}>
+        <label className={'label-text my-auto me-3 p-0'}>C.postal*</label>
         <input
           type={'text'}
           className={'grow'}
           onChange={(e) => setFormData({ ...formData, postalCode: e.target.value })}
+          required
         />
       </div>
+
       {/*INPUT CONTRASEÑA*/}
       <div className={'input max-w-sm rounded'}>
-        <label className={'label-text my-auto me-3 p-0'}>Contraseña*</label>
+        <label className={'label-text my-auto me-3 p-0'}>Contrasinal*</label>
         <input
           type={'password'}
           className={'grow'}
@@ -180,10 +194,16 @@ export default function BusinessRegisterForm() {
           required
         />
       </div>
+
       {/*INPUT CONFIRMAR CONTRASEÑA*/}
-      <div className={'input max-w-sm rounded'} title={'Confirmar contraseña'}>
-        <label className={'label-text my-auto me-3 p-0'}>Conf.Contraseña*</label>
-        <input type={'password'} className={'grow'} onChange={(e) => setPwd(e.target.value)} />
+      <div className={'input max-w-sm rounded'} title={'Confirmar contrasinal'}>
+        <label className={'label-text my-auto me-3 p-0'}>Confirmar contrasinal*</label>
+        <input
+          type={'password'}
+          className={'grow'}
+          onChange={(e) => setPwd(e.target.value)}
+          required
+        />
       </div>
 
       {/*MENSAJE DE ERROR*/}
@@ -195,7 +215,7 @@ export default function BusinessRegisterForm() {
 
       {/*BOTÓN PARA ENVIAR FORM*/}
       <button type={'submit'} className={'btn btn-primary rounded'}>
-        {loading ? <span className="loading loading-dots"></span> : 'Registrar Empresa'}
+        {loading ? <span className="loading loading-dots"></span> : 'Rexistrar empresa'}
       </button>
     </form>
   );

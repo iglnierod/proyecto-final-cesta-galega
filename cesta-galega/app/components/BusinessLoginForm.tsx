@@ -4,7 +4,9 @@ import { useRouter } from 'next/navigation';
 import { BusinessLoginInput } from '@/app/lib/types/business';
 import { useAlert } from '@/app/context/AlertContext';
 
+// Componente con la lógica y vista del formulario de login de empresas
 export default function BusinessLoginForm() {
+  // Definir estado del formulario y propiedades del componente
   const [formData, setFormData] = useState<BusinessLoginInput>({
     email: '',
     password: '',
@@ -14,37 +16,44 @@ export default function BusinessLoginForm() {
   const router = useRouter();
   const { showAlert } = useAlert();
 
+  // Función que se ejecuta al enviar el formulario
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setErrorMsg(null);
     setLoading(true);
 
     try {
+      // Enviar petición a la API para iniciar sesión
       const res = await fetch('/api/auth/business/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
+      // Si la respuesta no es correcta, lanzar error
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data?.error ?? 'Error al inciar sesión');
+        throw new Error(data?.error ?? 'Erro ao iniciar sesión');
       }
 
-      showAlert('Sesión iniciada correctamente', 'success');
+      // Si el login es correcto, mostrar alerta y redirigir
+      showAlert('A sesión iniciouse correctamente', 'success');
       router.push('/');
     } catch (err: any) {
-      setErrorMsg(err.message || 'Error inesperado');
+      // Si falla, establecer mensaje de error
+      setErrorMsg(err.message || 'Erro inesperado');
       console.error(err);
     } finally {
       setLoading(false);
     }
   }
 
+  // Devolver vista del formulario
   return (
     <form className={'flex flex-col gap-3'} onSubmit={handleSubmit}>
+      {/*INPUT EMAIL*/}
       <div className={'input max-w-sm rounded'}>
-        <label className={'label-text my-auto me-3 p-0'}>Email</label>
+        <label className={'label-text my-auto me-3 p-0'}>Correo*</label>
         <input
           type={'email'}
           className={'grow'}
@@ -53,8 +62,9 @@ export default function BusinessLoginForm() {
         />
       </div>
 
+      {/*INPUT CONTRASINAL*/}
       <div className={'input max-w-sm rounded'}>
-        <label className={'label-text my-auto me-3 p-0'}>Password</label>
+        <label className={'label-text my-auto me-3 p-0'}>Contrasinal*</label>
         <input
           type={'password'}
           className={'grow'}
@@ -63,12 +73,14 @@ export default function BusinessLoginForm() {
         />
       </div>
 
+      {/*MENSAJE DE ERROR*/}
       {errorMsg && (
         <p className={'text-sm text-red-600'} role={'alert'}>
           {errorMsg}
         </p>
       )}
 
+      {/*BOTÓN PARA ENVIAR FORM*/}
       <button type={'submit'} className={'btn btn-primary rounded'} disabled={loading}>
         {loading ? <span className="loading loading-dots"></span> : 'Iniciar sesión'}
       </button>
