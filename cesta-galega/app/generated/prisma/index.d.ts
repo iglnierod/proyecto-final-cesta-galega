@@ -2790,6 +2790,10 @@ export namespace Prisma {
     province: string | null
     postalCode: string | null
     password: string | null
+    iban: string | null
+    instagram: string | null
+    facebook: string | null
+    logo: string | null
     createdAt: Date | null
   }
 
@@ -2805,6 +2809,10 @@ export namespace Prisma {
     province: string | null
     postalCode: string | null
     password: string | null
+    iban: string | null
+    instagram: string | null
+    facebook: string | null
+    logo: string | null
     createdAt: Date | null
   }
 
@@ -2820,6 +2828,10 @@ export namespace Prisma {
     province: number
     postalCode: number
     password: number
+    iban: number
+    instagram: number
+    facebook: number
+    logo: number
     createdAt: number
     _all: number
   }
@@ -2845,6 +2857,10 @@ export namespace Prisma {
     province?: true
     postalCode?: true
     password?: true
+    iban?: true
+    instagram?: true
+    facebook?: true
+    logo?: true
     createdAt?: true
   }
 
@@ -2860,6 +2876,10 @@ export namespace Prisma {
     province?: true
     postalCode?: true
     password?: true
+    iban?: true
+    instagram?: true
+    facebook?: true
+    logo?: true
     createdAt?: true
   }
 
@@ -2875,6 +2895,10 @@ export namespace Prisma {
     province?: true
     postalCode?: true
     password?: true
+    iban?: true
+    instagram?: true
+    facebook?: true
+    logo?: true
     createdAt?: true
     _all?: true
   }
@@ -2977,6 +3001,10 @@ export namespace Prisma {
     province: string
     postalCode: string
     password: string
+    iban: string | null
+    instagram: string | null
+    facebook: string | null
+    logo: string | null
     createdAt: Date
     _count: BusinessCountAggregateOutputType | null
     _avg: BusinessAvgAggregateOutputType | null
@@ -3011,6 +3039,10 @@ export namespace Prisma {
     province?: boolean
     postalCode?: boolean
     password?: boolean
+    iban?: boolean
+    instagram?: boolean
+    facebook?: boolean
+    logo?: boolean
     createdAt?: boolean
     product?: boolean | Business$productArgs<ExtArgs>
     _count?: boolean | BusinessCountOutputTypeDefaultArgs<ExtArgs>
@@ -3028,6 +3060,10 @@ export namespace Prisma {
     province?: boolean
     postalCode?: boolean
     password?: boolean
+    iban?: boolean
+    instagram?: boolean
+    facebook?: boolean
+    logo?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["business"]>
 
@@ -3043,6 +3079,10 @@ export namespace Prisma {
     province?: boolean
     postalCode?: boolean
     password?: boolean
+    iban?: boolean
+    instagram?: boolean
+    facebook?: boolean
+    logo?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["business"]>
 
@@ -3058,10 +3098,14 @@ export namespace Prisma {
     province?: boolean
     postalCode?: boolean
     password?: boolean
+    iban?: boolean
+    instagram?: boolean
+    facebook?: boolean
+    logo?: boolean
     createdAt?: boolean
   }
 
-  export type BusinessOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "description" | "businessType" | "phoneNumber" | "address" | "city" | "province" | "postalCode" | "password" | "createdAt", ExtArgs["result"]["business"]>
+  export type BusinessOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "description" | "businessType" | "phoneNumber" | "address" | "city" | "province" | "postalCode" | "password" | "iban" | "instagram" | "facebook" | "logo" | "createdAt", ExtArgs["result"]["business"]>
   export type BusinessInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     product?: boolean | Business$productArgs<ExtArgs>
     _count?: boolean | BusinessCountOutputTypeDefaultArgs<ExtArgs>
@@ -3086,6 +3130,10 @@ export namespace Prisma {
       province: string
       postalCode: string
       password: string
+      iban: string | null
+      instagram: string | null
+      facebook: string | null
+      logo: string | null
       createdAt: Date
     }, ExtArgs["result"]["business"]>
     composites: {}
@@ -3522,6 +3570,10 @@ export namespace Prisma {
     readonly province: FieldRef<"Business", 'String'>
     readonly postalCode: FieldRef<"Business", 'String'>
     readonly password: FieldRef<"Business", 'String'>
+    readonly iban: FieldRef<"Business", 'String'>
+    readonly instagram: FieldRef<"Business", 'String'>
+    readonly facebook: FieldRef<"Business", 'String'>
+    readonly logo: FieldRef<"Business", 'String'>
     readonly createdAt: FieldRef<"Business", 'DateTime'>
   }
     
@@ -9779,6 +9831,10 @@ export namespace Prisma {
     province: 'province',
     postalCode: 'postalCode',
     password: 'password',
+    iban: 'iban',
+    instagram: 'instagram',
+    facebook: 'facebook',
+    logo: 'logo',
     createdAt: 'createdAt'
   };
 
@@ -10035,6 +10091,10 @@ export namespace Prisma {
     province?: StringFilter<"Business"> | string
     postalCode?: StringFilter<"Business"> | string
     password?: StringFilter<"Business"> | string
+    iban?: StringNullableFilter<"Business"> | string | null
+    instagram?: StringNullableFilter<"Business"> | string | null
+    facebook?: StringNullableFilter<"Business"> | string | null
+    logo?: StringNullableFilter<"Business"> | string | null
     createdAt?: DateTimeFilter<"Business"> | Date | string
     product?: ProductListRelationFilter
   }
@@ -10051,6 +10111,10 @@ export namespace Prisma {
     province?: SortOrder
     postalCode?: SortOrder
     password?: SortOrder
+    iban?: SortOrderInput | SortOrder
+    instagram?: SortOrderInput | SortOrder
+    facebook?: SortOrderInput | SortOrder
+    logo?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     product?: ProductOrderByRelationAggregateInput
   }
@@ -10070,6 +10134,10 @@ export namespace Prisma {
     province?: StringFilter<"Business"> | string
     postalCode?: StringFilter<"Business"> | string
     password?: StringFilter<"Business"> | string
+    iban?: StringNullableFilter<"Business"> | string | null
+    instagram?: StringNullableFilter<"Business"> | string | null
+    facebook?: StringNullableFilter<"Business"> | string | null
+    logo?: StringNullableFilter<"Business"> | string | null
     createdAt?: DateTimeFilter<"Business"> | Date | string
     product?: ProductListRelationFilter
   }, "id" | "email">
@@ -10086,6 +10154,10 @@ export namespace Prisma {
     province?: SortOrder
     postalCode?: SortOrder
     password?: SortOrder
+    iban?: SortOrderInput | SortOrder
+    instagram?: SortOrderInput | SortOrder
+    facebook?: SortOrderInput | SortOrder
+    logo?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: BusinessCountOrderByAggregateInput
     _avg?: BusinessAvgOrderByAggregateInput
@@ -10109,6 +10181,10 @@ export namespace Prisma {
     province?: StringWithAggregatesFilter<"Business"> | string
     postalCode?: StringWithAggregatesFilter<"Business"> | string
     password?: StringWithAggregatesFilter<"Business"> | string
+    iban?: StringNullableWithAggregatesFilter<"Business"> | string | null
+    instagram?: StringNullableWithAggregatesFilter<"Business"> | string | null
+    facebook?: StringNullableWithAggregatesFilter<"Business"> | string | null
+    logo?: StringNullableWithAggregatesFilter<"Business"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Business"> | Date | string
   }
 
@@ -10558,6 +10634,10 @@ export namespace Prisma {
     province: string
     postalCode: string
     password: string
+    iban?: string | null
+    instagram?: string | null
+    facebook?: string | null
+    logo?: string | null
     createdAt?: Date | string
     product?: ProductCreateNestedManyWithoutBusinessInput
   }
@@ -10574,6 +10654,10 @@ export namespace Prisma {
     province: string
     postalCode: string
     password: string
+    iban?: string | null
+    instagram?: string | null
+    facebook?: string | null
+    logo?: string | null
     createdAt?: Date | string
     product?: ProductUncheckedCreateNestedManyWithoutBusinessInput
   }
@@ -10589,6 +10673,10 @@ export namespace Prisma {
     province?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    iban?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateManyWithoutBusinessNestedInput
   }
@@ -10605,6 +10693,10 @@ export namespace Prisma {
     province?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    iban?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUncheckedUpdateManyWithoutBusinessNestedInput
   }
@@ -10621,6 +10713,10 @@ export namespace Prisma {
     province: string
     postalCode: string
     password: string
+    iban?: string | null
+    instagram?: string | null
+    facebook?: string | null
+    logo?: string | null
     createdAt?: Date | string
   }
 
@@ -10635,6 +10731,10 @@ export namespace Prisma {
     province?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    iban?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -10650,6 +10750,10 @@ export namespace Prisma {
     province?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    iban?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -11190,6 +11294,10 @@ export namespace Prisma {
     province?: SortOrder
     postalCode?: SortOrder
     password?: SortOrder
+    iban?: SortOrder
+    instagram?: SortOrder
+    facebook?: SortOrder
+    logo?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -11209,6 +11317,10 @@ export namespace Prisma {
     province?: SortOrder
     postalCode?: SortOrder
     password?: SortOrder
+    iban?: SortOrder
+    instagram?: SortOrder
+    facebook?: SortOrder
+    logo?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -11224,6 +11336,10 @@ export namespace Prisma {
     province?: SortOrder
     postalCode?: SortOrder
     password?: SortOrder
+    iban?: SortOrder
+    instagram?: SortOrder
+    facebook?: SortOrder
+    logo?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -12418,6 +12534,10 @@ export namespace Prisma {
     province: string
     postalCode: string
     password: string
+    iban?: string | null
+    instagram?: string | null
+    facebook?: string | null
+    logo?: string | null
     createdAt?: Date | string
   }
 
@@ -12433,6 +12553,10 @@ export namespace Prisma {
     province: string
     postalCode: string
     password: string
+    iban?: string | null
+    instagram?: string | null
+    facebook?: string | null
+    logo?: string | null
     createdAt?: Date | string
   }
 
@@ -12531,6 +12655,10 @@ export namespace Prisma {
     province?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    iban?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -12546,6 +12674,10 @@ export namespace Prisma {
     province?: StringFieldUpdateOperationsInput | string
     postalCode?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    iban?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

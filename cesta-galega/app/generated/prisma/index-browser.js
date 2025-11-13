@@ -143,6 +143,10 @@ exports.Prisma.BusinessScalarFieldEnum = {
   province: 'province',
   postalCode: 'postalCode',
   password: 'password',
+  iban: 'iban',
+  instagram: 'instagram',
+  facebook: 'facebook',
+  logo: 'logo',
   createdAt: 'createdAt'
 };
 

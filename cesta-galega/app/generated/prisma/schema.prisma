@@ -41,6 +41,10 @@ model Business {
   province     String
   postalCode   String
   password     String
+  iban         String?
+  instagram    String?
+  facebook     String?
+  logo         String?
   createdAt    DateTime  @default(now())
   product      Product[]
 }
