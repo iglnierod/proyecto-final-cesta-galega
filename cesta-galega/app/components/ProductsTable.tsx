@@ -1,11 +1,14 @@
 'use client';
 import Swal from 'sweetalert2';
-import { Product } from '@/app/generated/prisma';
-import { useAlert } from '@/app/context/AlertContext';
 import withReactContent from 'sweetalert2-react-content';
-import ProductForm from '@/app/components/ProductForm';
-import { mutate } from 'swr';
 import { useRouter } from 'next/navigation';
+import { mutate } from 'swr';
+
+import { useAlert } from '@/app/context/AlertContext';
+import ProductForm from '@/app/components/ProductForm';
+import { ProductDTO, ProductWithBusinessDTO } from '@/app/lib/product/product.schema';
+
+const MySwal = withReactContent(Swal);
 
 export default function ProductsTable({
   products,
@@ -13,58 +16,78 @@ export default function ProductsTable({
   error,
   businessId,
 }: {
-  products: Product[];
+  products: ProductDTO[];
   loading: boolean;
   error?: string;
   businessId: number;
 }) {
   const { showAlert } = useAlert();
   const router = useRouter();
-  const MySwal = withReactContent(Swal);
   const key = `/api/product?businessId=${businessId}`;
 
+  // Eliminar producto (borrado lógico vía API)
   async function handleDelete(productId: number, name?: string) {
     const { isConfirmed } = await Swal.fire({
-      title: '¿Eliminar produto?',
+      title: 'Eliminar produto?',
       text: `Eliminarase o produto: ${name}`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar',
       reverseButtons: true,
     });
+
     if (!isConfirmed) return;
 
     try {
       const res = await fetch(`/api/product/${productId}`, { method: 'DELETE' });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data?.error ?? 'Error ao eliminar produto');
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) throw new Error(data?.error ?? 'Erro ao eliminar produto');
+
       showAlert('O produto foi eliminado correctamente', 'success');
 
-      // Revalidar la lista
-      mutate(key);
-    } catch (error) {
-      console.error(error);
+      // Revalidar a lista
+      await mutate(key);
+    } catch (err) {
+      console.error(err);
       showAlert('Ocorreu un erro ao eliminar o produto', 'error');
     }
   }
 
-  function handleEditClick(p: Product) {
-    MySwal.fire({
-      title: 'Editar produto',
-      html: (
-        <ProductForm
-          create={false}
-          businessId={businessId}
-          product={p}
-          onSuccess={() => {
-            showAlert('Produto actualiza con éxito', 'success');
-            mutate(key);
-          }}
-        />
-      ),
-      showConfirmButton: false,
-      width: 800,
-    });
+  // Editar producto: obter datos completos (ProductWithBusinessDTO) e abrir modal
+  async function handleEditClick(productId: number) {
+    try {
+      // Pedir ao backend o produto completo co mapper
+      const res = await fetch(`/api/product/${productId}`);
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        throw new Error(data?.error ?? 'Erro ao cargar o produto');
+      }
+
+      const fullProduct = data.product as ProductWithBusinessDTO;
+
+      MySwal.fire({
+        title: 'Editar produto',
+        html: (
+          <ProductForm
+            create={false}
+            businessId={businessId}
+            product={fullProduct}
+            onSuccess={() => {
+              showAlert('Produto actualizado con éxito', 'success');
+              mutate(key);
+            }}
+          />
+        ),
+        showConfirmButton: false,
+        width: 800,
+      });
+    } catch (err: any) {
+      console.error(err);
+      showAlert(err.message ?? 'Erro ao cargar o produto', 'error');
+    }
   }
 
   return (
@@ -104,7 +127,7 @@ export default function ProductsTable({
                   <td>{p.description}</td>
                   <td>
                     {p.enabled ? (
-                      <span className="badge badge-soft badge-success">Sí</span>
+                      <span className="badge badge-soft badge-success">Si</span>
                     ) : (
                       <span className="badge badge-soft badge-error">Non</span>
                     )}
@@ -112,19 +135,15 @@ export default function ProductsTable({
                   <td>{p.price} €</td>
                   <td>
                     {p.discounted ? (
-                      <span className="badge badge-soft badge-info">
-                        {p.discount ? p.discount : undefined} %
-                      </span>
+                      <span className="badge badge-soft badge-info">{p.discount} %</span>
                     ) : (
                       <span className="badge badge-soft badge-secondary">Non</span>
                     )}
                   </td>
-                  <td>
+                  <td className="flex gap-2">
                     <button
                       type="button"
-                      onClick={() => {
-                        router.push(`/business/manage/products/preview/${p.id}`);
-                      }}
+                      onClick={() => router.push(`/business/manage/products/preview/${p.id}`)}
                       title="Ver produto"
                       className="tooltip-toggle btn btn-circle btn-text btn-sm"
                       aria-label="Ver produto"
@@ -134,10 +153,10 @@ export default function ProductsTable({
 
                     <button
                       type="button"
-                      onClick={() => handleEditClick(p)}
+                      onClick={() => handleEditClick(p.id)}
                       title="Editar produto"
                       className="btn btn-circle btn-text btn-sm"
-                      aria-label="Action button"
+                      aria-label="Editar produto"
                     >
                       <span className="icon-[tabler--pencil] size-5 "></span>
                     </button>
@@ -147,7 +166,7 @@ export default function ProductsTable({
                       onClick={() => handleDelete(p.id, p.name)}
                       title="Eliminar produto"
                       className="btn btn-circle btn-text btn-sm"
-                      aria-label="Action button"
+                      aria-label="Eliminar produto"
                     >
                       <span className="icon-[tabler--trash] size-5"></span>
                     </button>
@@ -157,7 +176,7 @@ export default function ProductsTable({
             ) : (
               <tr>
                 <td className="text-center" colSpan={10}>
-                  Non hay produtos
+                  Non hai produtos
                 </td>
               </tr>
             )}

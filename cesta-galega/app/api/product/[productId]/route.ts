@@ -8,10 +8,14 @@ import {
 import { toProductWithBusinessDTO } from '@/app/lib/product/product.mapper';
 
 // Devolver datos de producto
-export async function GET(request: Request, { params }: { params: { productId: string } }) {
+export async function GET(
+  request: Request,
+  { params }: { params: Promise<{ productId: string }> }
+) {
   try {
+    const { productId } = await params;
     // Obtener id de producto enviada por parámetros
-    const id = Number(params.productId);
+    const id = Number(productId);
 
     // Si el id no es válido
     if (Number.isNaN(id)) {
@@ -39,10 +43,14 @@ export async function GET(request: Request, { params }: { params: { productId: s
 }
 
 // Actualizar producto
-export async function PUT(request: Request, { params }: { params: { productId: string } }) {
+export async function PUT(
+  request: Request,
+  { params }: { params: Promise<{ productId: string }> }
+) {
   try {
+    const { productId } = await params;
     // Obtener id de producto enviado por parámetros
-    const id = Number(params.productId);
+    const id = Number(productId);
 
     if (Number.isNaN(id)) {
       return NextResponse.json({ error: 'ID de produto non válido' }, { status: 400 });
@@ -78,9 +86,13 @@ export async function PUT(request: Request, { params }: { params: { productId: s
 }
 
 // Borrado lóxico de produto
-export async function DELETE(request: Request, { params }: { params: { productId: string } }) {
+export async function DELETE(
+  request: Request,
+  { params }: { params: Promise<{ productId: string }> }
+) {
   try {
-    const id = Number(params.productId);
+    const { productId } = await params;
+    const id = Number(productId);
 
     if (Number.isNaN(id)) {
       return NextResponse.json({ error: 'ID de produto non válido' }, { status: 400 });

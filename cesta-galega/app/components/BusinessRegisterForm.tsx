@@ -3,8 +3,8 @@ import { FormEvent, useState } from 'react';
 import { BusinessRegisterInput, businessType, BusinessType } from '@/app/lib/types/business';
 import { Province, provinces } from '@/app/lib/types/shared';
 import { useRouter } from 'next/navigation';
-import { businessRegisterSchema } from '@/app/lib/validators/businessValidator';
 import { useAlert } from '@/app/context/AlertContext';
+import { BusinessRegisterSchema } from '@/app/lib/business/business.schema';
 
 // Componente con lógica y vista de formulario de registro de empresas
 export default function BusinessRegisterForm() {
@@ -36,7 +36,7 @@ export default function BusinessRegisterForm() {
     setLoading(true);
 
     // Verificar datos de formulario usando la librería zod
-    const result = businessRegisterSchema.safeParse(formData);
+    const result = BusinessRegisterSchema.safeParse(formData);
     if (!result.success) {
       const error = result.error.issues[0];
       setErrorMsg(error.message);

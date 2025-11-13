@@ -2,13 +2,18 @@
 import useSWR from 'swr';
 import AddProductButton from '@/app/components/AddProductButton';
 import ProductsTable from '@/app/components/ProductsTable';
-import { Product } from '@/app/generated/prisma';
+import { ProductDTO } from '@/app/lib/product/product.schema';
 
+// Función fetcher para SWR
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 export default function ManageProductsClient({ businessId }: { businessId: number }) {
   const key = `/api/product?businessId=${businessId}`;
-  const { data, isLoading, error } = useSWR<Product[]>(key, fetcher);
+
+  // Esperamos que a API devolva { products: ProductDTO[] }
+  const { data, isLoading, error } = useSWR<{ products: ProductDTO[] }>(key, fetcher);
+
+  const products = data?.products ?? [];
 
   return (
     <section className="grid grid-cols-1 justify-items-center p-4">
@@ -20,7 +25,7 @@ export default function ManageProductsClient({ businessId }: { businessId: numbe
 
         <ProductsTable
           businessId={businessId}
-          products={data ?? []}
+          products={products}
           loading={isLoading}
           error={error ? 'Erro ao cargar os produtos' : undefined}
         />
