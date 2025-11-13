@@ -25,6 +25,10 @@ export async function findBusinessByEmail(email: string) {
   return prisma.business.findUnique({ where: { email } });
 }
 
+export async function findBusinessById(id: number) {
+  return prisma.business.findUnique({ where: { id } });
+}
+
 export async function createBusiness(data: {
   name: string;
   email: string;

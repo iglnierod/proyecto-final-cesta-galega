@@ -10,10 +10,11 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json());
 export default function ManageProductsClient({ businessId }: { businessId: number }) {
   const key = `/api/product?businessId=${businessId}`;
 
-  // Esperamos que a API devolva { products: ProductDTO[] }
+  // Esperamos que a los de la API
   const { data, isLoading, error } = useSWR<{ products: ProductDTO[] }>(key, fetcher);
 
-  const products = data?.products ?? [];
+  console.log(data);
+  const products: ProductDTO[] = data?.products ?? [];
 
   return (
     <section className="grid grid-cols-1 justify-items-center p-4">

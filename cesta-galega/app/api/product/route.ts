@@ -1,87 +1,45 @@
-import prisma from '@/app/lib/prisma';
 import { NextResponse } from 'next/server';
-import { BusinessSelectPublic } from '@/app/lib/selects/businessSelect';
-import { CategorySelectPublic } from '@/app/lib/selects/CategorySelectPublic';
+import { createProduct, findProductsByBusiness } from '@/app/lib/product/product.repo';
+import { toProductDTO, toProductWithBusinessDTO } from '@/app/lib/product/product.mapper';
+import { ProductCreateSchema } from '@/app/lib/product/product.schema';
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const businessId = searchParams.get('businessId');
 
-    let where: any = {
-      deleted: false,
-    };
-    if (businessId) {
-      where = {
-        ...where,
-        businessId: Number(businessId),
-      };
+    if (!businessId) {
+      return NextResponse.json({ error: 'businessId é necesario' }, { status: 400 });
     }
-    // const where = businessId ? { businessId: Number(businessId) } : {};
 
-    const products = await prisma.product.findMany({
-      where,
-      include: {
-        business: BusinessSelectPublic,
-        categories: CategorySelectPublic,
-      },
-      orderBy: [{ createdAt: 'desc' }],
+    const products = await findProductsByBusiness(Number(businessId));
+
+    return NextResponse.json({
+      products: products.map((p) => toProductDTO(p)),
     });
-
-    return NextResponse.json(products);
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: 'Failed to fetch products' }, { status: 500 });
+    return NextResponse.json({ error: 'Erro ao obter os produtos' }, { status: 500 });
   }
 }
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    const {
-      name,
-      description,
-      businessId,
-      image,
-      price,
-      discounted,
-      discount,
-      enabled,
-      categoryIds,
-    } = body;
+    const json = await request.json();
 
-    if (!name || !description || !businessId || !image || !categoryIds || !enabled) {
+    const parsed = ProductCreateSchema.safeParse(json);
+    if (!parsed.success) {
       return NextResponse.json(
-        { error: 'Name, description, businessId y categoryIds son necesarios ' },
+        { error: 'Datos non válidos', issues: parsed.error.issues },
         { status: 400 }
       );
     }
 
-    const newProduct = await prisma.product.create({
-      data: {
-        name,
-        description,
-        image,
-        price,
-        discounted,
-        discount,
-        enabled,
-        business: { connect: { id: businessId } },
-        categories: categoryIds
-          ? {
-              connect: categoryIds.map((id: number) => ({ id })),
-            }
-          : undefined,
-      },
-      include: {
-        business: BusinessSelectPublic,
-        categories: CategorySelectPublic,
-      },
-    });
+    const product = await createProduct(parsed.data);
 
-    return NextResponse.json({ newProduct }, { status: 201 });
-  } catch (err) {
-    console.error(err);
-    return NextResponse.json({ error: 'Error al crear el producto' }, { status: 500 });
+    return NextResponse.json({ product: toProductWithBusinessDTO(product) }, { status: 201 });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: 'Erro ao crear o produto' }, { status: 500 });
   }
 }
