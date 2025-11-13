@@ -54,11 +54,11 @@ model Product {
   name         String
   description  String
   image        String
-  enabled      Boolean?
-  price        Float?
-  discounted   Boolean?
-  discount     Float?
-  deleted      Boolean?       @default(false)
+  enabled      Boolean
+  price        Float
+  discounted   Boolean
+  discount     Float
+  deleted      Boolean        @default(false)
   createdAt    DateTime       @default(now())
   // relacion con Business
   businessId   Int

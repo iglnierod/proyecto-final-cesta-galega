@@ -4223,11 +4223,11 @@ export namespace Prisma {
     name: string
     description: string
     image: string
-    enabled: boolean | null
-    price: number | null
-    discounted: boolean | null
-    discount: number | null
-    deleted: boolean | null
+    enabled: boolean
+    price: number
+    discounted: boolean
+    discount: number
+    deleted: boolean
     createdAt: Date
     businessId: number
     _count: ProductCountAggregateOutputType | null
@@ -4342,11 +4342,11 @@ export namespace Prisma {
       name: string
       description: string
       image: string
-      enabled: boolean | null
-      price: number | null
-      discounted: boolean | null
-      discount: number | null
-      deleted: boolean | null
+      enabled: boolean
+      price: number
+      discounted: boolean
+      discount: number
+      deleted: boolean
       createdAt: Date
       businessId: number
     }, ExtArgs["result"]["product"]>
@@ -10196,11 +10196,11 @@ export namespace Prisma {
     name?: StringFilter<"Product"> | string
     description?: StringFilter<"Product"> | string
     image?: StringFilter<"Product"> | string
-    enabled?: BoolNullableFilter<"Product"> | boolean | null
-    price?: FloatNullableFilter<"Product"> | number | null
-    discounted?: BoolNullableFilter<"Product"> | boolean | null
-    discount?: FloatNullableFilter<"Product"> | number | null
-    deleted?: BoolNullableFilter<"Product"> | boolean | null
+    enabled?: BoolFilter<"Product"> | boolean
+    price?: FloatFilter<"Product"> | number
+    discounted?: BoolFilter<"Product"> | boolean
+    discount?: FloatFilter<"Product"> | number
+    deleted?: BoolFilter<"Product"> | boolean
     createdAt?: DateTimeFilter<"Product"> | Date | string
     businessId?: IntFilter<"Product"> | number
     business?: XOR<BusinessScalarRelationFilter, BusinessWhereInput>
@@ -10214,11 +10214,11 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     image?: SortOrder
-    enabled?: SortOrderInput | SortOrder
-    price?: SortOrderInput | SortOrder
-    discounted?: SortOrderInput | SortOrder
-    discount?: SortOrderInput | SortOrder
-    deleted?: SortOrderInput | SortOrder
+    enabled?: SortOrder
+    price?: SortOrder
+    discounted?: SortOrder
+    discount?: SortOrder
+    deleted?: SortOrder
     createdAt?: SortOrder
     businessId?: SortOrder
     business?: BusinessOrderByWithRelationInput
@@ -10235,11 +10235,11 @@ export namespace Prisma {
     name?: StringFilter<"Product"> | string
     description?: StringFilter<"Product"> | string
     image?: StringFilter<"Product"> | string
-    enabled?: BoolNullableFilter<"Product"> | boolean | null
-    price?: FloatNullableFilter<"Product"> | number | null
-    discounted?: BoolNullableFilter<"Product"> | boolean | null
-    discount?: FloatNullableFilter<"Product"> | number | null
-    deleted?: BoolNullableFilter<"Product"> | boolean | null
+    enabled?: BoolFilter<"Product"> | boolean
+    price?: FloatFilter<"Product"> | number
+    discounted?: BoolFilter<"Product"> | boolean
+    discount?: FloatFilter<"Product"> | number
+    deleted?: BoolFilter<"Product"> | boolean
     createdAt?: DateTimeFilter<"Product"> | Date | string
     businessId?: IntFilter<"Product"> | number
     business?: XOR<BusinessScalarRelationFilter, BusinessWhereInput>
@@ -10253,11 +10253,11 @@ export namespace Prisma {
     name?: SortOrder
     description?: SortOrder
     image?: SortOrder
-    enabled?: SortOrderInput | SortOrder
-    price?: SortOrderInput | SortOrder
-    discounted?: SortOrderInput | SortOrder
-    discount?: SortOrderInput | SortOrder
-    deleted?: SortOrderInput | SortOrder
+    enabled?: SortOrder
+    price?: SortOrder
+    discounted?: SortOrder
+    discount?: SortOrder
+    deleted?: SortOrder
     createdAt?: SortOrder
     businessId?: SortOrder
     _count?: ProductCountOrderByAggregateInput
@@ -10275,11 +10275,11 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Product"> | string
     description?: StringWithAggregatesFilter<"Product"> | string
     image?: StringWithAggregatesFilter<"Product"> | string
-    enabled?: BoolNullableWithAggregatesFilter<"Product"> | boolean | null
-    price?: FloatNullableWithAggregatesFilter<"Product"> | number | null
-    discounted?: BoolNullableWithAggregatesFilter<"Product"> | boolean | null
-    discount?: FloatNullableWithAggregatesFilter<"Product"> | number | null
-    deleted?: BoolNullableWithAggregatesFilter<"Product"> | boolean | null
+    enabled?: BoolWithAggregatesFilter<"Product"> | boolean
+    price?: FloatWithAggregatesFilter<"Product"> | number
+    discounted?: BoolWithAggregatesFilter<"Product"> | boolean
+    discount?: FloatWithAggregatesFilter<"Product"> | number
+    deleted?: BoolWithAggregatesFilter<"Product"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
     businessId?: IntWithAggregatesFilter<"Product"> | number
   }
@@ -10761,11 +10761,11 @@ export namespace Prisma {
     name: string
     description: string
     image: string
-    enabled?: boolean | null
-    price?: number | null
-    discounted?: boolean | null
-    discount?: number | null
-    deleted?: boolean | null
+    enabled: boolean
+    price: number
+    discounted: boolean
+    discount: number
+    deleted?: boolean
     createdAt?: Date | string
     business: BusinessCreateNestedOneWithoutProductInput
     categories?: CategoryCreateNestedManyWithoutProductsInput
@@ -10778,11 +10778,11 @@ export namespace Prisma {
     name: string
     description: string
     image: string
-    enabled?: boolean | null
-    price?: number | null
-    discounted?: boolean | null
-    discount?: number | null
-    deleted?: boolean | null
+    enabled: boolean
+    price: number
+    discounted: boolean
+    discount: number
+    deleted?: boolean
     createdAt?: Date | string
     businessId: number
     categories?: CategoryUncheckedCreateNestedManyWithoutProductsInput
@@ -10794,11 +10794,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    price?: FloatFieldUpdateOperationsInput | number
+    discounted?: BoolFieldUpdateOperationsInput | boolean
+    discount?: FloatFieldUpdateOperationsInput | number
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     business?: BusinessUpdateOneRequiredWithoutProductNestedInput
     categories?: CategoryUpdateManyWithoutProductsNestedInput
@@ -10811,11 +10811,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    price?: FloatFieldUpdateOperationsInput | number
+    discounted?: BoolFieldUpdateOperationsInput | boolean
+    discount?: FloatFieldUpdateOperationsInput | number
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     businessId?: IntFieldUpdateOperationsInput | number
     categories?: CategoryUncheckedUpdateManyWithoutProductsNestedInput
@@ -10828,11 +10828,11 @@ export namespace Prisma {
     name: string
     description: string
     image: string
-    enabled?: boolean | null
-    price?: number | null
-    discounted?: boolean | null
-    discount?: number | null
-    deleted?: boolean | null
+    enabled: boolean
+    price: number
+    discounted: boolean
+    discount: number
+    deleted?: boolean
     createdAt?: Date | string
     businessId: number
   }
@@ -10841,11 +10841,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    price?: FloatFieldUpdateOperationsInput | number
+    discounted?: BoolFieldUpdateOperationsInput | boolean
+    discount?: FloatFieldUpdateOperationsInput | number
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -10854,11 +10854,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    price?: FloatFieldUpdateOperationsInput | number
+    discounted?: BoolFieldUpdateOperationsInput | boolean
+    discount?: FloatFieldUpdateOperationsInput | number
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     businessId?: IntFieldUpdateOperationsInput | number
   }
@@ -11365,20 +11365,20 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type BoolNullableFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
-  export type FloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type BusinessScalarRelationFilter = {
@@ -11462,28 +11462,28 @@ export namespace Prisma {
     businessId?: SortOrder
   }
 
-  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBoolNullableFilter<$PrismaModel>
-    _max?: NestedBoolNullableFilter<$PrismaModel>
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type CategoryCountOrderByAggregateInput = {
@@ -11510,17 +11510,6 @@ export namespace Prisma {
 
   export type CategorySumOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type FloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type UserScalarRelationFilter = {
@@ -11575,22 +11564,6 @@ export namespace Prisma {
     rating?: SortOrder
     userId?: SortOrder
     productId?: SortOrder
-  }
-
-  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type OrderCountOrderByAggregateInput = {
@@ -11880,12 +11853,12 @@ export namespace Prisma {
     connect?: OrderProductWhereUniqueInput | OrderProductWhereUniqueInput[]
   }
 
-  export type NullableBoolFieldUpdateOperationsInput = {
-    set?: boolean | null
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
-  export type NullableFloatFieldUpdateOperationsInput = {
-    set?: number | null
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
     increment?: number
     decrement?: number
     multiply?: number
@@ -12030,14 +12003,6 @@ export namespace Prisma {
     create?: XOR<ProductCreateWithoutUserProductInput, ProductUncheckedCreateWithoutUserProductInput>
     connectOrCreate?: ProductCreateOrConnectWithoutUserProductInput
     connect?: ProductWhereUniqueInput
-  }
-
-  export type FloatFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type UserUpdateOneRequiredWithoutUserProductNestedInput = {
@@ -12276,44 +12241,17 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedBoolNullableFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBoolNullableFilter<$PrismaModel>
-    _max?: NestedBoolNullableFilter<$PrismaModel>
-  }
-
-  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -12453,11 +12391,11 @@ export namespace Prisma {
     name: string
     description: string
     image: string
-    enabled?: boolean | null
-    price?: number | null
-    discounted?: boolean | null
-    discount?: number | null
-    deleted?: boolean | null
+    enabled: boolean
+    price: number
+    discounted: boolean
+    discount: number
+    deleted?: boolean
     createdAt?: Date | string
     categories?: CategoryCreateNestedManyWithoutProductsInput
     UserProduct?: UserProductCreateNestedManyWithoutProductInput
@@ -12469,11 +12407,11 @@ export namespace Prisma {
     name: string
     description: string
     image: string
-    enabled?: boolean | null
-    price?: number | null
-    discounted?: boolean | null
-    discount?: number | null
-    deleted?: boolean | null
+    enabled: boolean
+    price: number
+    discounted: boolean
+    discount: number
+    deleted?: boolean
     createdAt?: Date | string
     categories?: CategoryUncheckedCreateNestedManyWithoutProductsInput
     UserProduct?: UserProductUncheckedCreateNestedManyWithoutProductInput
@@ -12514,11 +12452,11 @@ export namespace Prisma {
     name?: StringFilter<"Product"> | string
     description?: StringFilter<"Product"> | string
     image?: StringFilter<"Product"> | string
-    enabled?: BoolNullableFilter<"Product"> | boolean | null
-    price?: FloatNullableFilter<"Product"> | number | null
-    discounted?: BoolNullableFilter<"Product"> | boolean | null
-    discount?: FloatNullableFilter<"Product"> | number | null
-    deleted?: BoolNullableFilter<"Product"> | boolean | null
+    enabled?: BoolFilter<"Product"> | boolean
+    price?: FloatFilter<"Product"> | number
+    discounted?: BoolFilter<"Product"> | boolean
+    discount?: FloatFilter<"Product"> | number
+    deleted?: BoolFilter<"Product"> | boolean
     createdAt?: DateTimeFilter<"Product"> | Date | string
     businessId?: IntFilter<"Product"> | number
   }
@@ -12754,11 +12692,11 @@ export namespace Prisma {
     name: string
     description: string
     image: string
-    enabled?: boolean | null
-    price?: number | null
-    discounted?: boolean | null
-    discount?: number | null
-    deleted?: boolean | null
+    enabled: boolean
+    price: number
+    discounted: boolean
+    discount: number
+    deleted?: boolean
     createdAt?: Date | string
     business: BusinessCreateNestedOneWithoutProductInput
     UserProduct?: UserProductCreateNestedManyWithoutProductInput
@@ -12770,11 +12708,11 @@ export namespace Prisma {
     name: string
     description: string
     image: string
-    enabled?: boolean | null
-    price?: number | null
-    discounted?: boolean | null
-    discount?: number | null
-    deleted?: boolean | null
+    enabled: boolean
+    price: number
+    discounted: boolean
+    discount: number
+    deleted?: boolean
     createdAt?: Date | string
     businessId: number
     UserProduct?: UserProductUncheckedCreateNestedManyWithoutProductInput
@@ -12834,11 +12772,11 @@ export namespace Prisma {
     name: string
     description: string
     image: string
-    enabled?: boolean | null
-    price?: number | null
-    discounted?: boolean | null
-    discount?: number | null
-    deleted?: boolean | null
+    enabled: boolean
+    price: number
+    discounted: boolean
+    discount: number
+    deleted?: boolean
     createdAt?: Date | string
     business: BusinessCreateNestedOneWithoutProductInput
     categories?: CategoryCreateNestedManyWithoutProductsInput
@@ -12850,11 +12788,11 @@ export namespace Prisma {
     name: string
     description: string
     image: string
-    enabled?: boolean | null
-    price?: number | null
-    discounted?: boolean | null
-    discount?: number | null
-    deleted?: boolean | null
+    enabled: boolean
+    price: number
+    discounted: boolean
+    discount: number
+    deleted?: boolean
     createdAt?: Date | string
     businessId: number
     categories?: CategoryUncheckedCreateNestedManyWithoutProductsInput
@@ -12915,11 +12853,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    price?: FloatFieldUpdateOperationsInput | number
+    discounted?: BoolFieldUpdateOperationsInput | boolean
+    discount?: FloatFieldUpdateOperationsInput | number
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     business?: BusinessUpdateOneRequiredWithoutProductNestedInput
     categories?: CategoryUpdateManyWithoutProductsNestedInput
@@ -12931,11 +12869,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    price?: FloatFieldUpdateOperationsInput | number
+    discounted?: BoolFieldUpdateOperationsInput | boolean
+    discount?: FloatFieldUpdateOperationsInput | number
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     businessId?: IntFieldUpdateOperationsInput | number
     categories?: CategoryUncheckedUpdateManyWithoutProductsNestedInput
@@ -13075,11 +13013,11 @@ export namespace Prisma {
     name: string
     description: string
     image: string
-    enabled?: boolean | null
-    price?: number | null
-    discounted?: boolean | null
-    discount?: number | null
-    deleted?: boolean | null
+    enabled: boolean
+    price: number
+    discounted: boolean
+    discount: number
+    deleted?: boolean
     createdAt?: Date | string
     business: BusinessCreateNestedOneWithoutProductInput
     categories?: CategoryCreateNestedManyWithoutProductsInput
@@ -13091,11 +13029,11 @@ export namespace Prisma {
     name: string
     description: string
     image: string
-    enabled?: boolean | null
-    price?: number | null
-    discounted?: boolean | null
-    discount?: number | null
-    deleted?: boolean | null
+    enabled: boolean
+    price: number
+    discounted: boolean
+    discount: number
+    deleted?: boolean
     createdAt?: Date | string
     businessId: number
     categories?: CategoryUncheckedCreateNestedManyWithoutProductsInput
@@ -13154,11 +13092,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    price?: FloatFieldUpdateOperationsInput | number
+    discounted?: BoolFieldUpdateOperationsInput | boolean
+    discount?: FloatFieldUpdateOperationsInput | number
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     business?: BusinessUpdateOneRequiredWithoutProductNestedInput
     categories?: CategoryUpdateManyWithoutProductsNestedInput
@@ -13170,11 +13108,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    price?: FloatFieldUpdateOperationsInput | number
+    discounted?: BoolFieldUpdateOperationsInput | boolean
+    discount?: FloatFieldUpdateOperationsInput | number
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     businessId?: IntFieldUpdateOperationsInput | number
     categories?: CategoryUncheckedUpdateManyWithoutProductsNestedInput
@@ -13262,11 +13200,11 @@ export namespace Prisma {
     name: string
     description: string
     image: string
-    enabled?: boolean | null
-    price?: number | null
-    discounted?: boolean | null
-    discount?: number | null
-    deleted?: boolean | null
+    enabled: boolean
+    price: number
+    discounted: boolean
+    discount: number
+    deleted?: boolean
     createdAt?: Date | string
   }
 
@@ -13274,11 +13212,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    price?: FloatFieldUpdateOperationsInput | number
+    discounted?: BoolFieldUpdateOperationsInput | boolean
+    discount?: FloatFieldUpdateOperationsInput | number
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: CategoryUpdateManyWithoutProductsNestedInput
     UserProduct?: UserProductUpdateManyWithoutProductNestedInput
@@ -13290,11 +13228,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    price?: FloatFieldUpdateOperationsInput | number
+    discounted?: BoolFieldUpdateOperationsInput | boolean
+    discount?: FloatFieldUpdateOperationsInput | number
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: CategoryUncheckedUpdateManyWithoutProductsNestedInput
     UserProduct?: UserProductUncheckedUpdateManyWithoutProductNestedInput
@@ -13306,11 +13244,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    price?: FloatFieldUpdateOperationsInput | number
+    discounted?: BoolFieldUpdateOperationsInput | boolean
+    discount?: FloatFieldUpdateOperationsInput | number
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -13401,11 +13339,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    price?: FloatFieldUpdateOperationsInput | number
+    discounted?: BoolFieldUpdateOperationsInput | boolean
+    discount?: FloatFieldUpdateOperationsInput | number
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     business?: BusinessUpdateOneRequiredWithoutProductNestedInput
     UserProduct?: UserProductUpdateManyWithoutProductNestedInput
@@ -13417,11 +13355,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    price?: FloatFieldUpdateOperationsInput | number
+    discounted?: BoolFieldUpdateOperationsInput | boolean
+    discount?: FloatFieldUpdateOperationsInput | number
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     businessId?: IntFieldUpdateOperationsInput | number
     UserProduct?: UserProductUncheckedUpdateManyWithoutProductNestedInput
@@ -13433,11 +13371,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
-    enabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    discounted?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    deleted?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    price?: FloatFieldUpdateOperationsInput | number
+    discounted?: BoolFieldUpdateOperationsInput | boolean
+    discount?: FloatFieldUpdateOperationsInput | number
+    deleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     businessId?: IntFieldUpdateOperationsInput | number
   }
