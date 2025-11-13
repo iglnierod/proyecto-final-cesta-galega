@@ -1,0 +1,27 @@
+import { z } from 'zod';
+
+export const SexEnum = z.enum(['MALE', 'FEMALE', 'OTHER']);
+export type Sex = z.infer<typeof SexEnum>;
+
+export const UserRegisterSchema = z.object({
+  name: z.string().min(5, 'O nome debe ter 5 caracteres').trim(),
+  email: z.email('Formato de mail non válido').trim().toLowerCase(),
+  sex: SexEnum.default('OTHER'),
+  birthDate: z.string('A data de nacemento non é válida'),
+  province: z.string().min(1).trim(),
+  password: z.string().min(8, 'O contrasinal debe ter 8 caracteres'),
+});
+
+export type UserRegisterInput = z.infer<typeof UserRegisterSchema>;
+
+export const UserDTO = z.object({
+  id: z.number().int(),
+  name: z.string(),
+  email: z.email(),
+  sex: z.string(),
+  birthDate: z.string(),
+  province: z.string(),
+  createdAt: z.string(),
+});
+
+export type UserDTO = z.infer<typeof UserDTO>;

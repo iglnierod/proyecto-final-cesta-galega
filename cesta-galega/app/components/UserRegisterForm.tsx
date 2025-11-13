@@ -1,24 +1,21 @@
 'use client';
 import { FormEvent, useState } from 'react';
 import { Sex, UserRegisterInput } from '@/app/lib/types/user';
-import { Province, provinces } from '@/app/lib/types/shared';
 import { useRouter } from 'next/navigation';
-import { userRegisterSchema } from '@/app/lib/validators/userValidator';
 import { useAlert } from '@/app/context/AlertContext';
+import { UserRegisterSchema } from '@/app/lib/user/user.schema';
+import { Province, provinces } from '@/app/lib/types/shared';
 
-// Componente con lógica y vista de formulario de registro de usuarios
 export default function UserRegisterForm() {
-  // Definir formulario de registro de usuario
   const [formData, setFormData] = useState<UserRegisterInput>({
     name: '',
     email: '',
-    sex: 'MALE',
+    sex: 'OTHER',
     birthDate: '',
     province: 'CORUÑA, A',
     password: '',
   });
 
-  // Definir estados y propiedades del componente
   const [pwd, setPwd] = useState('');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -26,110 +23,117 @@ export default function UserRegisterForm() {
   const { showAlert } = useAlert();
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    // Evitar evento por defecto, eliminar mensaje y establecer cargando
+    // Prevenir acciones por defecto
     e.preventDefault();
     setErrorMsg(null);
     setLoading(true);
 
-    // Verificar datos de formulario usando la librería zod
-    const result = userRegisterSchema.safeParse(formData);
-    if (!result.success) {
-      const error = result.error.issues[0];
-      setErrorMsg(error.message);
+    // Verificación de formulario y devolver error si falla algún formato
+    const parsed = UserRegisterSchema.safeParse(formData);
+    if (!parsed.success) {
+      const first = parsed.error.issues[0];
+      setErrorMsg(first?.message ?? 'Datos non válidos');
       setLoading(false);
       return;
     }
 
     // Verificar que las dos contraseñas introducidas son iguales
     if (pwd !== formData.password) {
-      setErrorMsg('Las contraseñas no coinciden');
+      setErrorMsg('Os contrasinais non coinciden');
       setLoading(false);
       return;
     }
 
     try {
-      // Enviar petición a la api para registrar usuario
+      // Hacer petición de crear usuario
       const res = await fetch('/api/auth/user/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(parsed.data),
       });
 
-      // Si falla el backend lanza error
+      // Obtener datos de vuelta
+      const data = await res.json().catch(() => ({}));
+
+      // Si el registro falló
       if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data?.error ?? 'Error al registrarse');
+        throw new Error(data?.error ?? 'Erro no rexistro');
       }
 
-      // Si se ha registrado correctamente enviar a login
-      showAlert('Se ha creado la cuenta correctamente', 'success');
+      // Mostrar alerta de confirmación y redirigir a login
+      showAlert('O usuario creouse correctamente. Agora inicie sesión', 'success');
       router.push('/user/login');
     } catch (err: any) {
-      // Si falla establecer mensaje
-      setErrorMsg(err.message || 'Error inesperado');
-      console.error('Error inesperado');
+      // Mostrar error
+      setErrorMsg(err.message || 'Erro inesperado. Volva tentalo máis tarde');
+      console.error(err);
     } finally {
       setLoading(false);
     }
   }
 
-  // Devolver vista
   return (
-    <form className={'flex flex-col gap-3'} onSubmit={handleSubmit}>
-      {/*INPUT NOMBRE*/}
-      <div className={'input max-w-sm rounded'}>
-        <label className={'label-text my-auto me-3 p-0'}>Nombre*</label>
+    <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
+      {/* NOMBRE */}
+      <div className="input max-w-sm rounded">
+        <label className="label-text my-auto me-3 p-0">Nome*</label>
         <input
-          type={'text'}
-          className={'grow'}
+          type="text"
+          className="grow"
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           required
         />
       </div>
-      {/*INPUT EMAIL*/}
-      <div className={'input max-w-sm rounded'}>
-        <label className={'label-text my-auto me-3 p-0'}>Email*</label>
+
+      {/* CORREO */}
+      <div className="input max-w-sm rounded">
+        <label className="label-text my-auto me-3 p-0">Correo*</label>
         <input
-          type={'email'}
-          className={'grow'}
+          type="email"
+          className="grow"
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           required
         />
       </div>
-      {/*INPUT GÉNERO*/}
-      <div className={'select-floating max-w-sm'}>
+
+      {/* GENERO */}
+      <div className="select-floating max-w-sm">
         <select
           className="select max-w-sm"
-          aria-label="select"
+          aria-label="Seleccionar xénero"
+          value={formData.sex}
           onChange={(e) => setFormData({ ...formData, sex: e.target.value as Sex })}
           required
         >
-          <option value={'MALE'}>Hombre</option>
-          <option value={'FEMALE'}>Mujer</option>
-          <option value={'OTHER'}>Prefiero no decirlo</option>
+          <option value="MALE">Home</option>
+          <option value="FEMALE">Muller</option>
+          <option value="OTHER">Prefiro non dicilo</option>
         </select>
-        <label className="select-floating-label">Género*</label>
+        <label className="select-floating-label">Xénero*</label>
       </div>
-      {/*INPUT FECHA DE NACIMIENTO*/}
-      <div className={'input max-w-sm rounded'} title={'Fecha de nacimiento'}>
-        <label className={'label-text my-auto me-3 p-0'}>F.Nacimiento*</label>
+
+      {/* FEHCA DE NACIMIENTO */}
+      <div className="input max-w-sm rounded" title="Data de nacemento">
+        <label className="label-text my-auto me-3 p-0">F.nacemento*</label>
         <input
-          type={'date'}
-          className={'grow'}
+          type="date"
+          className="grow"
           onChange={(e) => setFormData({ ...formData, birthDate: e.target.value })}
           required
         />
       </div>
-      {/*INPUT PROVINCIA*/}
-      <div className={'select-floating max-w-sm'}>
+
+      {/* PROVINCIA */}
+      <div className="select-floating max-w-sm">
         <select
           className="select max-w-sm"
-          aria-label="select"
+          aria-label="Seleccionar provincia"
+          value={formData.province as Province}
           onChange={(e) => setFormData({ ...formData, province: e.target.value as Province })}
           required
         >
-          <option disabled defaultValue={'OTHER'}>
-            Selecciona tu provincia
+          <option disabled value="">
+            Selecciona a túa provincia
           </option>
           {provinces.map((p) => (
             <option key={p} value={p}>
@@ -139,32 +143,34 @@ export default function UserRegisterForm() {
         </select>
         <label className="select-floating-label">Provincia*</label>
       </div>
-      {/*INPUT CONTRASEÑA*/}
-      <div className={'input max-w-sm rounded'}>
-        <label className={'label-text my-auto me-3 p-0'}>Contraseña*</label>
+
+      {/* CONTRASEÑA */}
+      <div className="input max-w-sm rounded">
+        <label className="label-text my-auto me-3 p-0">Contrasinal*</label>
         <input
-          type={'password'}
-          className={'grow'}
+          type="password"
+          className="grow"
           onChange={(e) => setFormData({ ...formData, password: e.target.value })}
           required
         />
       </div>
-      {/*INPUT CONFIRMAR CONTRASEÑA*/}
-      <div className={'input max-w-sm rounded'} title={'Confirmar contraseña'}>
-        <label className={'label-text my-auto me-3 p-0'}>Conf.Contraseña*</label>
-        <input type={'password'} className={'grow'} onChange={(e) => setPwd(e.target.value)} />
+
+      {/* CONFIRMAR CONTRASEÑA */}
+      <div className="input max-w-sm rounded" title="Confirmar contrasinal">
+        <label className="label-text my-auto me-3 p-0">Confirmar contrasinal*</label>
+        <input type="password" className="grow" onChange={(e) => setPwd(e.target.value)} required />
       </div>
 
-      {/*MENSAJE DE ERROR*/}
+      {/* ERROR */}
       {errorMsg && (
-        <p className={'text-sm text-red-600'} role={'alert'}>
+        <p className="text-sm text-red-600" role="alert">
           {errorMsg}
         </p>
       )}
 
-      {/*BOTÓN PARA ENVIAR FORM*/}
-      <button type={'submit'} className={'btn btn-primary rounded'}>
-        {loading ? <span className="loading loading-dots"></span> : 'Registrarse'}
+      {/* SUBMIT */}
+      <button type="submit" className="btn btn-primary rounded">
+        {loading ? <span className="loading loading-dots"></span> : 'Rexistrarse'}
       </button>
     </form>
   );
