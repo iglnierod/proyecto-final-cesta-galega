@@ -1,57 +1,60 @@
-import prisma from '@/app/lib/prisma';
 import { NextResponse } from 'next/server';
-import { productCreateSchema } from '@/app/lib/validators/productValidator';
-import { BusinessSelectPublic } from '@/app/lib/selects/businessSelect';
-import { CategorySelectPublic } from '@/app/lib/selects/CategorySelectPublic';
+import { ProductUpdateSchema } from '@/app/lib/product/product.schema';
+import {
+  findProductByIdWithBusiness,
+  softDeleteProduct,
+  updateProduct,
+} from '@/app/lib/product/product.repo';
+import { toProductWithBusinessDTO } from '@/app/lib/product/product.mapper';
 
 // Devolver datos de producto
-export async function GET(
-  request: Request,
-  { params }: { params: Promise<{ productId: string }> }
-) {
+export async function GET(request: Request, { params }: { params: { productId: string } }) {
   try {
-    // Obtener id de producto enviada por parametros
-    const { productId } = await params;
-    const id = Number(productId);
+    // Obtener id de producto enviada por parámetros
+    const id = Number(params.productId);
 
-    // Obtener datos de producto con ese id
-    const product = await prisma.product.findUnique({
-      where: { id },
-      include: {
-        business: BusinessSelectPublic,
-        categories: CategorySelectPublic,
-      },
-    });
-
-    // Si el producto no se encuentra
-    if (!product) {
-      return NextResponse.json({ error: 'Producto non atopado' }, { status: 404 });
+    // Si el id no es válido
+    if (Number.isNaN(id)) {
+      return NextResponse.json({ error: 'ID de produto non válido' }, { status: 400 });
     }
 
+    // Obtener datos de producto con ese id desde el repo
+    const product = await findProductByIdWithBusiness(id);
+
+    // Si el producto no se encuentra o está borrado lógicamente
+    if (!product || product.deleted) {
+      return NextResponse.json({ error: 'Produto non atopado' }, { status: 404 });
+    }
+
+    // Mapear a DTO
+    const dto = toProductWithBusinessDTO(product);
+
     // Devolver datos del producto
-    return NextResponse.json({ product });
+    return NextResponse.json({ product: dto });
   } catch (error) {
     // Si falla algo devolver error
-    console.log(error);
-    return NextResponse.json({ error: 'Error no fetch do producto' }, { status: 500 });
+    console.error(error);
+    return NextResponse.json({ error: 'Erro ao obter o produto' }, { status: 500 });
   }
 }
 
 // Actualizar producto
-export async function PUT(
-  request: Request,
-  { params }: { params: Promise<{ productId: string }> }
-) {
+export async function PUT(request: Request, { params }: { params: { productId: string } }) {
   try {
-    // Obtener id de producto enviado por parametros
-    const { productId } = await params;
-    const id = Number(productId);
+    // Obtener id de producto enviado por parámetros
+    const id = Number(params.productId);
 
-    // Obtener datos de producto de la peticion y verificar los datos con zod
+    if (Number.isNaN(id)) {
+      return NextResponse.json({ error: 'ID de produto non válido' }, { status: 400 });
+    }
+
+    // Obtener datos de producto de la petición
     const body = await request.json();
-    const parsed = productCreateSchema.safeParse(body);
 
-    // Si los datos no son validos
+    // Mezclar el id de la ruta con el body y validar con Zod
+    const parsed = ProductUpdateSchema.safeParse({ ...body, id });
+
+    // Si los datos no son válidos
     if (!parsed.success) {
       return NextResponse.json(
         { error: 'Datos non válidos', issues: parsed.error.issues },
@@ -59,81 +62,39 @@ export async function PUT(
       );
     }
 
-    // Obtener datos de body
-    const {
-      name,
-      description,
-      image,
-      businessId,
-      price,
-      discounted,
-      discount,
-      categoryIds = [],
-    } = parsed.data;
+    // Actualizar producto usando el repo
+    const updated = await updateProduct(id, parsed.data);
 
-    // Actualizar producto y obtener los nuevos datos
-    const updated = await prisma.product.update({
-      where: { id },
-      data: {
-        name,
-        description,
-        image,
-        price,
-        discounted,
-        discount,
-        business: { connect: { id: businessId } },
-        categories: {
-          set: categoryIds.map((cid: number) => ({ id: cid })),
-        },
-      },
-      select: {
-        id: true,
-        name: true,
-        description: true,
-        image: true,
-        createdAt: true,
-        business: BusinessSelectPublic,
-        categories: CategorySelectPublic,
-      },
-    });
+    // Mapear a DTO
+    const dto = toProductWithBusinessDTO(updated);
 
     // Devolver producto actualizado
-    return NextResponse.json({ product: updated });
+    return NextResponse.json({ product: dto });
   } catch (error) {
     // Si falla algo enviar error
     console.error(error);
-    return NextResponse.json({ error: 'Error ao actualizar o producto' }, { status: 500 });
+    return NextResponse.json({ error: 'Erro ao actualizar o produto' }, { status: 500 });
   }
 }
 
-export async function DELETE(
-  request: Request,
-  { params }: { params: Promise<{ productId: string }> }
-) {
+// Borrado lóxico de produto
+export async function DELETE(request: Request, { params }: { params: { productId: string } }) {
   try {
-    const { productId } = await params;
-    const id = Number(productId);
+    const id = Number(params.productId);
 
-    const deleteProduct = await prisma.product.update({
-      where: { id },
-      data: {
-        deleted: true,
-      },
-      select: {
-        id: true,
-        name: true,
-        description: true,
-        image: true,
-        deleted: true,
-        createdAt: true,
-        business: BusinessSelectPublic,
-        categories: CategorySelectPublic,
-      },
-    });
+    if (Number.isNaN(id)) {
+      return NextResponse.json({ error: 'ID de produto non válido' }, { status: 400 });
+    }
 
-    return NextResponse.json({ deleteProduct }, { status: 200 });
+    // Borrado lógico a través del repo
+    const deletedProduct = await softDeleteProduct(id);
+
+    // Mapear a DTO
+    const dto = toProductWithBusinessDTO(deletedProduct);
+
+    return NextResponse.json({ product: dto }, { status: 200 });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: 'Erro ao eliminar o produto' });
+    return NextResponse.json({ error: 'Erro ao eliminar o produto' }, { status: 500 });
   }
 }

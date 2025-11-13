@@ -3,6 +3,7 @@
 // Selects tipados y reutilizables
 import { Prisma } from '@/app/generated/prisma';
 import { prisma } from '@/app/lib/prisma';
+import { ProductCreateInput, ProductUpdateInput } from '@/app/lib/product/product.schema';
 
 export const productLiteSelect = Prisma.validator<Prisma.ProductSelect>()({
   id: true,
@@ -13,15 +14,21 @@ export const productLiteSelect = Prisma.validator<Prisma.ProductSelect>()({
   discount: true,
   enabled: true,
   image: true,
+  deleted: true,
+  createdAt: true,
 });
 
-export type ProductLite = Prisma.ProductGetPayload<{ select: typeof productLiteSelect }>;
+export type ProductLite = Prisma.ProductGetPayload<{
+  select: typeof productLiteSelect;
+}>;
 
 export const productWithBusinessInclude = Prisma.validator<Prisma.ProductInclude>()({
   business: {
     select: { id: true, name: true, province: true, city: true },
   },
-  // categories: { select: { id: true, name: true }},
+  categories: {
+    select: { id: true, name: true },
+  },
 });
 
 export type ProductWithBusiness = Prisma.ProductGetPayload<{
@@ -43,11 +50,48 @@ export async function findProductByIdWithBusiness(id: number) {
   });
 }
 
-export async function createProduct(data: Prisma.ProductCreateInput) {
-  // o usa los campos que aceptas exactamente desde ProductCreateInput -> map
-  return prisma.product.create({ data, include: productWithBusinessInclude });
+export async function createProduct(data: ProductCreateInput) {
+  const { categoryIds, ...productData } = data;
+
+  return prisma.product.create({
+    data: {
+      ...productData,
+      categories: categoryIds.length
+        ? {
+            connect: categoryIds.map((id) => ({ id })),
+          }
+        : undefined,
+    },
+    include: productWithBusinessInclude,
+  });
 }
 
-export async function updateProduct(id: number, data: Prisma.ProductUpdateInput) {
-  return prisma.product.update({ where: { id }, data, include: productWithBusinessInclude });
+export async function updateProduct(id: number, data: ProductUpdateInput) {
+  const { categoryIds, ...productData } = data;
+
+  return prisma.product.update({
+    where: { id },
+    data: {
+      ...productData,
+      ...(categoryIds
+        ? {
+            categories: {
+              set: categoryIds.map((categoryId) => ({ id: categoryId })),
+            },
+          }
+        : {}),
+    },
+    include: productWithBusinessInclude,
+  });
+}
+
+export async function softDeleteProduct(id: number) {
+  return prisma.product.update({
+    where: { id },
+    data: {
+      deleted: true,
+      enabled: false,
+    },
+    include: productWithBusinessInclude,
+  });
 }

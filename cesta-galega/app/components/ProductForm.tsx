@@ -193,7 +193,7 @@ export default function ProductForm({
               value={formData.discount}
               onChange={(e) => {
                 const n = e.currentTarget.valueAsNumber;
-                setFormData({ ...formData, discount: Number.isNaN(n) ? 0 : n });
+                setFormData({ ...formData, discount: Number(n) });
               }}
               className="grow"
             />

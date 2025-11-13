@@ -3,16 +3,17 @@ import { ProductDTO, ProductWithBusinessDTO } from '@/app/lib/product/product.sc
 import { ProductLite, ProductWithBusiness } from '@/app/lib/product/product.repo';
 
 export function toProductDTO(p: ProductLite) {
-  // Sanitiza/normaliza por si hay nulls/undefined
   return ProductDTO.parse({
     id: p.id,
     name: p.name,
-    description: p.description ?? '',
+    description: p.description,
     price: p.price,
     discounted: p.discounted,
-    discount: p.discount ?? 0,
+    discount: p.discount,
     enabled: p.enabled,
-    image: p.image ?? '##',
+    image: p.image,
+    deleted: p.deleted,
+    createdAt: p.createdAt,
   });
 }
 
@@ -20,18 +21,23 @@ export function toProductWithBusinessDTO(p: ProductWithBusiness) {
   return ProductWithBusinessDTO.parse({
     id: p.id,
     name: p.name,
-    description: p.description ?? '',
+    description: p.description,
     price: p.price,
     discounted: p.discounted,
-    discount: p.discount ?? 0,
+    discount: p.discount,
     enabled: p.enabled,
-    image: p.image ?? '##',
+    image: p.image,
+    deleted: p.deleted,
+    createdAt: p.createdAt,
     business: {
       id: p.business.id,
       name: p.business.name,
-      province: p.business.province ?? null,
-      city: p.business.city ?? null,
+      province: p.business.province,
+      city: p.business.city,
     },
-    // categories: p.categories?.map(c => ({ id: c.id, name: c.name })) ?? [],
+    categories: p.categories.map((c) => ({
+      id: c.id,
+      name: c.name,
+    })),
   });
 }

@@ -2,21 +2,28 @@ import { z } from 'zod';
 
 export const ProductCreateSchema = z.object({
   businessId: z.number().int().positive(),
-  name: z.string().min(1),
-  description: z.string().optional().default(''),
-  price: z.number().nonnegative(),
+  name: z.string().min(5, 'O nome do produto debe ter 5 caracteres'),
+  description: z.string().min(15, 'A descrición debe ter 15 caracteres'),
+  price: z
+    .number()
+    .nonnegative()
+    .min(1, 'O prezo debe ser como mínimo de 1€')
+    .max(9999, 'O prezo máximo é de 9999 €'),
   discounted: z.boolean().default(false),
   discount: z.number().min(0).max(99).default(0),
-  image: z.string().default('##'),
+  image: z.string().optional().default('##'),
   categoryIds: z.number().int().array().default([]),
   enabled: z.boolean().default(true),
 });
+
+export type ProductCreateInput = z.infer<typeof ProductCreateSchema>;
 
 export const ProductUpdateSchema = ProductCreateSchema.partial().extend({
   id: z.number().int().positive(),
 });
 
-// 🔹 DTO “ligero” para la lista
+export type ProductUpdateInput = z.infer<typeof ProductUpdateSchema>;
+
 export const ProductDTO = z.object({
   id: z.number().int(),
   name: z.string(),
@@ -28,7 +35,8 @@ export const ProductDTO = z.object({
   image: z.string().nullable().optional(),
 });
 
-// 🔹 DTO “completo” con empresa (para preview/detalle)
+export type ProductDTO = z.infer<typeof ProductDTO>;
+
 export const ProductWithBusinessDTO = ProductDTO.extend({
   business: z.object({
     id: z.number().int(),
@@ -39,7 +47,4 @@ export const ProductWithBusinessDTO = ProductDTO.extend({
   // categories: z.array(z.object({ id: z.number(), name: z.string() })).optional(),
 });
 
-export type ProductCreateInput = z.infer<typeof ProductCreateSchema>;
-export type ProductUpdateInput = z.infer<typeof ProductUpdateSchema>;
-export type ProductDTO = z.infer<typeof ProductDTO>;
 export type ProductWithBusinessDTO = z.infer<typeof ProductWithBusinessDTO>;
