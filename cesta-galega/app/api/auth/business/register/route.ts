@@ -38,6 +38,7 @@ export async function POST(request: Request) {
     // Devolver datos de empresa creada
     return NextResponse.json({ business }, { status: 201 });
   } catch (err: any) {
+    console.log(err.issues);
     if (err?.name === 'ZodError') {
       const first = err.issues?.[0];
       return NextResponse.json({ error: first?.message ?? 'Datos non válidos' }, { status: 400 });

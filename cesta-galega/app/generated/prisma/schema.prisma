@@ -46,6 +46,7 @@ model Business {
   facebook     String?
   logo         String?
   createdAt    DateTime  @default(now())
+  // relación con product
   product      Product[]
 }
 

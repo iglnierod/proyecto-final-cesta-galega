@@ -26,7 +26,7 @@ export default function ProductPreview({ product }: { product: ProductWithBusine
   }
 
   return (
-    <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 p-4">
+    <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 p-4 outline outline-red-500">
       {/* Columna izquierda: imagen */}
       <div className="w-full">
         <div className="w-full aspect-square rounded-xl border border-base-content/20 flex items-center justify-center bg-base-200">

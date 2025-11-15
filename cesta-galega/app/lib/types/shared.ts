@@ -1,3 +1,61 @@
-export const provinces = ['CORUÑA, A', 'LUGO', 'OURENSE', 'PONTEVEDRA', 'MONTCADA'] as const;
+import { z } from 'zod';
 
-export type Province = (typeof provinces)[number];
+export const ProvincesEnum = z.enum([
+  // Galicia
+  'CORUÑA, A',
+  'LUGO',
+  'OURENSE',
+  'PONTEVEDRA',
+
+  // Resto de España (orden alfabético)
+  // 'ÁLAVA',
+  // 'ALBACETE',
+  // 'ALICANTE',
+  // 'ALMERÍA',
+  // 'ASTURIAS',
+  // 'ÁVILA',
+  // 'BADAJOZ',
+  // 'BARCELONA',
+  // 'BURGOS',
+  // 'CÁCERES',
+  // 'CÁDIZ',
+  // 'CANTABRIA',
+  // 'CASTELLÓN',
+  // 'CEUTA',
+  // 'CIUDAD REAL',
+  // 'CÓRDOBA',
+  // 'CUENCA',
+  // 'GIRONA',
+  // 'GRANADA',
+  // 'GUADALAJARA',
+  // 'GUIPÚZCOA',
+  // 'HUELVA',
+  // 'HUESCA',
+  // 'ILLES BALEARS',
+  // 'JAÉN',
+  // 'LA RIOJA',
+  // 'LAS PALMAS',
+  // 'LEÓN',
+  // 'LLEIDA',
+  // 'MADRID',
+  // 'MÁLAGA',
+  // 'MELILLA',
+  // 'MURCIA',
+  // 'NAVARRA',
+  // 'PALENCIA',
+  // 'SALAMANCA',
+  // 'SANTA CRUZ DE TENERIFE',
+  // 'SEGOVIA',
+  // 'SEVILLA',
+  // 'SORIA',
+  // 'TARRAGONA',
+  // 'TERUEL',
+  // 'TOLEDO',
+  // 'VALENCIA',
+  // 'VALLADOLID',
+  // 'VIZCAYA',
+  // 'ZAMORA',
+  // 'ZARAGOZA',
+]);
+
+export type ProvinceType = z.infer<typeof ProvincesEnum>;

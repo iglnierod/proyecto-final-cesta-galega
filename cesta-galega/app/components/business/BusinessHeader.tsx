@@ -2,6 +2,7 @@
 import LogOutButton from '@/app/components/LogOutButon';
 import Image from 'next/image';
 import logo from '@/public/assets/logo.png';
+import Link from 'next/link';
 
 export default function BusinessHeader({ businessName }: { businessName: string | undefined }) {
   return (
@@ -36,10 +37,40 @@ export default function BusinessHeader({ businessName }: { businessName: string 
         >
           <ul className="menu md:menu-horizontal gap-2 p-0 text-base max-md:mt-2">
             <li>
-              <a href="/business/manage/products">Xestión</a>
+              <Link href="/business/dashboard">Inicio</Link>
             </li>
             <li>
               <a href="#">Estadísticas</a>
+            </li>
+            <li className="dropdown relative inline-flex [--auto-close:inside] [--offset:8] [--placement:bottom-end]">
+              <button
+                id="dropdown-link"
+                type="button"
+                className="dropdown-toggle dropdown-open:bg-base-content/10 dropdown-open:text-base-content"
+                aria-haspopup="menu"
+                aria-expanded="false"
+                aria-label="Dropdown"
+              >
+                Xestión
+                <span className="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
+              </button>
+              <ul
+                className="dropdown-menu dropdown-open:opacity-100 hidden"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="dropdown-link"
+              >
+                <li>
+                  <Link className="dropdown-item" href="/business/manage/products">
+                    Produtos
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" href="/business/manage/orders">
+                    Pedidos
+                  </Link>
+                </li>
+              </ul>
             </li>
             <li className="dropdown relative inline-flex [--auto-close:inside] [--offset:8] [--placement:bottom-end]">
               <button
@@ -59,23 +90,18 @@ export default function BusinessHeader({ businessName }: { businessName: string 
                 aria-orientation="vertical"
                 aria-labelledby="dropdown-link"
               >
-                <LogOutButton />
                 <li>
-                  <a className="dropdown-item" href="#">
-                    Link 4
-                  </a>
+                  <Link className="dropdown-item" href="/business/settings">
+                    Axustes
+                  </Link>
                 </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Link 5
-                  </a>
-                </li>
+                {/*<li>*/}
+                {/*  <a className="dropdown-item" href="#">*/}
+                {/*    Link 5*/}
+                {/*  </a>*/}
+                {/*</li>*/}
                 <hr className="border-base-content/25 -mx-2" />
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Link 6
-                  </a>
-                </li>
+                <LogOutButton />
               </ul>
             </li>
           </ul>

@@ -1,16 +1,15 @@
 'use client';
 import { FormEvent, useState } from 'react';
-import { Sex, UserRegisterInput } from '@/app/lib/types/user';
 import { useRouter } from 'next/navigation';
 import { useAlert } from '@/app/context/AlertContext';
-import { UserRegisterSchema } from '@/app/lib/user/user.schema';
-import { Province, provinces } from '@/app/lib/types/shared';
+import { Sex, SexEnum, UserRegisterInput, UserRegisterSchema } from '@/app/lib/user/user.schema';
+import { ProvincesEnum, ProvinceType } from '@/app/lib/types/shared';
 
 export default function UserRegisterForm() {
   const [formData, setFormData] = useState<UserRegisterInput>({
     name: '',
     email: '',
-    sex: 'OTHER',
+    sex: 'Prefiero no decirlo',
     birthDate: '',
     province: 'CORUÑA, A',
     password: '',
@@ -105,9 +104,14 @@ export default function UserRegisterForm() {
           onChange={(e) => setFormData({ ...formData, sex: e.target.value as Sex })}
           required
         >
-          <option value="MALE">Home</option>
-          <option value="FEMALE">Muller</option>
-          <option value="OTHER">Prefiro non dicilo</option>
+          <option disabled value="">
+            Selecciona o teu xénero
+          </option>
+          {SexEnum.options.map((s) => (
+            <option key={s} value={s}>
+              {s}
+            </option>
+          ))}
         </select>
         <label className="select-floating-label">Xénero*</label>
       </div>
@@ -128,14 +132,14 @@ export default function UserRegisterForm() {
         <select
           className="select max-w-sm"
           aria-label="Seleccionar provincia"
-          value={formData.province as Province}
-          onChange={(e) => setFormData({ ...formData, province: e.target.value as Province })}
+          value={formData.province}
+          onChange={(e) => setFormData({ ...formData, province: e.target.value as ProvinceType })}
           required
         >
           <option disabled value="">
             Selecciona a túa provincia
           </option>
-          {provinces.map((p) => (
+          {ProvincesEnum.options.map((p) => (
             <option key={p} value={p}>
               {p}
             </option>

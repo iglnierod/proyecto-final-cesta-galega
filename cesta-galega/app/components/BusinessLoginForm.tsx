@@ -1,8 +1,8 @@
 'use client';
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { BusinessLoginInput } from '@/app/lib/types/business';
 import { useAlert } from '@/app/context/AlertContext';
+import { BusinessLoginInput } from '@/app/lib/business/business.schema';
 
 // Componente con la lógica y vista del formulario de login de empresas
 export default function BusinessLoginForm() {

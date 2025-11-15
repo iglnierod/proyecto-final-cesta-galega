@@ -1,10 +1,14 @@
 'use client';
 import { FormEvent, useState } from 'react';
-import { BusinessRegisterInput, businessType, BusinessType } from '@/app/lib/types/business';
-import { Province, provinces } from '@/app/lib/types/shared';
+import { ProvincesEnum, ProvinceType } from '@/app/lib/types/shared';
 import { useRouter } from 'next/navigation';
 import { useAlert } from '@/app/context/AlertContext';
-import { BusinessRegisterSchema } from '@/app/lib/business/business.schema';
+import {
+  BusinessRegisterInput,
+  BusinessRegisterSchema,
+  BusinessType,
+  BusinessTypeEnum,
+} from '@/app/lib/business/business.schema';
 
 // Componente con lógica y vista de formulario de registro de empresas
 export default function BusinessRegisterForm() {
@@ -111,7 +115,7 @@ export default function BusinessRegisterForm() {
           }
           required
         >
-          {businessType.map((bt) => (
+          {BusinessTypeEnum.options.map((bt) => (
             <option key={bt} value={bt}>
               {bt}
             </option>
@@ -158,13 +162,13 @@ export default function BusinessRegisterForm() {
         <select
           className="select max-w-sm"
           aria-label="Selecciona a provincia"
-          onChange={(e) => setFormData({ ...formData, province: e.target.value as Province })}
+          onChange={(e) => setFormData({ ...formData, province: e.target.value as ProvinceType })}
           required
         >
           <option disabled defaultValue={'OTHER'}>
             Selecciona a túa provincia
           </option>
-          {provinces.map((p) => (
+          {ProvincesEnum.options.map((p) => (
             <option key={p} value={p}>
               {p}
             </option>

@@ -18,7 +18,7 @@ export default async function ProductPreviewPage({
   }
 
   return (
-    <section className="max-w-[1200px] grid grid-cols-1 justify-items-center">
+    <section className="">
       <ProductPreview product={product} />
     </section>
   );

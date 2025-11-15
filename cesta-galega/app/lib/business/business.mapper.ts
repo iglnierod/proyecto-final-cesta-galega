@@ -1,8 +1,8 @@
 import { BusinessPublic } from '@/app/lib/business/business.repo';
-import { BusinessDTO } from '@/app/lib/business/business.schema';
+import { BusinessDTO as BusinessDTOSchema } from '@/app/lib/business/business.schema';
 
 export function toBusinessDTO(b: BusinessPublic) {
-  return BusinessDTO.parse({
+  return BusinessDTOSchema.parse({
     id: b.id,
     name: b.name,
     email: b.email,

@@ -19,16 +19,25 @@ export const businessPublicSelect = Prisma.validator<Prisma.BusinessSelect>()({
   createdAt: true,
 });
 
-export type BusinessPublic = Prisma.BusinessGetPayload<{ select: typeof businessPublicSelect }>;
+export type BusinessPublic = Prisma.BusinessGetPayload<{
+  select: typeof businessPublicSelect;
+}>;
 
 export async function findBusinessByEmail(email: string) {
-  return prisma.business.findUnique({ where: { email } });
+  return prisma.business.findUnique({
+    where: { email },
+    select: businessPublicSelect,
+  });
 }
 
 export async function findBusinessById(id: number) {
-  return prisma.business.findUnique({ where: { id } });
+  return prisma.business.findUnique({
+    where: { id },
+    select: businessPublicSelect,
+  });
 }
 
+// data pode vir do BusinessRegisterInput (+ password já hasheado, por exemplo)
 export async function createBusiness(data: {
   name: string;
   email: string;
