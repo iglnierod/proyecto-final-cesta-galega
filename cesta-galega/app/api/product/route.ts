@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { createProduct, findProductsByBusiness } from '@/app/lib/product/product.repo';
-import { toProductDTO, toProductWithBusinessDTO } from '@/app/lib/product/product.mapper';
+import {
+  toProductWithBusinessDTO,
+  toProductWithCategoriesDTO,
+} from '@/app/lib/product/product.mapper';
 import { ProductCreateSchema } from '@/app/lib/product/product.schema';
 
 export async function GET(request: Request) {
@@ -15,7 +18,7 @@ export async function GET(request: Request) {
     const products = await findProductsByBusiness(Number(businessId));
 
     return NextResponse.json({
-      products: products.map((p) => toProductDTO(p)),
+      products: products.map((p) => toProductWithCategoriesDTO(p)),
     });
   } catch (error) {
     console.error(error);

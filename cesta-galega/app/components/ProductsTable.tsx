@@ -6,7 +6,7 @@ import { mutate } from 'swr';
 
 import { useAlert } from '@/app/context/AlertContext';
 import ProductForm from '@/app/components/ProductForm';
-import { ProductDTO, ProductWithBusinessDTO } from '@/app/lib/product/product.schema';
+import { ProductWithBusinessDTO, ProductWithCategoriesDTO } from '@/app/lib/product/product.schema';
 
 const MySwal = withReactContent(Swal);
 
@@ -16,7 +16,7 @@ export default function ProductsTable({
   error,
   businessId,
 }: {
-  products: ProductDTO[];
+  products: ProductWithCategoriesDTO[];
   loading: boolean;
   error?: string;
   businessId: number;

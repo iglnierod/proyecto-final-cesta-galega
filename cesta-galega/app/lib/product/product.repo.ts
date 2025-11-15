@@ -22,6 +22,26 @@ export type ProductLite = Prisma.ProductGetPayload<{
   select: typeof productLiteSelect;
 }>;
 
+export const productLiteWithCategoriesSelect = Prisma.validator<Prisma.ProductSelect>()({
+  id: true,
+  name: true,
+  description: true,
+  price: true,
+  discounted: true,
+  discount: true,
+  enabled: true,
+  image: true,
+  deleted: true,
+  createdAt: true,
+  categories: {
+    select: { id: true, name: true },
+  },
+});
+
+export type ProductWithCategories = Prisma.ProductGetPayload<{
+  select: typeof productLiteWithCategoriesSelect;
+}>;
+
 export const productWithBusinessInclude = Prisma.validator<Prisma.ProductInclude>()({
   business: {
     select: { id: true, name: true, province: true, city: true },
@@ -38,7 +58,7 @@ export type ProductWithBusiness = Prisma.ProductGetPayload<{
 export async function findProductsByBusiness(businessId: number) {
   return prisma.product.findMany({
     where: { businessId, deleted: false },
-    select: productLiteSelect,
+    select: productLiteWithCategoriesSelect,
     orderBy: { createdAt: 'desc' },
   });
 }

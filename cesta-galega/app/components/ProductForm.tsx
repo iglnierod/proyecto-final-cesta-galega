@@ -12,6 +12,7 @@ import {
 } from '@/app/lib/product/product.schema';
 import Image from 'next/image';
 import { uploadToCloudinary } from '@/app/lib/cloudinary';
+import { CategoryDTO } from '@/app/lib/category/category.schema';
 
 // Componente de formulario para crear/editar produtos
 export default function ProductForm({
@@ -22,7 +23,7 @@ export default function ProductForm({
 }: {
   create: boolean;
   businessId: number | undefined;
-  product?: ProductWithBusinessDTO; // Produto que se edita (DTO da API)
+  product?: ProductWithBusinessDTO;
   onSuccessAction?: (p: ProductWithBusinessDTO) => void;
 }) {
   // Estado do formulario alineado co ProductCreateInput
@@ -37,13 +38,24 @@ export default function ProductForm({
     categoryIds: [],
     enabled: true,
   });
-  const [productFile, setProductFile] = useState<File | null>(null);
 
+  const [productFile, setProductFile] = useState<File | null>(null);
+  const [categories, setCategories] = useState<CategoryDTO[]>([]);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   // Rellenar o formulario se chega un produto (modo edición)
   useEffect(() => {
+    async function loadCategories() {
+      try {
+        const res = await fetch('/api/category');
+        const data = await res.json();
+        setCategories(data.categories || []);
+      } catch (err: any) {
+        console.error('Erro cargando categorías: ', err);
+      }
+    }
+
     if (product) {
       setFormData({
         businessId: businessId ?? product.business.id,
@@ -53,7 +65,7 @@ export default function ProductForm({
         discounted: product.discounted,
         discount: product.discount,
         image: product.image ?? '',
-        categoryIds: [],
+        categoryIds: product.categories.map((c) => c.id),
         enabled: product.enabled,
       });
     } else {
@@ -63,6 +75,8 @@ export default function ProductForm({
         businessId: businessId ?? prev.businessId,
       }));
     }
+
+    loadCategories();
   }, [product, businessId]);
 
   // Xestión do submit do formulario
@@ -122,7 +136,7 @@ export default function ProductForm({
 
   return (
     <section>
-      <form onSubmit={handleSubmit} className="grid grid-cols-3 gap-8 justify-between w-full">
+      <form onSubmit={handleSubmit} className="grid grid-cols-3 gap-1 justify-between w-full">
         {/* NOME */}
         <div className="text-left col-span-3">
           <label form="name" className="label-text">
@@ -174,7 +188,7 @@ export default function ProductForm({
               value={formData.price}
               onChange={(e) => {
                 const n = e.currentTarget.valueAsNumber;
-                setFormData({ ...formData, price: Number.isNaN(n) ? 0 : n });
+                setFormData({ ...formData, price: n });
               }}
               className="grow"
             />
@@ -217,7 +231,7 @@ export default function ProductForm({
               value={formData.discount}
               onChange={(e) => {
                 const n = e.currentTarget.valueAsNumber;
-                setFormData({ ...formData, discount: Number.isNaN(n) ? 0 : n });
+                setFormData({ ...formData, price: n });
               }}
               className="grow"
             />
@@ -260,6 +274,60 @@ export default function ProductForm({
                 "
               />
             </div>
+          </div>
+        </div>
+
+        <div className="col-span-3 flex justify-center text-left pb-10">
+          <div className="w-full overflow-x-auto overflow-y-auto max-h-[300px] rounded-lg p-4">
+            <h3 className="text-lg font-semibold mb-2">Categorías</h3>
+            <p className="text-base-content/70 text-sm mb-4">
+              Selecciona as categorías do produto, esto axudará aos usuarios na búsqueda.
+            </p>
+
+            <table className="table w-full">
+              <thead>
+                <tr className="border-b border-base-300">
+                  <th className="w-24 text-center">Seleccionado</th>
+                  <th>Nome</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {categories && categories.length ? (
+                  categories.map((c) => (
+                    <tr key={c.id} className="hover:bg-base-200/40 transition">
+                      <td className="text-center">
+                        <input
+                          type="checkbox"
+                          className="checkbox checkbox-primary checkbox-sm"
+                          checked={formData.categoryIds.includes(c.id)}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              setFormData({
+                                ...formData,
+                                categoryIds: [...formData.categoryIds, c.id],
+                              });
+                            } else {
+                              setFormData({
+                                ...formData,
+                                categoryIds: formData.categoryIds.filter((id) => id !== c.id),
+                              });
+                            }
+                          }}
+                        />
+                      </td>
+                      <td className="font-medium">{c.name}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={2} className="text-center py-3 text-base-content/60">
+                      Sen categorías dispoñibles
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
 

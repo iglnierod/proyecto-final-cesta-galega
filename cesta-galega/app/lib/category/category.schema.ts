@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { ProductDTO } from '@/app/lib/product/product.schema';
 
 // Crear categoría (normalmente de empresa)
 // - isGlobal: por defecto false → categoría privada da empresa
@@ -26,7 +25,14 @@ export type CategoryDTO = z.infer<typeof CategoryDTO>;
 
 // DTO de categoría con produtos
 export const CategoryWithProductsDTO = CategoryDTO.extend({
-  products: z.array(ProductDTO),
+  products: z.array(
+    z.object({
+      id: z.number().int(),
+      name: z.string(),
+      price: z.number(),
+      image: z.string().nullable(),
+    })
+  ),
 });
 
 export type CategoryWithProductsDTO = z.infer<typeof CategoryWithProductsDTO>;

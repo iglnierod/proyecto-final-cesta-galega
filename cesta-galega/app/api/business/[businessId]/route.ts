@@ -33,8 +33,12 @@ export async function PUT(
   }
 }
 
-export async function DELETE(request: Request, { params }: { params: { businessId: string } }) {
-  const id = Number(params.businessId);
+export async function DELETE(
+  request: Request,
+  { params }: { params: Promise<{ businessId: string }> }
+) {
+  const { businessId } = await params;
+  const id = Number(businessId);
 
   if (Number.isNaN(id)) {
     return NextResponse.json({ error: 'ID de empresa non válido' }, { status: 400 });

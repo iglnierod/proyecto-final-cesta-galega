@@ -2,7 +2,7 @@
 import useSWR from 'swr';
 import AddProductButton from '@/app/components/AddProductButton';
 import ProductsTable from '@/app/components/ProductsTable';
-import { ProductDTO } from '@/app/lib/product/product.schema';
+import { ProductWithCategoriesDTO } from '@/app/lib/product/product.schema';
 
 // Función fetcher para SWR
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
@@ -11,10 +11,10 @@ export default function ManageProductsClient({ businessId }: { businessId: numbe
   const key = `/api/product?businessId=${businessId}`;
 
   // Esperamos que a los de la API
-  const { data, isLoading, error } = useSWR<{ products: ProductDTO[] }>(key, fetcher);
+  const { data, isLoading, error } = useSWR<{ products: ProductWithCategoriesDTO[] }>(key, fetcher);
 
   console.log(data);
-  const products: ProductDTO[] = data?.products ?? [];
+  const products: ProductWithCategoriesDTO[] = data?.products ?? [];
 
   return (
     <section className="grid grid-cols-1 justify-items-center p-4">
