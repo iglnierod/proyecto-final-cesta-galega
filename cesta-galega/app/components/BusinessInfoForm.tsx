@@ -13,6 +13,7 @@ export default function BusinessInfoForm({
   onSuccess?: (b: BusinessDTO) => void;
 }) {
   const [formData, setFormData] = useState<BusinessEditInput>({
+    id: business.id,
     name: business.name,
     email: business.email,
     businessType: business.businessType as BusinessType,
@@ -36,7 +37,7 @@ export default function BusinessInfoForm({
     setLoading(true);
 
     try {
-      const res = await fetch('/api/business/info', {
+      const res = await fetch(`/api/business/${business.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -231,7 +232,8 @@ export default function BusinessInfoForm({
             onChange={(e) => setFormData({ ...formData, logo: e.target.value })}
           />
         </div>
-
+        {/* ERRO */}
+        {errorMsg && <p className="col-span-3 text-error text-sm text-center mt-2">{errorMsg}</p>}
         {/* BOTÓNS */}
         <div className="col-span-3 grid grid-cols-2 gap-8">
           <button
@@ -247,9 +249,6 @@ export default function BusinessInfoForm({
             Gardar cambios
           </button>
         </div>
-
-        {/* ERRO */}
-        {errorMsg && <p className="col-span-3 text-error text-sm text-center mt-2">{errorMsg}</p>}
       </form>
     </section>
   );

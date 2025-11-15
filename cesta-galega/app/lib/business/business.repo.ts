@@ -1,5 +1,6 @@
 import { Prisma } from '@/app/generated/prisma';
 import prisma from '@/app/lib/prisma';
+import { BusinessEditInput } from '@/app/lib/business/business.schema';
 
 export const businessPublicSelect = Prisma.validator<Prisma.BusinessSelect>()({
   id: true,
@@ -62,5 +63,15 @@ export async function createBusiness(data: {
       password: data.password,
     },
     select: businessPublicSelect,
+  });
+}
+
+export async function updateBusiness(id: number, data: BusinessEditInput) {
+  const { ...businessData } = data;
+  return prisma.business.update({
+    where: { id },
+    data: {
+      ...businessData,
+    },
   });
 }

@@ -5,15 +5,25 @@ import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
 import { useAlert } from '@/app/context/AlertContext';
 import BusinessInfoForm from '@/app/components/BusinessInfoForm';
+import { useRouter } from 'next/navigation';
 
 export default function ManageBusinessInfo({ business }: { business: BusinessDTO }) {
   const { showAlert } = useAlert();
   const MySwal = withReactContent(Swal);
+  const router = useRouter();
 
   async function handleClick() {
     await MySwal.fire({
       title: 'Editar información',
-      html: <BusinessInfoForm business={business} onSuccess={() => console.log('success')} />,
+      html: (
+        <BusinessInfoForm
+          business={business}
+          onSuccess={(b) => {
+            router.refresh();
+            showAlert('Actualizouse a información correctamente', 'success');
+          }}
+        />
+      ),
       showConfirmButton: false,
       width: 800,
     });
@@ -61,7 +71,7 @@ export default function ManageBusinessInfo({ business }: { business: BusinessDTO
             <p className="text-lg mb-3">{business.businessType}</p>
 
             <p className="text-sm font-semibold text-base-content/70">Data de creación</p>
-            <p className="text-lg mb-3">{business.createdAt.toLocaleDateString()}</p>
+            <p className="text-lg mb-3">{business.createdAt.toString()}</p>
 
             <p className="text-sm font-semibold text-base-content/70">IBAN</p>
             <p className="text-lg">

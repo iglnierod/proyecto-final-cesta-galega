@@ -9,7 +9,7 @@ export const BusinessRegisterSchema = z.object({
   email: z.email('Formato do mail non válido').trim().toLowerCase(),
   businessType: BusinessTypeEnum.default('S.L'),
   phoneNumber: z.string().regex(/^\d{3} \d{3} \d{3}/, 'O teléfono debe ter formato XXX XXX XXX'),
-  address: z.string().min(10, 'O enderezo debe ter 10 caracteres'),
+  address: z.string().min(5, 'O enderezo debe ter 5 caracteres'),
   city: z.string('Debe introducir a cidade'),
   province: ProvincesEnum.default('CORUÑA, A'),
   postalCode: z
@@ -29,14 +29,25 @@ export const BusinessLoginSchema = z.object({
 export type BusinessLoginInput = z.infer<typeof BusinessLoginSchema>;
 
 export const BusinessEditSchema = BusinessRegisterSchema.extend({
+  id: z.number().positive(),
+
   iban: z
     .string()
-    .regex(/^[A-Z]{2}\d{2}[A-Z0-9]{11,30}$/, 'O formato de IBAN debe ser AA00 0000 0000 0000')
+    .regex(/^[A-Z]{2}\d{2}[A-Z0-9]{11,30}$/, 'O formato de IBAN debe ser AA00XXXXXXXXXXXX')
+    .or(z.literal(''))
     .nullable()
     .optional(),
-  instagram: z.string().nullable().optional(),
-  facebook: z.string().nullable().optional(),
-  logo: z.url('O formato da URL do logo non é válido').nullable().optional(),
+
+  instagram: z.string().or(z.literal('')).nullable().optional(),
+
+  facebook: z.string().or(z.literal('')).nullable().optional(),
+
+  logo: z
+    .string()
+    .url('O formato da URL do logo non é válido')
+    .or(z.literal(''))
+    .nullable()
+    .optional(),
 }).omit({
   password: true,
 });
@@ -58,7 +69,7 @@ export const BusinessDTO = z.object({
   instagram: z.string().nullable().optional(),
   facebook: z.string().nullable().optional(),
   logo: z.string().nullable().optional(),
-  createdAt: z.date(),
+  createdAt: z.string(),
 });
 
 export type BusinessDTO = z.infer<typeof BusinessDTO>;

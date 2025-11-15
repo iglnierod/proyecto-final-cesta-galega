@@ -12,6 +12,10 @@ export function toBusinessDTO(b: BusinessPublic) {
     city: b.city,
     province: b.province,
     postalCode: b.postalCode,
+    iban: b.iban,
+    instagram: b.instagram,
+    facebook: b.facebook,
+    logo: b.logo,
     createdAt: b.createdAt.toISOString(),
   });
 }
