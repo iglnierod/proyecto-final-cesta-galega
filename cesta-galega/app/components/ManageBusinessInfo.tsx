@@ -25,8 +25,41 @@ export default function ManageBusinessInfo({ business }: { business: BusinessDTO
         />
       ),
       showConfirmButton: false,
-      width: 800,
+      width: 900,
     });
+  }
+
+  async function handleDeleteLogoClick() {
+    try {
+      const res = await fetch(`/api/business/${business.id}?logoFlag=true`, {
+        method: 'DELETE',
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        showAlert('Erro ao eliminar o logo', 'error');
+        return;
+      }
+
+      // Mensaje tipo toast
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+      });
+
+      Toast.fire({
+        icon: 'success',
+        title: 'Logo eliminado correctamente',
+      });
+
+      // Refrescar datos
+      router.refresh();
+    } catch (err: any) {
+      showAlert('Erro inesperado', 'error');
+    }
   }
 
   return (
@@ -36,36 +69,45 @@ export default function ManageBusinessInfo({ business }: { business: BusinessDTO
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold">Información da empresa</h1>
-
-          {/* Botón de editar (abrirá modal SweetAlert máis adiante) */}
           <button onClick={handleClick} className="btn btn-primary btn-sm rounded">
             Editar información
           </button>
         </div>
 
-        {/* Datos principales */}
+        {/* Datos principais */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Logo */}
           <div className="col-span-1 flex flex-col items-start gap-3">
             <p className="text-sm font-semibold text-base-content/70">Logo</p>
+
             {business.logo ? (
-              <Image
-                src={business.logo}
-                alt="Logo da empresa"
-                width={120}
-                height={120}
-                className="rounded-lg border border-base-300"
-              />
+              <>
+                <Image
+                  src={business.logo}
+                  alt="Logo da empresa"
+                  width={150}
+                  height={150}
+                  className="rounded-lg border border-base-300"
+                />
+
+                {/* Botón eliminar logo */}
+                <button
+                  onClick={() => handleDeleteLogoClick()}
+                  className="btn btn-warning btn-sm mt-1 rounded"
+                >
+                  Eliminar logo actual
+                </button>
+              </>
             ) : (
               <div className="avatar avatar-placeholder">
-                <div className="bg-primary text-primary-content w-18 rounded-full">
+                <div className="bg-primary text-primary-content w-32 rounded-full">
                   <span className="text-md uppercase">cl</span>
                 </div>
               </div>
             )}
           </div>
 
-          {/* Tipo empresa + data creación */}
+          {/* Tipo e outros */}
           <div className="col-span-1">
             <p className="text-sm font-semibold text-base-content/70">Tipo de empresa</p>
             <p className="text-lg mb-3">{business.businessType}</p>
@@ -75,7 +117,11 @@ export default function ManageBusinessInfo({ business }: { business: BusinessDTO
 
             <p className="text-sm font-semibold text-base-content/70">IBAN</p>
             <p className="text-lg">
-              {business.iban ?? <span className="text-sm text-red-700">Falta por completar</span>}
+              {business.iban && business.iban.trim() !== '' ? (
+                business.iban
+              ) : (
+                <span className="badge badge-outline badge-error">Falta por completar</span>
+              )}
             </p>
           </div>
         </div>
@@ -101,13 +147,25 @@ export default function ManageBusinessInfo({ business }: { business: BusinessDTO
           {/* Instagram */}
           <div>
             <p className="text-sm font-semibold text-base-content/70">Instagram</p>
-            <p className="text-lg">{business.instagram ?? '—'}</p>
+            <p className="text-lg">
+              {business.instagram && business.instagram.trim() !== '' ? (
+                business.instagram
+              ) : (
+                <span className="badge badge-outline badge-warning">Falta por completar</span>
+              )}
+            </p>
           </div>
 
           {/* Facebook */}
           <div>
             <p className="text-sm font-semibold text-base-content/70">Facebook</p>
-            <p className="text-lg">{business.facebook ?? '—'}</p>
+            <p className="text-lg">
+              {business.facebook && business.facebook.trim() !== '' ? (
+                business.facebook
+              ) : (
+                <span className="badge badge-outline badge-warning">Falta por completar</span>
+              )}
+            </p>
           </div>
         </div>
 
@@ -117,25 +175,21 @@ export default function ManageBusinessInfo({ business }: { business: BusinessDTO
         <h2 className="text-xl font-semibold mb-4">Enderezo</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Dirección */}
           <div>
             <p className="text-sm font-semibold text-base-content/70">Enderezo</p>
             <p className="text-lg">{business.address}</p>
           </div>
 
-          {/* Cidade */}
           <div>
             <p className="text-sm font-semibold text-base-content/70">Cidade</p>
             <p className="text-lg">{business.city}</p>
           </div>
 
-          {/* Provincia */}
           <div>
             <p className="text-sm font-semibold text-base-content/70">Provincia</p>
             <p className="text-lg">{business.province}</p>
           </div>
 
-          {/* Código Postal */}
           <div>
             <p className="text-sm font-semibold text-base-content/70">Código postal</p>
             <p className="text-lg">{business.postalCode}</p>

@@ -76,3 +76,13 @@ export async function updateBusiness(id: number, data: BusinessEditInput) {
     select: businessPublicSelect,
   });
 }
+
+export async function deleteLogo(id: number) {
+  return prisma.business.update({
+    where: { id },
+    data: {
+      logo: null,
+    },
+    select: businessPublicSelect,
+  });
+}

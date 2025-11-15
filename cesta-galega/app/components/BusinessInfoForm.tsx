@@ -99,7 +99,7 @@ export default function BusinessInfoForm({
         </div>
 
         {/* TIPO EMPRESA */}
-        <div className="text-left">
+        <div className="text-left col-span-3 md:col-span-1">
           <label className="label-text">Tipo de empresa</label>
           <select
             className="select w-full rounded"
@@ -119,7 +119,7 @@ export default function BusinessInfoForm({
         </div>
 
         {/* TELÉFONO */}
-        <div className="text-left">
+        <div className="text-left col-span-3 md:col-span-1">
           <label className="label-text">
             Teléfono <span className="text-red-500">*</span>
           </label>
@@ -132,11 +132,11 @@ export default function BusinessInfoForm({
         </div>
 
         {/* IBAN */}
-        <div className="text-left">
+        <div className="text-left col-span-3 md:col-span-1">
           <label className="label-text">IBAN</label>
           <input
             className="input rounded"
-            placeholder="ES00 0000 0000 0000 0000"
+            placeholder="ESXXXXXXXXXXXXXXXXXX"
             value={formData.iban ?? ''}
             onChange={(e) => setFormData({ ...formData, iban: e.target.value })}
           />
@@ -157,7 +157,7 @@ export default function BusinessInfoForm({
         </div>
 
         {/* CIDADE */}
-        <div className="text-left">
+        <div className="text-left col-span-3 md:col-span-1">
           <label className="label-text">
             Cidade <span className="text-red-500">*</span>
           </label>
@@ -171,7 +171,7 @@ export default function BusinessInfoForm({
         </div>
 
         {/* PROVINCIA (SELECT) */}
-        <div className="text-left">
+        <div className="text-left col-span-3 md:col-span-1">
           <label className="label-text">
             Provincia <span className="text-red-500">*</span>
           </label>
@@ -195,7 +195,7 @@ export default function BusinessInfoForm({
         </div>
 
         {/* CÓDIGO POSTAL */}
-        <div className="text-left">
+        <div className="text-left col-span-3 md:col-span-1">
           <label className="label-text">
             Código postal <span className="text-red-500">*</span>
           </label>

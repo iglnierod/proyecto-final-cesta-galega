@@ -1,6 +1,6 @@
 import { BusinessEditSchema } from '@/app/lib/business/business.schema';
 import { NextResponse } from 'next/server';
-import { updateBusiness } from '@/app/lib/business/business.repo';
+import { deleteLogo, updateBusiness } from '@/app/lib/business/business.repo';
 import { toBusinessDTO } from '@/app/lib/business/business.mapper';
 
 export async function PUT(
@@ -31,4 +31,24 @@ export async function PUT(
     console.error(err);
     return NextResponse.json({ error: 'Erro ao procesar a petición' }, { status: 500 });
   }
+}
+
+export async function DELETE(request: Request, { params }: { params: { businessId: string } }) {
+  const id = Number(params.businessId);
+
+  if (Number.isNaN(id)) {
+    return NextResponse.json({ error: 'ID de empresa non válido' }, { status: 400 });
+  }
+
+  // Leer query params correctamente
+  const { searchParams } = new URL(request.url);
+  const logoFlag = searchParams.get('logoFlag') === 'true';
+
+  // Si el flag viene activado → eliminar el logo
+  if (logoFlag) {
+    const business = await deleteLogo(id);
+    return NextResponse.json({ business });
+  }
+
+  return NextResponse.json({ error: 'Acción non especificada' }, { status: 400 });
 }
