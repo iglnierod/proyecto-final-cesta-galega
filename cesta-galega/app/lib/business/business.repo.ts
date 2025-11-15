@@ -73,5 +73,6 @@ export async function updateBusiness(id: number, data: BusinessEditInput) {
     data: {
       ...businessData,
     },
+    select: businessPublicSelect,
   });
 }

@@ -4,13 +4,14 @@ import { BusinessDTO, BusinessEditInput, BusinessType } from '@/app/lib/business
 import { FormEvent, useState } from 'react';
 import Swal from 'sweetalert2';
 import { ProvincesEnum, ProvinceType } from '@/app/lib/types/shared';
+import { uploadToCloudinary } from '@/app/lib/cloudinary';
 
 export default function BusinessInfoForm({
   business,
-  onSuccess,
+  onSuccessAction,
 }: {
   business: BusinessDTO;
-  onSuccess?: (b: BusinessDTO) => void;
+  onSuccessAction?: (b: BusinessDTO) => void;
 }) {
   const [formData, setFormData] = useState<BusinessEditInput>({
     id: business.id,
@@ -27,6 +28,7 @@ export default function BusinessInfoForm({
     facebook: business.facebook ?? '',
     logo: business.logo ?? '',
   });
+  const [logoFile, setLogoFile] = useState<File | null>(null);
 
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -37,16 +39,22 @@ export default function BusinessInfoForm({
     setLoading(true);
 
     try {
+      let logoUrl = formData.logo;
+
+      if (logoFile) {
+        logoUrl = await uploadToCloudinary(logoFile);
+      }
+
       const res = await fetch(`/api/business/${business.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, logo: logoUrl }),
       });
 
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data?.error ?? 'Erro ao actualizar a empresa');
 
-      onSuccess?.(data.business);
+      onSuccessAction?.(data.business);
       Swal.close();
     } catch (err: any) {
       setErrorMsg(err.message);
@@ -222,16 +230,31 @@ export default function BusinessInfoForm({
           />
         </div>
 
-        {/* LOGO */}
+        {/* LOGO FILE UPLOAD */}
         <div className="text-left col-span-3">
-          <label className="label-text">Logo (URL)</label>
+          <label className="label-text">Logo</label>
           <input
-            className="input rounded"
-            placeholder="https://..."
-            value={formData.logo ?? ''}
-            onChange={(e) => setFormData({ ...formData, logo: e.target.value })}
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              const file = e.target.files?.[0] ?? null;
+              setLogoFile(file);
+            }}
+            className="
+              block w-full
+              text-sm text-base-content
+              file:mr-4 file:py-2 file:px-4
+              file:rounded file:border-0
+              file:text-sm file:font-semibold
+              file:bg-primary file:text-primary-content
+              hover:file:bg-primary/80
+              cursor-pointer
+              border border-base-content/20 rounded-lg
+              p-2
+            "
           />
         </div>
+
         {/* ERRO */}
         {errorMsg && <p className="col-span-3 text-error text-sm text-center mt-2">{errorMsg}</p>}
         {/* BOTÓNS */}

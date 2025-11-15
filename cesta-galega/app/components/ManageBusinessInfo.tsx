@@ -18,7 +18,7 @@ export default function ManageBusinessInfo({ business }: { business: BusinessDTO
       html: (
         <BusinessInfoForm
           business={business}
-          onSuccess={(b) => {
+          onSuccessAction={(b) => {
             router.refresh();
             showAlert('Actualizouse a información correctamente', 'success');
           }}
