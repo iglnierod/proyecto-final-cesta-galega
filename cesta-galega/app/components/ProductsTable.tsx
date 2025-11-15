@@ -75,7 +75,7 @@ export default function ProductsTable({
             create={false}
             businessId={businessId}
             product={fullProduct}
-            onSuccess={() => {
+            onSuccessAction={() => {
               showAlert('Produto actualizado con éxito', 'success');
               mutate(key);
             }}

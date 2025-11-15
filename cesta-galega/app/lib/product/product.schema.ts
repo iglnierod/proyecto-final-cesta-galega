@@ -11,7 +11,7 @@ export const ProductCreateSchema = z.object({
     .max(9999, 'O prezo máximo é de 9999 €'),
   discounted: z.boolean().default(false),
   discount: z.number().min(0).max(99).default(0),
-  image: z.string().optional().default('##'),
+  image: z.string().min(1, 'Debe engadir unha imaxe ao produto'),
   categoryIds: z.number().int().array().default([]),
   enabled: z.boolean().default(true),
 });

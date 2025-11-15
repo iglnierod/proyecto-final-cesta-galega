@@ -21,7 +21,7 @@ export default function AddProductButton({ businessId }: { businessId: number | 
         <ProductForm
           create={true}
           businessId={businessId}
-          onSuccess={() => {
+          onSuccessAction={() => {
             showAlert('Produto creado con éxito', 'success');
             // 🔁 Revalidar la lista
             mutate(`/api/product?businessId=${businessId}`);

@@ -2,6 +2,7 @@
 import { FormEvent, useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { mutate } from 'swr';
+import imagePlaceholder from '@/public/assets/100x100.svg';
 
 // Schemas y tipos del dominio de producto
 import {
@@ -9,18 +10,20 @@ import {
   ProductCreateSchema,
   ProductWithBusinessDTO,
 } from '@/app/lib/product/product.schema';
+import Image from 'next/image';
+import { uploadToCloudinary } from '@/app/lib/cloudinary';
 
 // Componente de formulario para crear/editar produtos
 export default function ProductForm({
   create,
   businessId,
   product,
-  onSuccess,
+  onSuccessAction,
 }: {
   create: boolean;
   businessId: number | undefined;
   product?: ProductWithBusinessDTO; // Produto que se edita (DTO da API)
-  onSuccess?: (p: ProductWithBusinessDTO) => void;
+  onSuccessAction?: (p: ProductWithBusinessDTO) => void;
 }) {
   // Estado do formulario alineado co ProductCreateInput
   const [formData, setFormData] = useState<ProductCreateInput>({
@@ -30,10 +33,11 @@ export default function ProductForm({
     price: 0,
     discounted: false,
     discount: 0,
-    image: '##',
+    image: '',
     categoryIds: [],
     enabled: true,
   });
+  const [productFile, setProductFile] = useState<File | null>(null);
 
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -67,23 +71,32 @@ export default function ProductForm({
     setErrorMsg(null);
     setLoading(true);
 
-    // Validar datos co novo schema
-    const result = ProductCreateSchema.safeParse(formData);
-    if (!result.success) {
-      const error = result.error.issues[0];
-      setErrorMsg(error.message);
-      setLoading(false);
-      return;
-    }
-
     try {
+      // Validar datos co novo schema
+      if (productFile) {
+        formData.image = '##';
+      }
+      const result = ProductCreateSchema.safeParse(formData);
+      if (!result.success) {
+        const error = result.error.issues[0];
+        setErrorMsg(error.message);
+        setLoading(false);
+        return;
+      }
+
+      let imageUrl = formData.image;
+
+      if (productFile) {
+        imageUrl = await uploadToCloudinary(productFile);
+      }
+
       const method = create ? 'POST' : 'PUT';
       const url = create ? `/api/product` : `/api/product/${product?.id}`;
 
       const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(result.data),
+        body: JSON.stringify({ ...result.data, image: imageUrl }),
       });
 
       const data = await res.json().catch(() => ({}));
@@ -91,7 +104,7 @@ export default function ProductForm({
 
       // A API responde { product: {...} } segundo o mapper
       const saved: ProductWithBusinessDTO = data.product as ProductWithBusinessDTO;
-      onSuccess?.(saved);
+      onSuccessAction?.(saved);
 
       // Revalidar lista con SWR
       if (businessId) {
@@ -212,6 +225,47 @@ export default function ProductForm({
           </div>
         </div>
 
+        {/* IMAXE DO PRODUTO */}
+        <div className="col-span-3">
+          <label className="text-left label-text block mb-2">
+            Imaxe do produto<span className="text-red-500">*</span>
+          </label>
+
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+            {/* Vista previa */}
+            <Image
+              src={product?.image ?? imagePlaceholder}
+              width={140}
+              height={140}
+              alt="Imaxe do produto"
+              className="rounded-lg border border-base-content/20 object-cover"
+            />
+
+            <div className="flex flex-col gap-3 w-full">
+              {/* Input de ficheiro */}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setProductFile(e.target.files?.[0] ?? null)}
+                className="
+                  block w-full text-sm text-base-content
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-lg file:border-0
+                  file:text-sm file:font-semibold
+                  file:bg-primary file:text-primary-content
+                  hover:file:bg-primary/80
+                  cursor-pointer
+                  border border-base-content/20 rounded-lg
+                  p-2
+                "
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Mensaxe de erro */}
+        {errorMsg && <p className="col-span-3 text-error text-sm mt-2 text-center">{errorMsg}</p>}
+
         {/* BOTÓNS */}
         <div className="col-span-3 grid grid-cols-2 gap-8">
           <button
@@ -224,11 +278,9 @@ export default function ProductForm({
           </button>
           <button type="submit" className="btn btn-primary rounded" disabled={loading}>
             {create ? 'Crear' : 'Gardar'}
+            {loading ? <span className="loading loading-dots loading-xl"></span> : <span></span>}
           </button>
         </div>
-
-        {/* Mensaxe de erro */}
-        {errorMsg && <p className="col-span-3 text-error text-sm mt-2 text-center">{errorMsg}</p>}
       </form>
     </section>
   );
