@@ -2,6 +2,7 @@
 
 import { ProductWithBusinessDTO } from '@/app/lib/product/product.schema';
 import { useState } from 'react';
+import Image from 'next/image';
 
 export default function ProductPreview({ product }: { product: ProductWithBusinessDTO }) {
   const [qty, setQty] = useState<number>(1);
@@ -13,129 +14,147 @@ export default function ProductPreview({ product }: { product: ProductWithBusine
   const currency = (v: number) =>
     new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(v);
 
-  const disabled = !product.enabled;
-
-  function handleAddToCart() {
-    // Aquí integrarás tu lógica de carrito
-    console.log('Add to cart', { productId: product.id, qty });
-  }
-
-  function handleBuyNow() {
-    // Aquí integrarás tu flujo de compra directa
-    console.log('Buy now', { productId: product.id, qty });
-  }
-
   return (
-    <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 p-4 outline outline-red-500">
-      {/* Columna izquierda: imagen */}
-      <div className="w-full">
-        <div className="w-full aspect-square rounded-xl border border-base-content/20 flex items-center justify-center bg-base-200">
-          {/* Placeholder de imagen */}
-          <div className="text-center">
-            <div className="mx-auto mb-3 rounded-full size-16 flex items-center justify-center border border-dashed border-base-content/40">
-              <span className="icon-[tabler--photo] size-7 opacity-60"></span>
-            </div>
-            <p className="text-base-content/70 text-sm">Aquí irá a futura imaxe do produto</p>
-          </div>
-        </div>
-
-        {/* Datos de la empresa */}
-        <div className="mt-6 rounded-xl border border-base-content/20 p-4">
-          <h3 className="font-semibold text-lg mb-2">Datos da empresa</h3>
-          <div className="text-sm text-base-content/80 space-y-1">
-            <p>
-              <span className="font-medium">Nome:</span> {product.business?.name ?? '—'}
-            </p>
-            <p>
-              <span className="font-medium">Provincia:</span> {product.business?.province ?? '—'}
-            </p>
-            <p>
-              <span className="font-medium">Cidade:</span> {product.business?.city ?? '—'}
-            </p>
-          </div>
+    <div className="w-full max-w-7xl mx-auto px-4 py-8">
+      {/* Aviso de preview */}
+      <div className="mb-6 alert alert-soft alert-info">
+        <span className="icon-[tabler--eye]"></span>
+        <div>
+          <h2 className="font-semibold">Vista previa do produto</h2>
+          <p className="text-sm opacity-80">
+            Esta é a vista que verán as persoas usuarias. Os botóns e controles están
+            deshabilitados.
+          </p>
         </div>
       </div>
 
-      {/* Columna derecha: info y acciones */}
-      <div className="w-full space-y-4">
-        {/* Nombre */}
-        <h1 className="text-2xl lg:text-3xl font-bold leading-tight">{product.name}</h1>
-
-        {/* Precio / descuento */}
-        <div className="flex items-center gap-3">
-          {product.discounted ? (
-            <>
-              <span className="text-2xl font-semibold">{currency(finalPrice)}</span>
-              <span className="line-through text-base-content/60">{currency(product.price)}</span>
-              <span className="badge badge-soft badge-info">{product.discount}% OFF</span>
-            </>
-          ) : (
-            <span className="text-2xl font-semibold">{currency(product.price)}</span>
-          )}
-          {!product.enabled && <span className="badge badge-soft badge-error">Non dispoñible</span>}
-        </div>
-
-        {/* Descripción */}
-        {product.description && (
-          <p className="text-base-content/80 whitespace-pre-line">{product.description}</p>
-        )}
-
-        {/* (Futuro) Categoría */}
-        <div className="pt-2">
-          <span className="text-sm text-base-content/60">
-            (Aquí irá a categoría do produto máis adiante)
-          </span>
-        </div>
-
-        {/* Cantidad */}
-        <div className="pt-2 max-w-xs">
-          <label htmlFor="qty" className="label-text">
-            Cantidade
-          </label>
-          <div className="input rounded flex items-center">
-            <input
-              id="qty"
-              type="number"
-              min={1}
-              max={999}
-              step={1}
-              value={qty}
-              onChange={(e) => setQty(Math.max(1, e.currentTarget.valueAsNumber || 1))}
-              className="grow"
-              aria-label="Número de unidades"
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        {/* Columna esquerda: imaxe do produto */}
+        <div className="flex justify-center lg:justify-start">
+          <div className="relative w-full max-w-[700px] aspect-square rounded-2xl border border-base-content/15 bg-base-200 flex items-center justify-center shadow-sm">
+            {/* Aquí máis adiante poderás substituír polo teu <Image /> real */}
+            <Image
+              src={product.image ?? ''}
+              alt="Imaxe do producto"
+              width={700}
+              height={700}
+              className="rounded-md border"
             />
-            <span className="ms-3 text-base-content/70 text-sm shrink-0">unid.</span>
           </div>
         </div>
 
-        {/* Botones de acción */}
-        <div className="grid grid-cols-2 gap-3 pt-4 max-w-md">
-          <button
-            type="button"
-            className="btn btn-secondary rounded"
-            onClick={handleAddToCart}
-            disabled={disabled}
-            title="Engadir ao carriño"
-          >
-            Engadir ao carriño
-          </button>
-          <button
-            type="button"
-            className="btn btn-primary rounded"
-            onClick={handleBuyNow}
-            disabled={disabled}
-            title="Comprar agora"
-          >
-            Comprar agora
-          </button>
-        </div>
+        {/* Columna dereita: info do produto + empresa + compra */}
+        <div className="w-full space-y-5">
+          {/* Nome */}
+          <h1 className="text-2xl lg:text-3xl font-bold leading-tight">{product.name}</h1>
 
-        {/* Nota de indisponibilidad */}
-        {disabled && (
-          <p className="text-sm text-error/80 pt-2">
-            Este produto non está dispoñible actualmente.
-          </p>
-        )}
+          {/* Prezo / desconto / estado */}
+          <div className="flex flex-wrap items-center gap-3">
+            {product.discounted ? (
+              <>
+                <span className="text-2xl font-semibold">{currency(finalPrice)}</span>
+                <span className="line-through text-base-content/60">{currency(product.price)}</span>
+                <span className="badge badge-soft badge-info">{product.discount}% DESCONTO</span>
+              </>
+            ) : (
+              <span className="text-2xl font-semibold">{currency(product.price)}</span>
+            )}
+            {!product.enabled && (
+              <span className="badge badge-soft badge-error">Non dispoñible</span>
+            )}
+          </div>
+
+          {/* Categorías */}
+          {product.categories.length > 0 && (
+            <div className="space-y-2">
+              <p className="text-sm font-medium text-base-content/80">Categorías</p>
+              <div className="flex flex-wrap gap-2">
+                {product.categories.map((c) => (
+                  <span className="badge badge-soft badge-primary" key={c.id}>
+                    {c.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Descrición */}
+          {product.description && (
+            <div className="space-y-1">
+              <p className="text-sm font-medium text-base-content/80">Descrición</p>
+              <p className="text-base-content/80 whitespace-pre-line text-sm lg:text-base">
+                {product.description}
+              </p>
+            </div>
+          )}
+
+          {/* Info da empresa */}
+          <div className="mt-2 rounded-2xl border border-base-content/15 p-4 bg-base-100/60 shadow-sm">
+            <h3 className="font-semibold text-base mb-2">Información da empresa</h3>
+            <div className="text-sm text-base-content/80 space-y-1">
+              <p>
+                <span className="font-medium">Nome:</span> {product.business?.name ?? '—'}
+              </p>
+              <p>
+                <span className="font-medium">Provincia:</span> {product.business?.province ?? '—'}
+              </p>
+              <p>
+                <span className="font-medium">Cidade:</span> {product.business?.city ?? '—'}
+              </p>
+            </div>
+          </div>
+
+          {/* Controles de compra (deshabilitados) */}
+          <div className="pt-4 border-t border-base-content/10 space-y-4">
+            {/* Cantidade */}
+            <div className="max-w-xs space-y-1 opacity-60 pointer-events-none">
+              <label
+                htmlFor="qty"
+                className="label-text text-sm font-medium flex items-center gap-2"
+              >
+                Cantidade
+                <span className="badge badge-soft badge-ghost text-[10px]">
+                  Deshabilitado na vista previa
+                </span>
+              </label>
+              <div className="input rounded flex items-center">
+                <input
+                  id="qty"
+                  type="number"
+                  min={1}
+                  max={999}
+                  step={1}
+                  value={qty}
+                  disabled
+                  onChange={(e) => setQty(Math.max(1, e.currentTarget.valueAsNumber || 1))}
+                  className="grow bg-transparent"
+                  aria-label="Número de unidades"
+                />
+                <span className="ms-3 text-base-content/70 text-sm shrink-0">unid.</span>
+              </div>
+            </div>
+
+            {/* Botóns de acción (deshabilitados) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-md">
+              <button
+                type="button"
+                className="btn btn-secondary rounded-lg w-full"
+                disabled
+                title="Engadir ao carriño (deshabilitado na vista previa)"
+              >
+                Engadir ao carriño
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary rounded-lg w-full"
+                disabled
+                title="Comprar agora (deshabilitado na vista previa)"
+              >
+                Comprar agora
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
