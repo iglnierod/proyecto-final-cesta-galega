@@ -111,6 +111,7 @@ model OrderProduct {
   quantity  Int
   unitPrice Float
   subtotal  Float
+  status    String
   // relacion con Order
   orderId   Int
   order     Order   @relation(fields: [orderId], references: [id])

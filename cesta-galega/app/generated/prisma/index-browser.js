@@ -196,6 +196,7 @@ exports.Prisma.OrderProductScalarFieldEnum = {
   quantity: 'quantity',
   unitPrice: 'unitPrice',
   subtotal: 'subtotal',
+  status: 'status',
   orderId: 'orderId',
   productId: 'productId'
 };
