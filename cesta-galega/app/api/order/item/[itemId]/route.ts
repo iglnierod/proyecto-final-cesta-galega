@@ -23,7 +23,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ it
 
     const dto = toBusinessOrderItemDTO(updated);
 
-    return NextResponse.json({ dto }, { status: 200 });
+    return NextResponse.json(dto);
   } catch (err: any) {
     return NextResponse.json(err.message || 'Erro ao actualizar o produto do pedido');
   }

@@ -15,9 +15,7 @@ export async function GET(request: Request) {
 
     const orderItems = await getOrdersForBusiness(businessId);
 
-    return NextResponse.json({
-      orderProducts: orderItems.map((op) => toBusinessOrderItemDTO(op)),
-    });
+    return NextResponse.json(orderItems.map((op) => toBusinessOrderItemDTO(op)));
   } catch (err: any) {
     console.error(err);
     return NextResponse.json({ error: 'Erro ao obter os produtos' }, { status: 500 });
