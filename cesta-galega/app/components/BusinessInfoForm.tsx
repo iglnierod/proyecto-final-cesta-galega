@@ -5,6 +5,8 @@ import { FormEvent, useState } from 'react';
 import Swal from 'sweetalert2';
 import { ProvincesEnum, ProvinceType } from '@/app/lib/types/shared';
 import { uploadToCloudinary } from '@/app/lib/cloudinary';
+import Image from 'next/image';
+import imagePlaceholder from '@/public/assets/100x100.svg';
 
 export default function BusinessInfoForm({
   business,
@@ -29,7 +31,7 @@ export default function BusinessInfoForm({
     logo: business.logo ?? '',
   });
   const [logoFile, setLogoFile] = useState<File | null>(null);
-
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
@@ -231,28 +233,51 @@ export default function BusinessInfoForm({
         </div>
 
         {/* LOGO FILE UPLOAD */}
-        <div className="text-left col-span-3">
-          <label className="label-text">Logo</label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => {
-              const file = e.target.files?.[0] ?? null;
-              setLogoFile(file);
-            }}
-            className="
-              block w-full
-              text-sm text-base-content
-              file:mr-4 file:py-2 file:px-4
-              file:rounded file:border-0
-              file:text-sm file:font-semibold
-              file:bg-primary file:text-primary-content
-              hover:file:bg-primary/80
-              cursor-pointer
-              border border-base-content/20 rounded-lg
-              p-2
-            "
-          />
+        <div className="col-span-3">
+          <label className="text-left label-text block mb-2">
+            Logo <span className="text-red-500">*</span>
+          </label>
+
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+            {/* IMAGEN SELECCIONADA O IMAGEN ESTABLECIDA EN BD */}
+            <Image
+              src={previewUrl ? previewUrl : business?.logo ? business.logo : imagePlaceholder}
+              width={140}
+              height={140}
+              alt="Imaxe do produto"
+              className="rounded-lg border border-base-content/20 object-cover"
+            />
+
+            <div className="flex flex-col gap-3 w-full">
+              {/* Input de ficheiro */}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files?.[0] ?? null;
+                  setLogoFile(file);
+
+                  if (file) {
+                    const url = URL.createObjectURL(file);
+                    setPreviewUrl(url);
+                  } else {
+                    setPreviewUrl(null);
+                  }
+                }}
+                className="
+                  block w-full text-sm text-base-content
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-lg file:border-0
+                  file:text-sm file:font-semibold
+                  file:bg-primary file:text-primary-content
+                  hover:file:bg-primary/80
+                  cursor-pointer
+                  border border-base-content/20 rounded-lg
+                  p-2
+                "
+              />
+            </div>
+          </div>
         </div>
 
         {/* ERRO */}

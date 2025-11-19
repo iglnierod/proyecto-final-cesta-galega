@@ -40,6 +40,7 @@ export default function ProductForm({
   });
 
   const [productFile, setProductFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [categories, setCategories] = useState<CategoryDTO[]>([]);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -231,7 +232,7 @@ export default function ProductForm({
               value={formData.discount}
               onChange={(e) => {
                 const n = e.currentTarget.valueAsNumber;
-                setFormData({ ...formData, price: n });
+                setFormData({ ...formData, discount: n });
               }}
               className="grow"
             />
@@ -246,9 +247,9 @@ export default function ProductForm({
           </label>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-            {/* Vista previa */}
+            {/* IMAGEN SELECCIONADA O IMAGEN ESTABLECIDA EN BD */}
             <Image
-              src={product?.image ?? imagePlaceholder}
+              src={previewUrl ? previewUrl : product?.image ? product.image : imagePlaceholder}
               width={140}
               height={140}
               alt="Imaxe do produto"
@@ -260,7 +261,17 @@ export default function ProductForm({
               <input
                 type="file"
                 accept="image/*"
-                onChange={(e) => setProductFile(e.target.files?.[0] ?? null)}
+                onChange={(e) => {
+                  const file = e.target.files?.[0] ?? null;
+                  setProductFile(file);
+
+                  if (file) {
+                    const url = URL.createObjectURL(file);
+                    setPreviewUrl(url);
+                  } else {
+                    setPreviewUrl(null);
+                  }
+                }}
                 className="
                   block w-full text-sm text-base-content
                   file:mr-4 file:py-2 file:px-4
