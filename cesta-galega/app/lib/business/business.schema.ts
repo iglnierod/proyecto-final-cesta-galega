@@ -30,24 +30,16 @@ export type BusinessLoginInput = z.infer<typeof BusinessLoginSchema>;
 
 export const BusinessEditSchema = BusinessRegisterSchema.extend({
   id: z.number().positive(),
-
+  description: z.string().or(z.literal('')).nullable().optional(),
   iban: z
     .string()
     .regex(/^[A-Z]{2}\d{2}[A-Z0-9]{11,30}$/, 'O formato de IBAN debe ser AA00XXXXXXXXXXXX')
     .or(z.literal(''))
     .nullable()
     .optional(),
-
   instagram: z.string().or(z.literal('')).nullable().optional(),
-
   facebook: z.string().or(z.literal('')).nullable().optional(),
-
-  logo: z
-    .string()
-    .url('O formato da URL do logo non é válido')
-    .or(z.literal(''))
-    .nullable()
-    .optional(),
+  logo: z.url('O formato da URL do logo non é válido').or(z.literal('')).nullable().optional(),
 }).omit({
   password: true,
 });
@@ -59,6 +51,7 @@ export const BusinessDTO = z.object({
   id: z.number().int(),
   name: z.string(),
   email: z.string(),
+  description: z.string().nullable().optional(),
   businessType: z.string(),
   phoneNumber: z.string(),
   address: z.string(),

@@ -19,6 +19,7 @@ export default function BusinessInfoForm({
     id: business.id,
     name: business.name,
     email: business.email,
+    description: business.description,
     businessType: business.businessType as BusinessType,
     phoneNumber: business.phoneNumber,
     address: business.address,
@@ -86,7 +87,7 @@ export default function BusinessInfoForm({
 
         {/* EMAIL */}
         <div className="text-left col-span-3">
-          <label htmlFor="email" className="label-text">
+          <label className="label-text">
             Email <span className="text-red-500">*</span>
           </label>
           <input
@@ -98,6 +99,17 @@ export default function BusinessInfoForm({
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             required
           />
+        </div>
+
+        {/* DESCRICION */}
+        <div className="text-left col-span-3">
+          <label className="label-text">Descrición</label>
+          <textarea
+            className="textarea"
+            placeholder="Escriba aquí unha descrición da súa empresa"
+            value={formData.description ?? ''}
+            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+          ></textarea>
         </div>
 
         {/* TIPO EMPRESA */}

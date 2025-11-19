@@ -6,6 +6,7 @@ export function toBusinessDTO(b: BusinessPublic) {
     id: b.id,
     name: b.name,
     email: b.email,
+    description: b.description,
     businessType: b.businessType,
     phoneNumber: b.phoneNumber,
     address: b.address,

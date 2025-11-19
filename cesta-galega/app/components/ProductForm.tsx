@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import { mutate } from 'swr';
 import imagePlaceholder from '@/public/assets/100x100.svg';
 
-// Schemas y tipos del dominio de producto
+// Schemas y tipos del dominio de produto
 import {
   ProductCreateInput,
   ProductCreateSchema,
@@ -67,7 +67,7 @@ export default function ProductForm({
         discount: product.discount,
         image: product.image ?? '',
         categoryIds: product.categories.map((c) => c.id),
-        enabled: product.enabled,
+        enabled: product.enabled, // aquí ya coges el valor real en edición
       });
     } else {
       // Se é creación e cambia o businessId, actualizalo
@@ -247,7 +247,7 @@ export default function ProductForm({
           </label>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-            {/* IMAGEN SELECCIONADA O IMAGEN ESTABLECIDA EN BD */}
+            {/* IMAXE SELECCIONADA OU IMAXE EN BD */}
             <Image
               src={previewUrl ? previewUrl : product?.image ? product.image : imagePlaceholder}
               width={140}
@@ -288,14 +288,32 @@ export default function ProductForm({
           </div>
         </div>
 
-        <div className="col-span-3 flex justify-center text-left pb-10">
-          <div className="w-full overflow-x-auto overflow-y-auto max-h-[300px] rounded-lg p-4">
+        {/* PRODUTO ACTIVO */}
+        <div className="col-span-3 mt-2">
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="checkbox"
+              className="checkbox checkbox-primary"
+              checked={formData.enabled}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  enabled: e.target.checked,
+                })
+              }
+            />
+            <span className="label-text text-base">Produto activo e visible para os usuarios</span>
+          </label>
+        </div>
+
+        <div className="col-span-3 flex justify-center text-left pb-10 ">
+          <div className="w-full overflow-x-auto overflow-y-auto max-h-[300px] rounded-lg p-4 border border-gray-300 flex flex-col items-center">
             <h3 className="text-lg font-semibold mb-2">Categorías</h3>
             <p className="text-base-content/70 text-sm mb-4">
               Selecciona as categorías do produto, esto axudará aos usuarios na búsqueda.
             </p>
 
-            <table className="table w-full">
+            <table className="table max-w-[500px]">
               <thead>
                 <tr className="border-b border-base-300">
                   <th className="w-24 text-center">Seleccionado</th>
