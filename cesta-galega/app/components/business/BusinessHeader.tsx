@@ -91,6 +91,11 @@ export default function BusinessHeader({ businessName }: { businessName: string 
                 aria-labelledby="dropdown-link"
               >
                 <li>
+                  <Link className="dropdown-item" href="/business/shop">
+                    A miña tenda
+                  </Link>
+                </li>
+                <li>
                   <Link className="dropdown-item" href="/business/settings">
                     Axustes
                   </Link>

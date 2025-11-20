@@ -29,28 +29,36 @@ export default async function Home() {
           </Link>
         </div>
       </section>
-      {/*2do APARTADO*/}
+      {/*2do APARTADO - Sección para empresas*/}
       <section className="py-20 text-center">
         <div className="container mx-auto px-6 md:flex md:items-center md:justify-between md:text-left">
           <div className="md:w-1/2 mb-10 md:mb-0">
             <h2 className="text-4xl font-bold">Empieza a vender online</h2>
-            <p className="mt-4 ">
+            <p className="mt-4">
               Si eres productor, artesano o comerciante, en Cesta Galega puedes crear tu tienda en
               minutos, mostrar tus productos y llegar a miles de clientes en toda Galicia.
             </p>
-            <Link
-              href="/business/register"
-              className="inline-block mt-6 px-6 py-3 bg-blue-900 text-white font-semibold rounded-lg hover:bg-blue-950 transition"
-            >
-              Crear cuenta de vendedor
-            </Link>
+            <div className="mt-6 flex gap-4 justify-center md:justify-start">
+              <Link
+                href="/business/register"
+                className="inline-block px-6 py-3 bg-blue-900 text-white font-semibold rounded-lg hover:bg-blue-950 transition"
+              >
+                Crear cuenta de vendedor
+              </Link>
+              <Link
+                href="/business/login"
+                className="inline-block px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-700 transition"
+              >
+                Iniciar sesión como vendedor
+              </Link>
+            </div>
           </div>
           <div className="md:w-1/2 flex justify-center">
             <Image src={imgPaquete} alt="Vendedor mostrando sus productos" width={300} />
           </div>
         </div>
       </section>
-      {/*3er APARTADO*/}
+      {/*4to APARTADO - Beneficios de Cesta Galega*/}
       <section className="bg-blue-900 text-white py-20 text-center">
         <div className="container mx-auto px-6">
           <h3 className="text-4xl font-bold mb-8">¿Por qué elegir Cesta Galega?</h3>
