@@ -457,7 +457,7 @@ Estas ayudas permiten reducir costes iniciales y fomentar el crecimiento sosteni
 
 ## Entregas
 
-### Prototipo 1:
+### Prototipo 1: 07/09/2025
 
 En esta versión están implementadas las funcionalidades de autenticación de usuarios y empresas. Usando la tecnología _JWT_ o _Json Web Token_ que almacena como cookie la información de la sesión del usuario.
 
@@ -479,7 +479,7 @@ En el backend están hechos los siguientes endpoints:
 - Cerrar sesión [POST]: `/api/auth/logout`
 - Obtener información de usuario [GET]: `/api/user/[userId]`
 
-### Prototipo 2:
+### Prototipo 2: 21/11/2025
 
 En esta versión están implementadas algunas de las funcionalidades principales que podrán realizar los usuarios con el rol empresa.
 Esta versión tiene una mejor gestión de los tipos de datos, creando tanto los distintos _schemas, repos y mappers_ necesarios.
