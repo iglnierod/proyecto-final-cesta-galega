@@ -478,6 +478,19 @@ En el backend están hechos los siguientes endpoints:
 - Cerrar sesión [POST]: `/api/auth/logout`
 - Obtener información de usuario [GET]: `/api/user/[userId]`
 
+### Prototipo 2:
+
+En esta versión están implementadas algunas de las funcionalidades principales que podrán realizar los usuarios con el rol empresa.
+Esta versión tiene una mejor gestión de los tipos de datos, creando tanto los distintos _schemas, repos y mappers_ necesarios.
+
+- [Página principal](https://proyecto-final-cesta-galega.vercel.app/)
+- [Registro de usuario](https://proyecto-final-cesta-galega.vercel.app/user/register)
+- [Inicio de sesión de usuario](https://proyecto-final-cesta-galega.vercel.app/user/login)
+- [Registro de empresa](https://proyecto-final-cesta-galega.vercel.app/business/register)
+- [Inicio de sesión de empresa](https://proyecto-final-cesta-galega.vercel.app/business/login)
+- [Dashboard de empresa (con placeholders)](https://proyecto-final-cesta-galega.vercel.app/business/dashboard)
+- 
+
 ## Propuesta de mejoras
 
 > A partir de tu solución final indicarás futuras ampliaciones o mejoras. Ejemplos:
