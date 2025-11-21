@@ -40,6 +40,7 @@
         - [Ayudas y subvenciones](#ayudas-y-subvenciones)
 - [Entregas](#entregas)
     - [Prototipo 1:](#prototipo-1)
+    - [Prototipo 2:](#prototipo-2)
 - [Propuesta de mejoras](#propuesta-de-mejoras)
 - [Conclusiones](#conclusiones)
 - [Referencias, Fuentes consultadas y Recursos externos: Webgrafía](#referencias-fuentes-consultadas-y-recursos-externos-webgrafía)
@@ -187,7 +188,7 @@ Las distintas fases del proyecto a su vez se dividirán en tareas más pequeñas
 [Enlace a Trello de Cesta Galega](https://trello.com/b/eC77GoBN/proyecto-daw-cesta-galega)
 
 | **Fase**                                                   | **Descripción**                                                                                                                                    | **Duración estimada** | **Dependencias** | **Periodo aproximado** |
-| ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | ---------------- | ---------------------- |
+|------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|------------------|------------------------|
 | **1. Anteproyecto: análisis y planificación**              | Definición de los objetivos, funcionalidades, usuarios y estructura del sistema. Elaboración del anteproyecto y planificación general del trabajo. | 1 semana              | —                | 29 sep – 6 oct         |
 | **2. Diseño de la base de datos**                          | Creación del modelo entidad-relación, definición de tablas y relaciones, e implementación del esquema SQL inicial.                                 | 5 días                | Fase 1           | 7 – 11 oct             |
 | **3. Configuración del entorno y estructura del proyecto** | Creación del proyecto con Next.js, configuración del repositorio, instalación de dependencias y conexión con la base de datos.                     | 1 semana              | Fase 2           | 14 – 20 oct            |
@@ -381,7 +382,7 @@ Se ha optado por la S.L por ser la figura legal más adecuada para pequeñas emp
 La empresa está compuesta por 3 trabajadores con perfiles complementarios
 
 | Cargo / Rol                             | Funciones principales                                                                                         | Tipo de contrato | Cualificación                                         |
-| --------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ---------------- | ----------------------------------------------------- |
+|-----------------------------------------|---------------------------------------------------------------------------------------------------------------|------------------|-------------------------------------------------------|
 | **Analista / Desarrollador Full-Stack** | Diseño, desarrollo y mantenimiento del sistema, integración entre backend y frontend, despliegues en Docker.  | Jornada completa | Técnico Superior en Desarrollo de Aplicaciones Web    |
 | **Diseñador UX/UI**                     | Creación de la interfaz visual, experiencia de usuario, diseño gráfico y adaptación a distintos dispositivos. | Media jornada    | Técnico Superior en Diseño y Producción de Multimedia |
 | **Tester / Responsable de calidad**     | Pruebas funcionales, validación de requisitos y control de calidad del producto final.                        | Media jornada    | Técnico en Sistemas Microinformáticos o QA Tester     |
@@ -399,7 +400,7 @@ Este periodo tiene 79 días, equivalentes a 21.64% del año y se aplican los sig
 - **IRPF**: entre el 12% y 16% según nivel salarial
 
 | Empleado / Cargo                                    | Salario bruto (79 días) | Cotización empresa (30%) | Cotización trabajador (6,35%) | IRPF aplicado | Retención IRPF (€) | **Salario neto percibido** | **Coste total empresa** |
-| --------------------------------------------------- | ----------------------- | ------------------------ | ----------------------------- | ------------- | ------------------ | -------------------------- | ----------------------- |
+|-----------------------------------------------------|-------------------------|--------------------------|-------------------------------|---------------|--------------------|----------------------------|-------------------------|
 | **Analista / Desarrollador Full-Stack**             | 7.790,40 €              | 2.337,12 €               | 494,76 €                      | 16 %          | 1.246,46 €         | **6.049,18 €**             | **10.127,52 €**         |
 | **Diseñador UX/UI (media jornada)**                 | 3.895,20 €              | 1.168,56 €               | 247,26 €                      | 12 %          | 467,42 €           | **3.180,52 €**             | **5.063,76 €**          |
 | **Tester / Responsable de calidad (media jornada)** | 3.895,20 €              | 1.168,56 €               | 247,26 €                      | 12 %          | 467,42 €           | **3.180,52 €**             | **5.063,76 €**          |
@@ -486,10 +487,10 @@ Se añade la funcionalidad y gestión de imágenes a la app, se implementa con l
 Además, se crean los endpoints de la API necesarios para brindar la información a la UI.
 
 > Cuenta de empresa creada para pruebas:
-> 
+>
 > email: prueba@gmail.com
-> 
-> contraseña: abc123.. 
+>
+> contraseña: abc123..
 
 - [Página principal](https://proyecto-final-cesta-galega.vercel.app/)
 - [Registro de usuario](https://proyecto-final-cesta-galega.vercel.app/user/register)
