@@ -18,7 +18,7 @@ export default function ManageProductsClient({ businessId }: { businessId: numbe
 
   return (
     <section className="grid grid-cols-1 justify-items-center p-4">
-      <div className="flex flex-col gap-3 w-full max-w-[1100px]">
+      <div className="flex flex-col gap-3 w-full max-w-[1400px]">
         <h1 className="text-3xl font-bold">Xestionar produtos</h1>
 
         {/* Solo necesita businessId para poder mutar con la misma key */}

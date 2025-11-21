@@ -482,14 +482,25 @@ En el backend están hechos los siguientes endpoints:
 
 En esta versión están implementadas algunas de las funcionalidades principales que podrán realizar los usuarios con el rol empresa.
 Esta versión tiene una mejor gestión de los tipos de datos, creando tanto los distintos _schemas, repos y mappers_ necesarios.
+Se añade la funcionalidad y gestión de imágenes a la app, se implementa con la API de cloudinary de manera que las imágenes subidas vienen desde su servidor.
+Además, se crean los endpoints de la API necesarios para brindar la información a la UI.
+
+> Cuenta de empresa creada para pruebas:
+> 
+> email: prueba@gmail.com
+> 
+> contraseña: abc123.. 
 
 - [Página principal](https://proyecto-final-cesta-galega.vercel.app/)
 - [Registro de usuario](https://proyecto-final-cesta-galega.vercel.app/user/register)
 - [Inicio de sesión de usuario](https://proyecto-final-cesta-galega.vercel.app/user/login)
 - [Registro de empresa](https://proyecto-final-cesta-galega.vercel.app/business/register)
 - [Inicio de sesión de empresa](https://proyecto-final-cesta-galega.vercel.app/business/login)
-- [Dashboard de empresa (con placeholders)](https://proyecto-final-cesta-galega.vercel.app/business/dashboard)
-- 
+- [Dashboard de empresa (con placeholders)](https://proyecto-final-cesta-galega.vercel.app/business/dashboard): enlace creado pero únicamente tiene placeholders y falta añadir el contenido
+- [Axustes do perfil da empresa](https://proyecto-final-cesta-galega.vercel.app/business/settings): puede modificar los datos y añadir un logo
+- [Gestión de productos](https://proyecto-final-cesta-galega.vercel.app/business/manage/products): permite añadir, editar, ver y eliminar los productos
+- [Vista previa producto](https://proyecto-final-cesta-galega.vercel.app/business/manage/products/preview/1): permite a la empresa ver el producto como lo verá un usuario
+- [Gestión de pedidos](https://proyecto-final-cesta-galega.vercel.app/business/manage/orders): permite a la empresa cambiar el estado de los productos pedidos por los usuarios
 
 ## Propuesta de mejoras
 
