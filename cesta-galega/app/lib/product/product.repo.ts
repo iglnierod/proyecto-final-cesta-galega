@@ -70,6 +70,52 @@ export async function findProductByIdWithBusiness(id: number) {
   });
 }
 
+export async function getFilteredProducts(
+  businessId: number,
+  filters: {
+    search?: string;
+    category?: string | null;
+    sort?: string;
+  }
+) {
+  const { search, category, sort } = filters;
+
+  // WHERE dinámico
+  const where: any = {
+    businessId,
+    deleted: false,
+  };
+
+  if (search) {
+    where.name = {
+      contains: search,
+      mode: 'insensitive',
+    };
+  }
+
+  if (category) {
+    where.categories = {
+      some: { id: Number(category) },
+    };
+  }
+
+  // ORDENACIÓN
+  let orderBy: any = { createdAt: 'desc' };
+
+  if (sort === 'price_asc') orderBy = { price: 'asc' };
+  if (sort === 'price_desc') orderBy = { price: 'desc' };
+
+  // Query final
+  return prisma.product.findMany({
+    where,
+    orderBy,
+    include: {
+      categories: true,
+      business: true,
+    },
+  });
+}
+
 export async function createProduct(data: ProductCreateInput) {
   const { categoryIds, ...productData } = data;
 

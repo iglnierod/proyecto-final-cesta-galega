@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createProduct, findProductsByBusiness } from '@/app/lib/product/product.repo';
+import { createProduct, getFilteredProducts } from '@/app/lib/product/product.repo';
 import {
   toProductWithBusinessDTO,
   toProductWithCategoriesDTO,
@@ -9,13 +9,21 @@ import { ProductCreateSchema } from '@/app/lib/product/product.schema';
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
+
     const businessId = searchParams.get('businessId');
+    const search = searchParams.get('search') ?? '';
+    const category = searchParams.get('category');
+    const sort = searchParams.get('sort') ?? '';
 
     if (!businessId) {
       return NextResponse.json({ error: 'businessId é necesario' }, { status: 400 });
     }
 
-    const products = await findProductsByBusiness(Number(businessId));
+    const products = await getFilteredProducts(Number(businessId), {
+      search,
+      category,
+      sort,
+    });
 
     return NextResponse.json({
       products: products.map((p) => toProductWithCategoriesDTO(p)),
