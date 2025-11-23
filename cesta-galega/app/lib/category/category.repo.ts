@@ -31,6 +31,18 @@ export async function getCategories() {
   });
 }
 
+// Obtener las categorías que usa una empresa
+export async function getCategoriesByBusiness(businessId: number) {
+  return prisma.category.findMany({
+    where: {
+      products: {
+        some: { businessId },
+      },
+    },
+    orderBy: { name: 'asc' },
+  });
+}
+
 // Obtener unha categoría xunto cos seus produtos
 export async function findCategoryWithProducts(id: number) {
   return prisma.category.findUnique({

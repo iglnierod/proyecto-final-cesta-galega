@@ -1,5 +1,7 @@
+'use client';
 import { ProductDTO } from '@/app/lib/product/product.schema';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export default function ProductGridItem({
   product,
@@ -11,6 +13,8 @@ export default function ProductGridItem({
   const finalPrice = product.discounted
     ? Math.max(0, product.price * (1 - product.discount / 100))
     : product.price;
+
+  const router = useRouter();
   return (
     <div
       key={product.id}
@@ -45,7 +49,7 @@ export default function ProductGridItem({
         <div className="grid grid-cols-2 gap-3 pt-2">
           <button
             className="btn btn-secondary btn-sm rounded"
-            onClick={() => console.log('ver', product.id)}
+            onClick={() => router.push(`/business/manage/products/preview/${product.id}`)}
           >
             Ver
           </button>
