@@ -288,6 +288,25 @@ Este diagrama está hecho en la web _octopus.do_ y se puede ver de manera online
 
 [Enlace a octopus.do del proyecto](https://octopus.do/d08h7a8kudi)
 
+### Diseño de interfaces (Mockups)
+
+> Los mockups son temporales y están hechos de una manera sencilla y adaptable para poder solucionar cualquier problema 
+> rápidamente
+
+La herramienta utilizada para el primer diseño de las interfaces es Excalidraw. Esta herramienta permite de una manera sencilla
+rápida y de manera online, realizar esquemas o cualquier otro tipo de diagrama, dibujo, etc.
+
+**Dashboard de la empresa:**
+Esta es la solución temporal a la interfaz que tendrá la dashboard de la empresa una vez esté implementada
+
+![Mockup dashboard de la empresa](img/mockup-dashboard.png)
+
+**Tienda principal:**
+Esta es la solución a la interfaz web que verá el usuario una vez esté en la tienda de la aplicación, se ven los distintos componentes:
+navbar, barra de búsqueda y orden, filtros y renderizado de grid de productos
+
+![Mockup tienda principal](img/mockup-shop.png)
+
 ### Software e paquetes de software
 
 La configuración de software seleccionada está orientada a un entorno de desarrollo web moderno, con herramientas que
@@ -409,7 +428,7 @@ Este periodo tiene 79 días, equivalentes a 21.64% del año y se aplican los sig
 #### Software y hardware
 
 | Concepto                                | Descripción                                                                | Coste unitario | Periodo / cantidad | **Coste total (€)** |
-| --------------------------------------- | -------------------------------------------------------------------------- | -------------- | ------------------ | ------------------- |
+|-----------------------------------------|----------------------------------------------------------------------------|----------------|--------------------|---------------------|
 | **IntelliJ IDEA Ultimate**              | Licencia mensual para desarrollo backend y frontend                        | 24,08 €/mes    | 3 meses            | **72,24 €**         |
 | **Adobe Photoshop**                     | Licencia mensual para edición y diseño gráfico                             | 25 €/mes       | 3 meses            | **75,00 €**         |
 | **Ordenador desarrollador Full-Stack**  | CPU i5, 16 GB RAM, SSD 512 GB, teclado, ratón y monitor                    | —              | —                  | **1.200 €**         |

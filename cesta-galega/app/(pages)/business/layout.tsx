@@ -1,6 +1,6 @@
 import { getAuthTokenDecoded, isCookieValid, JwtPayloadBusiness } from '@/app/lib/auth';
 import { redirect } from 'next/navigation';
-import BusinessHeader from '@/app/components/business/BusinessHeader';
+import BusinessHeader from '@/app/components/BusinessHeader';
 import prisma from '@/app/lib/prisma';
 
 export default async function BusinessLayout({
