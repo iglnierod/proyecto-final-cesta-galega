@@ -45,6 +45,47 @@ El proyecto pretende fomentar el comercio local y crear una alternativa accesibl
 
 Este proyecto dispone de [una documentación más extensa](doc/doc.md) del proyecto que recomiendo revisar.
 
+### Carpetas
+Este apartado explica las diferentes carpetas y estructuras del repositorio
+
+- **.github/**: contiene el workflow de github que hace la migración de la base de datos automáticamente.
+- **.vscode/**: contiene ajustes y extensiones recomendadas para Visual Studio Code.
+- **cesta-galega/**: contiene el proyecto de _Next.js_ y todo el código de la app.
+- **doc/**: agrupa los contenidos de la documentación avanzada del repositorio.
+- **.gitattributes**: fichero de Git que impide que se guarden cambios de ficheros binarios y que dan problemas.
+- **.gitignore**: fichero de Git que impide que se suban y guarden cambios de ficheros privados o innecesarios.
+- **LICENSE**: contenido de la licencia del proyecto.
+
+### Explicación sobre carpetas del proyecto Next.js
+Aquí se explican en profundidad las carpetas y ficheros principales del proyecto:
+
+- **app/**: contiene todo el código fuente de la app
+  - **(pages)/**: agrupa las distintas páginas navegables de la aplicación.
+  - **api/**: contiene las diferentes rutas y ficheros de la API REST de la aplicación.
+  - **components/**: agrupa todos los componentes usados en la aplicación.
+  - **context/**: crea el contexto de alertas para la aplicación.
+  - **generated/**: carpeta generada por Prisma ORM, contiene el cliente utilizado para hacer las llamadas a la base de datos.
+  - **lib/**: contiene diferentes utilidades de la app. Como auth.js que maneja la autenticación de usuarios en la app o los diferentes
+  tipados de datos de objetos
+  - **globals.css**: fichero de CSS global del proyecto, se usa para configurar Tailwind y FlyonUI
+  - **layout.tsx**: los ficheros `layout.tsx` en _Next.js_ definen la estructura del endpoint de la carpeta en la que se encuentran,
+  en este caso es el layout principal que se usa para renderizar la app.
+  - **page.tsx**: los ficheros `page.tsx` en _Next.js_ renderizan el contenido de la página.
+- **prisma/**: contiene lo necesario para Prisma ORM.
+  - **migrations/**: contiene las migraciones y cambios que sufre la base de datos.
+  - **schema.prisma**: fichero que define la estructura de la base de datos SQL.
+- **public/**: contiene los recursos estáticos usados en la web.
+- **sql/**: contiene scripts sql que insertan datos de prueba en la base de datos.
+- **.env.example**: fichero de variables de entorno de ejemplo para poder definirlas fácilmente.
+- **.prettierrc**: fichero de configuración de la extensión Prettier, formatea el proyecto.
+- **docker-compose.yml**: fichero docker compose que levanta un contenedor con PostgreSQL para desarrollar la app.
+- **eslint.config.mjs**: configuración de la dependencia ESLint que muestra fallos de TypeScript.
+- **next.config.ts**: fichero de configuración de _Next.js_.
+- **package.json**: fichero que define las dependencias del proyecto.
+- **postcss.config.mjs**: fichero de configuración de la dependencia PostCSS (necesaria para Tailwind).
+- **tailwind.config.ts**: fichero de configuración de la dependencia Tailwind
+- **tsconfig.json**: fichero de configuración de TypeScript.
+
 ## Guía de contribución
 
 > _TODO_: Tratándose de un proyecto de software libre, es muy importante que expongas cómo se puede contribuir con tu proyecto. Algunos ejemplos de esto son realizar nuevas funcionalidades, corrección y/u optimización del código, realización de tests automatizados, nuevas interfaces de integración, desarrollo de plugins, etc. etc. Sé lo más conciso que puedas.
@@ -60,7 +101,7 @@ Los commits de este proyecto seguirán el formato de [Conventional Commits](http
 ```
 
 | Tipo         | Cuándo usarlo                                               | Ejemplo                                       |
-| ------------ | ----------------------------------------------------------- | --------------------------------------------- |
+|--------------|-------------------------------------------------------------|-----------------------------------------------|
 | **feat**     | Nueva funcionalidad                                         | `feat(home): añade sección de noticias`       |
 | **fix**      | Corrección de error                                         | `fix(api): corrige URL incorrecta en fetch`   |
 | **chore**    | Cambios menores o tareas que no afectan el código funcional | `chore: actualiza .gitignore`                 |
