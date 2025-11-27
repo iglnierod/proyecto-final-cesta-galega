@@ -24,7 +24,7 @@ export async function POST(request: Request) {
     }
 
     // Crear JWT e guardarlo en las cookies
-    const userToken = signUser({ userId: user.id, email: user.email });
+    const userToken = signUser({ userId: user.id, email: user.email, userName: user.name });
     await saveSessionCookie(userToken);
 
     return NextResponse.json({ message: 'Login correcto' }, { status: 200 });

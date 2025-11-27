@@ -19,6 +19,7 @@ export async function verifyPassword(password: string, hash: string) {
 export interface JwtPayloadUser {
   userId: number;
   email: string;
+  userName: string;
 }
 
 // Crea payload de empresa que se almacena en las cookies

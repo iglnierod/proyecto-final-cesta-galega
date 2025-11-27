@@ -1,117 +1,129 @@
 'use client';
-import LogOutButton from '@/app/components/LogOutButon';
-import Image from 'next/image';
-import logo from '@/public/assets/logo.png';
-import Link from 'next/link';
 
-export default function UserHeader() {
+import Link from 'next/link';
+import LogOutButton from '@/app/components/LogOutButon';
+
+export default function UserHeader({
+  loggedIn,
+  userName,
+}: {
+  loggedIn: boolean;
+  userName?: string;
+}) {
   return (
-    <nav className="navbar rounded-box shadow-base-300/20 shadow-sm">
-      <div className="w-full md:flex md:items-center md:gap-2">
-        <div className="flex items-center justify-between">
-          <div className="navbar-start items-center justify-between max-md:w-full">
-            <a
-              className="link link-neutral text-xl font-bold no-underline flex gap-1 items-center"
-              href="/business/dashboard"
-            >
-              <Image src={logo} alt="Logo Cesta Galega" width={32} />
-              CestaGalega
-            </a>
-            <div className="md:hidden">
-              <button
-                type="button"
-                className="collapse-toggle btn btn-outline btn-secondary btn-sm btn-square"
-                data-collapse="#navbar-collapse"
-                aria-controls="navbar-collapse"
-                aria-label="Toggle navigation"
-              >
-                <span className="icon-[tabler--menu-2] collapse-open:hidden size-4"></span>
-                <span className="icon-[tabler--x] collapse-open:block hidden size-4"></span>
-              </button>
-            </div>
-          </div>
+    <div className="h-16 max-md:h-[3.5rem]">
+      <nav className="navbar rounded-box shadow-base-300/20 shadow-sm">
+        {/* IZQUIERDA: nombre de la app */}
+        <div className="navbar-start">
+          <Link
+            className="link text-base-content link-neutral text-xl font-bold no-underline"
+            href="/"
+          >
+            CestaGalega
+          </Link>
         </div>
-        <div
-          id="navbar-collapse"
-          className="md:navbar-end collapse hidden grow basis-full overflow-hidden transition-[height] duration-300 max-md:w-full"
-        >
-          <ul className="menu md:menu-horizontal gap-2 p-0 text-base max-md:mt-2">
+
+        {/* CENTRO: enlaces (solo desktop / tablet) */}
+        <div className="navbar-center max-md:hidden">
+          <ul className="menu menu-horizontal gap-4 p-0 text-base">
             <li>
-              <Link href="/business/dashboard">Inicio</Link>
+              <Link href="/shop">Tenda</Link>
             </li>
             <li>
-              <a href="#">Estadísticas</a>
+              <Link href="/shop?filter=newness">Novedades</Link>
             </li>
-            <li className="dropdown relative inline-flex [--auto-close:inside] [--offset:8] [--placement:bottom-end]">
-              <button
-                id="dropdown-link"
-                type="button"
-                className="dropdown-toggle dropdown-open:bg-base-content/10 dropdown-open:text-base-content"
-                aria-haspopup="menu"
-                aria-expanded="false"
-                aria-label="Dropdown"
-              >
-                Xestión
-                <span className="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
-              </button>
-              <ul
-                className="dropdown-menu dropdown-open:opacity-100 hidden"
-                role="menu"
-                aria-orientation="vertical"
-                aria-labelledby="dropdown-link"
-              >
-                <li>
-                  <Link className="dropdown-item" href="/business/manage/products">
-                    Produtos
-                  </Link>
-                </li>
-                <li>
-                  <Link className="dropdown-item" href="/business/manage/orders">
-                    Pedidos
-                  </Link>
-                </li>
-              </ul>
-            </li>
-            <li className="dropdown relative inline-flex [--auto-close:inside] [--offset:8] [--placement:bottom-end]">
-              <button
-                id="dropdown-link"
-                type="button"
-                className="dropdown-toggle dropdown-open:bg-base-content/10 dropdown-open:text-base-content"
-                aria-haspopup="menu"
-                aria-expanded="false"
-                aria-label="Dropdown"
-              >
-                USUARIO
-                <span className="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
-              </button>
-              <ul
-                className="dropdown-menu dropdown-open:opacity-100 hidden"
-                role="menu"
-                aria-orientation="vertical"
-                aria-labelledby="dropdown-link"
-              >
-                <li>
-                  <Link className="dropdown-item" href="/business/shop">
-                    A miña tenda
-                  </Link>
-                </li>
-                <li>
-                  <Link className="dropdown-item" href="/business/settings">
-                    Axustes
-                  </Link>
-                </li>
-                {/*<li>*/}
-                {/*  <a className="dropdown-item" href="#">*/}
-                {/*    Link 5*/}
-                {/*  </a>*/}
-                {/*</li>*/}
-                <hr className="border-base-content/25 -mx-2" />
-                <LogOutButton />
-              </ul>
+            <li>
+              <a href="/shop?filter=discount">Descontos</a>
             </li>
           </ul>
         </div>
-      </div>
-    </nav>
+
+        {/* DERECHA: menú móvil + botón login */}
+        <div className="navbar-end items-center gap-4">
+          {/* Menú hamburguesa */}
+          <div className="dropdown relative inline-flex [--placement:bottom] md:hidden">
+            <button
+              id="dropdown-default"
+              type="button"
+              className="dropdown-toggle btn btn-text btn-secondary btn-square"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              aria-label="Abrir menú"
+            >
+              <span className="icon-[tabler--menu-2] dropdown-open:hidden size-5"></span>
+              <span className="icon-[tabler--x] dropdown-open:block hidden size-5"></span>
+            </button>
+            <ul
+              className="dropdown-menu dropdown-open:opacity-100 hidden min-w-60"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="dropdown-default"
+            >
+              <li>
+                <Link className="dropdown-item" href="/shop">
+                  Tenda
+                </Link>
+              </li>
+              <li>
+                <a className="dropdown-item" href="/shop?filter=newness">
+                  Novedades
+                </a>
+              </li>
+              <li>
+                <a className="dropdown-item" href="/shop?filter=discount">
+                  Descontos
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {loggedIn ? (
+            <ul className="menu md:menu-horizontal gap-2 p-0 text-base max-md:mt-2">
+              <li>
+                <Link href="/shop/cart" title="Carro">
+                  <span className="icon-[tabler--shopping-cart] dropdown-open:hidden size-5"></span>
+                </Link>
+              </li>
+              <li className="dropdown relative inline-flex [--auto-close:inside] [--offset:8] [--placement:bottom-end]">
+                <button
+                  id="dropdown-link"
+                  type="button"
+                  className="dropdown-toggle dropdown-open:bg-base-content/10 dropdown-open:text-base-content"
+                  aria-haspopup="menu"
+                  aria-expanded="false"
+                  aria-label="Dropdown"
+                >
+                  {userName}
+                  <span className="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
+                </button>
+                <ul
+                  className="dropdown-menu dropdown-open:opacity-100 hidden"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="dropdown-link"
+                >
+                  <li>
+                    <Link className="dropdown-item" href="/business/shop">
+                      Historial
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" href="/business/settings">
+                      Axustes
+                    </Link>
+                  </li>
+                  <hr className="border-base-content/25 -mx-2" />
+                  <LogOutButton />
+                </ul>
+              </li>
+            </ul>
+          ) : (
+            <Link className="btn btn-primary rounded" href="/user/login">
+              Login
+            </Link>
+          )}
+        </div>
+      </nav>
+    </div>
   );
 }
