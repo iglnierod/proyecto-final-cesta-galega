@@ -1,4 +1,5 @@
 import { getAuthTokenDecoded, isCookieValid, JwtPayloadUser } from '@/app/lib/auth';
+import MainShopClient from '@/app/components/MainShopClient';
 
 export default async function ShopPage() {
   let loggedIn = false;
@@ -8,5 +9,9 @@ export default async function ShopPage() {
     decoded = (await getAuthTokenDecoded()) as JwtPayloadUser;
     loggedIn = true;
   }
-  return <>Shop page works!</>;
+  return (
+    <div className="mt-16 md:mt-4 lg:mt-0 p-2">
+      <MainShopClient loggedIn={loggedIn} />
+    </div>
+  );
 }

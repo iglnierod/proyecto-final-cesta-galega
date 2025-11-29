@@ -2,7 +2,7 @@
 
 // Selects tipados y reutilizables
 import { Prisma } from '@/app/generated/prisma';
-import { prisma } from '@/app/lib/prisma';
+import { prisma } from '@/app/lib/prisma'; // o de donde lo tengas
 import { ProductCreateInput, ProductUpdateInput } from '@/app/lib/product/product.schema';
 
 export const productLiteSelect = Prisma.validator<Prisma.ProductSelect>()({
@@ -70,21 +70,23 @@ export async function findProductByIdWithBusiness(id: number) {
   });
 }
 
-export async function getFilteredProducts(
-  businessId: number,
-  filters: {
-    search?: string;
-    category?: string | null;
-    sort?: string;
-  }
-) {
-  const { search, category, sort } = filters;
+export async function getFilteredProducts(filters: {
+  businessId?: number;
+  search?: string;
+  category?: string | null;
+  sort?: string;
+}) {
+  const { businessId, search, category, sort } = filters;
 
   // WHERE dinámico
   const where: any = {
-    businessId,
     deleted: false,
   };
+
+  // Si hay businessId, filtramos por empresa concreta.
+  if (typeof businessId === 'number') {
+    where.businessId = businessId;
+  }
 
   if (search) {
     where.name = {

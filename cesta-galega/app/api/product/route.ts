@@ -10,16 +10,24 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
 
-    const businessId = searchParams.get('businessId');
+    const businessIdParam = searchParams.get('businessId');
     const search = searchParams.get('search') ?? '';
     const category = searchParams.get('category');
     const sort = searchParams.get('sort') ?? '';
 
-    if (!businessId) {
-      return NextResponse.json({ error: 'businessId é necesario' }, { status: 400 });
+    let businessId: number | undefined = undefined;
+
+    if (businessIdParam) {
+      const parsed = Number(businessIdParam);
+      if (Number.isNaN(parsed)) {
+        return NextResponse.json({ error: 'businessId non é válido' }, { status: 400 });
+      }
+      businessId = parsed;
     }
 
-    const products = await getFilteredProducts(Number(businessId), {
+    // Ahora getFilteredProducts funciona tanto con como sen businessId
+    const products = await getFilteredProducts({
+      businessId,
       search,
       category,
       sort,
