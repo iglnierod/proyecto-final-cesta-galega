@@ -10,7 +10,7 @@ import ShopFiltersColumn from '@/app/components/ShopFilterColumn';
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
-export default function MainShopClient() {
+export default function MainShopClient({ loggedIn = false }: { loggedIn?: boolean }) {
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState<string>('');
   const [category, setCategory] = useState<string>('');
