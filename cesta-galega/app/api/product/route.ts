@@ -1,3 +1,4 @@
+// app/api/product/route.ts
 import { NextResponse } from 'next/server';
 import { createProduct, getFilteredProducts } from '@/app/lib/product/product.repo';
 import {
@@ -15,8 +16,10 @@ export async function GET(request: Request) {
     const category = searchParams.get('category');
     const sort = searchParams.get('sort') ?? '';
 
-    let businessId: number | undefined = undefined;
+    const minPriceParam = searchParams.get('minPrice');
+    const maxPriceParam = searchParams.get('maxPrice');
 
+    let businessId: number | undefined = undefined;
     if (businessIdParam) {
       const parsed = Number(businessIdParam);
       if (Number.isNaN(parsed)) {
@@ -25,12 +28,24 @@ export async function GET(request: Request) {
       businessId = parsed;
     }
 
-    // Ahora getFilteredProducts funciona tanto con como sen businessId
+    const minPrice = minPriceParam ? Number(minPriceParam) : undefined;
+    const maxPrice = maxPriceParam ? Number(maxPriceParam) : undefined;
+
+    if (minPriceParam && Number.isNaN(minPrice)) {
+      return NextResponse.json({ error: 'minPrice non é válido' }, { status: 400 });
+    }
+
+    if (maxPriceParam && Number.isNaN(maxPrice)) {
+      return NextResponse.json({ error: 'maxPrice non é válido' }, { status: 400 });
+    }
+
     const products = await getFilteredProducts({
       businessId,
       search,
       category,
       sort,
+      minPrice,
+      maxPrice,
     });
 
     return NextResponse.json({

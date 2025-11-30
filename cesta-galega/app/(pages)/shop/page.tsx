@@ -11,6 +11,7 @@ export default async function ShopPage() {
   }
   return (
     <div className="mt-16 md:mt-4 lg:mt-0 p-2">
+      <h1 className="text-center text-base-300 text-3xl mt-2">Tenda</h1>
       <MainShopClient loggedIn={loggedIn} />
     </div>
   );

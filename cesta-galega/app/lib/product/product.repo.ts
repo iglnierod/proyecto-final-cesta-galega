@@ -75,15 +75,16 @@ export async function getFilteredProducts(filters: {
   search?: string;
   category?: string | null;
   sort?: string;
+  minPrice?: number;
+  maxPrice?: number;
 }) {
-  const { businessId, search, category, sort } = filters;
+  const { businessId, search, category, sort, minPrice, maxPrice } = filters;
 
   // WHERE dinámico
   const where: any = {
     deleted: false,
   };
 
-  // Si hay businessId, filtramos por empresa concreta.
   if (typeof businessId === 'number') {
     where.businessId = businessId;
   }
@@ -99,6 +100,12 @@ export async function getFilteredProducts(filters: {
     where.categories = {
       some: { id: Number(category) },
     };
+  }
+
+  if (minPrice !== undefined || maxPrice !== undefined) {
+    where.price = {};
+    if (minPrice !== undefined) where.price.gte = minPrice;
+    if (maxPrice !== undefined) where.price.lte = maxPrice;
   }
 
   // ORDENACIÓN
