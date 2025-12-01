@@ -6,15 +6,18 @@ import { useRouter } from 'next/navigation';
 export default function ProductGridItem({
   product,
   addButtonDisabled = false,
+  isBusinessView = false,
 }: {
   product: ProductDTO;
   addButtonDisabled?: boolean;
+  isBusinessView?: boolean;
 }) {
   const finalPrice = product.discounted
     ? Math.max(0, product.price * (1 - product.discount / 100))
     : product.price;
 
   const router = useRouter();
+
   return (
     <div
       key={product.id}
@@ -47,20 +50,34 @@ export default function ProductGridItem({
 
         {/* Acciones */}
         <div className="grid grid-cols-2 gap-3 pt-2">
-          <button
-            className="btn btn-secondary btn-sm rounded"
-            onClick={() => router.push(`/business/manage/products/preview/${product.id}`)}
-          >
-            Ver
-          </button>
+          {/* Botón para la empresa */}
+          {isBusinessView ? (
+            <button
+              className="btn btn-secondary btn-sm rounded"
+              onClick={() => router.push(`/business/manage/products/preview/${product.id}`)}
+            >
+              Ver
+            </button>
+          ) : (
+            // Botón para el usuario
+            <button
+              className="btn btn-secondary btn-sm rounded"
+              onClick={() => router.push(`/shop/product/${product.id}`)}
+            >
+              Ver
+            </button>
+          )}
 
-          <button
-            className="btn btn-primary btn-sm rounded"
-            disabled={addButtonDisabled}
-            onClick={() => console.log('add to cart')}
-          >
-            Engadir
-          </button>
+          {/* Botón de añadir al carrito solo para el usuario */}
+          {!isBusinessView && (
+            <button
+              className="btn btn-primary btn-sm rounded"
+              disabled={addButtonDisabled}
+              onClick={() => console.log('add to cart')} // TODO: Lógica de añadir al carrito (por implementar)
+            >
+              Engadir
+            </button>
+          )}
         </div>
       </div>
     </div>

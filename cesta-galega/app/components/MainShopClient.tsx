@@ -77,7 +77,9 @@ export default function MainShopClient({ loggedIn = false }: { loggedIn?: boolea
             </div>
           )}
 
-          {!productsLoading && !productsError && <ProductsGrid products={products} />}
+          {!productsLoading && !productsError && (
+            <ProductsGrid products={products} addButtonDisabled={!loggedIn} />
+          )}
         </section>
       </div>
     </div>

@@ -3,7 +3,7 @@
 // Selects tipados y reutilizables
 import { Prisma } from '@/app/generated/prisma';
 import { prisma } from '@/app/lib/prisma'; // o de donde lo tengas
-import { ProductCreateInput, ProductUpdateInput } from '@/app/lib/product/product.schema';
+import { ProductCreateInput, ProductUpdateInput } from '@/app/lib/product/product.schema'; // Asegúrate de tener el DTO adecuado
 
 export const productLiteSelect = Prisma.validator<Prisma.ProductSelect>()({
   id: true,
