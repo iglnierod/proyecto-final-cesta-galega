@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import useSWR from 'swr';
+import { useSearchParams } from 'next/navigation';
 import ShopSearchBar from '@/app/components/ShopSearchBar';
 import ProductsGrid from '@/app/components/ProductsGrid';
 import { ProductDTO } from '@/app/lib/product/product.schema';
@@ -11,6 +12,9 @@ import ShopFiltersColumn from '@/app/components/ShopFilterColumn';
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 export default function MainShopClient({ loggedIn = false }: { loggedIn?: boolean }) {
+  const searchParams = useSearchParams();
+  const filter = searchParams.get('filter') ?? ''; // '', 'news' o 'discounts'
+
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState<string>('');
   const [category, setCategory] = useState<string>('');
@@ -24,6 +28,7 @@ export default function MainShopClient({ loggedIn = false }: { loggedIn?: boolea
   if (category) productParams.set('category', category);
   if (minPrice) productParams.set('minPrice', minPrice);
   if (maxPrice) productParams.set('maxPrice', maxPrice);
+  if (filter) productParams.set('filter', filter); // 💡 NUEVO
 
   const productKey = `/api/product${productParams.toString() ? `?${productParams.toString()}` : ''}`;
 

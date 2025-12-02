@@ -1,4 +1,5 @@
 // app/api/product/route.ts
+// app/api/product/route.ts
 import { NextResponse } from 'next/server';
 import { createProduct, getFilteredProducts } from '@/app/lib/product/product.repo';
 import {
@@ -18,6 +19,10 @@ export async function GET(request: Request) {
 
     const minPriceParam = searchParams.get('minPrice');
     const maxPriceParam = searchParams.get('maxPrice');
+
+    const filterParam = searchParams.get('filter'); // 'news', 'discounts' o null
+    const filter =
+      filterParam === 'newness' || filterParam === 'discount' ? filterParam : undefined;
 
     let businessId: number | undefined = undefined;
     if (businessIdParam) {
@@ -46,6 +51,7 @@ export async function GET(request: Request) {
       sort,
       minPrice,
       maxPrice,
+      filter,
     });
 
     return NextResponse.json({

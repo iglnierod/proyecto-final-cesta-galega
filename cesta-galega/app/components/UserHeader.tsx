@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import LogOutButton from '@/app/components/LogOutButon';
 
+export const dynamic = 'force-dynamic'; // Evitar cacheo del navegador
+
 export default function UserHeader({
   loggedIn,
   userName,

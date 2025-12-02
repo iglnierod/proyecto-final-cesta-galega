@@ -77,10 +77,10 @@ export async function getFilteredProducts(filters: {
   sort?: string;
   minPrice?: number;
   maxPrice?: number;
+  filter?: 'newness' | 'discount';
 }) {
-  const { businessId, search, category, sort, minPrice, maxPrice } = filters;
+  const { businessId, search, category, sort, minPrice, maxPrice, filter } = filters;
 
-  // WHERE dinámico
   const where: any = {
     deleted: false,
   };
@@ -108,16 +108,29 @@ export async function getFilteredProducts(filters: {
     if (maxPrice !== undefined) where.price.lte = maxPrice;
   }
 
+  // Filtro especial de descontos
+  if (filter === 'discount') {
+    where.discounted = true;
+  }
+
   // ORDENACIÓN
   let orderBy: any = { createdAt: 'desc' };
+  let take: number | undefined = undefined;
 
-  if (sort === 'price_asc') orderBy = { price: 'asc' };
-  if (sort === 'price_desc') orderBy = { price: 'desc' };
+  if (filter === 'newness') {
+    // Últimos 15 produtos engadidos
+    orderBy = { createdAt: 'desc' };
+    take = 15;
+  } else {
+    // Solo aplicamos "sort" normal si NO estamos en "news"
+    if (sort === 'price_asc') orderBy = { price: 'asc' };
+    if (sort === 'price_desc') orderBy = { price: 'desc' };
+  }
 
-  // Query final
   return prisma.product.findMany({
     where,
     orderBy,
+    take,
     include: {
       categories: true,
       business: true,

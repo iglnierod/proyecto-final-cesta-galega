@@ -44,13 +44,13 @@ export default function ProductPage({ product }: { product: ProductWithBusinessD
               <>
                 <span className="text-2xl font-semibold">{currency(finalPrice)}</span>
                 <span className="line-through text-base-content/60">{currency(product.price)}</span>
-                <span className="badge badge-soft badge-info">{product.discount}% DESCUENTO</span>
+                <span className="badge badge-soft badge-info">{product.discount}% DESCONTO</span>
               </>
             ) : (
               <span className="text-2xl font-semibold">{currency(product.price)}</span>
             )}
             {!product.enabled && (
-              <span className="badge badge-soft badge-error">No disponible</span>
+              <span className="badge badge-soft badge-error">Non dispoñible</span>
             )}
           </div>
 
@@ -71,7 +71,7 @@ export default function ProductPage({ product }: { product: ProductWithBusinessD
           {/* Descripción del producto */}
           {product.description && (
             <div className="space-y-1">
-              <p className="text-sm font-medium text-base-content/80">Descripción</p>
+              <p className="text-sm font-medium text-base-content/80">Descrición</p>
               <p className="text-base-content/80 whitespace-pre-line text-sm lg:text-base">
                 {product.description}
               </p>
@@ -86,7 +86,7 @@ export default function ProductPage({ product }: { product: ProductWithBusinessD
                 htmlFor="qty"
                 className="label-text text-sm font-medium flex items-center gap-2"
               >
-                Cantidad
+                Cantidade
               </label>
               <div className="input rounded flex items-center">
                 <input
@@ -109,16 +109,16 @@ export default function ProductPage({ product }: { product: ProductWithBusinessD
               <button
                 type="button"
                 className="btn btn-secondary rounded-lg w-full"
-                onClick={() => console.log('add to cart')} // Aquí agregaríamos la lógica del carrito
+                onClick={() => console.log('add to cart')}
               >
-                Añadir al carrito
+                Engadir ao carro
               </button>
               <button
                 type="button"
                 className="btn btn-primary rounded-lg w-full"
-                onClick={() => console.log('buy now')} // Aquí se manejaría la compra
+                onClick={() => console.log('buy now')}
               >
-                Comprar ahora
+                Comprar agora
               </button>
             </div>
           </div>
