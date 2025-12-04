@@ -10,7 +10,7 @@ export default async function UserLoginPage() {
   const loggedIn = await isCookieValid();
 
   if (loggedIn) {
-    redirect('/');
+    redirect('/shop');
   }
 
   // Página de login de usuario

@@ -47,7 +47,7 @@ export default function UserLoginForm() {
 
       // Mostrar alerta de confirmación y redirigir
       showAlert('Inicio de sesión exitoso', 'success');
-      router.push('/');
+      router.push('/shop');
     } catch (err: any) {
       setErrorMsg(err.message || 'Error inesperado');
       console.error(err);

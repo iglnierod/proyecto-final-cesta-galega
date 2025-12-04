@@ -2,6 +2,7 @@
 import { ProductDTO } from '@/app/lib/product/product.schema';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useAlert } from '@/app/context/AlertContext';
 
 export default function ProductGridItem({
   product,
@@ -17,6 +18,26 @@ export default function ProductGridItem({
     : product.price;
 
   const router = useRouter();
+  const { showAlert } = useAlert();
+
+  const handleAddToCart = async () => {
+    try {
+      const res = await fetch('/api/cart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId: product.id, quantity: 1 }),
+      });
+
+      if (!res.ok) {
+        showAlert('Erro ao engadir o produto ao carro', 'error');
+      }
+
+      const data = await res.json();
+      showAlert('Engadiuse o produto ao carro', 'success');
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div
@@ -73,7 +94,7 @@ export default function ProductGridItem({
             <button
               className="btn btn-primary btn-sm rounded"
               disabled={addButtonDisabled}
-              onClick={() => console.log('add to cart')} // TODO: Lógica de añadir al carrito (por implementar)
+              onClick={handleAddToCart}
             >
               Engadir
             </button>
