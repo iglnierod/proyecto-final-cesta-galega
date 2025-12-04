@@ -1,11 +1,11 @@
 import { getAuthTokenDecoded, isCookieValid, JwtPayloadUser } from '@/app/lib/auth';
 import MainShopClient from '@/app/components/MainShopClient';
 
-type ShopPageProps = {
-  searchParams?: { [key: string]: string | string[] | undefined };
-};
-
-export default async function ShopPage({ searchParams }: ShopPageProps) {
+export default async function ShopPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
   let loggedIn = false;
   let decoded: JwtPayloadUser | undefined;
 
@@ -15,12 +15,13 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
     loggedIn = true;
   }
 
-  const rawFilter = searchParams?.filter;
+  const params = await searchParams;
+  const rawFilter = params?.filter;
   const filter = Array.isArray(rawFilter) ? rawFilter[0] : rawFilter;
 
   let title = 'Tenda';
-  if (filter === 'newness') title = 'Tenda: Novedades';
-  if (filter === 'discount') title = 'Tenda: Descontos';
+  if (filter === 'news') title = 'Tenda: Novedades';
+  if (filter === 'discounts') title = 'Tenda: Descontos';
 
   return (
     <div className="mt-16 md:mt-4 lg:mt-0 p-2">
