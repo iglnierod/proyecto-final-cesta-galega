@@ -1,7 +1,7 @@
-// app/lib/order/order.mapper.ts
 import { z } from 'zod';
 import {
   BusinessOrderItemDTO,
+  CheckoutOrderDTO,
   OrderDTO,
   OrderProductDTO,
   OrderProductStatus,
@@ -55,5 +55,32 @@ export function toBusinessOrderItemDTO(
     status: item.status as OrderProductStatus,
     customerName: item.order.user.name,
     createdAt: item.order.createdAt.toISOString(),
+  };
+}
+
+export function toCheckoutOrderDTO(order: OrderWithRelations): z.infer<typeof CheckoutOrderDTO> {
+  return {
+    id: order.id,
+    status: order.status as z.infer<typeof CheckoutOrderDTO>['status'],
+    total: order.total,
+    // Se na BD pode ser null, normalizamos a cadea baleira
+    shippingAddress: order.shippingAddress ?? '',
+    paymentMethod: order.paymentMethod as z.infer<typeof CheckoutOrderDTO>['paymentMethod'],
+    createdAt: order.createdAt.toISOString(),
+    updatedAt: order.updatedAt.toISOString(),
+    userId: order.userId,
+    items: order.OrderProduct.map((op) => ({
+      id: op.id,
+      productId: op.productId,
+      quantity: op.quantity,
+      unitPrice: op.unitPrice,
+      subtotal: op.subtotal,
+      status: op.status as OrderProductStatus,
+      product: {
+        id: op.product.id,
+        name: op.product.name,
+        image: op.product.image,
+      },
+    })),
   };
 }

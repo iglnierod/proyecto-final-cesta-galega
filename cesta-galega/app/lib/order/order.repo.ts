@@ -345,3 +345,22 @@ export async function removeCartItem(userId: number, orderProductId: number) {
   await recalcOrderTotal(orderId);
   return findActiveCartByUser(userId);
 }
+
+export async function getOrderForUserCheckout(userId: number, orderId: number) {
+  return prisma.order.findFirst({
+    where: {
+      id: orderId,
+      userId,
+    },
+    include: {
+      OrderProduct: {
+        include: {
+          product: true,
+        },
+        orderBy: {
+          id: 'asc', // orde estable das liñas do pedido
+        },
+      },
+    },
+  });
+}

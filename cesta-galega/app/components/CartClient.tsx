@@ -69,7 +69,7 @@ export default function CartClient({ loggedIn }: CartClientProps) {
   };
 
   const handleCheckout = () => {
-    console.log('ir a realizar a compra');
+    router.push(`/shop/checkout/${data?.cart?.id}`);
   };
 
   if (isLoading) {
