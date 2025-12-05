@@ -12,7 +12,9 @@ export default async function ShopPage({
   const cookieValid = await isCookieValid();
   if (cookieValid) {
     decoded = (await getAuthTokenDecoded()) as JwtPayloadUser;
-    loggedIn = true;
+    if (decoded) {
+      loggedIn = true;
+    }
   }
 
   const params = await searchParams;

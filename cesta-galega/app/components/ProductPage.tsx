@@ -4,9 +4,19 @@ import { ProductWithBusinessDTO } from '@/app/lib/product/product.schema';
 import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useAlert } from '@/app/context/AlertContext';
+import Swal from 'sweetalert2';
 
-export default function ProductPage({ product }: { product: ProductWithBusinessDTO }) {
+export default function ProductPage({
+  product,
+  isUserLoggedIn,
+}: {
+  product: ProductWithBusinessDTO;
+  isUserLoggedIn: boolean;
+}) {
   const [qty, setQty] = useState<number>(1);
+  const [isAdding, setIsAdding] = useState(false);
+  const { showAlert } = useAlert();
   const router = useRouter();
 
   const finalPrice = product.discounted
@@ -15,6 +25,64 @@ export default function ProductPage({ product }: { product: ProductWithBusinessD
 
   const currency = (v: number) =>
     new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(v);
+
+  const checkUserLoggedIn = async (): Promise<boolean> => {
+    if (!isUserLoggedIn) {
+      Swal.fire({
+        title: 'Inicia sesión',
+        text: 'Debes ter sesión iniciada para acceder ao carro.',
+        icon: 'warning',
+        showCancelButton: true,
+        showDenyButton: true,
+        confirmButtonText: 'Ir a login',
+        denyButtonText: 'Ir a rexistro',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push('/login');
+        } else if (result.isDenied) {
+          router.push('/register');
+        }
+      });
+      return false;
+    }
+    return true;
+  };
+
+  const handleAddToCart = async () => {
+    if (!product.enabled) return;
+
+    const isLoggedIn = await checkUserLoggedIn();
+    if (!isLoggedIn) return;
+
+    try {
+      setIsAdding(true);
+
+      const res = await fetch('/api/cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          productId: product.id,
+          quantity: qty,
+        }),
+      });
+
+      if (!res.ok) {
+        showAlert('Erro ao engadir o produto ao carro', 'error');
+        return;
+      }
+
+      // Opcional: refrescar datos globales, contador de cesta, etc.
+      // router.refresh();
+      showAlert('Engadiuse o produto ao carro', 'success');
+    } catch (err) {
+      console.error('Erro inesperado ao engadir ao carro', err);
+    } finally {
+      setIsAdding(false);
+    }
+  };
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 py-8">
@@ -109,9 +177,10 @@ export default function ProductPage({ product }: { product: ProductWithBusinessD
               <button
                 type="button"
                 className="btn btn-secondary rounded-lg w-full"
-                onClick={() => console.log('add to cart')}
+                onClick={handleAddToCart}
+                disabled={isAdding || !product.enabled}
               >
-                Engadir ao carro
+                {isAdding ? 'Engadindo...' : 'Engadir ao carro'}
               </button>
               <button
                 type="button"
