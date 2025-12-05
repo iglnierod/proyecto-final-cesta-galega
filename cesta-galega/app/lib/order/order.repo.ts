@@ -151,6 +151,9 @@ export async function findActiveCartByUser(userId: number) {
         include: {
           product: true,
         },
+        orderBy: {
+          id: 'asc',
+        },
       },
     },
   });
@@ -162,7 +165,6 @@ export async function createEmptyCartForUser(userId: number) {
     data: {
       status: 'Carrito',
       total: 0,
-      // De momento deixamos a dirección e método por defecto/simple
       shippingAddress: '',
       paymentMethod: 'Tarjeta',
       userId,
@@ -171,6 +173,9 @@ export async function createEmptyCartForUser(userId: number) {
       OrderProduct: {
         include: {
           product: true,
+        },
+        orderBy: {
+          id: 'asc',
         },
       },
       user: true,
@@ -250,4 +255,93 @@ export async function addItemToCart(userId: number, productId: number, quantity:
 export async function getCartForUser(userId: number) {
   const cart = await findActiveCartByUser(userId);
   return cart ?? null;
+}
+
+export async function updateCartItemQuantity(
+  userId: number,
+  orderProductId: number,
+  quantity: number
+) {
+  if (quantity < 1) {
+    throw new Error('A cantidade debe ser polo menos 1');
+  }
+
+  // Buscamos a liña de pedido co seu pedido asociado
+  const existing = await prisma.orderProduct.findUnique({
+    where: { id: orderProductId },
+    include: {
+      order: true,
+    },
+  });
+
+  if (!existing) {
+    throw new Error('Non se atopou a liña do carriño');
+  }
+
+  if (existing.order.userId !== userId) {
+    throw new Error('Non tes permiso para modificar este carriño');
+  }
+
+  if (existing.order.status !== 'Carrito') {
+    throw new Error('Só se poden modificar pedidos en estado "Carrito"');
+  }
+
+  // Actualizamos cantidade e subtotal (mantemos o unitPrice xa gardado)
+  await prisma.orderProduct.update({
+    where: { id: orderProductId },
+    data: {
+      quantity,
+      subtotal: existing.unitPrice * quantity,
+    },
+  });
+
+  // Recalcular total do carriño
+  await recalcOrderTotal(existing.orderId);
+
+  // Devolver carriño actualizado
+  return findActiveCartByUser(userId);
+}
+
+export async function removeCartItem(userId: number, orderProductId: number) {
+  // Buscamos a liña + pedido
+  const existing = await prisma.orderProduct.findUnique({
+    where: { id: orderProductId },
+    include: {
+      order: true,
+    },
+  });
+
+  if (!existing) {
+    throw new Error('Non se atopou a liña do carriño');
+  }
+
+  if (existing.order.userId !== userId) {
+    throw new Error('Non tes permiso para modificar este carriño');
+  }
+
+  if (existing.order.status !== 'Carrito') {
+    throw new Error('Só se poden modificar pedidos en estado "Carrito"');
+  }
+
+  const orderId = existing.orderId;
+
+  // Eliminamos a liña
+  await prisma.orderProduct.delete({
+    where: { id: orderProductId },
+  });
+
+  // Miramos se o carriño quedou baleiro
+  const remainingItems = await prisma.orderProduct.count({
+    where: { orderId },
+  });
+
+  if (remainingItems === 0) {
+    // Opcional: eliminar o order completo se non ten liñas
+    await prisma.order.delete({ where: { id: orderId } });
+    return null; // o client pode interpretar "carriño baleiro"
+  }
+
+  // Se aínda ten items, recalculamos total e devolvemos o carriño
+  await recalcOrderTotal(orderId);
+  return findActiveCartByUser(userId);
 }

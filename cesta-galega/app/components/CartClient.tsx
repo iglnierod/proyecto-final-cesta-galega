@@ -1,8 +1,9 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import Image from 'next/image';
+import { useAlert } from '@/app/context/AlertContext';
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
@@ -30,6 +31,7 @@ type Cart = {
 
 export default function CartClient({ loggedIn }: CartClientProps) {
   const router = useRouter();
+  const { showAlert } = useAlert();
 
   const { data, error, isLoading } = useSWR<{ cart: Cart | null }>('/api/cart', fetcher);
 
@@ -41,13 +43,29 @@ export default function CartClient({ loggedIn }: CartClientProps) {
   const shippingCost = 3.99;
   const grandTotal = productsTotal + shippingCost;
 
-  const handleUpdateQuantity = (itemId: number, newQty: number) => {
+  const handleUpdateQuantity = async (itemId: number, newQty: number) => {
     if (newQty < 1) return;
-    console.log('update quantity', { itemId, newQty });
+    const res = await fetch('/api/cart', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ orderProductId: itemId, quantity: newQty }),
+    });
+    if (res.ok) {
+      showAlert('Actualizando cantidade...', 'info');
+      mutate('/api/cart');
+    }
   };
 
-  const handleRemoveItem = (itemId: number) => {
-    console.log('remove item', { itemId });
+  const handleRemoveItem = async (itemId: number) => {
+    const res = await fetch('/api/cart', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ orderProductId: itemId }),
+    });
+    if (res.ok) {
+      showAlert('Eliminando do carro...', 'info');
+      mutate('/api/cart');
+    }
   };
 
   const handleCheckout = () => {

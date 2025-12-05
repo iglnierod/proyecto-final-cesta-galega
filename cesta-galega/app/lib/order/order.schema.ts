@@ -78,3 +78,16 @@ export const BusinessOrderItemDTO = z.object({
 });
 
 export type BusinessOrderItem = z.infer<typeof BusinessOrderItemDTO>;
+
+export const CartUpdateItemSchema = z.object({
+  orderProductId: z.number().int(),
+  quantity: z.number().int().min(1),
+});
+
+export type CartUpdateItemInput = z.infer<typeof CartUpdateItemSchema>;
+
+export const CartRemoveItemSchema = z.object({
+  orderProductId: z.number().int(),
+});
+
+export type CartRemoveItemInput = z.infer<typeof CartRemoveItemSchema>;
