@@ -7,10 +7,14 @@ import { isCookieValid } from '@/app/lib/auth';
 
 export const dynamic = 'force-dynamic'; // Evitar cacheo del navegador
 
-export default async function ProductPageWrapper({ params }: { params: { productId: string } }) {
+export default async function ProductPageWrapper({
+  params,
+}: {
+  params: Promise<{ productId: string }>;
+}) {
   let loggedIn = false;
   if (await isCookieValid()) loggedIn = true;
-  const { productId } = params;
+  const { productId } = await params;
 
   // Buscar el producto por ID
   const product = await findProductByIdWithBusiness(Number(productId));
