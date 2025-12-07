@@ -8,6 +8,8 @@ import {
   OrderCheckoutFormInput,
   OrderCheckoutFormSchema,
 } from '@/app/lib/order/order.schema';
+import { ProvincesEnum, ProvinceType } from '@/app/lib/types/shared';
+import Swal from 'sweetalert2';
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
@@ -24,14 +26,14 @@ export default function CheckoutClient({ orderId }: { orderId: number }) {
   const items = order?.items ?? [];
   const productsTotal = order?.total ?? items.reduce((acc, it) => acc + it.subtotal, 0);
 
-  const shippingCost = 3.99;
+  const shippingCost = 0;
   const grandTotal = productsTotal + shippingCost;
 
+  // 🔹 Estado do formulario: só gardamos enderezo + método de pago
   const [formData, setFormData] = useState<OrderCheckoutFormInput>({
-    fullName: '',
     address: '',
     city: '',
-    province: '',
+    province: 'CORUÑA, A',
     postalCode: '',
     paymentMethod: 'Tarjeta',
   });
@@ -51,7 +53,7 @@ export default function CheckoutClient({ orderId }: { orderId: number }) {
         return;
       }
 
-      // ✅ Validar co schema de Zod, igual que en ProductForm
+      // Validar co schema de Zod
       const result = OrderCheckoutFormSchema.safeParse(formData);
       if (!result.success) {
         const error = result.error.issues[0];
@@ -62,11 +64,22 @@ export default function CheckoutClient({ orderId }: { orderId: number }) {
 
       const safeData = result.data;
 
-      // Construír shippingAddress para o backend
-      const shippingAddress = `${safeData.fullName}
-${safeData.address}
+      // 🔹 Construír shippingAddress coa info do formulario
+      const shippingAddress = `${safeData.address}
 ${safeData.postalCode} ${safeData.city}
 ${safeData.province}`;
+
+      // 🔸 Modal de carga de SweetAlert
+      Swal.fire({
+        title: 'Procesando pago',
+        text: 'Por favor, agarda un intre mentres procesamos o teu pedido.',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
 
       const res = await fetch(`/api/order/${orderId}/checkout`, {
         method: 'POST',
@@ -83,11 +96,31 @@ ${safeData.province}`;
         throw new Error(data?.error ?? 'Produciuse un erro ao procesar o pedido.');
       }
 
-      // Compra simulada → rediriximos á tenda (ou páxina de obrigado se a creas)
+      // 🔸 Pechamos o loading e mostramos éxito
+      Swal.close();
+      await Swal.fire({
+        icon: 'success',
+        title: 'Pago realizado',
+        text: 'O pago do teu pedido realizouse correctamente.',
+        confirmButtonText: 'Aceptar',
+      });
+
       router.push('/shop');
     } catch (err: any) {
       console.error(err?.message ?? err);
-      setErrorMsg(err?.message ?? 'Produciuse un erro inesperado ao procesar o pedido.');
+      const message = err?.message ?? 'Produciuse un erro inesperado ao procesar o pedido.';
+      setErrorMsg(message);
+
+      // Pechar loading se estaba aberto
+      Swal.close();
+
+      // Mostrar modal de erro
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro no pago',
+        text: message,
+        confirmButtonText: 'Aceptar',
+      });
     } finally {
       setLoading(false);
     }
@@ -135,21 +168,7 @@ ${safeData.province}`;
             </div>
           )}
 
-          {/* Nome */}
-          <div className="space-y-1">
-            <label htmlFor="fullName" className="label-text text-sm font-medium">
-              Nome completo
-            </label>
-            <input
-              id="fullName"
-              className="input w-full"
-              placeholder="Nome e apelidos"
-              value={formData.fullName}
-              onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-            />
-          </div>
-
-          {/* Enderezo */}
+          {/* ENDEREZO */}
           <div className="space-y-1">
             <label htmlFor="address" className="label-text text-sm font-medium">
               Enderezo
@@ -165,6 +184,7 @@ ${safeData.province}`;
 
           {/* Cidade / Provincia */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Cidade */}
             <div className="space-y-1">
               <label htmlFor="city" className="label-text text-sm font-medium">
                 Cidade
@@ -177,17 +197,35 @@ ${safeData.province}`;
                 onChange={(e) => setFormData({ ...formData, city: e.target.value })}
               />
             </div>
+
+            {/* Provincia */}
             <div className="space-y-1">
-              <label htmlFor="province" className="label-text text-sm font-medium">
-                Provincia
-              </label>
-              <input
-                id="province"
-                className="input w-full"
-                placeholder="Provincia"
-                value={formData.province}
-                onChange={(e) => setFormData({ ...formData, province: e.target.value })}
-              />
+              <label className="label-text text-sm font-medium">Provincia</label>
+
+              <div className="select-floating max-w-sm w-full">
+                <select
+                  className="select max-w-sm w-full"
+                  aria-label="Seleccionar provincia"
+                  value={formData.province}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      province: e.target.value as ProvinceType,
+                    })
+                  }
+                  required
+                >
+                  <option disabled value="">
+                    Selecciona a túa provincia
+                  </option>
+                  {ProvincesEnum.options.map((p) => (
+                    <option key={p} value={p}>
+                      {p}
+                    </option>
+                  ))}
+                </select>
+                <label className="select-floating-label">Provincia*</label>
+              </div>
             </div>
           </div>
 

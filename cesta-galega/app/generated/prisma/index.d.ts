@@ -8694,6 +8694,7 @@ export namespace Prisma {
     unitPrice: number | null
     subtotal: number | null
     status: string | null
+    payed: boolean | null
     orderId: number | null
     productId: number | null
   }
@@ -8704,6 +8705,7 @@ export namespace Prisma {
     unitPrice: number | null
     subtotal: number | null
     status: string | null
+    payed: boolean | null
     orderId: number | null
     productId: number | null
   }
@@ -8714,6 +8716,7 @@ export namespace Prisma {
     unitPrice: number
     subtotal: number
     status: number
+    payed: number
     orderId: number
     productId: number
     _all: number
@@ -8744,6 +8747,7 @@ export namespace Prisma {
     unitPrice?: true
     subtotal?: true
     status?: true
+    payed?: true
     orderId?: true
     productId?: true
   }
@@ -8754,6 +8758,7 @@ export namespace Prisma {
     unitPrice?: true
     subtotal?: true
     status?: true
+    payed?: true
     orderId?: true
     productId?: true
   }
@@ -8764,6 +8769,7 @@ export namespace Prisma {
     unitPrice?: true
     subtotal?: true
     status?: true
+    payed?: true
     orderId?: true
     productId?: true
     _all?: true
@@ -8861,6 +8867,7 @@ export namespace Prisma {
     unitPrice: number
     subtotal: number
     status: string
+    payed: boolean | null
     orderId: number
     productId: number
     _count: OrderProductCountAggregateOutputType | null
@@ -8890,6 +8897,7 @@ export namespace Prisma {
     unitPrice?: boolean
     subtotal?: boolean
     status?: boolean
+    payed?: boolean
     orderId?: boolean
     productId?: boolean
     order?: boolean | OrderDefaultArgs<ExtArgs>
@@ -8902,6 +8910,7 @@ export namespace Prisma {
     unitPrice?: boolean
     subtotal?: boolean
     status?: boolean
+    payed?: boolean
     orderId?: boolean
     productId?: boolean
     order?: boolean | OrderDefaultArgs<ExtArgs>
@@ -8914,6 +8923,7 @@ export namespace Prisma {
     unitPrice?: boolean
     subtotal?: boolean
     status?: boolean
+    payed?: boolean
     orderId?: boolean
     productId?: boolean
     order?: boolean | OrderDefaultArgs<ExtArgs>
@@ -8926,11 +8936,12 @@ export namespace Prisma {
     unitPrice?: boolean
     subtotal?: boolean
     status?: boolean
+    payed?: boolean
     orderId?: boolean
     productId?: boolean
   }
 
-  export type OrderProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "quantity" | "unitPrice" | "subtotal" | "status" | "orderId" | "productId", ExtArgs["result"]["orderProduct"]>
+  export type OrderProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "quantity" | "unitPrice" | "subtotal" | "status" | "payed" | "orderId" | "productId", ExtArgs["result"]["orderProduct"]>
   export type OrderProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     order?: boolean | OrderDefaultArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
@@ -8956,6 +8967,7 @@ export namespace Prisma {
       unitPrice: number
       subtotal: number
       status: string
+      payed: boolean | null
       orderId: number
       productId: number
     }, ExtArgs["result"]["orderProduct"]>
@@ -9388,6 +9400,7 @@ export namespace Prisma {
     readonly unitPrice: FieldRef<"OrderProduct", 'Float'>
     readonly subtotal: FieldRef<"OrderProduct", 'Float'>
     readonly status: FieldRef<"OrderProduct", 'String'>
+    readonly payed: FieldRef<"OrderProduct", 'Boolean'>
     readonly orderId: FieldRef<"OrderProduct", 'Int'>
     readonly productId: FieldRef<"OrderProduct", 'Int'>
   }
@@ -9913,6 +9926,7 @@ export namespace Prisma {
     unitPrice: 'unitPrice',
     subtotal: 'subtotal',
     status: 'status',
+    payed: 'payed',
     orderId: 'orderId',
     productId: 'productId'
   };
@@ -10499,6 +10513,7 @@ export namespace Prisma {
     unitPrice?: FloatFilter<"OrderProduct"> | number
     subtotal?: FloatFilter<"OrderProduct"> | number
     status?: StringFilter<"OrderProduct"> | string
+    payed?: BoolNullableFilter<"OrderProduct"> | boolean | null
     orderId?: IntFilter<"OrderProduct"> | number
     productId?: IntFilter<"OrderProduct"> | number
     order?: XOR<OrderScalarRelationFilter, OrderWhereInput>
@@ -10511,6 +10526,7 @@ export namespace Prisma {
     unitPrice?: SortOrder
     subtotal?: SortOrder
     status?: SortOrder
+    payed?: SortOrderInput | SortOrder
     orderId?: SortOrder
     productId?: SortOrder
     order?: OrderOrderByWithRelationInput
@@ -10526,6 +10542,7 @@ export namespace Prisma {
     unitPrice?: FloatFilter<"OrderProduct"> | number
     subtotal?: FloatFilter<"OrderProduct"> | number
     status?: StringFilter<"OrderProduct"> | string
+    payed?: BoolNullableFilter<"OrderProduct"> | boolean | null
     orderId?: IntFilter<"OrderProduct"> | number
     productId?: IntFilter<"OrderProduct"> | number
     order?: XOR<OrderScalarRelationFilter, OrderWhereInput>
@@ -10538,6 +10555,7 @@ export namespace Prisma {
     unitPrice?: SortOrder
     subtotal?: SortOrder
     status?: SortOrder
+    payed?: SortOrderInput | SortOrder
     orderId?: SortOrder
     productId?: SortOrder
     _count?: OrderProductCountOrderByAggregateInput
@@ -10556,6 +10574,7 @@ export namespace Prisma {
     unitPrice?: FloatWithAggregatesFilter<"OrderProduct"> | number
     subtotal?: FloatWithAggregatesFilter<"OrderProduct"> | number
     status?: StringWithAggregatesFilter<"OrderProduct"> | string
+    payed?: BoolNullableWithAggregatesFilter<"OrderProduct"> | boolean | null
     orderId?: IntWithAggregatesFilter<"OrderProduct"> | number
     productId?: IntWithAggregatesFilter<"OrderProduct"> | number
   }
@@ -11072,6 +11091,7 @@ export namespace Prisma {
     unitPrice: number
     subtotal: number
     status: string
+    payed?: boolean | null
     order: OrderCreateNestedOneWithoutOrderProductInput
     product: ProductCreateNestedOneWithoutOrderProductInput
   }
@@ -11082,6 +11102,7 @@ export namespace Prisma {
     unitPrice: number
     subtotal: number
     status: string
+    payed?: boolean | null
     orderId: number
     productId: number
   }
@@ -11091,6 +11112,7 @@ export namespace Prisma {
     unitPrice?: FloatFieldUpdateOperationsInput | number
     subtotal?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    payed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     order?: OrderUpdateOneRequiredWithoutOrderProductNestedInput
     product?: ProductUpdateOneRequiredWithoutOrderProductNestedInput
   }
@@ -11101,6 +11123,7 @@ export namespace Prisma {
     unitPrice?: FloatFieldUpdateOperationsInput | number
     subtotal?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    payed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     orderId?: IntFieldUpdateOperationsInput | number
     productId?: IntFieldUpdateOperationsInput | number
   }
@@ -11111,6 +11134,7 @@ export namespace Prisma {
     unitPrice: number
     subtotal: number
     status: string
+    payed?: boolean | null
     orderId: number
     productId: number
   }
@@ -11120,6 +11144,7 @@ export namespace Prisma {
     unitPrice?: FloatFieldUpdateOperationsInput | number
     subtotal?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    payed?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type OrderProductUncheckedUpdateManyInput = {
@@ -11128,6 +11153,7 @@ export namespace Prisma {
     unitPrice?: FloatFieldUpdateOperationsInput | number
     subtotal?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    payed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     orderId?: IntFieldUpdateOperationsInput | number
     productId?: IntFieldUpdateOperationsInput | number
   }
@@ -11637,6 +11663,11 @@ export namespace Prisma {
     userId?: SortOrder
   }
 
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type OrderScalarRelationFilter = {
     is?: OrderWhereInput
     isNot?: OrderWhereInput
@@ -11648,6 +11679,7 @@ export namespace Prisma {
     unitPrice?: SortOrder
     subtotal?: SortOrder
     status?: SortOrder
+    payed?: SortOrder
     orderId?: SortOrder
     productId?: SortOrder
   }
@@ -11667,6 +11699,7 @@ export namespace Prisma {
     unitPrice?: SortOrder
     subtotal?: SortOrder
     status?: SortOrder
+    payed?: SortOrder
     orderId?: SortOrder
     productId?: SortOrder
   }
@@ -11677,6 +11710,7 @@ export namespace Prisma {
     unitPrice?: SortOrder
     subtotal?: SortOrder
     status?: SortOrder
+    payed?: SortOrder
     orderId?: SortOrder
     productId?: SortOrder
   }
@@ -11688,6 +11722,14 @@ export namespace Prisma {
     subtotal?: SortOrder
     orderId?: SortOrder
     productId?: SortOrder
+  }
+
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type UserProductCreateNestedManyWithoutUserInput = {
@@ -12118,6 +12160,10 @@ export namespace Prisma {
     connect?: ProductWhereUniqueInput
   }
 
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
+  }
+
   export type OrderUpdateOneRequiredWithoutOrderProductNestedInput = {
     create?: XOR<OrderCreateWithoutOrderProductInput, OrderUncheckedCreateWithoutOrderProductInput>
     connectOrCreate?: OrderCreateOrConnectWithoutOrderProductInput
@@ -12297,6 +12343,19 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type UserProductCreateWithoutUserInput = {
@@ -12580,6 +12639,7 @@ export namespace Prisma {
     unitPrice: number
     subtotal: number
     status: string
+    payed?: boolean | null
     order: OrderCreateNestedOneWithoutOrderProductInput
   }
 
@@ -12589,6 +12649,7 @@ export namespace Prisma {
     unitPrice: number
     subtotal: number
     status: string
+    payed?: boolean | null
     orderId: number
   }
 
@@ -12716,6 +12777,7 @@ export namespace Prisma {
     unitPrice?: FloatFilter<"OrderProduct"> | number
     subtotal?: FloatFilter<"OrderProduct"> | number
     status?: StringFilter<"OrderProduct"> | string
+    payed?: BoolNullableFilter<"OrderProduct"> | boolean | null
     orderId?: IntFilter<"OrderProduct"> | number
     productId?: IntFilter<"OrderProduct"> | number
   }
@@ -12945,6 +13007,7 @@ export namespace Prisma {
     unitPrice: number
     subtotal: number
     status: string
+    payed?: boolean | null
     product: ProductCreateNestedOneWithoutOrderProductInput
   }
 
@@ -12954,6 +13017,7 @@ export namespace Prisma {
     unitPrice: number
     subtotal: number
     status: string
+    payed?: boolean | null
     productId: number
   }
 
@@ -13301,6 +13365,7 @@ export namespace Prisma {
     unitPrice: number
     subtotal: number
     status: string
+    payed?: boolean | null
     orderId: number
   }
 
@@ -13352,6 +13417,7 @@ export namespace Prisma {
     unitPrice?: FloatFieldUpdateOperationsInput | number
     subtotal?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    payed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     order?: OrderUpdateOneRequiredWithoutOrderProductNestedInput
   }
 
@@ -13361,6 +13427,7 @@ export namespace Prisma {
     unitPrice?: FloatFieldUpdateOperationsInput | number
     subtotal?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    payed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     orderId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -13370,6 +13437,7 @@ export namespace Prisma {
     unitPrice?: FloatFieldUpdateOperationsInput | number
     subtotal?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    payed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     orderId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -13424,6 +13492,7 @@ export namespace Prisma {
     unitPrice: number
     subtotal: number
     status: string
+    payed?: boolean | null
     productId: number
   }
 
@@ -13432,6 +13501,7 @@ export namespace Prisma {
     unitPrice?: FloatFieldUpdateOperationsInput | number
     subtotal?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    payed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     product?: ProductUpdateOneRequiredWithoutOrderProductNestedInput
   }
 
@@ -13441,6 +13511,7 @@ export namespace Prisma {
     unitPrice?: FloatFieldUpdateOperationsInput | number
     subtotal?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    payed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     productId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -13450,6 +13521,7 @@ export namespace Prisma {
     unitPrice?: FloatFieldUpdateOperationsInput | number
     subtotal?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    payed?: NullableBoolFieldUpdateOperationsInput | boolean | null
     productId?: IntFieldUpdateOperationsInput | number
   }
 

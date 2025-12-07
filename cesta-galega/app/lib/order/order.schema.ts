@@ -1,6 +1,7 @@
 import { z } from 'zod';
+import { ProvincesEnum } from '@/app/lib/types/shared';
 
-export const OrderStatusEnum = z.enum(['Carrito', 'Directo']);
+export const OrderStatusEnum = z.enum(['Carrito', 'Directo', 'Pagado']);
 export type OrderStatus = z.infer<typeof OrderStatusEnum>;
 
 export const PaymentMethodEnum = z.enum(['Tarjeta']);
@@ -44,6 +45,7 @@ export const OrderProductDTO = z.object({
   unitPrice: z.number(),
   subtotal: z.number(),
   status: OrderProductStatusEnum,
+  payed: z.boolean(),
 });
 export type OrderProductDTO = z.infer<typeof OrderProductDTO>;
 
@@ -70,6 +72,7 @@ export const BusinessOrderItemDTO = z.object({
   status: OrderProductStatusEnum,
   customerName: z.string(),
   createdAt: z.string(),
+  payed: z.boolean(),
 });
 export type BusinessOrderItem = z.infer<typeof BusinessOrderItemDTO>;
 
@@ -84,31 +87,17 @@ export const CartRemoveItemSchema = z.object({
 });
 export type CartRemoveItemInput = z.infer<typeof CartRemoveItemSchema>;
 
-/* 🔽🔽🔽 NUEVO: datos para checkout de un pedido (carrito ou directo) 🔽🔽🔽 */
-
 export const OrderCheckoutSchema = z.object({
   shippingAddress: z.string().min(5),
   paymentMethod: PaymentMethodEnum.default('Tarjeta'),
 });
 export type OrderCheckoutInput = z.infer<typeof OrderCheckoutSchema>;
 
-/* 🔽🔽🔽 NUEVO: creación de pedido directo dende un produto 🔽🔽🔽 */
-/**
- * Usado para POST /api/order/direct
- * O userId vén do token, non do body.
- */
 export const DirectOrderCreateSchema = z.object({
   productId: z.number().int(),
   quantity: z.number().int().min(1),
 });
 export type DirectOrderCreateInput = z.infer<typeof DirectOrderCreateSchema>;
-
-/* 🔽🔽🔽 NUEVO: DTO específico para o fluxo de checkout 🔽🔽🔽 */
-/**
- * Estes DTOs están pensados para o endpoint GET /api/order/[orderId]
- * que usas en /shop/checkout/[orderId], onde queres ver tamén info
- * do produto (ex. imaxe) e non só o productName plano.
- */
 
 export const CheckoutOrderProductDTO = z.object({
   id: z.number(),
@@ -117,6 +106,7 @@ export const CheckoutOrderProductDTO = z.object({
   unitPrice: z.number(),
   subtotal: z.number(),
   status: OrderProductStatusEnum,
+  payed: z.boolean(),
   product: z.object({
     id: z.number(),
     name: z.string(),
@@ -140,11 +130,13 @@ export type CheckoutOrderDTO = z.infer<typeof CheckoutOrderDTO>;
 
 // 🔹 Formulario de checkout (lado frontend)
 export const OrderCheckoutFormSchema = z.object({
-  fullName: z.string().min(2, 'O nome completo é obrigatorio'),
   address: z.string().min(5, 'O enderezo é obrigatorio'),
   city: z.string().min(2, 'A cidade é obrigatoria'),
-  province: z.string().min(2, 'A provincia é obrigatoria'),
-  postalCode: z.string().min(3, 'O código postal é obrigatorio'),
+  province: ProvincesEnum.default('CORUÑA, A'),
+  postalCode: z
+    .string()
+    .min(5, { message: 'O código postal debe ter 5 caracteres' })
+    .regex(/^\d{5}$/, 'O código postal debe ter 5 díxitos numéricos'),
   paymentMethod: PaymentMethodEnum.default('Tarjeta'),
 });
 

@@ -27,6 +27,7 @@ export function toOrderDTO(order: OrderWithRelations): z.infer<typeof OrderDTO> 
     unitPrice: op.unitPrice,
     subtotal: op.subtotal,
     status: op.status as z.infer<typeof OrderProductDTO>['status'],
+    payed: op.payed || false,
   }));
 
   return {
@@ -55,6 +56,7 @@ export function toBusinessOrderItemDTO(
     status: item.status as OrderProductStatus,
     customerName: item.order.user.name,
     createdAt: item.order.createdAt.toISOString(),
+    payed: item.payed || false,
   };
 }
 
@@ -76,6 +78,7 @@ export function toCheckoutOrderDTO(order: OrderWithRelations): z.infer<typeof Ch
       unitPrice: op.unitPrice,
       subtotal: op.subtotal,
       status: op.status as OrderProductStatus,
+      payed: op.payed || false,
       product: {
         id: op.product.id,
         name: op.product.name,

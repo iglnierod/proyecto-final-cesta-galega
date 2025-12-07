@@ -107,15 +107,16 @@ model Order {
 }
 
 model OrderProduct {
-  id        Int     @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   quantity  Int
   unitPrice Float
   subtotal  Float
   status    String
+  payed     Boolean? @default(false)
   // relacion con Order
   orderId   Int
-  order     Order   @relation(fields: [orderId], references: [id])
+  order     Order    @relation(fields: [orderId], references: [id])
   // relacion con Product
   productId Int
-  product   Product @relation(fields: [productId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
 }

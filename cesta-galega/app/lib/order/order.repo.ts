@@ -1,4 +1,8 @@
-import { OrderCreateInput, OrderProductStatus } from '@/app/lib/order/order.schema';
+import {
+  OrderCheckoutInput,
+  OrderCreateInput,
+  OrderProductStatus,
+} from '@/app/lib/order/order.schema';
 import prisma from '@/app/lib/prisma';
 
 export async function createOrder(data: OrderCreateInput) {
@@ -27,6 +31,7 @@ export async function createOrder(data: OrderCreateInput) {
       unitPrice,
       subtotal,
       status: 'Pendiente',
+      payed: false,
     };
   });
 
@@ -240,6 +245,7 @@ export async function addItemToCart(userId: number, productId: number, quantity:
         unitPrice,
         subtotal: unitPrice * quantity,
         status: 'Pendiente',
+        payed: false,
       },
     });
   }
@@ -362,5 +368,81 @@ export async function getOrderForUserCheckout(userId: number, orderId: number) {
         },
       },
     },
+  });
+}
+
+export async function checkoutOrderForUser(
+  userId: number,
+  orderId: number,
+  data: OrderCheckoutInput
+) {
+  return prisma.$transaction(async (tx) => {
+    const existing = await tx.order.findUnique({
+      where: { id: orderId },
+      include: {
+        OrderProduct: {
+          include: {
+            product: true,
+          },
+        },
+        user: true,
+      },
+    });
+
+    if (!existing) {
+      throw new Error('Pedido non atopado');
+    }
+
+    if (existing.userId !== userId) {
+      throw new Error('Non tes permiso para este pedido');
+    }
+
+    if (existing.OrderProduct.length === 0) {
+      throw new Error('O pedido non ten produtos');
+    }
+
+    // Se xa está todo pagado, podemos bloquear un segundo pago se queres
+    const allPayed = existing.OrderProduct.every((op) => op.payed);
+    if (allPayed) {
+      throw new Error('Este pedido xa foi pagado');
+    }
+
+    // Actualizar datos do pedido
+    await tx.order.update({
+      where: { id: orderId },
+      data: {
+        shippingAddress: data.shippingAddress,
+        paymentMethod: data.paymentMethod,
+        status: 'Pagado',
+        updatedAt: new Date(),
+      },
+    });
+
+    // Marcar todas as liñas como pagadas
+    await tx.orderProduct.updateMany({
+      where: { orderId },
+      data: {
+        payed: true,
+      },
+    });
+
+    // Devolver o pedido actualizado con relacións
+    const updated = await tx.order.findUnique({
+      where: { id: orderId },
+      include: {
+        OrderProduct: {
+          include: {
+            product: true,
+          },
+        },
+        user: true,
+      },
+    });
+
+    if (!updated) {
+      throw new Error('Erro ao recargar o pedido actualizado');
+    }
+
+    return updated;
   });
 }
