@@ -446,3 +446,25 @@ export async function checkoutOrderForUser(
     return updated;
   });
 }
+
+export async function getOrdersForUser(userId: number) {
+  return prisma.order.findMany({
+    where: {
+      userId,
+      status: {
+        not: 'Carrito',
+      },
+    },
+    include: {
+      OrderProduct: {
+        include: {
+          product: true,
+        },
+      },
+      user: true,
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
+}
