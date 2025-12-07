@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import LogOutButton from '@/app/components/LogOutButon';
 
-export const dynamic = 'force-dynamic'; // Evitar cacheo del navegador
+export const dynamic = 'force-dynamic';
 
 export default function UserHeader({
   loggedIn,
@@ -12,6 +12,9 @@ export default function UserHeader({
   loggedIn: boolean;
   userName?: string;
 }) {
+  const fullName = userName ?? '';
+  const displayName = fullName.length > 5 ? `${fullName.slice(0, 8)}…` : fullName || 'Usuario';
+
   return (
     <div className="h-16 max-md:h-[3.5rem]">
       <nav className="navbar rounded-box shadow-base-300/20 shadow-sm">
@@ -21,7 +24,9 @@ export default function UserHeader({
             className="link text-base-content link-neutral text-xl font-bold no-underline"
             href="/"
           >
-            CestaGalega
+            {/* En móviles solo "CG", en md+ "CestaGalega" */}
+            <span className="md:hidden">CG</span>
+            <span className="hidden md:inline">CestaGalega</span>
           </Link>
         </div>
 
@@ -40,7 +45,7 @@ export default function UserHeader({
           </ul>
         </div>
 
-        {/* DERECHA: menú móvil + botón login */}
+        {/* DERECHA: menú móvil + botón login / usuario */}
         <div className="navbar-end items-center gap-4">
           {/* Menú hamburguesa */}
           <div className="dropdown relative inline-flex [--placement:bottom] md:hidden">
@@ -81,43 +86,45 @@ export default function UserHeader({
 
           {loggedIn ? (
             <ul className="menu md:menu-horizontal gap-2 p-0 text-base max-md:mt-2">
-              <li>
-                <Link href="/shop/cart" title="Carro">
-                  <span className="icon-[tabler--shopping-cart] dropdown-open:hidden size-5"></span>
-                </Link>
-              </li>
-              <li className="dropdown relative inline-flex [--auto-close:inside] [--offset:8] [--placement:bottom-end]">
-                <button
-                  id="dropdown-link"
-                  type="button"
-                  className="dropdown-toggle dropdown-open:bg-base-content/10 dropdown-open:text-base-content"
-                  aria-haspopup="menu"
-                  aria-expanded="false"
-                  aria-label="Dropdown"
-                >
-                  {userName}
-                  <span className="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
-                </button>
-                <ul
-                  className="dropdown-menu dropdown-open:opacity-100 hidden"
-                  role="menu"
-                  aria-orientation="vertical"
-                  aria-labelledby="dropdown-link"
-                >
-                  <li>
-                    <Link className="dropdown-item" href="/business/shop">
-                      Historial
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" href="/business/settings">
-                      Axustes
-                    </Link>
-                  </li>
-                  <hr className="border-base-content/25 -mx-2" />
-                  <LogOutButton />
-                </ul>
-              </li>
+              <div className="flex">
+                <li>
+                  <Link href="/shop/cart" title="Carro">
+                    <span className="icon-[tabler--shopping-cart] size-5"></span>
+                  </Link>
+                </li>
+                <li className="dropdown relative inline-flex [--auto-close:inside] [--offset:8] [--placement:bottom-end]">
+                  <button
+                    id="dropdown-link"
+                    type="button"
+                    className="dropdown-toggle dropdown-open:bg-base-content/10 dropdown-open:text-base-content"
+                    aria-haspopup="menu"
+                    aria-expanded="false"
+                    aria-label="Dropdown"
+                  >
+                    {displayName}
+                    <span className="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4 ms-1"></span>
+                  </button>
+                  <ul
+                    className="dropdown-menu dropdown-open:opacity-100 hidden"
+                    role="menu"
+                    aria-orientation="vertical"
+                    aria-labelledby="dropdown-link"
+                  >
+                    <li>
+                      <Link className="dropdown-item" href="/shop/orders">
+                        Os meus pedidos
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" href="/business/settings">
+                        Axustes
+                      </Link>
+                    </li>
+                    <hr className="border-base-content/25 -mx-2" />
+                    <LogOutButton />
+                  </ul>
+                </li>
+              </div>
             </ul>
           ) : (
             <Link className="btn btn-primary rounded" href="/user/login">
