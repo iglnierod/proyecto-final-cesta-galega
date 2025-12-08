@@ -13,7 +13,7 @@ export default function UserHeader({
   userName?: string;
 }) {
   const fullName = userName ?? '';
-  const displayName = fullName.length > 5 ? `${fullName.slice(0, 8)}…` : fullName || 'Usuario';
+  const displayName = fullName.length > 6 ? `${fullName.slice(0, 6)}…` : fullName || 'Usuario';
 
   return (
     <div className="h-16 max-md:h-[3.5rem]">
@@ -116,7 +116,7 @@ export default function UserHeader({
                       </Link>
                     </li>
                     <li>
-                      <Link className="dropdown-item" href="/business/settings">
+                      <Link className="dropdown-item" href="/shop/settings">
                         Axustes
                       </Link>
                     </li>

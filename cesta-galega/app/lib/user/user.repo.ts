@@ -1,5 +1,6 @@
 import { Prisma } from '@/app/generated/prisma';
 import prisma from '@/app/lib/prisma';
+import { UserUpdateInput } from '@/app/lib/user/user.schema';
 
 export const userPublicSelect = Prisma.validator<Prisma.UserSelect>()({
   id: true,
@@ -36,4 +37,40 @@ export async function createUser(data: {
     },
     select: userPublicSelect,
   });
+}
+
+// Buscar usuario por id
+export async function findUserById(id: number) {
+  return prisma.user.findUnique({
+    where: { id },
+  });
+}
+
+// Actualizar perfil de usuario (nome, sexo, data, provincia, etc.)
+export async function updateUserProfile(data: UserUpdateInput) {
+  const { id, birthDate, ...rest } = data;
+
+  // birthDate ven como string "YYYY-MM-DD" dende o formulario
+  const birthDateAsDate = new Date(birthDate);
+
+  const updated = await prisma.user.update({
+    where: { id },
+    data: {
+      name: rest.name,
+      email: rest.email,
+      sex: rest.sex,
+      birthDate: birthDateAsDate,
+      province: rest.province,
+    },
+  });
+
+  return updated;
+}
+
+export async function deleteUserAccount(userId: number) {
+  const deleted = await prisma.user.delete({
+    where: { id: userId },
+  });
+
+  return deleted;
 }

@@ -33,3 +33,14 @@ export const UserDTO = z.object({
 });
 
 export type UserDTO = z.infer<typeof UserDTO>;
+
+export const UserUpdateSchema = z.object({
+  id: z.number().int(),
+  name: z.string().min(2),
+  email: z.string().email(),
+  sex: SexEnum,
+  birthDate: z.string(), // formato YYYY-MM-DD
+  province: ProvincesEnum,
+});
+
+export type UserUpdateInput = z.infer<typeof UserUpdateSchema>;
