@@ -1,32 +1,21 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/app/lib/prisma';
+import { findBusinessesForShop } from '@/app/lib/business/business.repo';
+import { toBusinessDTO } from '@/app/lib/business/business.mapper';
+
+export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get('id');
-  const name = searchParams.get('name');
-  const province = searchParams.get('province');
+  try {
+    const { searchParams } = new URL(request.url);
+    const search = searchParams.get('search');
 
-  if (id) {
-    const business = await prisma.business.findUnique({
-      where: { id: Number(id) },
+    const businesses = await findBusinessesForShop(search);
+
+    return NextResponse.json({
+      businesses: businesses.map((b) => toBusinessDTO(b)),
     });
-    return NextResponse.json(business);
+  } catch (err: any) {
+    console.error(err);
+    return NextResponse.json({ error: 'Erro ao obter as empresas' }, { status: 500 });
   }
-
-  const filters: any = {};
-
-  if (name) {
-    filters.name = { contains: name, mode: 'insensitive' };
-  }
-
-  if (province) {
-    filters.province = { contains: province, mode: 'insensitive' };
-  }
-
-  const businesses = await prisma.business.findMany({
-    where: Object.keys(filters).length > 0 ? filters : undefined,
-  });
-
-  return NextResponse.json(businesses);
 }

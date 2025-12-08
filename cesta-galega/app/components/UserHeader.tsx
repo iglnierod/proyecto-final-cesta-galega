@@ -37,7 +37,7 @@ export default function UserHeader({
               <Link href="/shop">Tenda</Link>
             </li>
             <li>
-              <Link href="/shop?filter=newness">Novedades</Link>
+              <Link href="/shop?filter=newness">Novidades</Link>
             </li>
             <li>
               <a href="/shop?filter=discount">Descontos</a>

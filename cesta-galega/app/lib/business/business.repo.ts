@@ -1,4 +1,5 @@
 import { Prisma } from '@/app/generated/prisma';
+// app/lib/business/business.repo.ts
 import prisma from '@/app/lib/prisma';
 import { BusinessEditInput } from '@/app/lib/business/business.schema';
 
@@ -84,5 +85,21 @@ export async function deleteLogo(id: number) {
       logo: null,
     },
     select: businessPublicSelect,
+  });
+}
+
+export async function findBusinessesForShop(search?: string | null) {
+  const where: any = {};
+
+  if (search && search.trim() !== '') {
+    where.name = {
+      contains: search.trim(),
+      mode: 'insensitive',
+    };
+  }
+
+  return prisma.business.findMany({
+    where,
+    orderBy: { name: 'asc' },
   });
 }

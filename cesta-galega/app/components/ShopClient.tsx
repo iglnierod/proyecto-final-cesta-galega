@@ -8,7 +8,19 @@ import ProductsGrid from '@/app/components/ProductsGrid';
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
-export default function ShopClient({ businessId }: { businessId: number }) {
+type ShopClientProps = {
+  businessId: number;
+  // se é a vista da empresa (xestión) ou vista pública para usuarios
+  isBusinessView?: boolean;
+  // se o usuario está logueado (para habilitar Engadir ao carro)
+  loggedIn?: boolean;
+};
+
+export default function ShopClient({
+  businessId,
+  isBusinessView = false,
+  loggedIn = false,
+}: ShopClientProps) {
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState<string>('');
   const [sort, setSort] = useState<string>('');
@@ -39,6 +51,10 @@ export default function ShopClient({ businessId }: { businessId: number }) {
   const { data, error, isLoading } = useSWR<{ products: ProductWithCategoriesDTO[] }>(key, fetcher);
 
   const products = data?.products ?? [];
+
+  // En vista de empresa: botón "Engadir" desactivado / modo xestión
+  // En vista usuario: Engadir activo só se está logueado
+  const addButtonDisabled = isBusinessView ? true : !loggedIn;
 
   return (
     <section className="flex flex-col gap-4">
@@ -89,7 +105,13 @@ export default function ShopClient({ businessId }: { businessId: number }) {
       )}
 
       {/* GRID DE PRODUTOS */}
-      {!isLoading && !error && <ProductsGrid products={products} />}
+      {!isLoading && !error && (
+        <ProductsGrid
+          products={products}
+          addButtonDisabled={addButtonDisabled}
+          isBusinessView={isBusinessView}
+        />
+      )}
     </section>
   );
 }

@@ -1,22 +1,24 @@
-import { getAuthTokenDecoded, JwtPayloadBusiness } from '@/app/lib/auth';
 import prisma from '@/app/lib/prisma';
 import Image from 'next/image';
 
-export default async function ShopLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  // Obtener datos de la empresa autenticada
-  const decoded = (await getAuthTokenDecoded()) as JwtPayloadBusiness;
+export default async function PublicBusinessShopLayout({
+  children,
+  params,
+}: Readonly<{
+  children: React.ReactNode;
+  params: Promise<{ businessId: string }>;
+}>) {
+  const { businessId } = await params;
+  const id = Number(businessId);
 
   const business = await prisma.business.findUnique({
-    where: {
-      id: decoded.businessId,
-    },
+    where: { id },
   });
 
   if (!business) {
-    throw new Error('No se encontró la empresa. Vuelva a intentarlo más tarde.');
+    throw new Error('Non se atopou a empresa. Volva tentalo máis tarde.');
   }
 
-  // Iniciales para el avatar si no hay logo
   const initials =
     business.name
       ?.split(' ')
@@ -28,9 +30,9 @@ export default async function ShopLayout({ children }: Readonly<{ children: Reac
   return (
     <section className="grid grid-cols-1 justify-items-center p-4">
       <div className="w-full max-w-[1200px] flex flex-col gap-6">
-        {/* CABECERA */}
+        {/* CABECEIRA PÚBLICA */}
         <header className="rounded-2xl border border-base-300 bg-base-100/80 shadow-sm p-4 sm:p-6 flex flex-col sm:flex-row gap-4 sm:gap-6 items-start sm:items-center">
-          {/* Logo o avatar */}
+          {/* Logo ou avatar */}
           <div className="shrink-0">
             {business.logo ? (
               <Image
@@ -49,7 +51,7 @@ export default async function ShopLayout({ children }: Readonly<{ children: Reac
             )}
           </div>
 
-          {/* Info principal de la empresa */}
+          {/* Info principal */}
           <div className="flex-1 space-y-2">
             <div className="flex flex-wrap items-center gap-2">
               <h1 className="text-2xl sm:text-3xl font-bold">{business.name}</h1>
@@ -72,7 +74,7 @@ export default async function ShopLayout({ children }: Readonly<{ children: Reac
               </p>
             )}
 
-            {/* Datos básicos de contacto / redes */}
+            {/* Contacto / redes */}
             <div className="flex flex-wrap gap-3 pt-2 text-sm text-base-content/80">
               {business.email && (
                 <span className="inline-flex items-center gap-1">
