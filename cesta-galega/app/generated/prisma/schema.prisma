@@ -24,6 +24,7 @@ model User {
   birthDate   DateTime
   province    String
   password    String
+  deleted     Boolean       @default(false)
   createdAt   DateTime      @default(now())
   UserProduct UserProduct[]
   Order       Order[]

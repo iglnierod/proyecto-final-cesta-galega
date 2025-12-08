@@ -1,6 +1,6 @@
 import prisma from '@/app/lib/prisma';
 import { NextResponse } from 'next/server';
-import { getAuthTokenDecoded, JwtPayloadUser } from '@/app/lib/auth';
+import { clearSessionCookies, getAuthTokenDecoded, JwtPayloadUser } from '@/app/lib/auth';
 import { UserUpdateSchema } from '@/app/lib/user/user.schema';
 import { deleteUserAccount, findUserById, updateUserProfile } from '@/app/lib/user/user.repo';
 import { toUserDTO } from '@/app/lib/user/user.mapper';
@@ -76,7 +76,7 @@ export async function DELETE() {
 
     await deleteUserAccount(decoded.userId);
 
-    // Opcional: aquí poderías borrar cookie/token se o fas dende este endpoint
+    await clearSessionCookies();
 
     return NextResponse.json(
       { ok: true, message: 'Conta eliminada correctamente' },

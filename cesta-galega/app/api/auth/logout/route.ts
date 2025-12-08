@@ -1,12 +1,9 @@
-import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
+import { clearSessionCookies } from '@/app/lib/auth';
 
 // Elimina las cookies de la sesión del usuario
 export async function POST() {
-  const cookieStore = await cookies();
-
-  cookieStore.delete('auth_token');
-  cookieStore.delete('auth_type');
+  await clearSessionCookies();
 
   return NextResponse.json({ message: 'Sesión Cerrada' });
 }

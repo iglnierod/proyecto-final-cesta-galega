@@ -104,3 +104,9 @@ export async function isBusinessLoggedIn(): Promise<boolean> {
   const authType = cookieStore.get('auth_type')?.value;
   return !!(authType && authType === 'business');
 }
+
+export async function clearSessionCookies() {
+  const cookieStore = await cookies();
+  cookieStore.delete('auth_type');
+  cookieStore.delete('auth_token');
+}

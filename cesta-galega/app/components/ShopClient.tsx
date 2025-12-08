@@ -10,9 +10,7 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 type ShopClientProps = {
   businessId: number;
-  // se é a vista da empresa (xestión) ou vista pública para usuarios
   isBusinessView?: boolean;
-  // se o usuario está logueado (para habilitar Engadir ao carro)
   loggedIn?: boolean;
 };
 
