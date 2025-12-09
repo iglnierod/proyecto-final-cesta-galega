@@ -1,3 +1,4 @@
+// app/lib/userProduct/userProduct.repo.ts
 import prisma from '@/app/lib/prisma';
 import { ProductReviewCreateInput } from '@/app/lib/review/userProduct.schema';
 
@@ -116,4 +117,16 @@ export async function getReviewFromOrderProduct(
   });
 
   return review;
+}
+
+export async function findReviewsForProduct(productId: number) {
+  return prisma.userProduct.findMany({
+    where: { productId },
+    include: {
+      user: true,
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
 }
