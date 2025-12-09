@@ -138,6 +138,64 @@ export async function getFilteredProducts(filters: {
   });
 }
 
+export async function getFilteredProductsBusiness(filters: {
+  businessId?: number;
+  search?: string;
+  category?: string | null;
+  sort?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  filter?: 'newness' | 'discount';
+}) {
+  const { businessId, search, category, sort, minPrice, maxPrice, filter } = filters;
+
+  const where: any = {
+    deleted: false,
+  };
+
+  if (typeof businessId === 'number') {
+    where.businessId = businessId;
+  }
+
+  if (search) {
+    where.name = {
+      contains: search,
+      mode: 'insensitive',
+    };
+  }
+
+  if (category) {
+    where.categories = {
+      some: { id: Number(category) },
+    };
+  }
+
+  if (minPrice !== undefined || maxPrice !== undefined) {
+    where.price = {};
+    if (minPrice !== undefined) where.price.gte = minPrice;
+    if (maxPrice !== undefined) where.price.lte = maxPrice;
+  }
+
+  // Filtro especial de descontos
+  if (filter === 'discount') {
+    where.discounted = true;
+  }
+
+  // ORDENACIÓN
+  let orderBy: any = { createdAt: 'desc' };
+  let take: number | undefined = undefined;
+
+  return prisma.product.findMany({
+    where,
+    orderBy,
+    take,
+    include: {
+      categories: true,
+      business: true,
+    },
+  });
+}
+
 export async function createProduct(data: ProductCreateInput) {
   const { categoryIds, ...productData } = data;
 
