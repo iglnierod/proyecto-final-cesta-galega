@@ -9,13 +9,12 @@ export async function createOrUpdateReviewFromOrderProduct(
 ) {
   const { productId, rating, title, review } = input;
 
-  // 1. Comprobar que o pedido é do usuario e contén ese produto
   const order = await prisma.order.findFirst({
     where: {
       id: orderId,
       userId,
       status: {
-        notIn: ['Carrito'], // opcional, por se non queres valorar carritos
+        notIn: ['Carrito', 'Directo'],
       },
     },
     include: {
@@ -33,7 +32,6 @@ export async function createOrUpdateReviewFromOrderProduct(
     throw new Error('O produto non pertence a este pedido');
   }
 
-  // 2. Buscar se o usuario xa ten unha valoración para este produto
   const existing = await prisma.userProduct.findFirst({
     where: {
       userId,
@@ -42,7 +40,6 @@ export async function createOrUpdateReviewFromOrderProduct(
   });
 
   if (existing) {
-    // 3a. Actualizar valoración existente
     const updated = await prisma.userProduct.update({
       where: { id: existing.id },
       data: {
@@ -55,7 +52,6 @@ export async function createOrUpdateReviewFromOrderProduct(
     return updated;
   }
 
-  // 3b. Crear nova valoración
   const created = await prisma.userProduct.create({
     data: {
       userId,
@@ -69,7 +65,6 @@ export async function createOrUpdateReviewFromOrderProduct(
   return created;
 }
 
-// Para máis adiante: obter as valoracións dun produto
 export async function getReviewsForProduct(productId: number) {
   return prisma.userProduct.findMany({
     where: { productId },
@@ -90,7 +85,6 @@ export async function getReviewFromOrderProduct(
   orderId: number,
   productId: number
 ) {
-  // 1) Comprobar que o pedido é do usuario e contén ese produto
   const order = await prisma.order.findFirst({
     where: {
       id: orderId,
@@ -114,7 +108,6 @@ export async function getReviewFromOrderProduct(
     throw new Error('O produto non pertence a este pedido');
   }
 
-  // 2) Devolver a review da táboa UserProduct (se existe)
   const review = await prisma.userProduct.findFirst({
     where: {
       userId,
@@ -122,5 +115,5 @@ export async function getReviewFromOrderProduct(
     },
   });
 
-  return review; // pode ser null
+  return review;
 }
