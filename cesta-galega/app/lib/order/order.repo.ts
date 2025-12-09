@@ -4,6 +4,7 @@ import {
   OrderProductStatus,
 } from '@/app/lib/order/order.schema';
 import prisma from '@/app/lib/prisma';
+import { CreateOrderReviewInput } from '@/app/lib/review/userProduct.schema';
 
 export async function createOrder(data: OrderCreateInput) {
   const products = await prisma.product.findMany({
@@ -452,7 +453,7 @@ export async function getOrdersForUser(userId: number) {
     where: {
       userId,
       status: {
-        not: 'Carrito',
+        notIn: ['Carrito', 'Directo'],
       },
     },
     include: {
@@ -465,6 +466,51 @@ export async function getOrdersForUser(userId: number) {
     },
     orderBy: {
       createdAt: 'desc',
+    },
+  });
+}
+
+// Obter a review dun usuario para un produto
+export async function getReviewForUserProduct(userId: number, productId: number) {
+  return prisma.userProduct.findFirst({
+    where: {
+      userId,
+      productId,
+    },
+  });
+}
+
+// Crear/actualizar (upsert manual) a review en UserProduct
+export async function upsertReviewForUserProduct(
+  userId: number,
+  productId: number,
+  input: CreateOrderReviewInput
+) {
+  const existing = await prisma.userProduct.findFirst({
+    where: {
+      userId,
+      productId,
+    },
+  });
+
+  if (existing) {
+    return prisma.userProduct.update({
+      where: { id: existing.id },
+      data: {
+        rating: input.rating,
+        title: input.title,
+        review: input.review,
+      },
+    });
+  }
+
+  return prisma.userProduct.create({
+    data: {
+      userId,
+      productId,
+      rating: input.rating,
+      title: input.title,
+      review: input.review,
     },
   });
 }

@@ -12,7 +12,6 @@ export const OrderProductStatusEnum = z.enum([
   'Aceptado',
   'Preparando',
   'Enviado',
-  'Recibido',
   'Cancelado',
 ]);
 export type OrderProductStatus = z.infer<typeof OrderProductStatusEnum>;

@@ -4,6 +4,10 @@ import useSWR from 'swr';
 import Link from 'next/link';
 import Image from 'next/image';
 import { OrderDTO, OrderProductDTO } from '@/app/lib/order/order.schema';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import { useAlert } from '@/app/context/AlertContext';
+import ReviewForm from '@/app/components/ReviewForm';
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
@@ -13,6 +17,7 @@ type OrdersApiResponse = {
 
 type OrderItemWithImage = OrderProductDTO & {
   productImage?: string | null;
+  payed?: boolean;
 };
 
 type OrderWithItemsAndImage = Omit<OrderDTO, 'items'> & {
@@ -50,8 +55,6 @@ function itemStatusBadgeClasses(status: OrderProductDTO['status']) {
     case 'Preparando':
     case 'Enviado':
       return 'badge badge-soft badge-info';
-    case 'Recibido':
-      return 'badge badge-soft badge-success';
     case 'Cancelado':
       return 'badge badge-soft badge-error';
     default:
@@ -60,10 +63,32 @@ function itemStatusBadgeClasses(status: OrderProductDTO['status']) {
 }
 
 export default function UserOrdersClient() {
-  const { data, error, isLoading } = useSWR<OrdersApiResponse>('/api/order/user', fetcher);
+  const { data, error, isLoading, mutate } = useSWR<OrdersApiResponse>('/api/order/user', fetcher);
 
   const rawOrders = data?.orders ?? [];
   const orders = rawOrders as OrderWithItemsAndImage[];
+
+  const MySwal = withReactContent(Swal);
+  const { showAlert } = useAlert();
+
+  const handleOpenReviewModal = (orderId: number, productId: number, productName: string) => {
+    void MySwal.fire({
+      title: `Valorar ${productName}`,
+      html: (
+        <ReviewForm
+          orderId={orderId}
+          productId={productId}
+          productName={productName}
+          onSuccessAction={async () => {
+            showAlert('Grazas pola túa valoración!', 'success');
+            await mutate();
+          }}
+        />
+      ),
+      showConfirmButton: false,
+      width: 800,
+    });
+  };
 
   if (isLoading) {
     return (
@@ -115,41 +140,55 @@ export default function UserOrdersClient() {
               const productHref = `/shop/product/${item.productId}`;
               const imgSrc = item.productImage ?? '';
               const hasImage = !!imgSrc;
+              const canReview = item.status === 'Enviado' && item.payed;
 
-              return hasImage ? (
-                <div key={item.id} className="flex flex-col sm:flex-row sm:items-center gap-3">
-                  {/* Imaxe do produto */}
-                  <Link
-                    href={productHref}
-                    className="relative w-full max-w-[80px] h-[80px] rounded-md bg-base-200 overflow-hidden shrink-0"
-                  >
-                    <Image src={imgSrc} alt={item.productName} fill className="object-cover" />
-                  </Link>
+              const StatusAndActions = (
+                <div className="flex flex-col items-end gap-1 shrink-0">
+                  <span className={itemStatusBadgeClasses(item.status)}>{item.status}</span>
 
-                  {/* Info principal */}
-                  <div className="flex-1 flex flex-col gap-1">
-                    <Link href={productHref} className="font-medium hover:underline line-clamp-2">
-                      {item.quantity}× {item.productName}
-                    </Link>
-                    <p className="text-xs text-base-content/70">
-                      Prezo unidade: {item.unitPrice.toFixed(2)} € — Subtotal:{' '}
-                      {item.subtotal.toFixed(2)} €
-                    </p>
-                  </div>
-
-                  {/* Estado / pago */}
-                  <div className="flex items-center sm:flex-col sm:items-end gap-2 sm:gap-1 shrink-0">
-                    <span className={itemStatusBadgeClasses(item.status)}>{item.status}</span>
-                    {item.payed ? (
-                      <span className="badge badge-soft badge-success text-[0.7rem]">Pagado</span>
-                    ) : (
-                      <span className="badge badge-soft badge-warning text-[0.7rem]">
-                        Pend. pago
-                      </span>
-                    )}
-                  </div>
+                  {canReview && (
+                    <button
+                      type="button"
+                      className="btn btn-ghost btn-xs mt-1"
+                      onClick={() =>
+                        handleOpenReviewModal(order.id, item.productId, item.productName)
+                      }
+                    >
+                      Valorar produto
+                    </button>
+                  )}
                 </div>
-              ) : (
+              );
+
+              if (hasImage) {
+                return (
+                  <div key={item.id} className="flex flex-col sm:flex-row sm:items-center gap-3">
+                    {/* Imaxe do produto */}
+                    <Link
+                      href={productHref}
+                      className="relative w-full max-w-[80px] h-[80px] rounded-md bg-base-200 overflow-hidden shrink-0"
+                    >
+                      <Image src={imgSrc} alt={item.productName} fill className="object-cover" />
+                    </Link>
+
+                    {/* Info principal */}
+                    <div className="flex-1 flex flex-col gap-1">
+                      <Link href={productHref} className="font-medium hover:underline line-clamp-2">
+                        {item.quantity}× {item.productName}
+                      </Link>
+                      <p className="text-xs text-base-content/70">
+                        Prezo unidade: {item.unitPrice.toFixed(2)} € — Subtotal:{' '}
+                        {item.subtotal.toFixed(2)} €
+                      </p>
+                    </div>
+
+                    {/* Estado / pago / valorar */}
+                    {StatusAndActions}
+                  </div>
+                );
+              }
+
+              return (
                 <div
                   key={item.id}
                   className="flex flex-col sm:flex-row sm:items-center justify-between gap-3"
@@ -164,9 +203,8 @@ export default function UserOrdersClient() {
                     </p>
                   </div>
 
-                  <div className="flex items-center sm:flex-col sm:items-end gap-2 sm:gap-1 shrink-0">
-                    <span className={itemStatusBadgeClasses(item.status)}>{item.status}</span>
-                  </div>
+                  {/* Estado / pago / valorar */}
+                  {StatusAndActions}
                 </div>
               );
             })}
