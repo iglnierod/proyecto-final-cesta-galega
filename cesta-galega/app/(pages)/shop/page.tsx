@@ -22,8 +22,8 @@ export default async function ShopPage({
   const filter = Array.isArray(rawFilter) ? rawFilter[0] : rawFilter;
 
   let title = 'Tenda';
-  if (filter === 'news') title = 'Tenda: Novedades';
-  if (filter === 'discounts') title = 'Tenda: Descontos';
+  if (filter === 'newness') title = 'Tenda: Novedades';
+  if (filter === 'discount') title = 'Tenda: Descontos';
 
   return (
     <div className="mt-16 md:mt-4 lg:mt-0 p-2">
