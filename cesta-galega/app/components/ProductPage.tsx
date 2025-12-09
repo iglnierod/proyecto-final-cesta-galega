@@ -16,6 +16,7 @@ export default function ProductPage({
 }) {
   const [qty, setQty] = useState<number>(1);
   const [isAdding, setIsAdding] = useState(false);
+  const [isBuying, setIsBuying] = useState(false);
   const { showAlert } = useAlert();
   const router = useRouter();
 
@@ -74,8 +75,6 @@ export default function ProductPage({
         return;
       }
 
-      // Opcional: refrescar datos globales, contador de cesta, etc.
-      // router.refresh();
       showAlert('Engadiuse o produto ao carro', 'success');
     } catch (err) {
       console.error('Erro inesperado ao engadir ao carro', err);
@@ -84,29 +83,82 @@ export default function ProductPage({
     }
   };
 
+  // 🛒 Comprar AGORA: crea pedido "Directo" e vai ao checkout
+  const handleBuyNow = async () => {
+    if (!product.enabled) return;
+
+    const isLoggedIn = await checkUserLoggedIn();
+    if (!isLoggedIn) return;
+
+    try {
+      setIsBuying(true);
+
+      const res = await fetch('/api/order/direct', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          productId: product.id,
+          quantity: qty,
+        }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        console.error(data);
+        showAlert('Produciuse un erro ao crear o pedido', 'error');
+        return;
+      }
+
+      const orderId = data?.order?.id;
+      if (!orderId) {
+        showAlert('Non se puido obter o identificador do pedido', 'error');
+        return;
+      }
+
+      // Ir directamente ao checkout dese pedido
+      router.push(`/shop/checkout/${orderId}`);
+    } catch (err) {
+      console.error('Erro inesperado ao crear o pedido directo', err);
+      showAlert('Produciuse un erro ao crear o pedido', 'error');
+    } finally {
+      setIsBuying(false);
+    }
+  };
+
+  const business = product.business;
+
   return (
     <div className="w-full max-w-7xl mx-auto px-4 py-8">
-      {/* Columna principal: info del producto */}
+      {/* Layout principal */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-        {/* Columna izquierda: imagen del producto */}
+        {/* Columna esquerda: imaxe do produto */}
         <div className="flex justify-center lg:justify-start">
-          <div className="relative w-full max-w-[700px] aspect-square rounded-2xl border border-base-content/15 bg-base-200 flex items-center justify-center shadow-sm">
-            <Image
-              src={product.image ?? ''}
-              alt="Imagen del producto"
-              width={700}
-              height={700}
-              className="rounded-md border"
-            />
+          <div className="relative w-full max-w-[700px] max-h-[480px] aspect-[4/3] rounded-2xl border border-base-content/15 bg-base-200 overflow-hidden shadow-sm">
+            {product.image ? (
+              <Image
+                src={product.image}
+                alt="Imagen del producto"
+                fill
+                className="object-cover"
+                priority
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-sm text-base-content/60">
+                Sen imaxe dispoñible
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Columna derecha: detalles del producto */}
+        {/* Columna dereita: detalles do produto */}
         <div className="w-full space-y-5">
-          {/* Nombre del producto */}
+          {/* Nome do produto */}
           <h1 className="text-2xl lg:text-3xl font-bold leading-tight">{product.name}</h1>
 
-          {/* Precio y descuento */}
+          {/* Prezo e desconto */}
           <div className="flex flex-wrap items-center gap-3">
             {product.discounted ? (
               <>
@@ -122,6 +174,33 @@ export default function ProductPage({
             )}
           </div>
 
+          {/* Pequeno cadro coa info da empresa vendedora */}
+          {business && (
+            <div className="rounded-lg border border-base-300 bg-base-100/80 p-3 shadow-sm text-sm">
+              <p className="text-xs font-semibold text-base-content/70 mb-1">Produto vendido por</p>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                <div>
+                  <p className="font-semibold">{business.name}</p>
+                  {(business.city || business.province) && (
+                    <p className="text-xs text-base-content/70">
+                      {business.city}
+                      {business.city && business.province && ', '}
+                      {business.province}
+                    </p>
+                  )}
+                </div>
+                <button
+                  type="button"
+                  className="btn btn-ghost btn-xs sm:btn-sm rounded-md border border-base-300"
+                  onClick={() => router.push(`/shop/business/${business.id}`)}
+                >
+                  Ver tenda
+                  <span className="icon-[tabler--arrow-right] size-4 ms-1" />
+                </button>
+              </div>
+            </div>
+          )}
+
           {/* Categorías */}
           {product.categories.length > 0 && (
             <div className="space-y-2">
@@ -136,7 +215,7 @@ export default function ProductPage({
             </div>
           )}
 
-          {/* Descripción del producto */}
+          {/* Descrición */}
           {product.description && (
             <div className="space-y-1">
               <p className="text-sm font-medium text-base-content/80">Descrición</p>
@@ -148,7 +227,7 @@ export default function ProductPage({
 
           {/* Controles de compra */}
           <div className="pt-4 border-t border-base-content/10 space-y-4">
-            {/* Cantidad */}
+            {/* Cantidade */}
             <div className="max-w-xs space-y-1">
               <label
                 htmlFor="qty"
@@ -172,7 +251,7 @@ export default function ProductPage({
               </div>
             </div>
 
-            {/* Botones de acción */}
+            {/* Botóns */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-md">
               <button
                 type="button"
@@ -185,9 +264,10 @@ export default function ProductPage({
               <button
                 type="button"
                 className="btn btn-primary rounded-lg w-full"
-                onClick={() => console.log('buy now')}
+                onClick={handleBuyNow}
+                disabled={isBuying || !product.enabled}
               >
-                Comprar agora
+                {isBuying ? 'Creando pedido...' : 'Comprar agora'}
               </button>
             </div>
           </div>
