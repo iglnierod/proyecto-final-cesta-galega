@@ -1,239 +1,494 @@
-# --- EMPRESAS ---
-INSERT INTO public."Business"
-("name", "email", "description", "businessType", "phoneNumber",
- "address", "city", "province", "postalCode", "password",
- "iban", "instagram", "facebook", "logo")
+INSERT INTO "public"."User" ("id",
+                             "name",
+                             "email",
+                             "password",
+                             "createdAt",
+                             "province",
+                             "sex",
+                             "birthDate",
+                             "deleted")
+VALUES ('5', 'Ana GN', 'anagnovoa@iessanclemente.net', '$2b$10$z/nqwsLtEBZ4DGi1AFTQmu5FF5QKCp.IbwdmBbkBj8FYSo81v5Ofu', '2025-11-24 11:40:41.663', 'CORUÑA, A', 'Mujer', '1999-01-01 00:00:00', 'false'),
+       ('6', 'usuario prueba', 'prueba@gmail.com', '$2b$10$CbVnqdoLZLrX1P8hMyd6h.MbrKUjVPRRsaH3zgAMkOa0ru0nmWLte', '2025-11-28 11:36:54.613', 'OURENSE', 'Prefiero no decirlo', '2002-01-03 00:00:00', 'false'),
+       ('7', 'Carlos Fernández López', 'carlos.fernandez@example.com', '$2b$10$CbVnqdoLZLrX1P8hMyd6h.MbrKUjVPRRsaH3zgAMkOa0ru0nmWLte', '2025-12-10 14:37:20.213', 'A Coruña', 'Hombre', '1987-03-15 00:00:00', 'false'),
+       ('8', 'Iria Rodríguez Castro', 'iria.rodriguez@example.com', '$2b$10$CbVnqdoLZLrX1P8hMyd6h.MbrKUjVPRRsaH3zgAMkOa0ru0nmWLte', '2025-12-10 14:37:20.213', 'Pontevedra', 'Mujer', '1994-11-02 00:00:00', 'false'),
+       ('9', 'Xoán Pereira Vázquez', 'xoan.pereira@example.com', '$2b$10$CbVnqdoLZLrX1P8hMyd6h.MbrKUjVPRRsaH3zgAMkOa0ru0nmWLte', '2025-12-10 14:37:20.213', 'Ourense', 'Hombre', '2000-06-21 00:00:00', 'false'),
+       ('10', 'Lara Gómez Souto', 'lara.gomez@example.com', '$2b$10$CbVnqdoLZLrX1P8hMyd6h.MbrKUjVPRRsaH3zgAMkOa0ru0nmWLte', '2025-12-10 14:37:20.213', 'Lugo', 'Mujer', '1990-01-09 00:00:00', 'false'),
+       ('11', 'Marta Alves Domínguez', 'marta.alves@example.com', '$2b$10$CbVnqdoLZLrX1P8hMyd6h.MbrKUjVPRRsaH3zgAMkOa0ru0nmWLte', '2025-12-10 14:37:20.213', 'A Coruña', 'Mujer', '1985-09-27 00:00:00', 'false'),
+       ('12', 'Diego Núñez Rial', 'diego.nunez@example.com', '$2b$10$CbVnqdoLZLrX1P8hMyd6h.MbrKUjVPRRsaH3zgAMkOa0ru0nmWLte', '2025-12-10 14:37:20.213', 'Pontevedra', 'Hombre', '1998-04-30 00:00:00', 'false');
+
+INSERT INTO "public"."Business" ("id",
+                                 "name",
+                                 "email",
+                                 "address",
+                                 "city",
+                                 "province",
+                                 "password",
+                                 "createdAt",
+                                 "businessType",
+                                 "phoneNumber",
+                                 "postalCode",
+                                 "description",
+                                 "facebook",
+                                 "iban",
+                                 "instagram",
+                                 "logo")
+VALUES ('9', 'Tinta e Lapis', 'prueba@gmail.com', 'Call1, Santiago', 'Santiago', 'CORUÑA, A', '$2b$10$zxfFRCgQI8H2DJiWnSYWz.q37SlieNYnZeGeaUycxhiDXZ89DdgCe', '2025-11-18 17:17:23.419', 'AUTONOMO', '123 456 789', '15700', 'A túa papelería local de confianza. Na nosa tenda atoparás a papelería e o material de journaling máis selecto, mesturando a funcionalidade coa estética vintage. Facemos que cada detalle dos teus proxectos sexa único e inspirador. ', '', '', '', 'https://res.cloudinary.com/dopixggee/image/upload/v1765321990/lgxpllhh6ciddhn6v2az.png'),
+       ('10', 'A Porta Fio', 'aportafio@gmail.com', 'Rúa dos concheiros, bajo 6', 'Santiago de Compostela', 'CORUÑA, A', '$2b$10$Iln9OZ2jmRH7/hdhQc9WYOIGXTbq4YdbS9gDoBdQf55v.bjDgGUee', '2025-12-05 11:56:14.61', 'AUTONOMO', '678 985 123', '15703', NULL, NULL, NULL, NULL, NULL),
+       ('11', 'O Rincon Calido S.A', 'orinconcalido@gmail.com', 'Avenida Pontevedra, nº75', 'Pontevedra', 'PONTEVEDRA', '$2b$10$NAcK61Ek.KRXRUN45JqGY.t4d794VpniMTKnQpZU05VtHOQn01bWO', '2025-12-05 11:57:17.001', 'S.A', '678 644 923', '65432', NULL, NULL, NULL, NULL, NULL),
+       ('12', 'Ria Moda S.L', 'riamoda@gmail.com', 'Avenida Riazor, 23', 'A Coruña', 'CORUÑA, A', '$2b$10$xPJfsxo5ISP6M1ZaqYetxuw/3MsFDqnnLtgJM3u/dJkHvTZZOLc0K', '2025-12-05 11:57:59.353', 'AUTONOMO', '644 658 786', '20123', NULL, NULL, NULL, NULL, NULL),
+       ('13', 'O Fogar do Trasno', 'ofogardotrasno@gmail.com', 'Avenida de Muros, 53', 'Muros', 'CORUÑA, A', '$2b$10$x./fitRexnGsL2M9EE874Oq1CgTosy7MfYtMbpFDYXAd31M8mAaiO', '2025-12-05 11:58:46.764', 'S.L', '654 677 682', '23145', NULL, NULL, NULL, NULL, NULL),
+       ('15', 'Obradoiro Camiño da Terra', 'contacto@caminodaterra.gal', 'Rúa das Artesáns 12, baixo', 'Santiago de Compostela', 'A Coruña', '$2b$10$zxfFRCgQI8H2DJiWnSYWz.q37SlieNYnZeGeaUycxhiDXZ89DdgCe', '2025-12-09 23:04:47.392', 'Artesanía en cerámica', '+34 600 123 456', '15703', 'Taller artesanal de cerámica gallega inspirada en los paisajes del Camino de Santiago. Piezas únicas hechas a mano, producción local y sostenible.' , NULL, 'ES12 2080 0000 1234 5678 9012', 'https://instagram.com/caminodaterra', 'https://example.com/logos/camino-da-terra.png');
+
+INSERT INTO "public"."Product" ("id",
+                                "name",
+                                "description",
+                                "createdAt",
+                                "businessId",
+                                "image",
+                                "enabled",
+                                "discount",
+                                "discounted",
+                                "price",
+                                "deleted")
+VALUES ('1', 'fjañklsdfjañlkdsjf lkasfjlkñ asjfañl', 'ñasjdfñl ajsñdlkf jañldfj lñasjf las', '2025-11-18 17:28:08.838', '9', 'https://res.cloudinary.com/dopixggee/image/upload/v1763486888/osfqpwahmpzbahsjqo4y.jpg', 'false', '0', 'false', '10', 'true'),
+       ('2', 'Tarxeta de Nadal', 'Tarxeta de felicitación de Nadal con motivos festivos ilustrados sobre fondo claro.', '2025-11-21 18:44:37.574', '9', 'https://res.cloudinary.com/dopixggee/image/upload/v1763750677/v27cd3qrtcqkcjwnjdzp.jpg', 'true', '5', 'true', '4.99', 'false'),
+       ('3', 'Estoxo para bolígrafos', 'Estoxo de bolígrafos fino con cremalleira e banda axustable para suxeitalo a cadernos ou axendas.', '2025-11-21 18:45:22.915', '9', 'https://res.cloudinary.com/dopixggee/image/upload/v1763750722/dfwqt8fu8xlasstgpito.webp', 'true', '0', 'false', '12.99', 'false'),
+       ('4', 'Funda de cartafol de cor verde', 'Cartafol organizador en ton verde oliva con peche de botón, ideal para gardar documentos ou notas.', '2025-11-21 18:46:11.042', '9', 'https://res.cloudinary.com/dopixggee/image/upload/v1763750770/ugbnt6ry5vqlkkyap5r8.webp', 'true', '0', 'false', '11', 'false'),
+       ('5', 'Marcadores de páxina e texto', 'Set de marcadores ou índices adhesivos de cores en tons azuis e verdes.', '2025-11-21 18:46:54.384', '9', 'https://res.cloudinary.com/dopixggee/image/upload/v1763750813/qlimcekzmnjcdoetdzbi.webp', 'true', '5', 'true', '7.99', 'false'),
+       ('6', 'Selos de silicona vintage', 'Set de selos transparentes de silicona con motivos de coellos e flores para manualidades.', '2025-11-21 18:47:25.151', '9', 'https://res.cloudinary.com/dopixggee/image/upload/v1763750844/qvqppv9jf9om7juqpyrq.webp', 'true', '0', 'false', '3.99', 'false'),
+       ('7', 'Pegatinas transferibles', 'Estes preciosos adhesivos sérvenche para decorar os teus proxectos persoais.', '2025-11-21 18:47:58.842', '9', 'https://res.cloudinary.com/dopixggee/image/upload/v1763750878/lg1apfaulbvim2ivjsdc.webp', 'true', '0', 'false', '5.75', 'false'),
+       ('8', 'Marcadores adhesivos', 'Con estos post-it modernos podrás tomar las mejores notas', '2025-11-21 18:48:46.924', '9', 'https://res.cloudinary.com/dopixggee/image/upload/v1763750926/ywojqeqj8ujd6xntkuo1.webp', 'false', '10', 'true', '6', 'true'),
+       ('10', 'Selo de Cera (Luna)', 'Selo de metal e madeira cun deseño de lúa crecente e estrela, ideal para lacrar cartas e invitacións.', '2025-12-09 23:03:18.313', '9', 'https://res.cloudinary.com/dopixggee/image/upload/v1765321397/benthjo2ccehohnyuwyh.jpg', 'true', '5', 'true', '14.33', 'false'),
+       ('11', 'Cintas Washi Tape', 'Conxunto de catro cintas adhesivas con patróns xaponeses (ondas, flores, grúas e peixes) para decoración e manualidades.', '2025-12-09 23:04:14.765', '9', 'https://res.cloudinary.com/dopixggee/image/upload/v1765321454/zllelur5nckpwpv3eejq.jpg', 'true', '0', 'false', '19.99', 'false'),
+       ('12', 'Axenda escolar 2026', 'Axenda do ano 2026 con deseño da obra de Van Gogh Améndoa en flor e banda elástica de peche.', '2025-12-09 23:05:20.965', '9', 'https://res.cloudinary.com/dopixggee/image/upload/v1765321520/edeyvhapi8ekaejyo3hm.webp', 'true', '6', 'true', '15.05', 'false'),
+       ('13', 'Pegatinas de formas xeométricas', 'Conxunto de adhesivos transparentes con formas xeométricas de cores pastel, perfectos para marcar e anotar en libros e axendas.', '2025-12-09 23:08:40.555', '9', 'https://res.cloudinary.com/dopixggee/image/upload/v1765321720/jpiwca9ejr8i2qhqkjad.webp', 'true', '0', 'false', '4.8', 'false'),
+       ('20', 'Camiseta básica oversize azul', 'Camiseta de corte folgado (oversize) en ton azul mariño escuro, ideal para un estilo casual e cómodo.', '2025-12-09 23:17:16.699', '12', 'https://res.cloudinary.com/dopixggee/image/upload/v1765322236/y0as04tgharvvj8pgcro.jpg', 'true', '0', 'false', '11', 'false'),
+       ('21', 'Cazadora deportiva con cremalleira azul claro', 'Sudadera con capucha en cor azul claro desgastado, con cremalleira frontal e petos, perfecta para chándal ou uso diario.', '2025-12-09 23:19:22.215', '12', 'https://res.cloudinary.com/dopixggee/image/upload/v1765322361/qjutexai31jczecxksob.jpg', 'true', '0', 'false', '15.2', 'false'),
+       ('22', 'Taza de cerámica "Camiño"', 'Taza de cerámica feita a man con esmalte azul inspirado no Atlántico. Apta para lavalouzas e microondas.', '2025-12-09 23:19:45.882', '15', 'https://res.cloudinary.com/dopixggee/image/upload/v1765323826/iybmqq1lwxqsjikco3nx.webp', 'true', '0', 'false', '14.9', 'false'),
+       ('23', 'Cunca para caldo galego', 'Cunca tradicional de cerámica artesanal deseñada para servir caldo galego, con acabado rústico e borde reforzado.', '2025-12-09 23:19:45.882', '15', 'https://res.cloudinary.com/dopixggee/image/upload/v1765323989/fmnuuabb3wm4cujw1rn5.jpg', 'true', '2', 'true', '19.5', 'false'),
+       ('24', 'Xogo de pratos "Atlántico" (4 unidades)', 'Conxunto de 4 pratos chans de cerámica con motivos mariños pintados a man. Ideal para ocasións especiais.', '2025-12-09 23:19:45.882', '15', 'https://res.cloudinary.com/dopixggee/image/upload/v1765323945/aq1yecuv0twdrntu1oai.avif', 'true', '0', 'false', '69.9', 'false'),
+       ('25', 'Cunca de café "Camiño de Santiago"', 'Cunca pequena de café con iconografía do Camiño de Santiago gravada en relevo.', '2025-12-09 23:19:45.882', '15', 'https://res.cloudinary.com/dopixggee/image/upload/v1765324748/xq1etq2fpigrf5piywsn.jpg', 'true', '1.5', 'true', '11.5', 'false'),
+       ('26', 'Xarra decorativa "Costa da Morte"', 'Xarra de cerámica de gran formato pensada para flores secas, con esmalte craquelado en tons verdes e azuis.', '2025-12-09 23:19:45.882', '15', 'https://res.cloudinary.com/dopixggee/image/upload/v1765324786/bazzfauxfswanf2pfn5v.jpg', 'true', '0', 'false', '54', 'false'),
+       ('27', 'Bandexa para petiscos', 'Bandexa rectangular de cerámica con tres compartimentos para servir petiscos ou tapas.', '2025-12-09 23:19:45.882', '15', 'https://res.cloudinary.com/dopixggee/image/upload/v1765324818/ir1njhepre1itkrepcln.jpg', 'true', '3', 'true', '27.9', 'false'),
+       ('28', 'Polo de punto de manga longa', 'Xersei fino con colo de polo e abotoadura de tres botóns en cor verde escuro.', '2025-12-09 23:20:14.128', '12', 'https://res.cloudinary.com/dopixggee/image/upload/v1765322413/e4mdwxzvinxhysktyoxr.webp', 'true', '0', 'false', '13.5', 'false'),
+       ('29', 'Chaqueta blazer casual azul', 'Chaqueta lixeira de estilo blazer en azul mariño, con peche de botóns e amplos petos frontais, ideal para un look semi-formal.', '2025-12-09 23:21:13.136', '12', 'https://res.cloudinary.com/dopixggee/image/upload/v1765322472/r37mrpoj61pllluu2vjn.jpg', 'true', '0', 'false', '21.4', 'false'),
+       ('30', 'Pantalón de chándal negro', 'Pantalón folgado e cómodo de chándal en cor negra cun axuste na cintura.', '2025-12-09 23:21:51.521', '12', 'https://res.cloudinary.com/dopixggee/image/upload/v1765322510/ji8vhyralcsw0ij3igx2.jpg', 'true', '0', 'false', '12.1', 'false'),
+       ('31', 'Xersei de punto básico verde oliva', 'Xersei de punto de manga longa, cun colo redondo e textura acanalada sutil, en cor verde oliva.', '2025-12-09 23:22:31.479', '12', 'https://res.cloudinary.com/dopixggee/image/upload/v1765322551/veuirnmso9tdsr8hvzob.jpg', 'true', '40', 'true', '11.1', 'false'),
+       ('32', 'Coroa de Nadal con follas secas', 'Coroa decorativa de Nadal elaborada con follas secas, bagas vermellas e ramas verdes. Ideal para pendurar na porta de entrada ou na parede e crear un ambiente acolledor.', '2025-12-09 23:24:25.896', '11', 'https://res.cloudinary.com/dopixggee/image/upload/v1765323917/uwnt5wqawcrifqjmxu6y.webp', 'true', '5', 'true', '34.9', 'false'),
+       ('33', 'Manta xeométrica de inverno', 'Manta de punto grosa cun debuxo xeométrico en tons verdes, marróns e vermellos. Perfecta para o sofá ou o pé da cama nos días fríos.', '2025-12-09 23:24:25.896', '11', 'https://res.cloudinary.com/dopixggee/image/upload/v1765323898/olujbmimiaq5in1rryft.webp', 'true', '8', 'true', '49.9', 'false'),
+       ('34', 'Cesta de almacenaxe onda mediana', 'Cesta rectangular de fibra natural cun remate ondulado na parte superior. Ideal para organizar mantas, revistas ou xoguetes no salón.', '2025-12-09 23:24:25.896', '11', 'https://res.cloudinary.com/dopixggee/image/upload/v1765323818/mgevurb42093rdl9nbfn.webp', 'true', '0', 'false', '19.9', 'false'),
+       ('35', 'Espello de parede efecto vintage', 'Espello rectangular con marco biselado e lixeiro efecto envellecido no vidro. Aporta luz e profundidade a calquera estancia cun estilo clásico.', '2025-12-09 23:24:25.896', '11', 'https://res.cloudinary.com/dopixggee/image/upload/v1765323774/vxvvpotvykayoseyeocf.webp', 'true', '0', 'false', '89', 'false'),
+       ('36', 'Funda de coxín liñas naturais', 'Funda de coxín rectangular en tecido beis con dúas liñas decorativas ao centro. Un básico atemporal para combinar con outros téxtiles do fogar.', '2025-12-09 23:24:25.896', '11', 'https://res.cloudinary.com/dopixggee/image/upload/v1765323756/c5vqdw9be4z2xic4qd7z.webp', 'true', '0', 'false', '24.9', 'false'),
+       ('37', 'Vela en faroliño de cristal e xute', 'Vela cilíndrica colocada nun faroliño de cristal transparente con base revestida en tecido tipo xute. Aporta unha luz cálida e suave para crear ambiente.', '2025-12-09 23:24:25.896', '11', 'https://res.cloudinary.com/dopixggee/image/upload/v1765323740/ujcpeuh1s9gs2wjk3g1i.webp', 'true', '0', 'false', '22.5', 'false'),
+       ('38', 'Tope de porta can de peluche', 'Tope de porta con forma de can tipo dachshund en tecido suave bouclé. Axuda a manter a porta aberta ao tempo que decora cun toque divertido.', '2025-12-09 23:24:25.896', '11', 'https://res.cloudinary.com/dopixggee/image/upload/v1765323724/t5unq8hl9rzzfz3x9li2.webp', 'true', '3', 'true', '27.9', 'false'),
+       ('39', 'Alfombra grande estampado floral', 'Alfombra de grande formato cun delicado estampado floral en tons neutros. Perfecta para o salón ou comedor, achega calidez e textura ao chan.', '2025-12-09 23:24:25.896', '11', 'https://res.cloudinary.com/dopixggee/image/upload/v1765323702/cxbdknrltqv8j1lihngk.webp', 'true', '0', 'false', '139', 'false'),
+       ('40', 'Lámpara de mesa pregable', 'Lámpara de mesa cunha pantalla de deseño pregado tipo origami e base metálica. Emite unha luz cálida ideal para mesillas, escritorios ou rincóns de lectura.', '2025-12-09 23:24:25.896', '11', 'https://res.cloudinary.com/dopixggee/image/upload/v1765323669/btkljjcgapvzj8pcjhmn.webp', 'true', '0', 'false', '59.9', 'false'),
+       ('41', 'Conxunto de bolas de Nadal florais', 'Dúas bolas de Nadal de vidro cun delicado debuxo floral e cinta de tecido para colgar. Perfectas para decorar a árbore ou coroas navideñas.', '2025-12-09 23:24:25.896', '11', 'https://res.cloudinary.com/dopixggee/image/upload/v1765323651/goxkmmiz5wz4pjmoq9vh.webp', 'true', '2', 'true', '14.9', 'false'),
+       ('42', 'Pantalón vaqueiro', 'Pantalón vaqueiro azul de corte amplo (baggy) e tiro alto, con acabado desgastado e costuras visibles.', '2025-12-09 23:26:06.682', '12', 'https://res.cloudinary.com/dopixggee/image/upload/v1765322766/qcfly4z5bcbzxb2cx7ef.webp', 'true', '10', 'true', '10.79', 'false'),
+       ('43', 'Baralla de cartas Balatro', 'Baralla de cartas con deseño pixel art multicolor inspirada en el videoxogo Balatro. Ideal para partidas entre amigos ou para coleccionistas.', '2025-12-09 23:26:51.185', '13', 'https://res.cloudinary.com/dopixggee/image/upload/v1765324539/mp9mrxmb4dyp0z75zwzc.webp', 'true', '2', 'true', '14.9', 'false'),
+       ('44', 'Lámina mapa 3D Dust II de Counter Strike 2', 'Lámina enmarcada cun mapa 3D da mítica pantalla Dust II de Counter Strike 2, perfecta para decorar o cuarto dun xogador de shooters.', '2025-12-09 23:26:51.185', '13', 'https://res.cloudinary.com/dopixggee/image/upload/v1765324682/nx0btj8o9rwprj0wt8og.webp', 'true', '0', 'false', '39.9', 'false'),
+       ('45', 'Set de parches de Pokemon', 'Conxunto de tres parches bordados de Pokemon, listos para coser en chaquetas, mochilas ou gorras.', '2025-12-09 23:26:51.185', '13', 'https://res.cloudinary.com/dopixggee/image/upload/v1765324729/wkbeomnlckwgoxempxw5.webp', 'true', '1.5', 'true', '11.9', 'false'),
+       ('46', 'Camiseta de Pochita', 'Camiseta negra unisex con bordado de Pochita de Chainsaw Man, perfecta para fans do manga e do anime.', '2025-12-09 23:26:51.185', '13', 'https://res.cloudinary.com/dopixggee/image/upload/v1765324879/artzof8rpcn1ictyskxk.webp', 'true', '3', 'true', '24.9', 'false'),
+       ('47', 'Colgante chave Eren', 'Colar con colgante en forma de chave de Eren de Shingeki No Kyojin dispoñible en acabado dourado, prateado e bronce.', '2025-12-09 23:26:51.185', '13', 'https://res.cloudinary.com/dopixggee/image/upload/v1765324949/hewrjvrvao8hmj6mnqsz.jpg', 'true', '2', 'true', '18.9', 'false'),
+       ('48', 'Díptico de Jinx e Powder', 'Conxunto de dous gravados que representan a profunda dualidade de Jinx e Powder de Arcane. Unha lámina reflicte a súa orixe melancólica (tons azuis) e a outra o seu caos explosivo (tons vermellos). Imprescindible para os fans.', '2025-12-09 23:26:51.185', '13', 'https://res.cloudinary.com/dopixggee/image/upload/v1765325216/skrzeyo1cxbtvocwaadv.webp', 'true', '0', 'false', '55.9', 'false'),
+       ('49', 'Póster de One Piece', 'Póster de One Piece estilo Ghibli co icónico Going Merry navegando. Captura a liberdade e a aventura da viaxe.', '2025-12-09 23:26:51.185', '13', 'https://res.cloudinary.com/dopixggee/image/upload/v1765325360/q7fkstbjyq8b5mtknhzz.webp', 'true', '0', 'false', '26.9', 'false'),
+       ('50', 'Lámpada LED Hornet', 'Lámpada inspirada en Hollow Knight con deseño de vidreira gótica. Mostra a Hornet en tons verdes. Ideal para luz ambiental e decoración gamer.', '2025-12-09 23:26:51.185', '13', 'https://res.cloudinary.com/dopixggee/image/upload/v1765325477/curifjic0pjgfifrbzrs.avif', 'true', '0', 'false', '15.9', 'false'),
+       ('51', 'Figura Hollow Knight', 'Unha figura elegante e minimalista que captura a alma do xogo Hollow Knight e é perfecta para decoración de escritorios ou estanterías.', '2025-12-09 23:26:51.185', '13', 'https://res.cloudinary.com/dopixggee/image/upload/v1765325588/bbetutzpsp42bgomcdaf.avif', 'true', '0', 'false', '34.9', 'false'),
+       ('52', 'Sudadeira Kimetsu No Yaiba', 'Sudadera negra oversize con carapucha que presenta un gravado minimalista cos ollos expresivos e intimidantes dos principais demos de Kimetsu no Yaiba.', '2025-12-09 23:26:51.185', '13', 'https://res.cloudinary.com/dopixggee/image/upload/v1765325687/dcl8ydkevtpgehgswj1v.webp', 'true', '20', 'true', '49.9', 'false'),
+       ('53', 'Pantalón de perna ancha', 'Pantalón formal negro de tiro alto e corte recto con perna ancha, cunha cintura simple e adaptado a outfits elegantes.', '2025-12-09 23:26:51.946', '12', 'https://res.cloudinary.com/dopixggee/image/upload/v1765322811/nhwwilutqclcyfuffmtx.webp', 'true', '0', 'false', '11.7', 'false'),
+       ('54', 'Impresora portátil sen tinta', 'Impresora portátil Bluetooth sen tinta, ideal para levar na mochila e imprimir documentos en calquera lugar. Inclúe funda ríxida de transporte.', '2025-12-09 23:29:23.597', '10', 'https://res.cloudinary.com/dopixggee/image/upload/v1765325790/awhky0axqnzaijmi0uli.jpg', 'true', '15', 'true', '119.9', 'false'),
+       ('55', 'Disco duro externo WD Black 2 TB', 'Disco duro externo WD Black de 2 TB pensado para xogos e almacenamento multimedia. Con carcasa resistente e deseño en negro mate.', '2025-12-09 23:29:23.597', '10', 'https://res.cloudinary.com/dopixggee/image/upload/v1765325806/eyaafosifxd6pel9osfg.webp', 'true', '0', 'false', '109.9', 'false'),
+       ('56', 'Libro electrónico Kobo', 'E-reader Kobo con pantalla antirreflexo e iluminación regulable. Permite levar milleiros de libros nun dispositivo lixeiro e cómodo para ler.', '2025-12-09 23:29:23.597', '10', 'https://res.cloudinary.com/dopixggee/image/upload/v1765325822/witd5vyub1lnquaej7vh.jpg', 'true', '10', 'true', '129', 'false'),
+       ('57', 'Enchufe intelixente WiFi', 'Enchufe intelixente compatible con asistentes de voz e control mediante app móbil. Permite programar acendidos e medir o consumo enerxético.', '2025-12-09 23:29:23.597', '10', 'https://res.cloudinary.com/dopixggee/image/upload/v1765325856/efmv4yhmjwc0tktdsmr0.jpg', 'true', '0', 'false', '19.9', 'false'),
+       ('58', 'Batería externa compacta', 'Power bank compacto de deseño minimalista, perfecto para cargar o móbil ou a tablet fóra da casa. Inclúe cable integrado.', '2025-12-09 23:29:23.597', '10', 'https://res.cloudinary.com/dopixggee/image/upload/v1765325876/ab71zdnuciir006duqio.jpg', 'true', '4', 'true', '29.9', 'false'),
+       ('59', 'Reloxo intelixente deportivo', 'Smartwatch con seguimento de actividade, frecuencia cardíaca e notificacións do móbil. Correa cómoda para uso diario e deporte.', '2025-12-09 23:29:23.597', '10', 'https://res.cloudinary.com/dopixggee/image/upload/v1765325889/bs9gvcf33g5vidalpdzw.jpg', 'true', '0', 'false', '89.9', 'false'),
+       ('60', 'Dron con cámara HD e maletín', 'Dron plegable con cámara HD, mando a distancia, dúas baterías e maletín de transporte. Ideal para iniciarse na fotografía aérea.', '2025-12-09 23:29:23.597', '10', 'https://res.cloudinary.com/dopixggee/image/upload/v1765325905/cbio5wtf9d9xyghjnhao.jpg', 'true', '20', 'true', '159', 'false'),
+       ('61', 'Impresora fotográfica portátil', 'Impresora portátil para móbil que permite imprimir instantáneas en papel fotográfico adhesivo, perfecta para álbumes e recordos.', '2025-12-09 23:29:23.597', '10', 'https://res.cloudinary.com/dopixggee/image/upload/v1765325920/d64pzuznf1ziyxmvqtvl.webp', 'true', '0', 'false', '89', 'false'),
+       ('62', 'Teclado mecánico retro estilo', 'Teclado mecánico con deseño retro e teclas en tons crema e laranxa. Ideal para escribir con comodidade e darlle personalidade ao escritorio.', '2025-12-09 23:29:23.597', '10', 'https://res.cloudinary.com/dopixggee/image/upload/v1765325962/js0ial3q8p5xrt6gs2fp.webp', 'true', '0', 'false', '79.9', 'false'),
+       ('63', 'Auriculares Bluetooth sobreorella', 'Auriculares Bluetooth sobreorella con deseño cómodo e pechado, perfectos para illarse do ruído e gozar da música durante horas.', '2025-12-09 23:29:23.597', '10', 'https://res.cloudinary.com/dopixggee/image/upload/v1765325977/luwicw1lig4cfmkoodgm.webp', 'true', '10', 'true', '99.9', 'false'),
+       ('64', 'Camisa casual de manga longa marrón', 'Camisa de home en cor marrón ou burdeos, con textura lixeira, colo clásico e peto frontal, para un estilo relaxado.', '2025-12-09 23:29:26.398', '12', 'https://res.cloudinary.com/dopixggee/image/upload/v1765322965/a3gc4ddwwqecmjmyzzth.jpg', 'true', '7', 'true', '13', 'false'),
+       ('65', 'Blázer gris de home', 'Unha chaqueta de home de cor gris ou marrón claro. Ten solapas tradicionais, un só botón frontal e petos con solapa.', '2025-12-09 23:32:53.208', '12', 'https://res.cloudinary.com/dopixggee/image/upload/v1765323172/ktu3acmn17sgvq5okcqv.jpg', 'true', '15', 'true', '15.1', 'false'),
+       ('66', 'Bolso negro', 'Un bolso de man ou tote de cor negra cun acabado que simula coiro. Ten asas longas para levalo ao ombreiro e un pequeno adorno metálico colgando.', '2025-12-09 23:34:10.494', '12', 'https://res.cloudinary.com/dopixggee/image/upload/v1765323249/kzvkdytkybq6x6pauz9w.jpg', 'true', '10', 'true', '35', 'false'),
+       ('67', 'Vestido gris', 'Un vestido de cor gris escuro. Ten un corte de lonxitude media, manga curta e un cinto integrado que axusta na cintura con tres botóns.', '2025-12-09 23:35:22.706', '12', 'https://res.cloudinary.com/dopixggee/image/upload/v1765323322/ajbimctbeeh93twnxrju.jpg', 'true', '0', 'false', '36.99', 'false'),
+       ('68', 'Sudadera de Home', 'Sudadera lisa de cor negra, de corte oversize ou folgado e cun pescozo redondo sen carapucha.', '2025-12-09 23:36:26.618', '12', 'https://res.cloudinary.com/dopixggee/image/upload/v1765323385/xalsic2yema67hmwbjdj.webp', 'true', '0', 'false', '31.4', 'false');
+
+INSERT INTO "public"."Category" ("id",
+                                 "name",
+                                 "createdAt")
+VALUES ('1', 'Papelería', '2025-11-04 22:43:18.469'),
+       ('2', 'Tecnoloxía', '2025-11-08 13:10:11.636'),
+       ('3', 'Cosas da casa', '2025-11-13 19:39:33.605'),
+       ('4', 'Ropa', '2025-11-13 19:39:33.605'),
+       ('5', 'Ropa home', '2025-11-13 19:39:33.605'),
+       ('6', 'Ropa muller', '2025-11-13 19:39:33.605'),
+       ('7', 'Friki', '2025-11-13 19:39:33.605');
+
+INSERT INTO public."Order" ("id",
+                            "status",
+                            "total",
+                            "shippingAddress",
+                            "paymentMethod",
+                            "userId")
+VALUES (1, 'Carrito', 44.88, 'Enderezo usuario 5 - Carrito', 'Tarjeta', 5),
+       (2, 'Pagado', 94.60, 'Enderezo usuario 5 - Pedido 1', 'Tarjeta', 5),
+       (3, 'Carrito', 130.90, 'Enderezo usuario 6 - Carrito', 'Tarjeta', 6),
+       (4, 'Pagado', 214.77, 'Enderezo usuario 6 - Pedido 1', 'Tarjeta', 6),
+       (5, 'Carrito', 49.80, 'Enderezo usuario 7 - Carrito', 'Tarjeta', 7),
+       (6, 'Pagado', 169.70, 'Enderezo usuario 7 - Pedido 1', 'Tarjeta', 7),
+       (7, 'Carrito', 27.89, 'Enderezo usuario 8 - Carrito', 'Tarjeta', 8),
+       (8, 'Pagado', 78.30, 'Enderezo usuario 8 - Pedido 1', 'Tarjeta', 8),
+       (9, 'Carrito', 149.70, 'Enderezo usuario 9 - Carrito', 'Tarjeta', 9),
+       (10, 'Pagado', 198.70, 'Enderezo usuario 9 - Pedido 1', 'Tarjeta', 9),
+       (11, 'Carrito', 163.90, 'Enderezo usuario 10 - Carrito', 'Tarjeta', 10),
+       (12, 'Pagado', 139.60, 'Enderezo usuario 10 - Pedido 1', 'Tarjeta', 10),
+       (13, 'Carrito', 41.80, 'Enderezo usuario 11 - Carrito', 'Tarjeta', 11),
+       (14, 'Pagado', 109.70, 'Enderezo usuario 11 - Pedido 1', 'Tarjeta', 11),
+       (15, 'Carrito', 169.80, 'Enderezo usuario 12 - Carrito', 'Tarjeta', 12),
+       (16, 'Pagado', 199.30, 'Enderezo usuario 12 - Pedido 1', 'Tarjeta', 12);
+
+INSERT INTO public."OrderProduct" ("id", "quantity", "unitPrice", "subtotal", "orderId", "productId", "status", "payed")
 VALUES
--- 1. Obradoiro de cerámica
-(
-    'Obradoiro Camiño da Terra',
-    'contacto@caminodaterra.gal',
-    'Taller artesanal de cerámica gallega inspirada en los paisajes del Camino de Santiago. Piezas únicas hechas a mano, producción local y sostenible.',
-    'Artesanía en cerámica',
-    '+34 600 123 456',
-    'Rúa das Artesáns 12, baixo',
-    'Santiago de Compostela',
-    'A Coruña',
-    '15703',
-    'password123',
-    'ES12 2080 0000 1234 5678 9012',
-    'https://instagram.com/caminodaterra',
-    NULL,
-    'https://example.com/logos/camino-da-terra.png'
+-- Pedido 1 (Carrito, user 5)
+(1, 2, 4.99, 9.98, 1, 2, 'Pendiente', FALSE),
+(2, 1, 34.90, 34.90, 1, 32, 'Pendiente', FALSE),
+
+-- Pedido 2 (Pagado, user 5)
+(3, 1, 49.90, 49.90, 2, 33, 'Aceptado', TRUE),
+(4, 2, 14.90, 29.80, 2, 22, 'Preparando', TRUE),
+(5, 1, 14.90, 14.90, 2, 43, 'Enviado', TRUE),
+
+-- Pedido 3 (Carrito, user 6)
+(6, 1, 11.00, 11.00, 3, 20, 'Pendiente', FALSE),
+(7, 1, 119.90, 119.90, 3, 54, 'Pendiente', FALSE),
+
+-- Pedido 4 (Pagado, user 6)
+(8, 1, 109.90, 109.90, 4, 55, 'Pendiente', TRUE),
+(9, 1, 89.90, 89.90, 4, 59, 'Aceptado', TRUE),
+(10, 3, 4.99, 14.97, 4, 2, 'Enviado', TRUE),
+
+-- Pedido 5 (Carrito, user 7)
+(11, 1, 34.90, 34.90, 5, 32, 'Pendiente', FALSE),
+(12, 1, 14.90, 14.90, 5, 43, 'Pendiente', FALSE),
+
+-- Pedido 6 (Pagado, user 7)
+(13, 1, 69.90, 69.90, 6, 24, 'Aceptado', TRUE),
+(14, 1, 49.90, 49.90, 6, 33, 'Preparando', TRUE),
+(15, 1, 49.90, 49.90, 6, 52, 'Enviado', TRUE),
+
+-- Pedido 7 (Carrito, user 8)
+(16, 1, 12.99, 12.99, 7, 3, 'Pendiente', FALSE),
+(17, 1, 14.90, 14.90, 7, 22, 'Pendiente', FALSE),
+
+-- Pedido 8 (Pagado, user 8)
+(18, 2, 11.00, 22.00, 8, 20, 'Pendiente', TRUE),
+(19, 1, 21.40, 21.40, 8, 29, 'Aceptado', TRUE),
+(20, 1, 34.90, 34.90, 8, 32, 'Enviado', TRUE),
+
+-- Pedido 9 (Carrito, user 9)
+(21, 1, 119.90, 119.90, 9, 54, 'Pendiente', FALSE),
+(22, 2, 14.90, 29.80, 9, 22, 'Pendiente', FALSE),
+
+-- Pedido 10 (Pagado, user 9)
+(23, 1, 129.00, 129.00, 10, 56, 'Aceptado', TRUE),
+(24, 2, 19.90, 39.80, 10, 57, 'Preparando', TRUE),
+(25, 1, 29.90, 29.90, 10, 58, 'Enviado', TRUE),
+
+-- Pedido 11 (Carrito, user 10)
+(26, 1, 24.90, 24.90, 11, 36, 'Pendiente', FALSE),
+(27, 1, 139.00, 139.00, 11, 39, 'Pendiente', FALSE),
+
+-- Pedido 12 (Pagado, user 10)
+(28, 1, 49.90, 49.90, 12, 33, 'Preparando', TRUE),
+(29, 2, 22.50, 45.00, 12, 37, 'Enviado', TRUE),
+(30, 3, 14.90, 44.70, 12, 41, 'Cancelado', TRUE),
+
+-- Pedido 13 (Carrito, user 11)
+(31, 1, 14.90, 14.90, 13, 43, 'Pendiente', FALSE),
+(32, 1, 26.90, 26.90, 13, 49, 'Pendiente', FALSE),
+
+-- Pedido 14 (Pagado, user 11)
+(33, 1, 24.90, 24.90, 14, 46, 'Aceptado', TRUE),
+(34, 1, 49.90, 49.90, 14, 52, 'Enviado', TRUE),
+(35, 1, 34.90, 34.90, 14, 51, 'Aceptado', TRUE),
+
+-- Pedido 15 (Carrito, user 12)
+(36, 1, 89.90, 89.90, 15, 59, 'Pendiente', FALSE),
+(37, 1, 79.90, 79.90, 15, 62, 'Pendiente', FALSE),
+
+-- Pedido 16 (Pagado, user 12)
+(38, 4, 14.90, 59.60, 16, 22, 'Aceptado', TRUE),
+(39, 1, 69.90, 69.90, 16, 24, 'Preparando', TRUE),
+(40, 2, 34.90, 69.80, 16, 32, 'Enviado', TRUE);
+
+INSERT INTO public."UserProduct"
+("id", "title", "review", "rating", "userId", "productId")
+VALUES
+-- Usuario 5, produtos 33, 22, 43
+(1,
+ 'Encantado coa compra',
+ 'Moi bo produto, mellor do que esperaba. A calidade é moi alta e chegou perfectamente embalado.',
+ 4.8,
+ 5,
+ 33
+),
+(2,
+ 'Moi práctico no día a día',
+ 'Uso este produto case a diario e estou moi satisfeito. É cómodo, resistente e cumpre o que promete.',
+ 4.5,
+ 5,
+ 22
+),
+(3,
+ 'Boa relación calidade-prezo',
+ 'Non é perfecto, pero pola súa prezo está moi ben. Repetiría a compra sen dúbida.',
+ 4.2,
+ 5,
+ 43
 ),
 
--- 2. Cosmética natural
-(
-    'Brétema Cosmética Natural',
-    'hola@bretemacosmetica.gal',
-    'Pequeña empresa familiar que elabora jabones y cosmética natural con ingredientes ecológicos gallegos como aceite de oliva, castaña y flores silvestres.',
-    'Cosmética artesanal',
-    '+34 601 234 567',
-    'Avda. do Mar 45, local 3',
-    'A Coruña',
-    'A Coruña',
-    '15008',
-    'password123',
-    'ES21 2080 0000 9876 5432 1098',
-    'https://instagram.com/bretemacosmetica',
-    'https://facebook.com/bretemacosmetica',
-    'https://example.com/logos/bretema.png'
+-- Usuario 6, produtos 55, 59, 2
+(4,
+ 'Produto moi recomendable',
+ 'Sorprendeume para ben. Funciona sen problemas e nótase que está ben construído.',
+ 4.7,
+ 6,
+ 55
+),
+(5,
+ 'Xenial para o que necesitaba',
+ 'Era xusto o que estaba buscando. Fácil de usar e con boas prestacións para o prezo que ten.',
+ 4.6,
+ 6,
+ 59
+),
+(6,
+ 'Compra correcta',
+ 'Cumpre coa súa función, aínda que o acabamento podería ser un pouco mellor. En xeral estou contento.',
+ 3.9,
+ 6,
+ 2
 ),
 
--- 3. Alimentación artesanal (queixos e marmeladas)
-(
-    'Sabores da Fraga',
-    'info@saboresdafraga.gal',
-    'Queixos artesáns, marmeladas e mel producidos en pequenas explotacións gandeiras e apícolas do interior de Galicia, cun forte compromiso coa economía local.',
-    'Alimentación artesanal',
-    '+34 602 345 678',
-    'Lugar A Fraga 7',
-    'Ourense',
-    'Ourense',
-    '32005',
-    'password123',
-    'ES56 2080 0000 1111 2222 3333',
-    NULL,
-    'https://facebook.com/saboresdafraga',
-    'https://example.com/logos/sabores-da-fraga.png'
+-- Usuario 7, produtos 24, 33, 52
+(7,
+ 'Moi elegante',
+ 'O deseño é precioso e queda moi ben na casa. Nótase o coidado nos detalles.',
+ 4.9,
+ 7,
+ 24
+),
+(8,
+ 'Boa calidade',
+ 'Materia prima de boa calidade e sensación de produto duradeiro. Podo recomendalo sen problema.',
+ 4.4,
+ 7,
+ 33
+),
+(9,
+ 'Encantoume',
+ 'Superou as miñas expectativas. Foi un agasallo e gustou moitísimo.',
+ 5.0,
+ 7,
+ 52
 ),
 
--- 4. Téxtil e complementos
-(
-    'Fíos do Atlántico',
-    'contacto@fiosdoatlantico.gal',
-    'Marca de roupa e complementos feitos con tecidos orgánicos e motivos inspirados nas rías galegas. Producción en pequenos talleres locais.',
-    'Textil y complementos',
-    '+34 603 456 789',
-    'Rúa do Porto 9',
-    'Vigo',
-    'Pontevedra',
-    '36202',
-    'password123',
-    'ES78 2080 0000 4444 5555 6666',
-    'https://instagram.com/fiosdoatlantico',
-    'https://facebook.com/fiosdoatlantico',
-    'https://example.com/logos/fios-do-atlantico.png'
+-- Usuario 8, produtos 20, 29, 32
+(10,
+ 'Perfecto para o día a día',
+ 'Moi útil e cómodo, axúdame moito na rutina diaria. A calidade é mellor da esperada.',
+ 4.5,
+ 8,
+ 20
+),
+(11,
+ 'Bo produto, envío rápido',
+ 'Chegou antes do previsto e en perfecto estado. O produto coincide co descrito.',
+ 4.3,
+ 8,
+ 29
+),
+(12,
+ 'Moi boa experiencia de compra',
+ 'Tanto o produto como a experiencia na tenda foron excelentes. Repetirei seguro.',
+ 4.9,
+ 8,
+ 32
 ),
 
--- 5. Madeira e decoración
-(
-    'Bosque de Carballos',
-    'ola@bosquedecarballos.gal',
-    'Pequeno obradoiro de carpintería artística especializado en pezas de decoración e menaxe do fogar en madeira de carballo galego certificada.',
-    'Decoración en madera',
-    '+34 604 567 890',
-    'Rúa da Carballeira 3',
-    'Lugo',
-    'Lugo',
-    '27002',
-    'password123',
-    'ES90 2080 0000 7777 8888 9999',
-    'https://instagram.com/bosquedecarballos',
-    NULL,
-    'https://example.com/logos/bosque-de-carballos.png'
+-- Usuario 9, produtos 56, 57, 58
+(13,
+ 'Excelente calidade',
+ 'Nótase que é un artigo de boa calidade. Moi satisfeita co resultado despois de varios días de uso.',
+ 4.8,
+ 9,
+ 56
+),
+(14,
+ 'Boa opción',
+ 'Non é o mellor do mercado, pero pola súa prezo está moi ben. Recoméndoo se buscas algo funcional.',
+ 4.1,
+ 9,
+ 57
+),
+(15,
+ 'Cumpre o prometido',
+ 'Produto tal como se describe na ficha. Sen sorpresas, nin boas nin malas, pero correcto.',
+ 3.8,
+ 9,
+ 58
+),
+
+-- Usuario 10, produtos 33, 37, 41
+(16,
+ 'Moi satisfeito',
+ 'A calidade é moi boa e vese resistente. Seguramente volva mercar desta empresa.',
+ 4.6,
+ 10,
+ 33
+),
+(17,
+ 'Práctico e ben deseñado',
+ 'Un produto práctico, cun deseño coidado. Gustoume especialmente o acabado.',
+ 4.4,
+ 10,
+ 37
+),
+(18,
+ 'Está ben, aínda que mellorable',
+ 'En xeral estou contento, aínda que esperaba algún detalle extra polo prezo. Aínda así é recomendable.',
+ 3.7,
+ 10,
+ 41
+),
+
+-- Usuario 11, produtos 46, 52, 51
+(19,
+ 'Moi boa compra',
+ 'Chegou perfecto e dende o primeiro día estou encantada. Cumpre exactamente o que buscaba.',
+ 4.9,
+ 11,
+ 46
+),
+(20,
+ 'Espectacular',
+ 'Un produto de dez. A calidade, o deseño e o acabado son excelentes.',
+ 5.0,
+ 11,
+ 52
+),
+(21,
+ 'Boa impresión xeral',
+ 'Funcionamento correcto e sensación de produto seguro. Volvería escoller esta referencia.',
+ 4.3,
+ 11,
+ 51
+),
+
+-- Usuario 12, produtos 22, 24, 32
+(22,
+ 'Moi útil e cómodo',
+ 'Encántame o uso que lle estou dando. Adaptouse moi ben ao que necesitaba na casa.',
+ 4.6,
+ 12,
+ 22
+),
+(23,
+ 'Produto de confianza',
+ 'Xa coñecía esta marca e volveu estar á altura. Moi contento coa compra.',
+ 4.7,
+ 12,
+ 24
+),
+(24,
+ 'Boa calidade a bo prezo',
+ 'Polo prezo que ten, a calidade é moi boa. Sen dúbida unha boa elección.',
+ 4.5,
+ 12,
+ 32
 );
 
-# --- PRODUCTOS ---
-INSERT INTO public."Product"
-  ("name", "description", "image", "enabled", "price",
-   "discounted", "discount", "deleted", "businessId")
-VALUES
-(
-  'Taza de cerámica "Camiño"',
-  'Taza de cerámica hecha a mano con esmalte azul inspirado en el Atlántico. Apta para lavavajillas y microondas.',
-  '',
-  TRUE,
-  14.90,
-  FALSE,
-  0.0,
-  FALSE,
-  (SELECT id FROM public."Business" WHERE email = 'contacto@caminodaterra.gal')
-),
-(
-  'Cuenco tradicional para caldo galego',
-  'Cuenco de cerámica artesanal diseñado para servir caldo gallego, con acabado rústico y borde reforzado.',
-  '',
-  TRUE,
-  19.50,
-  TRUE,
-  2.00,
-  FALSE,
-  (SELECT id FROM public."Business" WHERE email = 'contacto@caminodaterra.gal')
-),
-(
-  'Xogo de pratos "Atlántico" (4 unidades)',
-  'Set de 4 platos llanos de cerámica con motivos marinos pintados a mano. Ideal para mesas especiales.',
-  '',
-  TRUE,
-  69.90,
-  FALSE,
-  0.0,
-  FALSE,
-  (SELECT id FROM public."Business" WHERE email = 'contacto@caminodaterra.gal')
-),
-(
-  'Cunca para café "Camiño de Santiago"',
-  'Pequeña cunca de café con iconografía del Camiño de Santiago grabada en relieve.',
-  '',
-  TRUE,
-  11.50,
-  TRUE,
-  1.50,
-  FALSE,
-  (SELECT id FROM public."Business" WHERE email = 'contacto@caminodaterra.gal')
-),
-(
-  'Xarra decorativa "Costa da Morte"',
-  'Jarra de cerámica de gran formato pensada para flores secas, con esmalte craquelado en tonos verdes e azuis.',
-  '',
-  TRUE,
-  54.00,
-  FALSE,
-  0.0,
-  FALSE,
-  (SELECT id FROM public."Business" WHERE email = 'contacto@caminodaterra.gal')
-),
-(
-  'Bandexa para tapas',
-  'Bandeja rectangular de cerámica con tres compartimentos para servir tapas o petiscos.',
-  '',
-  TRUE,
-  27.90,
-  TRUE,
-  3.00,
-  FALSE,
-  (SELECT id FROM public."Business" WHERE email = 'contacto@caminodaterra.gal')
-);
-
-INSERT INTO public."Product"
-("name", "description", "image", "enabled", "price",
- "discounted", "discount", "deleted", "businessId")
-VALUES
-    (
-        'Xabón de castaña e mel',
-        'Xabón artesanal elaborado con aceite de oliva, extracto de castaña galega e mel local. Ideal para peles secas.',
-        '',
-        TRUE,
-        6.90,
-        FALSE,
-        0.0,
-        FALSE,
-        (SELECT id FROM public."Business" WHERE email = 'hola@bretemacosmetica.gal')
-    ),
-    (
-        'Xabón de lavanda relax',
-        'Pastilla de xabón con aceite esencial de lavanda, pensada para rutinas de noite e baños relaxantes.',
-        '',
-        TRUE,
-        6.50,
-        TRUE,
-        1.00,
-        FALSE,
-        (SELECT id FROM public."Business" WHERE email = 'hola@bretemacosmetica.gal')
-    ),
-    (
-        'Crema hidratante facial "Brétema"',
-        'Crema lixeira para uso diario con aloe vera, aceite de améndoas doces e hidrolato de camomila.',
-        '',
-        TRUE,
-        21.90,
-        FALSE,
-        0.0,
-        FALSE,
-        (SELECT id FROM public."Business" WHERE email = 'hola@bretemacosmetica.gal')
-    ),
-    (
-        'Bálsamo labial de mel e limón',
-        'Bálsamo labial nutritivo con cera de abella, mel e un lixeiro toque cítrico de limón.',
-        '',
-        TRUE,
-        4.90,
-        TRUE,
-        0.50,
-        FALSE,
-        (SELECT id FROM public."Business" WHERE email = 'hola@bretemacosmetica.gal')
-    ),
-    (
-        'Champú sólido de ortiga',
-        'Champú sólido con extracto de ortiga e aceite de ricino, formulado para coidar o coiro cabeludo e fortalecer o cabelo.',
-        '',
-        TRUE,
-        9.80,
-        FALSE,
-        0.0,
-        FALSE,
-        (SELECT id FROM public."Business" WHERE email = 'hola@bretemacosmetica.gal')
-    ),
-    (
-        'Pack regalo "Brétema no mar"',
-        'Caixa regalo que inclúe dous xabóns artesáns, un bálsamo labial e unha mostra de crema hidratante.',
-        '',
-        TRUE,
-        29.90,
-        TRUE,
-        5.00,
-        FALSE,
-        (SELECT id FROM public."Business" WHERE email = 'hola@bretemacosmetica.gal')
-    );
-
+INSERT INTO "public"."_CategoryToProduct" ("A",
+                                           "B")
+VALUES ('1', '2'),
+       ('1', '3'),
+       ('1', '4'),
+       ('1', '5'),
+       ('1', '6'),
+       ('1', '7'),
+       ('1', '10'),
+       ('1', '11'),
+       ('1', '12'),
+       ('1', '13'),
+       ('1', '54'),
+       ('1', '61'),
+       ('2', '54'),
+       ('2', '55'),
+       ('2', '56'),
+       ('2', '57'),
+       ('2', '58'),
+       ('2', '59'),
+       ('2', '60'),
+       ('2', '61'),
+       ('2', '62'),
+       ('2', '63'),
+       ('3', '22'),
+       ('3', '23'),
+       ('3', '24'),
+       ('3', '25'),
+       ('3', '26'),
+       ('3', '27'),
+       ('3', '32'),
+       ('3', '33'),
+       ('3', '34'),
+       ('3', '35'),
+       ('3', '36'),
+       ('3', '37'),
+       ('3', '38'),
+       ('3', '39'),
+       ('3', '40'),
+       ('3', '41'),
+       ('3', '48'),
+       ('3', '49'),
+       ('3', '51'),
+       ('4', '20'),
+       ('4', '21'),
+       ('4', '28'),
+       ('4', '31'),
+       ('4', '42'),
+       ('4', '46'),
+       ('4', '52'),
+       ('4', '53'),
+       ('4', '64'),
+       ('4', '65'),
+       ('4', '66'),
+       ('4', '67'),
+       ('4', '68'),
+       ('5', '20'),
+       ('5', '21'),
+       ('5', '28'),
+       ('5', '29'),
+       ('5', '30'),
+       ('5', '31'),
+       ('5', '42'),
+       ('5', '46'),
+       ('5', '52'),
+       ('5', '64'),
+       ('5', '65'),
+       ('5', '68'),
+       ('6', '29'),
+       ('6', '30'),
+       ('6', '46'),
+       ('6', '52'),
+       ('6', '53'),
+       ('6', '66'),
+       ('6', '67'),
+       ('7', '43'),
+       ('7', '44'),
+       ('7', '45'),
+       ('7', '46'),
+       ('7', '47'),
+       ('7', '48'),
+       ('7', '49'),
+       ('7', '50'),
+       ('7', '51'),
+       ('7', '52');
