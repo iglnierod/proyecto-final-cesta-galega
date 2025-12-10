@@ -1,11 +1,7 @@
 // app/api/product/route.ts
 // app/api/product/route.ts
 import { NextResponse } from 'next/server';
-import {
-  createProduct,
-  getFilteredProducts,
-  getFilteredProductsBusiness,
-} from '@/app/lib/product/product.repo';
+import { createProduct, getFilteredProducts } from '@/app/lib/product/product.repo';
 import {
   toProductWithBusinessDTO,
   toProductWithCategoriesDTO,
@@ -48,28 +44,15 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: 'maxPrice non é válido' }, { status: 400 });
     }
 
-    let products;
-    if (businessId) {
-      products = await getFilteredProductsBusiness({
-        businessId,
-        search,
-        category,
-        sort,
-        minPrice,
-        maxPrice,
-        filter,
-      });
-    } else {
-      products = await getFilteredProducts({
-        businessId,
-        search,
-        category,
-        sort,
-        minPrice,
-        maxPrice,
-        filter,
-      });
-    }
+    const products = await getFilteredProducts({
+      businessId,
+      search,
+      category,
+      sort,
+      minPrice,
+      maxPrice,
+      filter,
+    });
 
     return NextResponse.json({
       products: products.map((p) => toProductWithCategoriesDTO(p)),
