@@ -1,6 +1,7 @@
 // app/lib/userProduct/userProduct.repo.ts
 import prisma from '@/app/lib/prisma';
 import { ProductReviewCreateInput } from '@/app/lib/review/userProduct.schema';
+import { BusinessReviewSummaryType } from '@/app/lib/business/stats/stats.schema';
 
 // Crea ou actualiza a valoración dun produto a partir dun pedido
 export async function createOrUpdateReviewFromOrderProduct(
@@ -129,4 +130,37 @@ export async function findReviewsForProduct(productId: number) {
       createdAt: 'desc',
     },
   });
+}
+
+/* DASHBOARD */
+export async function getLatestReviewsForBusiness(
+  businessId: number,
+  limit: number = 2
+): Promise<BusinessReviewSummaryType[]> {
+  const rows = await prisma.userProduct.findMany({
+    where: {
+      product: {
+        businessId,
+      },
+    },
+    include: {
+      user: true,
+      product: true,
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+    take: limit,
+  });
+
+  return rows.map((r) => ({
+    id: r.id,
+    productId: r.productId,
+    productName: r.product.name,
+    title: r.title,
+    review: r.review,
+    rating: r.rating,
+    createdAt: r.createdAt.toISOString(),
+    userName: r.user.name,
+  }));
 }

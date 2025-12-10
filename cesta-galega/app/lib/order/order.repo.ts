@@ -4,6 +4,10 @@ import {
   OrderProductStatus,
 } from '@/app/lib/order/order.schema';
 import prisma from '@/app/lib/prisma';
+import {
+  BusinessDashboardStatsType,
+  BusinessRecentOrderLineType,
+} from '@/app/lib/business/stats/stats.schema';
 
 export async function createOrder(data: OrderCreateInput) {
   const products = await prisma.product.findMany({
@@ -401,7 +405,6 @@ export async function checkoutOrderForUser(
       throw new Error('O pedido non ten produtos');
     }
 
-    // Se xa está todo pagado, podemos bloquear un segundo pago se queres
     const allPayed = existing.OrderProduct.every((op) => op.payed);
     if (allPayed) {
       throw new Error('Este pedido xa foi pagado');
@@ -467,4 +470,108 @@ export async function getOrdersForUser(userId: number) {
       createdAt: 'desc',
     },
   });
+}
+
+export async function getBusinessLast7DaysRevenue(businessId: number): Promise<number> {
+  const now = new Date();
+  const from = new Date();
+  from.setDate(now.getDate() - 7);
+
+  const agg = await prisma.orderProduct.aggregate({
+    _sum: {
+      subtotal: true,
+    },
+    where: {
+      payed: true,
+      product: {
+        businessId,
+      },
+      order: {
+        createdAt: {
+          gte: from,
+        },
+      },
+    },
+  });
+
+  return agg._sum.subtotal ?? 0;
+}
+
+export async function getBusinessPendingOrderLines(businessId: number): Promise<number> {
+  const count = await prisma.orderProduct.count({
+    where: {
+      product: {
+        businessId,
+      },
+      payed: true,
+      status: {
+        in: ['Pendiente', 'Aceptado', 'Preparando'],
+      },
+    },
+  });
+
+  return count;
+}
+
+export async function getBusinessActiveProductsCount(businessId: number): Promise<number> {
+  const count = await prisma.product.count({
+    where: {
+      businessId,
+      deleted: false,
+      enabled: true,
+    },
+  });
+
+  return count;
+}
+
+export async function getBusinessDashboardStats(
+  businessId: number
+): Promise<BusinessDashboardStatsType> {
+  const [last7DaysRevenue, pendingOrderLines, activeProducts] = await Promise.all([
+    getBusinessLast7DaysRevenue(businessId),
+    getBusinessPendingOrderLines(businessId),
+    getBusinessActiveProductsCount(businessId),
+  ]);
+
+  return {
+    last7DaysRevenue,
+    pendingOrderLines,
+    activeProducts,
+  };
+}
+
+export async function getBusinessRecentOrderLines(
+  businessId: number,
+  limit: number = 5
+): Promise<BusinessRecentOrderLineType[]> {
+  const rows = await prisma.orderProduct.findMany({
+    where: {
+      payed: true,
+      product: {
+        businessId,
+      },
+    },
+    include: {
+      order: true,
+      product: true,
+    },
+    orderBy: {
+      order: {
+        createdAt: 'desc',
+      },
+    },
+    take: limit,
+  });
+
+  return rows.map((item) => ({
+    id: item.id,
+    orderId: item.orderId,
+    productId: item.productId,
+    productName: item.product.name,
+    quantity: item.quantity,
+    status: item.status,
+    payed: item.payed ?? false,
+    createdAt: item.order.createdAt.toISOString(),
+  }));
 }
