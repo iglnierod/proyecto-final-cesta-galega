@@ -16,6 +16,7 @@ VALUES ('5', 'Ana GN', 'anagnovoa@iessanclemente.net', '$2b$10$z/nqwsLtEBZ4DGi1A
        ('11', 'Marta Alves Domínguez', 'marta.alves@example.com', '$2b$10$CbVnqdoLZLrX1P8hMyd6h.MbrKUjVPRRsaH3zgAMkOa0ru0nmWLte', '2025-12-10 14:37:20.213', 'A Coruña', 'Mujer', '1985-09-27 00:00:00', 'false'),
        ('12', 'Diego Núñez Rial', 'diego.nunez@example.com', '$2b$10$CbVnqdoLZLrX1P8hMyd6h.MbrKUjVPRRsaH3zgAMkOa0ru0nmWLte', '2025-12-10 14:37:20.213', 'Pontevedra', 'Hombre', '1998-04-30 00:00:00', 'false');
 
+
 INSERT INTO "public"."Business" ("id",
                                  "name",
                                  "email",
@@ -37,7 +38,8 @@ VALUES ('9', 'Tinta e Lapis', 'prueba@gmail.com', 'Call1, Santiago', 'Santiago',
        ('11', 'O Rincon Calido S.A', 'orinconcalido@gmail.com', 'Avenida Pontevedra, nº75', 'Pontevedra', 'PONTEVEDRA', '$2b$10$NAcK61Ek.KRXRUN45JqGY.t4d794VpniMTKnQpZU05VtHOQn01bWO', '2025-12-05 11:57:17.001', 'S.A', '678 644 923', '65432', NULL, NULL, NULL, NULL, NULL),
        ('12', 'Ria Moda S.L', 'riamoda@gmail.com', 'Avenida Riazor, 23', 'A Coruña', 'CORUÑA, A', '$2b$10$xPJfsxo5ISP6M1ZaqYetxuw/3MsFDqnnLtgJM3u/dJkHvTZZOLc0K', '2025-12-05 11:57:59.353', 'AUTONOMO', '644 658 786', '20123', NULL, NULL, NULL, NULL, NULL),
        ('13', 'O Fogar do Trasno', 'ofogardotrasno@gmail.com', 'Avenida de Muros, 53', 'Muros', 'CORUÑA, A', '$2b$10$x./fitRexnGsL2M9EE874Oq1CgTosy7MfYtMbpFDYXAd31M8mAaiO', '2025-12-05 11:58:46.764', 'S.L', '654 677 682', '23145', NULL, NULL, NULL, NULL, NULL),
-       ('15', 'Obradoiro Camiño da Terra', 'contacto@caminodaterra.gal', 'Rúa das Artesáns 12, baixo', 'Santiago de Compostela', 'A Coruña', '$2b$10$zxfFRCgQI8H2DJiWnSYWz.q37SlieNYnZeGeaUycxhiDXZ89DdgCe', '2025-12-09 23:04:47.392', 'Artesanía en cerámica', '+34 600 123 456', '15703', 'Taller artesanal de cerámica gallega inspirada en los paisajes del Camino de Santiago. Piezas únicas hechas a mano, producción local y sostenible.' , NULL, 'ES12 2080 0000 1234 5678 9012', 'https://instagram.com/caminodaterra', 'https://example.com/logos/camino-da-terra.png');
+       ('15', 'Obradoiro Camiño da Terra', 'contacto@caminodaterra.gal', 'Rúa das Artesáns 12, baixo', 'Santiago de Compostela', 'A Coruña', '$2b$10$zxfFRCgQI8H2DJiWnSYWz.q37SlieNYnZeGeaUycxhiDXZ89DdgCe', '2025-12-09 23:04:47.392', 'Artesanía en cerámica', '+34 600 123 456', '15703', 'Taller artesanal de cerámica gallega inspirada en los paisajes del Camino de Santiago. Piezas únicas hechas a mano, producción local y sostenible.', NULL, 'ES12 2080 0000 1234 5678 9012', 'https://instagram.com/caminodaterra', 'https://example.com/logos/camino-da-terra.png');
+
 
 INSERT INTO "public"."Product" ("id",
                                 "name",
@@ -112,6 +114,7 @@ VALUES ('1', 'fjañklsdfjañlkdsjf lkasfjlkñ asjfañl', 'ñasjdfñl ajsñdlkf j
        ('67', 'Vestido gris', 'Un vestido de cor gris escuro. Ten un corte de lonxitude media, manga curta e un cinto integrado que axusta na cintura con tres botóns.', '2025-12-09 23:35:22.706', '12', 'https://res.cloudinary.com/dopixggee/image/upload/v1765323322/ajbimctbeeh93twnxrju.jpg', 'true', '0', 'false', '36.99', 'false'),
        ('68', 'Sudadera de Home', 'Sudadera lisa de cor negra, de corte oversize ou folgado e cun pescozo redondo sen carapucha.', '2025-12-09 23:36:26.618', '12', 'https://res.cloudinary.com/dopixggee/image/upload/v1765323385/xalsic2yema67hmwbjdj.webp', 'true', '0', 'false', '31.4', 'false');
 
+
 INSERT INTO "public"."Category" ("id",
                                  "name",
                                  "createdAt")
@@ -122,6 +125,7 @@ VALUES ('1', 'Papelería', '2025-11-04 22:43:18.469'),
        ('5', 'Ropa home', '2025-11-13 19:39:33.605'),
        ('6', 'Ropa muller', '2025-11-13 19:39:33.605'),
        ('7', 'Friki', '2025-11-13 19:39:33.605');
+
 
 INSERT INTO public."Order" ("id",
                             "status",
@@ -146,266 +150,112 @@ VALUES (1, 'Carrito', 44.88, 'Enderezo usuario 5 - Carrito', 'Tarjeta', 5),
        (15, 'Carrito', 169.80, 'Enderezo usuario 12 - Carrito', 'Tarjeta', 12),
        (16, 'Pagado', 199.30, 'Enderezo usuario 12 - Pedido 1', 'Tarjeta', 12);
 
-INSERT INTO public."OrderProduct" ("id", "quantity", "unitPrice", "subtotal", "orderId", "productId", "status", "payed")
-VALUES
--- Pedido 1 (Carrito, user 5)
-(1, 2, 4.99, 9.98, 1, 2, 'Pendiente', FALSE),
-(2, 1, 34.90, 34.90, 1, 32, 'Pendiente', FALSE),
 
--- Pedido 2 (Pagado, user 5)
-(3, 1, 49.90, 49.90, 2, 33, 'Aceptado', TRUE),
-(4, 2, 14.90, 29.80, 2, 22, 'Preparando', TRUE),
-(5, 1, 14.90, 14.90, 2, 43, 'Enviado', TRUE),
+INSERT INTO public."OrderProduct" ("id",
+                                   "quantity",
+                                   "unitPrice",
+                                   "subtotal",
+                                   "orderId",
+                                   "productId",
+                                   "status",
+                                   "payed")
+VALUES -- Pedido 1 (Carrito, user 5)
+       (1, 2, 4.99, 9.98, 1, 2, 'Pendiente', FALSE),
+       (2, 1, 34.90, 34.90, 1, 32, 'Pendiente', FALSE),
+       -- Pedido 2 (Pagado, user 5)
+       (3, 1, 49.90, 49.90, 2, 33, 'Aceptado', TRUE),
+       (4, 2, 14.90, 29.80, 2, 22, 'Preparando', TRUE),
+       (5, 1, 14.90, 14.90, 2, 43, 'Enviado', TRUE),
+       -- Pedido 3 (Carrito, user 6)
+       (6, 1, 11.00, 11.00, 3, 20, 'Pendiente', FALSE),
+       (7, 1, 119.90, 119.90, 3, 54, 'Pendiente', FALSE),
+       -- Pedido 4 (Pagado, user 6)
+       (8, 1, 109.90, 109.90, 4, 55, 'Pendiente', TRUE),
+       (9, 1, 89.90, 89.90, 4, 59, 'Aceptado', TRUE),
+       (10, 3, 4.99, 14.97, 4, 2, 'Enviado', TRUE),
+       -- Pedido 5 (Carrito, user 7)
+       (11, 1, 34.90, 34.90, 5, 32, 'Pendiente', FALSE),
+       (12, 1, 14.90, 14.90, 5, 43, 'Pendiente', FALSE),
+       -- Pedido 6 (Pagado, user 7)
+       (13, 1, 69.90, 69.90, 6, 24, 'Aceptado', TRUE),
+       (14, 1, 49.90, 49.90, 6, 33, 'Preparando', TRUE),
+       (15, 1, 49.90, 49.90, 6, 52, 'Enviado', TRUE),
+       -- Pedido 7 (Carrito, user 8)
+       (16, 1, 12.99, 12.99, 7, 3, 'Pendiente', FALSE),
+       (17, 1, 14.90, 14.90, 7, 22, 'Pendiente', FALSE),
+       -- Pedido 8 (Pagado, user 8)
+       (18, 2, 11.00, 22.00, 8, 20, 'Pendiente', TRUE),
+       (19, 1, 21.40, 21.40, 8, 29, 'Aceptado', TRUE),
+       (20, 1, 34.90, 34.90, 8, 32, 'Enviado', TRUE),
+       -- Pedido 9 (Carrito, user 9)
+       (21, 1, 119.90, 119.90, 9, 54, 'Pendiente', FALSE),
+       (22, 2, 14.90, 29.80, 9, 22, 'Pendiente', FALSE),
+       -- Pedido 10 (Pagado, user 9)
+       (23, 1, 129.00, 129.00, 10, 56, 'Aceptado', TRUE),
+       (24, 2, 19.90, 39.80, 10, 57, 'Preparando', TRUE),
+       (25, 1, 29.90, 29.90, 10, 58, 'Enviado', TRUE),
+       -- Pedido 11 (Carrito, user 10)
+       (26, 1, 24.90, 24.90, 11, 36, 'Pendiente', FALSE),
+       (27, 1, 139.00, 139.00, 11, 39, 'Pendiente', FALSE),
+       -- Pedido 12 (Pagado, user 10)
+       (28, 1, 49.90, 49.90, 12, 33, 'Preparando', TRUE),
+       (29, 2, 22.50, 45.00, 12, 37, 'Enviado', TRUE),
+       (30, 3, 14.90, 44.70, 12, 41, 'Cancelado', TRUE),
+       -- Pedido 13 (Carrito, user 11)
+       (31, 1, 14.90, 14.90, 13, 43, 'Pendiente', FALSE),
+       (32, 1, 26.90, 26.90, 13, 49, 'Pendiente', FALSE),
+       -- Pedido 14 (Pagado, user 11)
+       (33, 1, 24.90, 24.90, 14, 46, 'Aceptado', TRUE),
+       (34, 1, 49.90, 49.90, 14, 52, 'Enviado', TRUE),
+       (35, 1, 34.90, 34.90, 14, 51, 'Aceptado', TRUE),
+       -- Pedido 15 (Carrito, user 12)
+       (36, 1, 89.90, 89.90, 15, 59, 'Pendiente', FALSE),
+       (37, 1, 79.90, 79.90, 15, 62, 'Pendiente', FALSE),
+       -- Pedido 16 (Pagado, user 12)
+       (38, 4, 14.90, 59.60, 16, 22, 'Aceptado', TRUE),
+       (39, 1, 69.90, 69.90, 16, 24, 'Preparando', TRUE),
+       (40, 2, 34.90, 69.80, 16, 32, 'Enviado', TRUE);
 
--- Pedido 3 (Carrito, user 6)
-(6, 1, 11.00, 11.00, 3, 20, 'Pendiente', FALSE),
-(7, 1, 119.90, 119.90, 3, 54, 'Pendiente', FALSE),
 
--- Pedido 4 (Pagado, user 6)
-(8, 1, 109.90, 109.90, 4, 55, 'Pendiente', TRUE),
-(9, 1, 89.90, 89.90, 4, 59, 'Aceptado', TRUE),
-(10, 3, 4.99, 14.97, 4, 2, 'Enviado', TRUE),
+INSERT INTO public."UserProduct" ("id",
+                                  "title",
+                                  "review",
+                                  "rating",
+                                  "userId",
+                                  "productId")
+VALUES -- Usuario 5, produtos 33, 22, 43
+       (1, 'Encantado coa compra', 'Moi bo produto, mellor do que esperaba. A calidade é moi alta e chegou perfectamente embalado.', 4.8, 5, 33),
+       (2, 'Moi práctico no día a día', 'Uso este produto case a diario e estou moi satisfeito. É cómodo, resistente e cumpre o que promete.', 4.5, 5, 22),
+       (3, 'Boa relación calidade-prezo', 'Non é perfecto, pero pola súa prezo está moi ben. Repetiría a compra sen dúbida.', 4.2, 5, 43),
+       -- Usuario 6, produtos 55, 59, 2
+       (4, 'Produto moi recomendable', 'Sorprendeume para ben. Funciona sen problemas e nótase que está ben construído.', 4.7, 6, 55),
+       (5, 'Xenial para o que necesitaba', 'Era xusto o que estaba buscando. Fácil de usar e con boas prestacións para o prezo que ten.', 4.6, 6, 59),
+       (6, 'Compra correcta', 'Cumpre coa súa función, aínda que o acabamento podería ser un pouco mellor. En xeral estou contento.', 3.9, 6, 2),
+       -- Usuario 7, produtos 24, 33, 52
+       (7, 'Moi elegante', 'O deseño é precioso e queda moi ben na casa. Nótase o coidado nos detalles.', 4.9, 7, 24),
+       (8, 'Boa calidade', 'Materia prima de boa calidade e sensación de produto duradeiro. Podo recomendalo sen problema.', 4.4, 7, 33),
+       (9, 'Encantoume', 'Superou as miñas expectativas. Foi un agasallo e gustou moitísimo.', 5.0, 7, 52),
+       -- Usuario 8, produtos 20, 29, 32
+       (10, 'Perfecto para o día a día', 'Moi útil e cómodo, axúdame moito na rutina diaria. A calidade é mellor da esperada.', 4.5, 8, 20),
+       (11, 'Bo produto, envío rápido', 'Chegou antes do previsto e en perfecto estado. O produto coincide co descrito.', 4.3, 8, 29),
+       (12, 'Moi boa experiencia de compra', 'Tanto o produto como a experiencia na tenda foron excelentes. Repetirei seguro.', 4.9, 8, 32),
+       -- Usuario 9, produtos 56, 57, 58
+       (13, 'Excelente calidade', 'Nótase que é un artigo de boa calidade. Moi satisfeita co resultado despois de varios días de uso.', 4.8, 9, 56),
+       (14, 'Boa opción', 'Non é o mellor do mercado, pero pola súa prezo está moi ben. Recoméndoo se buscas algo funcional.', 4.1, 9, 57),
+       (15, 'Cumpre o prometido', 'Produto tal como se describe na ficha. Sen sorpresas, nin boas nin malas, pero correcto.', 3.8, 9, 58),
+       -- Usuario 10, produtos 33, 37, 41
+       (16, 'Moi satisfeito', 'A calidade é moi boa e vese resistente. Seguramente volva mercar desta empresa.', 4.6, 10, 33),
+       (17, 'Práctico e ben deseñado', 'Un produto práctico, cun deseño coidado. Gustoume especialmente o acabado.', 4.4, 10, 37),
+       (18, 'Está ben, aínda que mellorable', 'En xeral estou contento, aínda que esperaba algún detalle extra polo prezo. Aínda así é recomendable.', 3.7, 10, 41),
+       -- Usuario 11, produtos 46, 52, 51
+       (19, 'Moi boa compra', 'Chegou perfecto e dende o primeiro día estou encantada. Cumpre exactamente o que buscaba.', 4.9, 11, 46),
+       (20, 'Espectacular', 'Un produto de dez. A calidade, o deseño e o acabado son excelentes.', 5.0, 11, 52),
+       (21, 'Boa impresión xeral', 'Funcionamento correcto e sensación de produto seguro. Volvería escoller esta referencia.', 4.3, 11, 51),
+       -- Usuario 12, produtos 22, 24, 32
+       (22, 'Moi útil e cómodo', 'Encántame o uso que lle estou dando. Adaptouse moi ben ao que necesitaba na casa.', 4.6, 12, 22),
+       (23, 'Produto de confianza', 'Xa coñecía esta marca e volveu estar á altura. Moi contento coa compra.', 4.7, 12, 24),
+       (24, 'Boa calidade a bo prezo', 'Polo prezo que ten, a calidade é moi boa. Sen dúbida unha boa elección.', 4.5, 12, 32);
 
--- Pedido 5 (Carrito, user 7)
-(11, 1, 34.90, 34.90, 5, 32, 'Pendiente', FALSE),
-(12, 1, 14.90, 14.90, 5, 43, 'Pendiente', FALSE),
-
--- Pedido 6 (Pagado, user 7)
-(13, 1, 69.90, 69.90, 6, 24, 'Aceptado', TRUE),
-(14, 1, 49.90, 49.90, 6, 33, 'Preparando', TRUE),
-(15, 1, 49.90, 49.90, 6, 52, 'Enviado', TRUE),
-
--- Pedido 7 (Carrito, user 8)
-(16, 1, 12.99, 12.99, 7, 3, 'Pendiente', FALSE),
-(17, 1, 14.90, 14.90, 7, 22, 'Pendiente', FALSE),
-
--- Pedido 8 (Pagado, user 8)
-(18, 2, 11.00, 22.00, 8, 20, 'Pendiente', TRUE),
-(19, 1, 21.40, 21.40, 8, 29, 'Aceptado', TRUE),
-(20, 1, 34.90, 34.90, 8, 32, 'Enviado', TRUE),
-
--- Pedido 9 (Carrito, user 9)
-(21, 1, 119.90, 119.90, 9, 54, 'Pendiente', FALSE),
-(22, 2, 14.90, 29.80, 9, 22, 'Pendiente', FALSE),
-
--- Pedido 10 (Pagado, user 9)
-(23, 1, 129.00, 129.00, 10, 56, 'Aceptado', TRUE),
-(24, 2, 19.90, 39.80, 10, 57, 'Preparando', TRUE),
-(25, 1, 29.90, 29.90, 10, 58, 'Enviado', TRUE),
-
--- Pedido 11 (Carrito, user 10)
-(26, 1, 24.90, 24.90, 11, 36, 'Pendiente', FALSE),
-(27, 1, 139.00, 139.00, 11, 39, 'Pendiente', FALSE),
-
--- Pedido 12 (Pagado, user 10)
-(28, 1, 49.90, 49.90, 12, 33, 'Preparando', TRUE),
-(29, 2, 22.50, 45.00, 12, 37, 'Enviado', TRUE),
-(30, 3, 14.90, 44.70, 12, 41, 'Cancelado', TRUE),
-
--- Pedido 13 (Carrito, user 11)
-(31, 1, 14.90, 14.90, 13, 43, 'Pendiente', FALSE),
-(32, 1, 26.90, 26.90, 13, 49, 'Pendiente', FALSE),
-
--- Pedido 14 (Pagado, user 11)
-(33, 1, 24.90, 24.90, 14, 46, 'Aceptado', TRUE),
-(34, 1, 49.90, 49.90, 14, 52, 'Enviado', TRUE),
-(35, 1, 34.90, 34.90, 14, 51, 'Aceptado', TRUE),
-
--- Pedido 15 (Carrito, user 12)
-(36, 1, 89.90, 89.90, 15, 59, 'Pendiente', FALSE),
-(37, 1, 79.90, 79.90, 15, 62, 'Pendiente', FALSE),
-
--- Pedido 16 (Pagado, user 12)
-(38, 4, 14.90, 59.60, 16, 22, 'Aceptado', TRUE),
-(39, 1, 69.90, 69.90, 16, 24, 'Preparando', TRUE),
-(40, 2, 34.90, 69.80, 16, 32, 'Enviado', TRUE);
-
-INSERT INTO public."UserProduct"
-("id", "title", "review", "rating", "userId", "productId")
-VALUES
--- Usuario 5, produtos 33, 22, 43
-(1,
- 'Encantado coa compra',
- 'Moi bo produto, mellor do que esperaba. A calidade é moi alta e chegou perfectamente embalado.',
- 4.8,
- 5,
- 33
-),
-(2,
- 'Moi práctico no día a día',
- 'Uso este produto case a diario e estou moi satisfeito. É cómodo, resistente e cumpre o que promete.',
- 4.5,
- 5,
- 22
-),
-(3,
- 'Boa relación calidade-prezo',
- 'Non é perfecto, pero pola súa prezo está moi ben. Repetiría a compra sen dúbida.',
- 4.2,
- 5,
- 43
-),
-
--- Usuario 6, produtos 55, 59, 2
-(4,
- 'Produto moi recomendable',
- 'Sorprendeume para ben. Funciona sen problemas e nótase que está ben construído.',
- 4.7,
- 6,
- 55
-),
-(5,
- 'Xenial para o que necesitaba',
- 'Era xusto o que estaba buscando. Fácil de usar e con boas prestacións para o prezo que ten.',
- 4.6,
- 6,
- 59
-),
-(6,
- 'Compra correcta',
- 'Cumpre coa súa función, aínda que o acabamento podería ser un pouco mellor. En xeral estou contento.',
- 3.9,
- 6,
- 2
-),
-
--- Usuario 7, produtos 24, 33, 52
-(7,
- 'Moi elegante',
- 'O deseño é precioso e queda moi ben na casa. Nótase o coidado nos detalles.',
- 4.9,
- 7,
- 24
-),
-(8,
- 'Boa calidade',
- 'Materia prima de boa calidade e sensación de produto duradeiro. Podo recomendalo sen problema.',
- 4.4,
- 7,
- 33
-),
-(9,
- 'Encantoume',
- 'Superou as miñas expectativas. Foi un agasallo e gustou moitísimo.',
- 5.0,
- 7,
- 52
-),
-
--- Usuario 8, produtos 20, 29, 32
-(10,
- 'Perfecto para o día a día',
- 'Moi útil e cómodo, axúdame moito na rutina diaria. A calidade é mellor da esperada.',
- 4.5,
- 8,
- 20
-),
-(11,
- 'Bo produto, envío rápido',
- 'Chegou antes do previsto e en perfecto estado. O produto coincide co descrito.',
- 4.3,
- 8,
- 29
-),
-(12,
- 'Moi boa experiencia de compra',
- 'Tanto o produto como a experiencia na tenda foron excelentes. Repetirei seguro.',
- 4.9,
- 8,
- 32
-),
-
--- Usuario 9, produtos 56, 57, 58
-(13,
- 'Excelente calidade',
- 'Nótase que é un artigo de boa calidade. Moi satisfeita co resultado despois de varios días de uso.',
- 4.8,
- 9,
- 56
-),
-(14,
- 'Boa opción',
- 'Non é o mellor do mercado, pero pola súa prezo está moi ben. Recoméndoo se buscas algo funcional.',
- 4.1,
- 9,
- 57
-),
-(15,
- 'Cumpre o prometido',
- 'Produto tal como se describe na ficha. Sen sorpresas, nin boas nin malas, pero correcto.',
- 3.8,
- 9,
- 58
-),
-
--- Usuario 10, produtos 33, 37, 41
-(16,
- 'Moi satisfeito',
- 'A calidade é moi boa e vese resistente. Seguramente volva mercar desta empresa.',
- 4.6,
- 10,
- 33
-),
-(17,
- 'Práctico e ben deseñado',
- 'Un produto práctico, cun deseño coidado. Gustoume especialmente o acabado.',
- 4.4,
- 10,
- 37
-),
-(18,
- 'Está ben, aínda que mellorable',
- 'En xeral estou contento, aínda que esperaba algún detalle extra polo prezo. Aínda así é recomendable.',
- 3.7,
- 10,
- 41
-),
-
--- Usuario 11, produtos 46, 52, 51
-(19,
- 'Moi boa compra',
- 'Chegou perfecto e dende o primeiro día estou encantada. Cumpre exactamente o que buscaba.',
- 4.9,
- 11,
- 46
-),
-(20,
- 'Espectacular',
- 'Un produto de dez. A calidade, o deseño e o acabado son excelentes.',
- 5.0,
- 11,
- 52
-),
-(21,
- 'Boa impresión xeral',
- 'Funcionamento correcto e sensación de produto seguro. Volvería escoller esta referencia.',
- 4.3,
- 11,
- 51
-),
-
--- Usuario 12, produtos 22, 24, 32
-(22,
- 'Moi útil e cómodo',
- 'Encántame o uso que lle estou dando. Adaptouse moi ben ao que necesitaba na casa.',
- 4.6,
- 12,
- 22
-),
-(23,
- 'Produto de confianza',
- 'Xa coñecía esta marca e volveu estar á altura. Moi contento coa compra.',
- 4.7,
- 12,
- 24
-),
-(24,
- 'Boa calidade a bo prezo',
- 'Polo prezo que ten, a calidade é moi boa. Sen dúbida unha boa elección.',
- 4.5,
- 12,
- 32
-);
 
 INSERT INTO "public"."_CategoryToProduct" ("A",
                                            "B")
