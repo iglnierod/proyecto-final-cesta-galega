@@ -1,7 +1,5 @@
 'use client';
 import LogOutButton from '@/app/components/LogOutButon';
-import Image from 'next/image';
-import logo from '@/public/assets/logo.png';
 import Link from 'next/link';
 
 export default function BusinessHeader({ businessName }: { businessName: string | undefined }) {
@@ -14,7 +12,7 @@ export default function BusinessHeader({ businessName }: { businessName: string 
               className="link link-neutral text-xl font-bold no-underline flex gap-1 items-center"
               href="/business/dashboard"
             >
-              <Image src={logo} alt="Logo Cesta Galega" width={32} />
+              {/*<Image src={logo} alt="Logo Cesta Galega" width={32} />*/}
               CestaGalega
             </a>
             <div className="md:hidden">
@@ -40,7 +38,7 @@ export default function BusinessHeader({ businessName }: { businessName: string 
               <Link href="/business/dashboard">Inicio</Link>
             </li>
             <li>
-              <a href="#">Estadísticas</a>
+              <Link href="/business/stats">Estadísticas</Link>
             </li>
             <li className="dropdown relative inline-flex [--auto-close:inside] [--offset:8] [--placement:bottom-end]">
               <button

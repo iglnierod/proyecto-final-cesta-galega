@@ -103,3 +103,22 @@ export async function findBusinessesForShop(search?: string | null) {
     orderBy: { name: 'asc' },
   });
 }
+
+/* QUERIES DE ESTADISTICAS*/
+export async function findTopProducts(businessId: number) {
+  return prisma.orderProduct.groupBy({
+    by: ['productId'],
+    where: {
+      product: { businessId },
+      payed: true,
+    },
+    _sum: {
+      quantity: true,
+      subtotal: true,
+    },
+    orderBy: {
+      _sum: { quantity: 'desc' },
+    },
+    take: 5,
+  });
+}
