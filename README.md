@@ -46,10 +46,12 @@ La manera más sencilla de contactarme ahora o en un futuro es a través de corr
 
 ## Licencia
 
-> _TODO_: Brevísimamente. Indica qué licencia usarás y crea un link a ella. Hay miles de ejemplos en Github.
-> _TODO_: Es requisito INDISPENSABLE el licenciar explícitamente el proyecto software. Se recomienda licenciar con _MIT License_ (como viene en la plantilla) o _GNU Free Documentation License Version 1.3_. Presencia de un fichero `LICENSE` en la raiz del repo, con tu fichero de licencia. Recuerda que si empleas una licencia de software libre estás autorizando la derivación de tu obra bajo la misma licencia que elijas, pudiendo dar continuidad, p. e. otro alumno, para continuar tu proyecto en otro curso.
-> Si tu proyecto tiene además otro tipo contenido documental, recomendamos los términos de _GNU Free Documentation License Version 1.3_, crea igualmente el fichero `LICENSE`. Será especialmente valorado en este caso, la claridad de la especificación para que el proyecto pueda ser ejecutado partiendo de lo proyectado.
-> Ten en cuenta que estás cediendo el uso de este software y sus subproductos generados a la comunidad.
+El proyecto se distribuye bajo la licencia MIT License, cuyo texto completo se incluye en el fichero [LICENSE](LICENSE) del
+repositorio y puede consultarse también en [https://opensource.org/licenses/MIT](https://opensource.org/licenses/MIT).
+
+Esta licencia de software libre permite usar, copiar, modificar y distribuir el código, así como crear obras derivadas, siempre
+que se mantenga el aviso de copyright y la nota de licencia original, y sin ofrecer ningún tipo de garantía por parte del
+autor.
 
 ## Documentación
 
