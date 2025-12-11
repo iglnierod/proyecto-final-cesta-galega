@@ -10,12 +10,11 @@ export const userPublicSelect = Prisma.validator<Prisma.UserSelect>()({
   birthDate: true,
   province: true,
   createdAt: true,
-  // Ollo: non incluímos "deleted" no select público
 });
 
 export type UserPublic = Prisma.UserGetPayload<{ select: typeof userPublicSelect }>;
 
-// 🔹 Buscar usuario por email (só activos: deleted = false)
+//  Buscar usuario por email (só activos: deleted = false)
 export async function findUserByEmail(email: string) {
   return prisma.user.findFirst({
     where: {
@@ -25,7 +24,7 @@ export async function findUserByEmail(email: string) {
   });
 }
 
-// 🔹 Crear usuario novo (deleted = false explícito por claridade)
+//  Crear usuario novo (deleted = false explícito por claridade)
 export async function createUser(data: {
   name: string;
   email: string;
@@ -48,7 +47,7 @@ export async function createUser(data: {
   });
 }
 
-// 🔹 Buscar usuario por id (só usuarios non eliminados)
+//  Buscar usuario por id (só usuarios non eliminados)
 export async function findUserById(id: number) {
   return prisma.user.findFirst({
     where: {
@@ -58,7 +57,7 @@ export async function findUserById(id: number) {
   });
 }
 
-// 🔹 Actualizar perfil de usuario (só se non está eliminado)
+//  Actualizar perfil de usuario (só se non está eliminado)
 export async function updateUserProfile(data: UserUpdateInput) {
   const { id, birthDate, ...rest } = data;
 
@@ -91,7 +90,7 @@ export async function updateUserProfile(data: UserUpdateInput) {
   return updated;
 }
 
-// 🔹 "Eliminar" conta de usuario (soft delete: deleted = true)
+//  "Eliminar" conta de usuario (soft delete: deleted = true)
 export async function deleteUserAccount(userId: number) {
   const deleted = await prisma.user.update({
     where: { id: userId },

@@ -17,11 +17,13 @@ El proyecto pretende fomentar el comercio local y crear una alternativa accesibl
 1. Clonar el repositorio y acceder al directorio `cesta-galega/`
 2. Instalar las dependencias con `npm install`
 3. Renombrar el fichero `.env.example` a `.env` y si es necesario cambiar las propiedades establecidas por defecto
-4. Levantar el contenedor Docker con el comando `docker compose up -d`
-5. Crear la base de datos con el comando `npx prisma migrate deploy` 
-6. Regenerar el cliente prisma `npx prisma generate`
-7. Levantar la página web con el comando `npm run dev`
-8. Abrir en el navegador la dirección `localhost:3000`
+4. Crear una cuenta en cloudinary.com, web que gestiona las imágenes de la aplicación
+5. Obtener ```Cloud name``` y establecerlo en el fichero ``.env``
+6. Levantar el contenedor Docker con el comando `docker compose up -d`
+7. Crear la base de datos con el comando `npx prisma migrate deploy` 
+8. Regenerar el cliente prisma `npx prisma generate`
+9. Levantar la página web con el comando `npm run dev`
+10. Abrir en el navegador la dirección `localhost:3000`
 
 ## Uso
 
@@ -30,7 +32,17 @@ El proyecto pretende fomentar el comercio local y crear una alternativa accesibl
 
 ## Sobre el autor
 
-> _TODO_: Realiza una breve descripción de quien eres (perfil profesional), tus puntos fuertes, o tecnologías que más dominas... y porqué te has decantado por este proyecto. **No más de 200 palabras**. Indica la forma fiable de contactar contigo en el presente y en el futuro.
+Soy Rodrigo Iglesias Nieto, soy de Santiago de Compostela y tengo 21 años. Desde pequeño me ha gustado la informática y 
+hace unos años decidí estudiar programación, realicé el ciclo de DAM en el IES Antón Losada Diéguez de A Estrada y al terminar
+decidí seguir estudiando y ahora estoy realizando DAW a distancia.
+
+Lo que destaco de mí es la curiosidad y la autonomía para aprender sobre nuevas tecnologías, lenguajes, etc. Por mis estudios previos
+las tecnologías que más domino son: Java, SQL, Javascript y otras que conozco pero no manejo tanto son: Docker, React, Angular.
+
+Decidí hacer este proyecto porque me sirve para formarme en tecnologías como React o las API REST de una manera más profunda y descubrir nuevas
+herramientas como Prisma ORM o Supabase que me permitirán seguir desarrollando proyectos webs en un futuro.
+
+La manera más sencilla de contactarme ahora o en un futuro es a través de correo electrónico: ``iglnierod@gmail.com``
 
 ## Licencia
 

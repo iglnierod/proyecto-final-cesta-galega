@@ -419,6 +419,22 @@ export async function getCategoriesByBusiness(businessId: number) {
 
 [Enlace a fichero category.repo.ts que contiene el código](../cesta-galega/app/lib/category/category.repo.ts)
 
+Este otro ejemplo muestra la función que obtiene los datos de un usuario por la ID introducida:
+
+```typescript
+//  Buscar usuario por id (só usuarios non eliminados)
+export async function findUserById(id: number) {
+    return prisma.user.findFirst({
+        where: {
+            id,
+            deleted: false,
+        },
+    });
+}
+```
+
+[Enlace a fichero user.repo.ts que contiene el código](../cesta-galega/app/lib/user/user.repo.ts)
+
 ### Diagrama de navegación
 
 El siguiente diagrama de navegación refleja la estructura general de la aplicación, organizada en dos grandes áreas bien
