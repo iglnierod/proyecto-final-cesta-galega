@@ -14,7 +14,7 @@ export async function verifyPassword(password: string, hash: string) {
   return bcrypt.compare(password, hash);
 }
 
-// Jason Web Token
+// Json Web Token
 // Crea payload de usuario que se almacena en las cookies
 export interface JwtPayloadUser {
   userId: number;

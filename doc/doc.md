@@ -436,6 +436,124 @@ estructura coherente y fácil de entender.
 
 [Enlace a octopus.do del proyecto](https://octopus.do/d08h7a8kudi)
 
+### Autenticación (JWT)
+
+El sistema de autenticación seleccionado para esta aplicación es JWT (JSON Web Token).
+
+Un JWT es un tipo de token de autenticación que contiene información codificada en formato JSON (id del usuario, nombre,
+fecha de expiración, etc.). El token se compone de tres partes: header, payload y signature, dónde la firma se genera con
+una clave secreta en el servidor (.env). Gracias a esa firma, la API puede comprobar que el token no ha sido modificado.
+
+- Header: indica cómo está hecho el token. Indica el tipo de token (``"typ": jwt``) y el algoritmo (``"alg": "HS246"``).
+- Payload: carga útil del token, los datos que se almacenan e interesan (nombre, id, email...).
+- Signature: firma del token. Se calcula con header + payload + clave secreta. Sirve para comprobar que nadie ha modificado
+el header ni el payload y que lo ha generado tu servidor porque solo él conoce la clave.
+
+![Estructura de un token JWT](img/jwt-estructura.png)
+
+En caso de Cesta Galega la aplicación cuenta con distintos apartados que necesitan autenticación de un tipo o de ningún tipo,
+por ejemplo: la tienda la puede ver cualquier usuario anónimo, no hace falta que tenga una cuenta creada y que haya iniciado sesión
+en la aplicación, mientras que el apartado de empresa está completamente protegido, por lo que el usuario necesita estar iniciado
+como empresa y tener un token válido.
+
+**¿Cómo se traduce esto al código de la aplicación de Next.js?**
+
+En la carpeta ``/lib`` está el fichero ``auth.ts`` que gestiona las cookies de la aplicación y la autenticación de los usuarios.
+
+Primero se define la clave secreta y el tiempo de validez que se obtienen desde el fichero ``.env``.
+
+Lo siguiente es definir las interfaces de payload que usaremos en la app. En caso del usuario se almacena el identificador, email y nombre.
+
+> Para esto se utiliza la dependencia ``jsonwebtoken``
+
+```typescript
+import * as jwt from 'jsonwebtoken';
+import { cookies } from 'next/headers';
+
+const JWT_SECRET = process.env.JWT_SECRET ?? '';
+const JWT_EXPIRES_IN = Number(process.env.JWT_EXPIRES_IN) ?? 60 * 60;
+
+// [...]
+
+// Json Web Token
+// Crea payload de usuario que se almacena en las cookies
+export interface JwtPayloadUser {
+    userId: number;
+    email: string;
+    userName: string;
+}
+
+// Inicia sesión de un usuario
+export function signUser(payload: JwtPayloadUser): string {
+    return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
+}
+
+// Verificar token
+export function verifyToken(token: string) {
+    return jwt.verify(token, JWT_SECRET);
+}
+```
+
+Cuando un usuario incia sesión en la aplicación manda una petición al servidor en la ruta /api/auth/user/login con el método
+POST. El funcionamiento simplificado de este endpoint es el siguiente:
+
+1. Verificar datos introducidos por el usuario
+2. Buscar usuario en la base de datos (usando Prisma ORM)
+3. Verificar contraseña introducida con contraseña cifrada en base de datos
+4. Crear token y almacenarlo en las cookies del navegador
+
+```typescript
+export async function POST(request: Request) {
+    try {
+        const body = await request.json();
+
+        // Validación de los datos
+        const input = UserLoginSchema.parse(body);
+
+        // Buscar usuario en la base de datos
+        const user = await findUserByEmail(input.email);
+
+        if (!user) {
+            return NextResponse.json({ error: 'Usuario non atopado' }, { status: 404 });
+        }
+
+        // Verificar contraseña
+        const correctPassword = await verifyPassword(input.password, user.password);
+        if (!correctPassword) {
+            return NextResponse.json({ error: 'Contrasinal incorrecto' }, { status: 401 });
+        }
+
+        // Crear JWT e guardarlo en las cookies
+        const userToken = signUser({ userId: user.id, email: user.email, userName: user.name });
+        await saveSessionCookie(userToken);
+
+        return NextResponse.json({ message: 'Login correcto' }, { status: 200 });
+    } catch (err: any) {
+        // Si hay un fallo devolverlo
+        if (err?.name === 'ZodError') {
+            const first = err.issues?.[0];
+            return NextResponse.json({ error: first?.message ?? 'Datos non válidos' }, { status: 400 });
+        }
+        console.error(err);
+        return NextResponse.json({ error: 'Erro ao procesar a petición' }, { status: 500 });
+    }
+}
+```
+
+Este diagrama define y explica el funcionamiento de JWT en la aplicación Cesta Galega. Es válido para ambos roles (usuario y empresa)
+y se aplica en toda la app.
+
+![Diagrama explicación funcionamiento JWT](img/diagrama-jwt-1.png)
+
+**¿Por qué es una buena opción?**
+
+- **Autenticación sin estado (stateless)**: el servidor no necesita almacenar sesiones en memoria o en base de datos, se dedica
+únicamente a verificar el token. Esto simplifica la arquitectura y facilita la escalabilidad.
+- **Incluye información útil**: dentro del token puedes guardar datos como el identificador del usuario o rol, evitando consultas
+extra.
+- **Amplio soporte y estándar**: JWT es un estándar abierto soportado por multitud de librerías y frameworks, lo que reduce la complejidad
+de implementación
+
 ### Diseño de interfaces (Mockups)
 
 > Los mockups son temporales y están hechos de una manera sencilla y adaptable para poder solucionar cualquier problema 
