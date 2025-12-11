@@ -774,7 +774,8 @@ etiquetadas para mayor organización.
 
 ### Prototipo 1: 07/09/2025
 
-En esta versión están implementadas las funcionalidades de autenticación de usuarios y empresas. Usando la tecnología _JWT_ o _Json Web Token_ que almacena como cookie la información de la sesión del usuario.
+En esta versión están implementadas las funcionalidades de autenticación de usuarios y empresas. Usando la tecnología 
+_JWT_ o _Json Web Token_ que almacena como cookie la información de la sesión del usuario.
 
 Están hechas las siguientes páginas:
 
@@ -783,7 +784,7 @@ Están hechas las siguientes páginas:
 - [Inicio de sesión de usuario](https://proyecto-final-cesta-galega.vercel.app/user/login)
 - [Registro de empresa](https://proyecto-final-cesta-galega.vercel.app/business/register)
 - [Inicio de sesión de empresa](https://proyecto-final-cesta-galega.vercel.app/business/login)
-- [Dasboard de empresa (con logout)](https://proyecto-final-cesta-galega.vercel.app/business/dashboard)
+- [Dashboard de empresa (con logout)](https://proyecto-final-cesta-galega.vercel.app/business/dashboard)
 
 En el backend están hechos los siguientes endpoints:
 
@@ -820,17 +821,15 @@ Además, se crean los endpoints de la API necesarios para brindar la informació
 
 ## Propuesta de mejoras
 
-> A partir de tu solución final indicarás futuras ampliaciones o mejoras. Ejemplos:
->
-> Ampliacion de infraestructura ante una posible expansión de la empresa o aprterua de nuevas sucursales
->
-> Incorporación de neuvos servicios, aplicaciones, que pueden mejorar una carencia actual o cubrir una necesidad futura
->
-> Implantacion a futuro de alguna tecnología emergente en lugar de las propuestas inicalmente, por esperar a que esta
-> tecnología esté mas madura
->
-> Cualquier otra cosa que no estuviese comtempleada en el proyecto o que suprimiste en la solución final por falta de
-> tiempo o por dificultad de implantación.
+- Filtros y paginado en la gestión de productos y pedidos para las empresas
+- Panel administrador que gestione los usuarios y empresas registrados, puede verificar para que las empresas empiecen a
+poder vender
+- Servicio de mails, enviar mail de confirmación al usuario y poder recuperar la contraseña.
+- Permitir a las empresas responder a valoraciones.
+- Permitir interacciones de usuarios en las valoraciones.
+- Añadir carrusel de imágenes al producto, poder incluír vídeos.
+- Añadir métodos de pago reales y con formularios más complejos.
+- Rediseño de la aplicación, hacerla más única y menos simple, darle color y estilo diferenciado.
 
 ## Conclusiones
 
