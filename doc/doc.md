@@ -268,14 +268,118 @@ que combina la productividad del desarrollador con una experiencia de usuario fl
 
 ### Base de datos
 
-La base de datos de este proyecto es una base relacional SQL. El gestor de base de datos elegido es PostgreSQL.
+![Esquema Entidad-Relación de la base de datos](./img/base-de-datos.png)
 
-### Esquema Entidad-Relación
+[Enlace a diagrama web: erdlab.io](https://erdlab.page.link/hc3tuVoazFSyi3fT9)
 
-![Esquema Entidad-Relación de la base de datos](./img/bd_entidad-relacion.png)
-[Enlace a diagrama web: erdlab.io](https://erdlab.page.link/czgA4UV4ymD1koir9)
+La base de datos del proyecto se diseñó siguiendo un modelo relacional, con el objetivo de dar soporte a una plataforma
+de tipo _marketplace_ en la que distintos negocios pofrecen productos y los usuarios pueden realizar pedidos y valoraciones.
 
-> _Tablas y campos pueden variar y modificarse con el tiempo_
+En la imagen se muestra el diagrama entidad-relación que representa las principales entidades y las relaciones entre ellas.
+A continuación se describen las tablas y su función dentro del sistema.
+
+#### Tabla ``User``
+
+Esta tabla almacena la información de los usuarios finales de la plataforma.
+
+Incluye datos identificativos y personales (nombre, sexo, fecha de nacimiento, provincia), así como las credenciales de acceso
+(correo electrónico y contraseña cifrada).
+
+Adicionalmente, incorpora un campo booleano ``deleted`` que permite realizar borrado lógico de usuarios, preservando la integridad
+referencial y el histórico de datos (por ejemplo, pedidos o valoraciones previamente realizados).
+
+**Relaciones**
+
+- Relación 1:N con ``Order``: un usuario puede realizar cero o varios pedidos, mientras que cada pedido está asociado únicamente a un usuario.
+- Relación N:M con ``Product`` (mediante tabla ``User_Product``): un usuario puede valorar múltiples productos y cada producto puede recibir
+valoraciones de distintos usuarios.
+
+#### Tabla ``Business``
+
+Representa a los negocios registrados en la plataforma. Contiene información de identificación (nombre, correo electrónico),
+datos de contacto (teléfono, dirección, ciudad, provincia, código postal), redes sociales (Instagram, Facebook) y datos económicos (IBAN).
+
+También se almacena el tipo de negocio (``business_type``) y un posible logotipo (``logo``), de forma que la plataforma pueda mostrar
+información contextualizada a los usuarios.
+
+**Relaciones**
+
+- Relación 1:N con ``Product``: cada negocio puede ofrecer cero o varios productos mientras que cada producto pertenece exclusivamente
+a una única empresa.
+
+#### Tabla ``Product``
+
+La tabla ``Product`` contiene a los productos que los negocios ofrecen a través de la plataforma.
+
+Para cada producto se almacena su nombre, descripción, una imagen (enlace), el precio base y la información relativa a descuentos
+(``discounted``, ``discount``).
+
+Se utilizan dos campos booleanos: ``enabled``, para controlar la disponibilidad del producto en la plataforma, y ``deleted`` para gestionar
+su borrado lógico sin perder el histórico de pedidos o valoraciones asociados.
+
+**Relaciones**
+
+- Relación N:1 con ``Business``: cada producto está asociado a un único negocio.
+- Relación N:M con ``Category`` (mediante tabla ``Product_Category``): un producto puede pertenecer a ninguna o varias categorías, igual que
+una categoría puede agrupar cero o varios productos.
+- Relación N:M con ``Order`` (mediante tabla ``Order_Product``): un producto puede aparecer en cero o varios pedidos, y cada pedido puede
+incluir uno o varios productos.
+- Relación N:M on ``User`` (mediante tabla ``User_Product``): un producto puede recibir cero o muchas valoraciones por parte de disintos
+usuarios.
+
+#### Tabla ``Category``
+
+La tabla ``Category`` define las categorías utilizadas para clasificar los productos.
+
+Además del identificador, se almacena el nombre de la categoría y la fecha de creación.
+
+**Relaciones**
+
+- Relacion N:M con ``Product`` (mediante tabla ``Product_Category``): permite asociar varios productos a una misma categoría, facilitando
+la navegación y el filtrado de productos en la interfaz de usuario.
+
+#### Tabla ``Order``
+
+Representa los peidos realizados por los usuarios.
+
+Cada registro almacena el estado del pedido (``status``), el importe total (``total``), la dirección de envío (``shipping_address``) y
+el método de pago utilizado (``payment_method``).
+
+También se registran las marcas temporales de creación y actualización (``created_at``, ``updated_at``), lo que permite auditar la
+evolución de cada pedido.
+
+**Relaciones**
+
+- Relación N:1 con ``User``: cada pedido está asociado a un único usuario.
+- Relación N:M con ``Product``: (mediante ``Order_Product``): un peiddo puede contener uno o varios productos, y un mismo producto puede
+formar parte de distintos pedidos.
+
+#### Tabla ``Product_Category``
+
+Es una tabla intermedia que implementa la relación muchos a muchos entre ``Product`` y ``Category``.
+
+Está formada por los campos ``product_id`` y ``category_id``, que referencian respectivamente a ``Product`` y ``Category``. Ambos campos
+constituyen una clave primaria compuesta, garantizando que no existan duplicidades en la asignación de productos a categorías.
+Esta estructura permite que un producto pueda asociarse a múltiples categorías y una categoría pueda agrupar varios productos.
+
+#### Tabla ``User_Product``
+
+Materializa la relación muchos a muchos entre ``User`` y ``Product``, añadiendo información propia de la interacción del usuario con
+el producto en forma de valoración.
+
+Además de las claves foráneas ``user_id`` y ``product_id``, se almacena el título de la reseña, el contenido, la puntuación numérica y
+la fecha de creación.
+
+De este modo, cada registro representa una valoración concreta de un usuario sobre un producto determinado.
+
+#### Tabla ``Order_Product``
+
+Esta tabla implementa la relación N:M entre ``Order`` y ``Product`` y actúa como tabla que almacena las líneas de pedido.
+
+Se almacena la cantidad, el precio unitario, el subtotal, el estado de la línea y si se ha realizado la simulación de pago (``payed``).
+
+Esta estructura permite desglosar el contenido de cada pedido en múltiples productos y conservar para cada línea información
+económica precisa (cantidad y precio en el momento de la compra).
 
 ### Diagrama de navegación
 

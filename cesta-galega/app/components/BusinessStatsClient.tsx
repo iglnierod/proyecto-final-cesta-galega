@@ -69,12 +69,12 @@ export default function BusinessStatsClient({ businessId }: { businessId: number
       <header className="space-y-1">
         <h1 className="text-2xl font-bold">Estatísticas da tenda</h1>
         <p className="text-sm text-base-content/70">
-          Resumo visual de vendas, carriños e rendemento recente.
+          Resumo visual de vendas, carros e rendemento recente.
         </p>
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* 1) Produtos máis vendidos */}
+        {/* Produtos máis vendidos */}
         <div className="card bg-base-100 border border-base-300 rounded-xl shadow-sm p-4 space-y-3">
           <h2 className="font-semibold text-lg">Produtos máis vendidos</h2>
           {topProducts.length === 0 ? (
@@ -104,12 +104,12 @@ export default function BusinessStatsClient({ businessId }: { businessId: number
           )}
         </div>
 
-        {/* 2) Produtos en carriños */}
+        {/* Produtos en carros */}
         <div className="card bg-base-100 border border-base-300 rounded-xl shadow-sm p-4 space-y-3">
-          <h2 className="font-semibold text-lg">Produtos en carriños</h2>
+          <h2 className="font-semibold text-lg">Produtos en carros</h2>
           {cartItems.length === 0 ? (
             <p className="text-sm text-base-content/70">
-              Actualmente non hai produtos en carriños de usuarias/os.
+              Actualmente non hai produtos nalgún carro dalgún usuarias/os.
             </p>
           ) : (
             <div className="h-64">
@@ -134,7 +134,7 @@ export default function BusinessStatsClient({ businessId }: { businessId: number
           )}
         </div>
 
-        {/* 3) Vendas por provincia */}
+        {/* Vendas por provincia */}
         <div className="card bg-base-100 border border-base-300 rounded-xl shadow-sm p-4 space-y-3">
           <h2 className="font-semibold text-lg">Vendas por provincia</h2>
           {salesByProvince.length === 0 ? (
@@ -171,7 +171,7 @@ export default function BusinessStatsClient({ businessId }: { businessId: number
           )}
         </div>
 
-        {/* 4) Ingresos últimos 30 días */}
+        {/* Ingresos últimos 30 días */}
         <div className="card bg-base-100 border border-base-300 rounded-xl shadow-sm p-4 space-y-3">
           <div className="flex items-center justify-between gap-2">
             <h2 className="font-semibold text-lg">Ingresos últimos 30 días</h2>
