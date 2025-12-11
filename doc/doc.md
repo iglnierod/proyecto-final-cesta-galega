@@ -756,6 +756,20 @@ Al solicitar la ayuda del kit digital, al ser una empresa de entre 3 y 9 emplead
 
 Estas ayudas permiten reducir costes iniciales y fomentar el crecimiento sostenible del proyecto.
 
+## Organización: Metodología Kanban
+
+Para organizar el trabajo he utilizado una aproximación a _Kanban personal_, implementada mediante un tablero de Trello.
+El tablero se estructura en varias columnas que representan los estados del fujo de trabajo (Pendiente, en proceso, hecho, mejoras...)
+y cada tarea del proyecto se modela como una tarjeta que se va desplazando entre columnas a medida que avanza.
+
+Este enfoque permite visualizar de forma clara el progreso, limitar el número de tareas en curso y priorizar de manera flexible,
+manteniendo el flujo de trabajo continuo y fácil de adaptar a un desarrollo individual.
+
+Esta es una imagen del Trello en un momento del desarrollo del proyecto, se pueden ver las distintas columnas y las tareas
+etiquetadas para mayor organización.
+
+![Captura de pantalla de Trello](img/trello-captura.png)
+
 ## Entregas
 
 ### Prototipo 1: 07/09/2025
