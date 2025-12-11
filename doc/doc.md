@@ -421,12 +421,18 @@ export async function getCategoriesByBusiness(businessId: number) {
 
 ### Diagrama de navegación
 
-Este diagrama de navegación es una representación visual que muestra cómo se organizan y conectan las diferentes secciones
-de la aplicación web. Sirve para entender el recorrido que puede hacer el usuario.
+El siguiente diagrama de navegación refleja la estructura general de la aplicación, organizada en dos grandes áreas bien
+diferenciadas. Por un lado, el módulo de usuario agrupa la navegación relacionada con la experiencia de compra: acceso a
+la tienda, consulta de productos y empresas, gestión del carrito, proceso de pago, historial de pedidos y ajustes de la cuenta.
+Por otro lado, la aplicación dispone de un módulo específico para empresas accesible únicamente tras autenticación, donde los
+negocios pueden gestionar sus: productos, pedidos, estadísticas, valoraciones.
+
+Esta separación de navegaciones permite ofrecer una experiencia clara y adaptada a cada rol, manteniendo al mismo timepo una
+estructura coherente y fácil de entender.
 
 ![Diagrama de navegación](img/diagrama-de-navegacion.png)
 
-Este diagrama está hecho en la web _octopus.do_ y se puede ver de manera online en siguiente enlace:
+> Este diagrama está hecho en la web _octopus.do_ y se puede ver de manera online en siguiente enlace:
 
 [Enlace a octopus.do del proyecto](https://octopus.do/d08h7a8kudi)
 
