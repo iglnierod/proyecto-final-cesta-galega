@@ -12,7 +12,7 @@ export type CategoryPublic = Prisma.CategoryGetPayload<{
   select: typeof categoryPublicSelect;
 }>;
 
-// Categoría + produtos (para cando queiras produtos por categoría)
+// Categoría + produtos
 export const categoryWithProductsInclude = Prisma.validator<Prisma.CategoryInclude>()({
   products: {
     select: productLiteSelect,
@@ -40,13 +40,5 @@ export async function getCategoriesByBusiness(businessId: number) {
       },
     },
     orderBy: { name: 'asc' },
-  });
-}
-
-// Obtener unha categoría xunto cos seus produtos
-export async function findCategoryWithProducts(id: number) {
-  return prisma.category.findUnique({
-    where: { id },
-    include: categoryWithProductsInclude,
   });
 }

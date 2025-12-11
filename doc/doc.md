@@ -268,15 +268,20 @@ que combina la productividad del desarrollador con una experiencia de usuario fl
 
 ### Base de datos
 
-![Esquema Entidad-Relación de la base de datos](./img/base-de-datos.png)
+Para el diseño de la base de datos se ha optado por un modelo relacional porque la solución requiere información fuertemente
+estructurada y con numerosas relaciones entre entidades. El modelo relacional permite garantizar consistencia e integridad
+referencial mediante claves primarias y foráneas, algo clave en este tipo de aplicaciones donde no es aceptable perder la 
+trazabilidad entre pedidos, productos y usuarios.
 
-[Enlace a diagrama web: erdlab.io](https://erdlab.page.link/hc3tuVoazFSyi3fT9)
-
-La base de datos del proyecto se diseñó siguiendo un modelo relacional, con el objetivo de dar soporte a una plataforma
-de tipo _marketplace_ en la que distintos negocios pofrecen productos y los usuarios pueden realizar pedidos y valoraciones.
+Además, la base de datos relacional facilita la normalización de datos, evitando duplicidades y mejorando el mantenimiento.
+Ofrece un lenguaje estándar de consulta (SQL) que permite realizar consultas complejas de forma eficiente.
 
 En la imagen se muestra el diagrama entidad-relación que representa las principales entidades y las relaciones entre ellas.
 A continuación se describen las tablas y su función dentro del sistema.
+
+![Esquema Entidad-Relación de la base de datos](./img/base-de-datos.png)
+
+[Enlace a diagrama web: erdlab.io](https://erdlab.page.link/hc3tuVoazFSyi3fT9)
 
 #### Tabla ``User``
 
@@ -380,6 +385,39 @@ Se almacena la cantidad, el precio unitario, el subtotal, el estado de la línea
 
 Esta estructura permite desglosar el contenido de cada pedido en múltiples productos y conservar para cada línea información
 económica precisa (cantidad y precio en el momento de la compra).
+
+### Implementación de Base de datos 
+
+En el proyecto se utiliza el gestor de base de datos PostgreSQL tanto de manera local como en producción.
+
+Para el desarrollo se utilizó una imagen de este gestor y se desplegó usando Docker. En cambio, en el despliegue la aplicación
+se conecta a Supabase, un servicio web con plan gratuito que permite alojar base de datos PostgreSQL.
+
+#### Prisma ORM
+
+La aplicación se conecta a la base de datos a través de Prisma ORM. Esta es una dependencia que gestiona la conexión y todo tipo
+de acciones con la base de datos directamente. El front-end de la aplicación llega a los datos a través de la API REST de la app.
+
+Prisma facilita la obtención, creación eliminación de datos de manear que únicamente llamas a un cliente previamente creado en la app.
+
+Este ejemplo es la función que llama a Prisma para obtener las categorías que se muestran en la tienda específica de la tienda,
+de esta manera en el select de esta página únicamente se muestran las categorías que usa esa empresa en sus productos:
+
+```typescript
+// Obtener las categorías que usa una empresa
+export async function getCategoriesByBusiness(businessId: number) {
+    return prisma.category.findMany({
+        where: {
+            products: {
+                some: { businessId },
+            },
+        },
+        orderBy: { name: 'asc' },
+    });
+}
+```
+
+[Enlace a fichero category.repo.ts que contiene el código](../cesta-galega/app/lib/category/category.repo.ts)
 
 ### Diagrama de navegación
 
