@@ -103,7 +103,17 @@ autor.
 
 ## Documentación
 
-> _TODO_: Emplaza a quien se haya interesado en tu proyecto a leer una guía o documentación extendida del mismo. Haz un link a ella en este punto.
+Cesta Galega es una web creada con el framework Next.js que trabaja con la tecnología React y pertenece a Vercel. Propone
+una solución a la falta de comercio online de pequeñas empresas gallegas y facilita a los usuarios la compra de producto
+local.
+
+Es una aplicación simple que sirve tanto para usuarios como para empresas, el servicio se encarga de gestionar una tienda online
+que agrupa productos de todo tipo y de todas las empresas. Permite a los usuarios navegar, realizar pedidos y valorar productos y a la vez
+facilita a las empresas la gestión de productos, pedidos, estadísticas y ofrece una tienda personal.
+
+En este proyecto, se ha optado por Next.js por su facilidad de uso y porque permite crear aplicaciones rápidas, escalables y
+con buena experiencia de usuario. De esta manera se puede optimizar tanto el desarrollo del lado cliente como el servidor,
+lo que es ideal para la gestión de productos y procesos de compra.
 
 Este proyecto dispone de [una documentación más extensa](doc/doc.md) del proyecto que recomiendo revisar.
 
