@@ -160,8 +160,6 @@ Aquí se explican en profundidad las carpetas y ficheros principales del proyect
 
 ## Guía de contribución
 
-> _TODO_: Tratándose de un proyecto de software libre, es muy importante que expongas cómo se puede contribuir con tu proyecto. Algunos ejemplos de esto son realizar nuevas funcionalidades, corrección y/u optimización del código, realización de tests automatizados, nuevas interfaces de integración, desarrollo de plugins, etc. etc. Sé lo más conciso que puedas.
-
 Los commits de este proyecto seguirán el formato de [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/), usando los siguientes tipos de commit:
 
 ```
@@ -183,3 +181,19 @@ Los commits de este proyecto seguirán el formato de [Conventional Commits](http
 | **test**     | Añadir o modificar tests                                    | `test: añade tests para el componente Footer` |
 | **build**    | Cambios en dependencias o build                             | `build: actualiza versión de Next.js`         |
 | **ci**       | Cambios en configuración de CI/CD                           | `ci: actualiza workflow de GitHub Actions`    |
+
+### Cómo hacer nuevas implementaciones
+
+Lo primero es revisar en este mismo fichero la estructura de carpetas y archivos del proyecto, para localizar correctamente lo
+que debemos modificar.
+
+En la carpeta [lib](cesta-galega/app/lib) se encuentra la mayor parte de la lógica de la aplicación, en esta carpeta existen subcarpetas
+nombradas por el tipo de dato que manejan. Siempre encontraremos tres ficheros diferentes: ``<dato>.schema.ts``, ``<dato>.repo.ts``, ``<dato>.mapper.ts``:
+- Fichero schema: define los tipos de datos utilizados en la app.
+- Fichero repo: contiene funciones de Prisma para hacer llamadas a la base de datos, únicamente hace llamadas a la tabla del dato que maneja.
+- Fichero mapper: contiene funciones que mappean datos sin tipado y lo convierte a un tipo de dato creado previamente en el fichero ``schema``.
+
+Para crear nuevos endpoints se debe hacer siempre en la ruta [/app/api](cesta-galega/app/api).
+
+Para crear una nueva página se debe crear el ``page.tsx`` en la nueva ruta y siempre dentro de la carpeta [/app/(pages)](cesta-galega/app/(pages)).
+Si esta página llama a un componente este se debe crear en la carpeta [/app/components](cesta-galega/app/components).
