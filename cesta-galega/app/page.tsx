@@ -5,7 +5,7 @@ import { isBusinessLoggedIn } from '@/app/lib/auth';
 import { redirect } from 'next/navigation';
 
 export default async function Home() {
-  // Si hay cookies de login de empresa, redirigir a dashboard
+  // Se hai cookies de login de empresa, redirixir ao dashboard
   const businessLoggedIn = await isBusinessLoggedIn();
   if (businessLoggedIn) {
     redirect('/business/dashboard');
@@ -13,37 +13,38 @@ export default async function Home() {
 
   return (
     <>
-      {/*1er APARTADO*/}
+      {/* APARTADO*/}
       <section className="bg-blue-900 text-white text-center py-20">
         <div className="container mx-auto px-6">
           <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight">Cesta Galega</h1>
           <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
-            Descubre el mercado gallego más grande y fácil de usar. Compra directamente a
-            productores locales y apoya el comercio de proximidad.
+            Descubre o mercado galego máis grande e fácil de usar. Compra directamente a produtores
+            locais e axuda ao comercio de proximidade.
           </p>
           <Link
             href="/shop"
             className="inline-block mt-8 px-8 py-3 rounded-lg bg-white text-blue-900 font-semibold hover:bg-gray-100 transition"
           >
-            Explorar tienda
+            Explorar tenda
           </Link>
         </div>
       </section>
-      {/*2do APARTADO - Sección para empresas*/}
+
+      {/* Sección para empresas*/}
       <section className="py-20 text-center">
         <div className="container mx-auto px-6 md:flex md:items-center md:justify-between md:text-left">
           <div className="md:w-1/2 mb-10 md:mb-0">
-            <h2 className="text-4xl font-bold">Empieza a vender online</h2>
+            <h2 className="text-4xl font-bold">Comeza a vender online</h2>
             <p className="mt-4">
-              Si eres productor, artesano o comerciante, en Cesta Galega puedes crear tu tienda en
-              minutos, mostrar tus productos y llegar a miles de clientes en toda Galicia.
+              Se es produtor, artesán ou comerciante, en Cesta Galega podes crear a túa tenda en
+              minutos, amosar os teus produtos e chegar a milleiros de clientes en toda Galicia.
             </p>
             <div className="mt-6 flex gap-4 justify-center md:justify-start">
               <Link
                 href="/business/register"
                 className="inline-block px-6 py-3 bg-blue-900 text-white font-semibold rounded-lg hover:bg-blue-950 transition"
               >
-                Crear cuenta de vendedor
+                Crear conta de vendedor
               </Link>
               <Link
                 href="/business/login"
@@ -54,31 +55,33 @@ export default async function Home() {
             </div>
           </div>
           <div className="md:w-1/2 flex justify-center">
-            <Image src={imgPaquete} alt="Vendedor mostrando sus productos" width={300} />
+            <Image src={imgPaquete} alt="Vendedor mostrando os seus produtos" width={300} />
           </div>
         </div>
       </section>
-      {/*4to APARTADO - Beneficios de Cesta Galega*/}
+
+      {/* APARTADO - Beneficios de Cesta Galega*/}
       <section className="bg-blue-900 text-white py-20 text-center">
         <div className="container mx-auto px-6">
-          <h3 className="text-4xl font-bold mb-8">¿Por qué elegir Cesta Galega?</h3>
+          <h3 className="text-4xl font-bold mb-8">Por que elixir Cesta Galega?</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-6 bg-gray-800 rounded-xl shadow">
-              <h4 className="text-xl font-semibold mb-2">Proximidad</h4>
+              <h4 className="text-xl font-semibold mb-2">Proximidade</h4>
               <p>
-                Compra a productores gallegos, reduce la huella ecológica y fomenta la economía
-                local.
+                Compra a produtores galegos, reduce a pegada ecolóxica e fomenta a economía local.
               </p>
             </div>
             <div className="p-6 bg-gray-800 rounded-xl shadow">
               <h4 className="text-xl font-semibold mb-2">Transparencia</h4>
-              <p>Conoce quién está detrás de cada producto, su historia y su modo de producción.</p>
+              <p>
+                Coñece quen está detrás de cada produto, a súa historia e o seu modo de produción.
+              </p>
             </div>
             <div className="p-6 bg-gray-800 rounded-xl shadow">
               <h4 className="text-xl font-semibold mb-2">Comunidad</h4>
               <p>
-                Únete a una red que conecta consumidores conscientes y empresas con valores
-                sostenibles.
+                Únete a unha rede que conecta consumidores conscientes e empresas con valores
+                sostibles.
               </p>
             </div>
           </div>

@@ -12,6 +12,7 @@ El proyecto pretende fomentar el comercio local y crear una alternativa accesibl
 - Node.js 20.9 o superior
 - npm 9 o superior
 - Docker
+- Cuenta de Cloudinary (plan gratuito)
 
 **Pasos:**
 1. Clonar el repositorio y acceder al directorio `cesta-galega/`
@@ -37,6 +38,8 @@ La interfaz web está pensada y adaptada para que sea sencilla de usar para cual
 se adapta a grandes pantallas y a móviles. Se utilizaron estándares de diseño para facilitar al usuario una simple navegación.
 
 Vamos a ver el uso de una manera simple dependiendo del rol.
+
+![Captura de landing page](doc/img/captura-inicio.png)
 
 ### Usuario
 
