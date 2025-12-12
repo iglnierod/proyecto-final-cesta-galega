@@ -700,6 +700,50 @@ En este diagrama se puepde ver como el _Front-End_ no tiene conocimiento sobre c
 base de datos, funciona a través de la API implementada. Se ve como se utiliza Prisma para hacer las peticiones SQL al gestor
 de base de datos (PostgreSQL/Supabase). Y como en la API se tipan los datos con Zod para que no haya problemas de tipado con TypeScript.
 
+### Despliegue y automatización
+
+Desde el principio del proyecto se ha pensado en el simple despliegue de la aplicación a producción. Para esto se han utilizado
+las tecnologías Next.js, Prisma, Supabase, Docker y Cloudinary.
+
+Next.js es propiedad de [Vercel](https://vercel.com/), esta empresa es una plataforma de desarrollo y despliegue de aplicaciones web que permite
+crear, previsualizar y desplegar sitios web de forma rápida y sencilla. Vercel está optimizado para trabajar con frameworks
+como Next.js y ofrece servicios de despliegue automático desde repositorios de código (Github/Gitlab).
+
+![Captura de pantalla dashboard de Vercel](img/captura-dashboard-vercel.png)
+
+Este respositorio está en el Gitlab privado del IES San Clemente y a su vez está en [Github](https://github.com/iglnierod/proyecto-final-cesta-galega).
+La razón por la que está clonado en Github es para automatizar el despliegue de la aplicación en Vercel y para automatizar
+las migraciones de la base de datos.
+
+El siguiente diagrama explica paso a paso el funcionamiento del despliegue de la aplicación.
+
+![Diagrama explicación despliegue](img/diagrama-despliegue.png)
+
+En este diagrama se ve cómo se sube el código y documentación del proyecto tanto a GitLab como a GitHub. GitLab se utiliza para
+que, en este caso, la tutora pueda hacer la revisión del código y verificar la autoría del proyecto, mientras que en GitHub se sube
+de manera pública para utilizar los servicios de Vercel y GitHub Actions.
+
+El paso 1 y 2 son el push del código de la rama ``main`` del repositorio a GitLab y GitHub respectivamente. Cada vez que se hace
+un commit en la rama main Vercel crea un nuevo despliegue de la aplicación y por último nos da la url de la web para que, usuarios
+de todo el mundo puedan acceder (paso 3).
+
+El repositorio tiene el fichero ``.github/workflows/migrate.yml`` que define para GitHub una acción a la hora de hacer un push
+en una rama y en unas carpetas concretas. Esto se utiliza para que cuando se sube un commit que modifica de cierta manera la
+base de datos (fichero ``schema.prisma``) se ejecuten ciertas acciones en una máquina de GitHub que lo hace es ejecutar estas
+migraciones automáticamente. Con esto conseguimos automatizar por completo el despliegue y actualización de nuestra web y base
+de datos.
+
+En caso de equivocarnos de rama o subir código que no funciona correctamente, Vercel nos permite seleccionar el commit que
+queremos volver a desplegar manualmente. De esta manera podemos hacer un _rollback_ sin problema en el despliegue de
+producción y tener tiempo para arreglar cualquier error ya subido a la rama ``main``.
+
+Este repo tiene dos ramas: ``main`` y ``develop``, se desarrolla siempre en ``develop`` y cuando hay una alguna nueva funcionalidad
+o mejora que se verifica que funciona correctamente se hace un ``merge`` a la rama ``main``. De esta manera tenemos dos entornos
+separados y controlados.
+
+Vercel también permite llevar un registro de logs de la aplicación, podemos ver los logs en directo o logs de la última hora
+(con un plan de pago se pueden ver logs más antiguos).
+
 ### Diseño de interfaces (Mockups)
 
 > Los mockups son temporales y están hechos de una manera sencilla y adaptable para poder solucionar cualquier problema 
