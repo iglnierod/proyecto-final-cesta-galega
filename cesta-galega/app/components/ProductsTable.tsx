@@ -124,7 +124,9 @@ export default function ProductsTable({
               products.map((p) => (
                 <tr key={p.id}>
                   <td>{p.name}</td>
-                  <td>{p.description}</td>
+                  <td className="max-w-sm overflow-x-hidden" title={p.description ?? ''}>
+                    {p.description}
+                  </td>
                   <td>
                     {p.enabled ? (
                       <span className="badge badge-soft badge-success">Si</span>
