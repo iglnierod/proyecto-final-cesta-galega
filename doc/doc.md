@@ -570,6 +570,136 @@ extra.
 - **Amplio soporte y estándar**: JWT es un estándar abierto soportado por multitud de librerías y frameworks, lo que reduce la complejidad
 de implementación
 
+### Front-End
+
+![Tecnologías principales usadas](img/front-end-tech.png)
+
+Como ya se ha comentado anteriormente el proyecto está creado con el framework Next.js. Este framework web está basado en React
+y permite crear aplicaciones web y sitios web estáticos con un alto rendimiento. Se ha seleccionado esta tecnología por dos razones
+principalmente:
+
+- Enrutamiento automático: permite simplificar el enrutamiento según la estructura de archivos. Cada archivo se convierte en una
+ruta de la aplicación, lo que elimina la necesidad de configurar rutas manualmente.
+- API integrada: incluye un sistema básico para crear APIs. Se pueden definir rutas que actúan como API endpoints y permiten
+manejar peticiones dese el cliente sin crear un servidor separado.
+
+A nivel de interfaz gráfica se utiliza React, se crean componentes en ficheros ``.tsx`` ya que el proyecto utiliza ``Typescript``.
+En estos ficheros se definen componentes reutilizables y fácilmente customizables, cada uno de estes componentes tiene su propia
+lógica y manejo de datos.
+
+Los estilos de la web están hechos con [Tailwind CSS](https://tailwindcss.com/), un framework de diseño que permite usar clases utilitarias directamente en
+el HTML y así evitar usar clases predefinidas. Facilita el diseño sin tener que escribir mucho CSS permitiendo personalizar
+el aspecto de la aplicación solo con clases.
+
+Este ejemplo es la página de inicio de sesión de los usuarios, se ve como se llama al componente ``UserLoginForm.tsx`` y se utiliza
+``Tailwind CSS`` para estilar la web.
+
+```typescript jsx
+export default async function UserLoginPage() {
+  // Si el usuario está logueado que no pueda entrar
+  const loggedIn = await isCookieValid();
+
+  if (loggedIn) {
+    redirect('/shop');
+  }
+
+  // Página de login de usuario
+  return (
+    <div className="h-dvh flex items-center bg-gradient-to-b from-blue-900 to-blue-400">
+      <section className="w-full flex flex-col items-center py-4">
+        <div className="bg-white p-8 rounded-md flex flex-col items-center gap-3">
+          <Link href="/" title="Página principal">
+            <Image src={logo} alt="Logo Cesta Galega" width={150} />
+          </Link>
+          <h1 className={'text-xl font-bold'}>Iniciar sesión</h1>
+          <UserLoginForm />
+          <Link className={'link link-animated'} href={'/user/register'}>
+            No tengo una cuenta.
+          </Link>
+        </div>
+      </section>
+    </div>
+  );
+}
+```
+
+Además de Tailwind se utiliza una librería de componentes para todavía facilitar más el diseño de la web, esta librería es
+[FlyonUI](https://flyonui.com/docs/component/). Contiene componentes ya creados con Tailwind y permite usarlos utilizando clases predefinidas por esta librería.
+
+### Back-End
+
+![Tecnologías priciales usadas](img/back-end-tech.png)
+
+Next.js además de cargar la interfaz web y ser el entorno cliente, también se utiliza para el servidor. La aplicación maneja datos
+a través de la API, estos endpoints son los encargados de traer la información al usuario y de guardar, editar, eliminar la
+información de la base de datos haciendo uso de [Prisma ORM](https://www.prisma.io/). La aplicación almacena todos los datos en
+una base de datos relacional PostgreSQL gestionada desde Next.js a través de este ORM. Prisma permite y facilita el manejo completo
+de los datos de la aplicación.
+
+Prisma permite definir la base de datos de una manera simple en un fichero llamado schema.prisma, en este fichero se definen
+por completo las tablas de la aplicación, incluyendo relaciones, tipos de datos, etc. Este es un ejemplo de como se ve la
+definición de la tabla de valoraciones (``User_Product``) en la base de datos:
+
+```typescript
+model UserProduct {
+  id        Int      @id @default(autoincrement())
+  title     String
+  review    String
+  rating    Float
+  createdAt DateTime @default(now())
+  // relacion con User
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  // relacion con Product
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id])
+}
+```
+
+De esta manera se pueden crear migraciones a la hora de cambiar un dato, añadir otra columna o otra tabla a la base de datos.
+Así, de una manera sencilla se puede tener una base de datos completa y siempre sincrónizada tanto en local como en producción.
+
+Para mantener el tipado de datos en la aplicación se utila la librería [Zod](https://zod.dev/), esta permite crear tipos de datos
+y validadores para todos los formularios, endpoints e intercambio de datos entre aplicación y API. Este es un ejemplo de la
+definición del tipo de datos que se almacena cuando se crea una empresa:
+
+```typescript
+export const BusinessTypeEnum = z.enum(['S.L', 'S.A', 'AUTONOMO', 'COOPERATIVA']);
+export type BusinessType = z.infer<typeof BusinessTypeEnum>;
+
+export const BusinessRegisterSchema = z.object({
+    name: z.string('Debe introducir un nome').min(5, 'O nome debe ter 5 caracteres').trim(),
+    email: z.email('Formato do mail non válido').trim().toLowerCase(),
+    businessType: BusinessTypeEnum.default('S.L'),
+    phoneNumber: z.string().regex(/^\d{3} \d{3} \d{3}/, 'O teléfono debe ter formato XXX XXX XXX'),
+    address: z.string().min(5, 'O enderezo debe ter 5 caracteres'),
+    city: z.string('Debe introducir a cidade'),
+    province: ProvincesEnum.default('CORUÑA, A'),
+    postalCode: z
+        .string()
+        .min(5, { message: 'O código postal debe ter 5 caracteres' })
+        .regex(/^\d{5}$/, 'O código postal debe ter 5 díxitos numéricos'),
+    password: z.string().min(8, 'O contrasinal debe ter 8 caracteres'),
+});
+
+export type BusinessRegisterInput = z.infer<typeof BusinessRegisterSchema>;
+```
+
+En este código vemos como se definen tipos de datos en ENUM para almacenar siempre los mismos tipos de datos en la BBDD y
+de la misma manera, cargar estos tipos de datos en la interfaz para que el usuario tenga un input limitado. Se ve como se define
+el objeto, este objeto tiene cada una de las propiedades y su tipo de dato, también permite establecer mínimo de caracteres,
+datos obligatorios, opcionales, etc. Se utiliza esta tecnología para gestionar todos los datos de la app.
+
+El siguiente diagrama explica paso a paso las ejecuciones y ordenes que tiene una acción en la apliación, incluyendo la
+aplicación web, API REST, ORM y gestor de base de datos. Este esquema explicaría por ejemplo el funcionamiento de una acción
+del usuario, por ejemplo, darle clic a ver un producto específico:
+
+![Diagrama funcionamiento APP](img/diagrama-funcionamiento-app.png)
+
+En este diagrama se puepde ver como el _Front-End_ no tiene conocimiento sobre cómo obtener los datos directamente desde la
+base de datos, funciona a través de la API implementada. Se ve como se utiliza Prisma para hacer las peticiones SQL al gestor
+de base de datos (PostgreSQL/Supabase). Y como en la API se tipan los datos con Zod para que no haya problemas de tipado con TypeScript.
+
 ### Diseño de interfaces (Mockups)
 
 > Los mockups son temporales y están hechos de una manera sencilla y adaptable para poder solucionar cualquier problema 
@@ -579,7 +709,7 @@ La herramienta utilizada para el primer diseño de las interfaces es Excalidraw.
 rápida y de manera online, realizar esquemas o cualquier otro tipo de diagrama, dibujo, etc.
 
 **Dashboard de la empresa:**
-Esta es la solución temporal a la interfaz que tendrá la dashboard de la empresa una vez esté implementada
+Esta es la solución temporal a la interfaz que tendrá el dashboard de la empresa una vez esté implementada
 
 ![Mockup dashboard de la empresa](img/mockup-dashboard.png)
 
