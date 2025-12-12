@@ -30,10 +30,10 @@ export default function ProductGridItem({
 
       if (!res.ok) {
         showAlert('Erro ao engadir o produto ao carro', 'error');
-        return; // importante: no seguir a mostrar o alert de éxito
+        return;
       }
 
-      await res.json(); // por si más adiante queres usar os datos
+      await res.json();
       showAlert('Engadiuse o produto ao carro', 'success');
     } catch (err) {
       console.error(err);

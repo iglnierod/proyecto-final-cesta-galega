@@ -58,9 +58,9 @@ export default function ProductPage({
         cancelButtonText: 'Cancelar',
       }).then((result) => {
         if (result.isConfirmed) {
-          router.push('/login');
+          router.push('/user/login');
         } else if (result.isDenied) {
-          router.push('/register');
+          router.push('/user/register');
         }
       });
       return false;

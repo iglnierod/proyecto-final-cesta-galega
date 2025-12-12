@@ -128,7 +128,7 @@ export default function UserHeader({
             </ul>
           ) : (
             <Link className="btn btn-primary rounded" href="/user/login">
-              Login
+              Iniciar sesión
             </Link>
           )}
         </div>
