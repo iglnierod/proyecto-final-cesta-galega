@@ -27,8 +27,53 @@ El proyecto pretende fomentar el comercio local y crear una alternativa accesibl
 
 ## Uso
 
-> _TODO_: Es este apartado describe brevemente cómo se usará este software. Plantea un uso básico (como un _quickstart_) Si tiene una interfaz de terminal, puedes describir aquí su sintaxis. Si tiene una interfaz gráfica de usuario, describe aquí **sólo el uso** (a modo de sumario) **de los aspectos más relevantes de su funcionamiento** (máxima brevedad, como si fuese un anuncio reclamo o comercial).
-> Podrías incluso hacer una pequeña demo en _gif_ o un pantallazo de la misma muy descriptivo. Recueda que esto es un reclamo para que la prueben o lean tu documentación más extensa.
+Al entrar en la web llegamos a la _landing page_ una página que resume brevemente el proyecto y redirige a los usuarios.
+
+Dependiendo del tipo de usuario que seamos (comprador o vendedor) deberemos hacer acciones distintas. Los usuarios pueden
+ir la tienda directamente en el botón de ``Explorar tenda`` mientras que las empresas pueden ir a iniciar sesión o crear
+una cuenta directamente.
+
+La interfaz web está pensada y adaptada para que sea sencilla de usar para cualquier persona en cualquier tipo de dispositivo,
+se adapta a grandes pantallas y a móviles. Se utilizaron estándares de diseño para facilitar al usuario una simple navegación.
+
+Vamos a ver el uso de una manera simple dependiendo del rol.
+
+### Usuario
+
+Como usuario anónimo la primera vez que entramos en la web podemos ver la tienda. En la tienda veremos: barra de búsqueda y orden, filtros
+y listado de productos. En la cabecera de la web veremos un botón de ``Iniciar sesión`` que nos permitirá iniciar sesión o
+crear una cuenta nueva de usuario. Los usuarios anónimos (sin cuenta) no tienen todas las características disponibles.
+
+Cómo usuario anónimo podremos navegar por la tienda y ver diferentes productos. Veremos que cada producto tiene dos botones,
+el botón de ver nos llevará a ese producto específico y el de añadir estará bloqueado, este botón se desbloquea una vez esté la sesión
+iniciada.
+
+Las funcionalidades principales que podemos hacer como usuario ya registrado son varias: filtrar y navegar la tienda, buscar productos y empresas,
+hacer pedidos directos desde un producto o añadir al carrito y hacer una compra de varios productos, ver historial de pedidos,
+cambiar información personal en ajustes, valorar productos comprados...
+
+![Captura de pantalla de tienda](doc/img/captura-tienda.png)
+
+### Empresa
+
+Para acceder al apartado de empresa debemos tener una cuenta en la aplicación, para esto desde la página de inicio (_landing page_)
+debemos o crear una cuenta o iniciar sesión con una cuenta ya creada. En caso de haber usado la aplicación anteriormente y tener
+un token válido almacenado en las cookies de la web, te llevará directamente sin tener que volver a iniciar sesión.
+
+Lo primero que vemos será lo que se conoce como una _dashboard_, este apartado es un breve resumen sobre el estado y actividad
+de nuestra tienda online, aquí podemos ver alguna estadística, últimos pedidos y últimas valoraciones.
+
+En la parte superior encontramos una barra de navegación que nos permite movernos a los diferentes apartados. En ``Estadísticas``
+podremos ver gráficos sobre datos de nuestra tienda (productos más vendidos, dinero generado por fechas...). En el apartado de gestión
+podemos manejar los datos de nuestros productos (añadir, editar, eliminar, ver previsualización) y también tenemos otro apartado
+de pedidos que nos permite actualizar el estado de estos para que el usuario vea el estado de ese producto en su pedido.
+
+Por último tenemos un menú desplegable que es sobre la información de nuestra empresa, aquí podremos ver nuestra tienda,
+como la vería un usuario y podemos navegar por nuestros productos. También podemos ir a ajustes y actualizar la información de
+la empresa (nombre, descripción, logo...). Por último tenemos un botón de cerrar sesión que nos eliminará las cookies de sesión
+almacenadas en nuestro navegador.
+
+![Captura dashboard de empresa](doc/img/captura-dashboard.png)
 
 ## Sobre el autor
 
