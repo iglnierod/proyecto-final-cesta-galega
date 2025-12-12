@@ -1007,9 +1007,23 @@ poder vender
 
 ## Conclusiones
 
-> Deja esta apartado para el final. Realiza un resumen de todo lo que ha supuesto la realización de tu proyecto. Debe
-> ser una redacción breve. Un resumen de los hitos conseguidos más importantes y de lo aprendido durante el proceso.
-> Puede ser un buen punto de partida para organizar tu presentación y ajustarla al tiempo que tienes.
+La realización de este proyecto ha sido una experiencia de aprendizaje en varios aspectos. A lo largo del proceso,
+he conseguido grandes avances tanto en el diseño como en la implementación técnica de la aplicación. Desde la fase de
+anteproyecto hasta la documentación he construido una plataforma funcional que cumple con sus objetivos, ofreciendo conectar
+a pequeños negocios con clientes.
+
+Uno de los hitos más relevantes fue la integración de tecnologías como Next.js y Prisma ORM, que permitieron desarrollar una
+aplicación escalable y eficiente. Además, se ha implementado un sistema de autenticación basado en JSON Web Token, garatizando
+la seguridad de los datos y mejorando la experiencia del usuario. La creación de un entorno de desarrollo optimizado usando herramientas
+como Docker, PostgreSQL y Supabase permitió gestionar de manera eficiente la base de datos.
+
+Durante el desarrollo he aprendido la importancia de trabajar con metodologías ágiles como Kanban y planificar los recursos y el
+tiempo para cumplir con los plazos establecidos con la tutora. También, he mejorado mis hábilidades en el desarrollo con TypeScript,
+la creación de APIs y la automatización del despliegue, aspectos cruciales y necesarios en una aplicación web moderna.
+
+En resumen, este proyecto me ha supuesto un reto técnico a la hora de aprender y gestionar estas tecnologías. Además de un reto personal
+al tener que realizarlo a la vez que las prácticas en la empresa y tener que aprender a gestionar mejor el tiempo. Las lecciones
+aprendidas serán fundamentales para futuros proyectos tanto a nivel de desarrollo como de gestión y planificación.
 
 ## Referencias, Fuentes consultadas y Recursos externos: Webgrafía
 
