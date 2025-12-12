@@ -103,6 +103,10 @@ La contraseña de todas estas cuentas de prueba es: ``abc123..``
 - ofogardotrasno@gmail.com
 - contacto@caminodaterra.gal
 
+> En caso de querer cambiar de usuario a cuenta de empresa y viceversa, primero se debe cerrar sesión, luego volver a
+> inicio y entrar desde el enlace adecuado. Las empresas con sesión iniciada no pueden acceder al apartado de usuarios, y los
+> usuarios no pueden acceder al apartado de empresas.
+
 ## Sobre el autor
 
 Soy Rodrigo Iglesias Nieto, soy de Santiago de Compostela y tengo 21 años. Desde pequeño me ha gustado la informática y 

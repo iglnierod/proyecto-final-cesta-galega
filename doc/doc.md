@@ -993,6 +993,33 @@ Además, se crean los endpoints de la API necesarios para brindar la informació
 - [Vista previa producto](https://proyecto-final-cesta-galega.vercel.app/business/manage/products/preview/1): permite a la empresa ver el producto como lo verá un usuario
 - [Gestión de pedidos](https://proyecto-final-cesta-galega.vercel.app/business/manage/orders): permite a la empresa cambiar el estado de los productos pedidos por los usuarios
 
+### Prototipo 3 (FINAL): 12/12/2025
+
+Esta es la versión final e implementa novedades tanto en el apartado del usuario como de la empresa. Esta versión crea por completo el
+apartado de usuario: tienda, navegación, filtros, visualización de productos, valoraciones, pedidos, carrito...
+
+También termina de completar el apartado de empresa con la página de estadísticas, la página de tienda propia y el dashboard.
+
+**Usuario:**
+
+- [Tienda](https://proyecto-final-cesta-galega.vercel.app/shop)
+- [Tienda: novedades](https://proyecto-final-cesta-galega.vercel.app/shop?filter=newness)
+- [Tienda: descuentos](https://proyecto-final-cesta-galega.vercel.app/shop?filter=discount)
+- [Vista de producto](https://proyecto-final-cesta-galega.vercel.app/shop/product/56)
+- [Carrito](https://proyecto-final-cesta-galega.vercel.app/shop/cart): para ver esta página es necesario tener sesión iniciada
+- [Historial de pedidos](https://proyecto-final-cesta-galega.vercel.app/shop/orders): para ver esta página es necesario tener sesión iniciada
+- [Ajustes](https://proyecto-final-cesta-galega.vercel.app/shop/settings): para ver esta página es necesario tener sesión iniciada
+- [Realizar compra](https://proyecto-final-cesta-galega.vercel.app/shop/checkout/3): esta es una web dinámica y depende del pedido que se esté comprando
+- [Tienda de empresa específica](https://proyecto-final-cesta-galega.vercel.app/shop/business/10)
+
+**Empresa:**
+
+> Para ver estas páginas hace falta tener una sesión iniciada como empresa
+
+- [Dashboard completa](https://proyecto-final-cesta-galega.vercel.app/business/dashboard)
+- [Estadísticas](https://proyecto-final-cesta-galega.vercel.app/business/stats)
+- [Visualizar su tienda específica](https://proyecto-final-cesta-galega.vercel.app/business/shop)
+
 ## Propuesta de mejoras
 
 - Filtros y paginado en la gestión de productos y pedidos para las empresas
