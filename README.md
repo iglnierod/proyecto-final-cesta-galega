@@ -26,6 +26,8 @@ El proyecto pretende fomentar el comercio local y crear una alternativa accesibl
 9. Levantar la página web con el comando `npm run dev`
 10. Abrir en el navegador la dirección `localhost:3000`
 
+> En caso de querer añadir datos de prueba a la aplicación ejecutar el script [cesta-galega/sql/dml.sql](cesta-galega/sql/dml.sql) en la base de datos.
+
 ## Uso
 
 Al entrar en la web llegamos a la _landing page_ una página que resume brevemente el proyecto y redirige a los usuarios.
@@ -77,6 +79,29 @@ la empresa (nombre, descripción, logo...). Por último tenemos un botón de cer
 almacenadas en nuestro navegador.
 
 ![Captura dashboard de empresa](doc/img/captura-dashboard.png)
+
+### Cuentas de prueba
+
+La contraseña de todas estas cuentas de prueba es: ``abc123..``
+
+**Usuarios:**
+
+- prueba@gmail.com
+- carlos.fernandez@example.com
+- iria.rodriguez@example.com
+- xoan.pereira@example.com
+- lara.gomez@example.com
+- marta.alves@example.com
+- diego.nunez@example.com
+
+**Empresas:**
+
+- prueba@gmail.com
+- aportafio@gmail.com
+- orinconcalido@gmail.com
+- riamoda@gmail.com
+- ofogardotrasno@gmail.com
+- contacto@caminodaterra.gal
 
 ## Sobre el autor
 
